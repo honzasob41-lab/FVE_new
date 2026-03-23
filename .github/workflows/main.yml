@@ -1,0 +1,36 @@
+name: EMS Sběr Dat
+
+on:
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repozitare
+        uses: actions/checkout@v4
+
+      - name: Nastaveni Pythonu
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Instalace knihoven
+        run: pip install requests pandas tzdata
+
+      - name: Spusteni online.py
+        env:
+          TOKEN_SOLAX: ${{ secrets.TOKEN_SOLAX }}
+          SN: ${{ secrets.SN }}
+        run: python online.py
+
+      - name: Ulozeni zmen zpet do repozitare
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Automaticky update dat [skip ci]" || echo "Zadne zmeny k ulozeni"
+          git push
