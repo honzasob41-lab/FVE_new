@@ -21,15 +21,28 @@ SOUBOR_PLAN = "denni_plan.csv"
 MIN_DNI_PRO_UCENI = 5
 
 def nacti_solax_v2():
+    print(f"DEBUG: Spoustim nacti_solax_v2")
+    print(f"DEBUG: TOKEN_SOLAX nacten: {bool(TOKEN_SOLAX)}")
+    print(f"DEBUG: WIFI_SN nacten: {bool(WIFI_SN)}")
+    
     url = "https://global.solaxcloud.com/proxyApp/proxy/api/v2/dataAccess/realtimeInfo/get"
     payload = {"wifiSn": WIFI_SN}
     headers = {"tokenId": TOKEN_SOLAX, "Content-Type": "application/json"}
     try:
         r = requests.post(url, json=payload, headers=headers, timeout=15)
+        print(f"DEBUG: HTTP Status SolaX: {r.status_code}")
         data = r.json()
-        if data.get("success") is not True: return None
+        
+        if data.get("success") is not True: 
+            print(f"DEBUG: SolaX API vratilo chybu: {data}")
+            return None
+            
         res = data.get("result")
-        if not res: return None
+        if not res: 
+            print("DEBUG: SolaX API nevratilo zadny result.")
+            return None
+            
+        print("DEBUG: SolaX data uspesne nactena.")
         return {
             "v_dnes": float(res.get("yieldtoday", 0)),
             "soc": float(res.get("soc", 0)),
@@ -39,7 +52,9 @@ def nacti_solax_v2():
             "ac_out": float(res.get("acpower", 0)),
             "bat_p": float(res.get("batPower", 0))
         }
-    except: return None
+    except Exception as e: 
+        print(f"DEBUG: Kriticka chyba pri spojeni se SolaX: {e}")
+        return None
 
 def nacti_ceny_entsoe_dnes(dnesni_datum):
     TOKEN_ENTSOE = "680f2687-dd26-443a-81d1-db067ee6b029"
