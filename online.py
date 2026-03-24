@@ -112,12 +112,23 @@ def nacti_predpoved_pvcz_dnes(dnesni_datum):
 
 def nauc_se_spotrebu(df_h, aktualni_cas):
     if df_h.empty or 'Skutecna_Spotreba_kWh' not in df_h.columns: return None
+    
     je_vikend = aktualni_cas.weekday() >= 5
     df_h['Cas'] = pd.to_datetime(df_h['Cas'])
+    
+    # Filtrace na stejnou hodinu a stejny typ dne (vikend/vsedni)
     df_f = df_h[(df_h['Cas'].dt.hour == aktualni_cas.hour) & 
                 ((df_h['Cas'].dt.weekday >= 5) == je_vikend)].dropna(subset=['Skutecna_Spotreba_kWh'])
-    # Matematicka korekce: prumer za 15 minut * 4 = hodinovy odhad
-    return (df_f['Skutecna_Spotreba_kWh'].mean() * 4) if len(df_f) >= MIN_DNI_PRO_UCENI else None
+    
+    # Zjisteni skutecneho poctu unikatnich datumu (dnu)
+    pocet_unikatnich_dni = df_f['Cas'].dt.date.nunique()
+    
+    # Propustime to jen pokud mame data z alespon 5 ruznych dnu
+    if pocet_unikatnich_dni >= MIN_DNI_PRO_UCENI:
+        # Pětiminutový průměr násobíme 12x pro získání hodinového odhadu
+        return df_f['Skutecna_Spotreba_kWh'].mean() * 12
+    else:
+        return None
 
 def rozhodovaci_logika(prum_p, spot, soc, cena):
     if spot is None: return "UCENI_V_PRUBEHU"
