@@ -140,6 +140,18 @@ def rozhodovaci_logika(prum_p, spot, soc, cena):
     elif bilance > 0 and soc <= 95: return "NABIJET_SOLAREM"
     elif bilance < 0 and soc > 20: return "VYBIJET_PRO_DUM"
     else: return "NORMALNI_PROVOZ"
+        
+def main():
+    # Zjisteni aktualniho casu pro vsechny vypocty
+    ted = datetime.now(ZoneInfo("Europe/Prague"))
+    ted_cela_hodina = ted.replace(minute=0, second=0, microsecond=0)
+    
+    # Nacteni historickych dat (musi byt pred matematikou)
+    df_h = pd.DataFrame()
+    if os.path.exists(SOUBOR_HISTORIE):
+        df_h = pd.read_csv(SOUBOR_HISTORIE, sep=';', decimal=',')
+        if not df_h.empty and 'Cas' in df_h.columns:
+            df_h['Cas'] = pd.to_datetime(df_h['Cas'])
 
 # 1. Priprava casoveho okna pro plnych 48 hodin
     dnes_pulnoc = ted_cela_hodina.replace(hour=0)
