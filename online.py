@@ -140,21 +140,10 @@ def rozhodovaci_logika(prum_p, spot, soc, cena):
     elif bilance < 0 and soc > 20: return "VYBIJET_PRO_DUM"
     else: return "NORMALNI_PROVOZ"
 
-def main():
-    # Presny cas pro ukladani s minutami
-    ted = datetime.now(ZoneInfo("Europe/Prague")).replace(tzinfo=None, second=0, microsecond=0)
-    # Zaokrouhleny cas pro dotazy na API a predpovedi
-    ted_cela_hodina = ted.replace(minute=0)
-    
-    try:
-        df_h = pd.read_csv(SOUBOR_HISTORIE, parse_dates=['Cas'], sep=';', decimal=',') if os.path.exists(SOUBOR_HISTORIE) else pd.DataFrame()
-    except: df_h = pd.DataFrame()
-
-   # 1. Priprava casoveho okna pro plnych 48 hodin (dnesek a zitrek)
+# 1. Priprava casoveho okna pro plnych 48 hodin
     dnes_pulnoc = ted_cela_hodina.replace(hour=0)
     zitra_pulnoc = dnes_pulnoc + timedelta(days=1)
 
-    # Nacteni predpovedi a cen pro oba dny
     fs_dnes = nacti_predpoved_fs_dnes(dnes_pulnoc)
     pvcz_dnes = nacti_predpoved_pvcz_dnes(dnes_pulnoc)
     ceny_dnes = nacti_ceny_entsoe_dnes(dnes_pulnoc)
@@ -163,56 +152,91 @@ def main():
     pvcz_zitra = nacti_predpoved_pvcz_dnes(zitra_pulnoc)
     ceny_zitra = nacti_ceny_entsoe_dnes(zitra_pulnoc)
 
-    # 2. Inicializace baterie pro simulaci
-    KAPACITA_BATERIE_KWH = 10.0 # ZDE SI UPRAV KAPACITU BATERIE
-    simulovane_soc = 50.0
-    if not df_h.empty and 'Baterie_SOC_%' in df_h.columns:
-        simulovane_soc = float(df_h.iloc[-1]['Baterie_SOC_%'])
-
-    # 3. Hlavni planovaci smycka na 48 hodin
-    plan_data = []
+    # 2. Sber dat do poli pro matematicky solver
+    ceny_48, pv_48, spotreba_48, casy_48 = [], [], [], []
     for offset_h in range(48):
         aktualni_hodina_planu = dnes_pulnoc + timedelta(hours=offset_h)
         h = aktualni_hodina_planu.hour
+        casy_48.append(aktualni_hodina_planu)
         
-        # Vybereme spravny slovnik podle toho, jestli jsme v dnesku nebo zitrku
         if offset_h < 24:
             fs_val, pvcz_val, cena = fs_dnes.get(h, 0.0), pvcz_dnes.get(h, 0.0), ceny_dnes.get(h, 0.0)
         else:
             fs_val, pvcz_val, cena = fs_zitra.get(h, 0.0), pvcz_zitra.get(h, 0.0), ceny_zitra.get(h, 0.0)
             
-        p_avg = (fs_val + pvcz_val) / 2
+        pv_48.append((fs_val + pvcz_val) / 2)
+        ceny_48.append(cena)
         
-        # Zjisteni spotreby (ceka na tech 5 dni)
         spot = nauc_se_spotrebu(df_h, aktualni_hodina_planu)
-        akce = rozhodovaci_logika(p_avg, spot, simulovane_soc, cena)
-        
-        # Matematika pro baterii (pokud se ucime, udrzime rovnici v chodu nulou)
-        spot_pro_vypocet = spot if spot is not None else 0.0
-        bilance_kwh = p_avg - spot_pro_vypocet
-        
-        if akce == "NABIJET_ZE_SITE":
-            bilance_kwh += 3.0 
-            
-        zmena_soc = (bilance_kwh / KAPACITA_BATERIE_KWH) * 100.0
-        simulovane_soc = max(10.0, min(100.0, simulovane_soc + zmena_soc))
+        spotreba_48.append(spot if spot is not None else 0.0)
 
-        # Ulozime do planu jen budoucnost (od aktualni hodiny dal)
+    # 3. Inicializace parametru baterie
+    KAPACITA_BATERIE_KWH = 10.0 # ZDE ZADEJ KAPACITU
+    MAX_VYKON_STRIDACE = 3.0    # ZDE ZADEJ MAXIMALNI VYKON NABIJENI V kW
+    pocatecni_soc = 50.0
+    if not df_h.empty and 'Baterie_SOC_%' in df_h.columns:
+        pocatecni_soc = float(df_h.iloc[-1]['Baterie_SOC_%'])
+
+    # 4. STAVBA MATEMATICKEHO MODELU (Ph.D. uroven)
+    model = pulp.LpProblem("Optimalizace_FVE", pulp.LpMinimize)
+    hodiny = range(48)
+
+    # Promenne (co ma solver zjistit)
+    p_nakup = pulp.LpVariable.dicts("Nakup", hodiny, lowBound=0)
+    p_prodej = pulp.LpVariable.dicts("Prodej", hodiny, lowBound=0)
+    p_nabijeni = pulp.LpVariable.dicts("Nabijeni", hodiny, lowBound=0, upBound=MAX_VYKON_STRIDACE)
+    p_vybijeni = pulp.LpVariable.dicts("Vybijeni", hodiny, lowBound=0, upBound=MAX_VYKON_STRIDACE)
+    soc = pulp.LpVariable.dicts("SOC", hodiny, lowBound=10.0, upBound=100.0)
+
+    # Ucelova funkce (minimalizace nakladu)
+    model += pulp.lpSum([p_nakup[h] * ceny_48[h] - p_prodej[h] * (ceny_48[h] * 0.5) for h in hodiny])
+
+    # Omezujici podminky (fyzika a zachovani energie)
+    for h in hodiny:
+        model += (pv_48[h] + p_nakup[h] + p_vybijeni[h] == spotreba_48[h] + p_prodej[h] + p_nabijeni[h])
+        
+        zmena_soc = ((p_nabijeni[h] - p_vybijeni[h]) / KAPACITA_BATERIE_KWH) * 100.0
+        if h == 0:
+            model += soc[h] == pocatecni_soc + zmena_soc
+        else:
+            model += soc[h] == soc[h-1] + zmena_soc
+
+    # 5. VYRESENI SOUSTAVY ROVNIC
+    model.solve(pulp.PULP_CBC_CMD(msg=False))
+
+    # 6. Zapsani globalne optimalniho reseni do CSV
+    plan_data = []
+    for h in hodiny:
+        aktualni_hodina_planu = casy_48[h]
         if aktualni_hodina_planu >= ted_cela_hodina:
+            # Preklad matematiky zpet do srozumitelnych textovych akci
+            nab_val = p_nabijeni[h].varValue
+            vyb_val = p_vybijeni[h].varValue
+            nak_val = p_nakup[h].varValue
+            
+            akce = "NORMALNI_PROVOZ"
+            if nab_val > 0.1 and nak_val > 0.1:
+                akce = "NABIJET_ZE_SITE"
+            elif nab_val > 0.1:
+                akce = "NABIJET_SOLAREM"
+            elif vyb_val > 0.1:
+                akce = "POKRYT_Z_BATERIE"
+            elif p_prodej[h].varValue > 0.1:
+                akce = "PRODAVAT_DO_SITE"
+
             plan_data.append({
                 'Datum': aktualni_hodina_planu.strftime('%Y-%m-%d'), 
-                'Hodina': f"{h:02d}:00",
-                'Predpoved_FS_kWh': round(fs_val, 2),
-                'Predpoved_PVCZ_kWh': round(pvcz_val, 2),
-                'Predpoved_Prumer_kWh': round(p_avg, 2),
-                'Odhad_Spotreba_kWh': round(spot, 2) if spot is not None else "Nedostatek dat",
-                'Cena_CZK_kWh': round(cena, 2),
-                'Simulovane_SOC_%': round(simulovane_soc, 1),
+                'Hodina': f"{aktualni_hodina_planu.hour:02d}:00",
+                'Predpoved_FS_kWh': round(fs_dnes.get(aktualni_hodina_planu.hour, 0.0) if h < 24 else fs_zitra.get(aktualni_hodina_planu.hour, 0.0), 2),
+                'Predpoved_PVCZ_kWh': round(pvcz_dnes.get(aktualni_hodina_planu.hour, 0.0) if h < 24 else pvcz_zitra.get(aktualni_hodina_planu.hour, 0.0), 2),
+                'Predpoved_Prumer_kWh': round(pv_48[h], 2),
+                'Odhad_Spotreba_kWh': round(spotreba_48[h], 2) if spotreba_48[h] > 0 else "Nedostatek dat",
+                'Cena_CZK_kWh': round(ceny_48[h], 2),
+                'Simulovane_SOC_%': round(soc[h].varValue, 1),
                 'Akce_EMS': akce
             })
         
     pd.DataFrame(plan_data).to_csv(SOUBOR_PLAN, index=False, sep=';', decimal=',')
-
     m = nacti_solax_v2()
     if not m: return
 
