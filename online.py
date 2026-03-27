@@ -1,4 +1,4 @@
-import pupl
+import pulp
 import requests
 import pandas as pd
 from datetime import datetime, timezone, timedelta
