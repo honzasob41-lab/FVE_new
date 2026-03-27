@@ -22,28 +22,17 @@ SOUBOR_PLAN = "denni_plan.csv"
 MIN_DNI_PRO_UCENI = 5
 
 def nacti_solax_v2():
-    print(f"DEBUG: Spoustim nacti_solax_v2")
-    print(f"DEBUG: TOKEN_SOLAX nacten: {bool(TOKEN_SOLAX)}")
-    print(f"DEBUG: WIFI_SN nacten: {bool(WIFI_SN)}")
-    
     url = "https://global.solaxcloud.com/proxyApp/proxy/api/v2/dataAccess/realtimeInfo/get"
     payload = {"wifiSn": WIFI_SN}
     headers = {"tokenId": TOKEN_SOLAX, "Content-Type": "application/json"}
     try:
         r = requests.post(url, json=payload, headers=headers, timeout=15)
-        print(f"DEBUG: HTTP Status SolaX: {r.status_code}")
         data = r.json()
-        
         if data.get("success") is not True: 
-            print(f"DEBUG: SolaX API vratilo chybu: {data}")
             return None
-            
         res = data.get("result")
         if not res: 
-            print("DEBUG: SolaX API nevratilo zadny result.")
             return None
-            
-        print("DEBUG: SolaX data uspesne nactena.")
         return {
             "v_dnes": float(res.get("yieldtoday", 0)),
             "soc": float(res.get("soc", 0)),
@@ -53,8 +42,7 @@ def nacti_solax_v2():
             "ac_out": float(res.get("acpower", 0)),
             "bat_p": float(res.get("batPower", 0))
         }
-    except Exception as e: 
-        print(f"DEBUG: Kriticka chyba pri spojeni se SolaX: {e}")
+    except Exception: 
         return None
 
 def nacti_ceny_entsoe_dnes(dnesni_datum):
@@ -113,20 +101,12 @@ def nacti_predpoved_pvcz_dnes(dnesni_datum):
 
 def nauc_se_spotrebu(df_h, aktualni_cas):
     if df_h.empty or 'Skutecna_Spotreba_kWh' not in df_h.columns: return None
-    
     je_vikend = aktualni_cas.weekday() >= 5
     df_h['Cas'] = pd.to_datetime(df_h['Cas'])
-    
-    # Filtrace na stejnou hodinu a stejny typ dne (vikend/vsedni)
     df_f = df_h[(df_h['Cas'].dt.hour == aktualni_cas.hour) & 
                 ((df_h['Cas'].dt.weekday >= 5) == je_vikend)].dropna(subset=['Skutecna_Spotreba_kWh'])
-    
-    # Zjisteni skutecneho poctu unikatnich datumu (dnu)
     pocet_unikatnich_dni = df_f['Cas'].dt.date.nunique()
-    
-    # Propustime to jen pokud mame data z alespon 5 ruznych dnu
     if pocet_unikatnich_dni >= MIN_DNI_PRO_UCENI:
-        # Pětiminutový průměr násobíme 12x pro získání hodinového odhadu
         return df_f['Skutecna_Spotreba_kWh'].mean() * 12
     else:
         return None
@@ -140,20 +120,20 @@ def rozhodovaci_logika(prum_p, spot, soc, cena):
     elif bilance > 0 and soc <= 95: return "NABIJET_SOLAREM"
     elif bilance < 0 and soc > 20: return "VYBIJET_PRO_DUM"
     else: return "NORMALNI_PROVOZ"
-        
+
+
 def main():
-    # Zjisteni aktualniho casu pro vsechny vypocty
+    # --- A. PRIPRAVA CASU A HISTORIE ---
     ted = datetime.now(ZoneInfo("Europe/Prague"))
     ted_cela_hodina = ted.replace(minute=0, second=0, microsecond=0)
     
-    # Nacteni historickych dat (musi byt pred matematikou)
     df_h = pd.DataFrame()
     if os.path.exists(SOUBOR_HISTORIE):
         df_h = pd.read_csv(SOUBOR_HISTORIE, sep=';', decimal=',')
         if not df_h.empty and 'Cas' in df_h.columns:
             df_h['Cas'] = pd.to_datetime(df_h['Cas'])
 
-# 1. Priprava casoveho okna pro plnych 48 hodin
+    # --- B. MATEMATICKA OPTIMALIZACE (DENNI PLAN) ---
     dnes_pulnoc = ted_cela_hodina.replace(hour=0)
     zitra_pulnoc = dnes_pulnoc + timedelta(days=1)
 
@@ -165,7 +145,6 @@ def main():
     pvcz_zitra = nacti_predpoved_pvcz_dnes(zitra_pulnoc)
     ceny_zitra = nacti_ceny_entsoe_dnes(zitra_pulnoc)
 
-    # 2. Sber dat do poli pro matematicky solver
     ceny_48, pv_48, spotreba_48, casy_48 = [], [], [], []
     for offset_h in range(48):
         aktualni_hodina_planu = dnes_pulnoc + timedelta(hours=offset_h)
@@ -183,46 +162,37 @@ def main():
         spot = nauc_se_spotrebu(df_h, aktualni_hodina_planu)
         spotreba_48.append(spot if spot is not None else 0.0)
 
-    # 3. Inicializace parametru baterie
-    KAPACITA_BATERIE_KWH = 10.0 # ZDE ZADEJ KAPACITU
-    MAX_VYKON_STRIDACE = 3.0    # ZDE ZADEJ MAXIMALNI VYKON NABIJENI V kW
+    KAPACITA_BATERIE_KWH = 10.0 
+    MAX_VYKON_STRIDACE = 3.0    
     pocatecni_soc = 50.0
     if not df_h.empty and 'Baterie_SOC_%' in df_h.columns:
         pocatecni_soc = float(df_h.iloc[-1]['Baterie_SOC_%'])
 
-    # 4. STAVBA MATEMATICKEHO MODELU (Ph.D. uroven)
     model = pulp.LpProblem("Optimalizace_FVE", pulp.LpMinimize)
     hodiny = range(48)
 
-    # Promenne (co ma solver zjistit)
     p_nakup = pulp.LpVariable.dicts("Nakup", hodiny, lowBound=0)
     p_prodej = pulp.LpVariable.dicts("Prodej", hodiny, lowBound=0)
     p_nabijeni = pulp.LpVariable.dicts("Nabijeni", hodiny, lowBound=0, upBound=MAX_VYKON_STRIDACE)
     p_vybijeni = pulp.LpVariable.dicts("Vybijeni", hodiny, lowBound=0, upBound=MAX_VYKON_STRIDACE)
     soc = pulp.LpVariable.dicts("SOC", hodiny, lowBound=10.0, upBound=100.0)
 
-    # Ucelova funkce (minimalizace nakladu)
     model += pulp.lpSum([p_nakup[h] * ceny_48[h] - p_prodej[h] * (ceny_48[h] * 0.5) for h in hodiny])
 
-    # Omezujici podminky (fyzika a zachovani energie)
     for h in hodiny:
         model += (pv_48[h] + p_nakup[h] + p_vybijeni[h] == spotreba_48[h] + p_prodej[h] + p_nabijeni[h])
-        
         zmena_soc = ((p_nabijeni[h] - p_vybijeni[h]) / KAPACITA_BATERIE_KWH) * 100.0
         if h == 0:
             model += soc[h] == pocatecni_soc + zmena_soc
         else:
             model += soc[h] == soc[h-1] + zmena_soc
 
-    # 5. VYRESENI SOUSTAVY ROVNIC
     model.solve(pulp.PULP_CBC_CMD(msg=False))
 
-    # 6. Zapsani globalne optimalniho reseni do CSV
     plan_data = []
     for h in hodiny:
         aktualni_hodina_planu = casy_48[h]
         if aktualni_hodina_planu >= ted_cela_hodina:
-            # Preklad matematiky zpet do srozumitelnych textovych akci
             nab_val = p_nabijeni[h].varValue
             vyb_val = p_vybijeni[h].varValue
             nak_val = p_nakup[h].varValue
@@ -250,25 +220,22 @@ def main():
             })
         
     pd.DataFrame(plan_data).to_csv(SOUBOR_PLAN, index=False, sep=';', decimal=',')
+
+    # --- C. AKTUALIZACE HISTORIE (REALNA DATA ZE SOLAXU) ---
     m = nacti_solax_v2()
     if not m: return
 
-    # Vychozi hodnoty pro diferencialni vypocty
     h_vyroba = m['v_dnes']
     h_spotreba = 0.0
     delta_h = 0.25
     
     if not df_h.empty:
-        # Vypocet presneho casoveho kroku v hodinach (numericka integrace)
         posledni_zaznam = df_h.iloc[-1]
         rozdil_sekund = (ted - posledni_zaznam['Cas']).total_seconds()
         if 0 < rozdil_sekund <= 3600:
             delta_h = rozdil_sekund / 3600.0
 
-        # Spotreba domu (vzdalenost od absolutne posledniho zaznamu)
         h_spotreba = max(0.0, m['s_celkem'] - posledni_zaznam['Spotreba_Celkem_kWh'])
-        
-        # AC Vyroba (vzdalenost jen od dnesnich zaznamu, protoze se o pulnoci nuluje)
         dnesni_zaznamy = df_h[df_h['Cas'].dt.date == ted.date()]
         if not dnesni_zaznamy.empty:
             h_vyroba = max(0.0, m['v_dnes'] - dnesni_zaznamy['AC_vyroba_Dnes_kWh'].iloc[-1])
@@ -303,5 +270,8 @@ def main():
     pd.concat([df_h, n_radek]).drop_duplicates(subset=['Cas'], keep='last').to_csv(SOUBOR_HISTORIE, index=False, sep=';', decimal=',')
 
 if __name__ == "__main__":
-    try: main()
-    except: traceback.print_exc()
+    try: 
+        main()
+    except Exception as e: 
+        print(f"Kriticka chyba pri behu skriptu: {e}")
+        traceback.print_exc()
