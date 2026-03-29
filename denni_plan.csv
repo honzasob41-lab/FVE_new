@@ -1,5 +1,4 @@
 Datum;Hodina;Predpoved_FS_kWh;Predpoved_PVCZ_kWh;Predpoved_Prumer_kWh;Odhad_Spotreba_kWh;Cena_CZK_kWh;Simulovane_SOC_%;Akce_EMS
-2026-03-29;19:00;0,0;0,0;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ
 2026-03-29;20:00;0,0;0,0;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ
 2026-03-29;21:00;0,0;0,0;0,0;Nedostatek dat;0,0;40,0;NABIJET_ZE_SITE
 2026-03-29;22:00;0,0;0,0;0,0;Nedostatek dat;0,0;70,0;NABIJET_ZE_SITE
