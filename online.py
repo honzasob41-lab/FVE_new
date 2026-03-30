@@ -124,7 +124,8 @@ def rozhodovaci_logika(prum_p, spot, soc, cena):
 
 def main():
     # --- A. PRIPRAVA CASU A HISTORIE ---
-    ted = datetime.now(ZoneInfo("Europe/Prague"))
+    # Reseni problemu s casovymi pasmy: nacteme cas a ihned mu smazeme tzinfo
+    ted = datetime.now(ZoneInfo("Europe/Prague")).replace(tzinfo=None)
     ted_cela_hodina = ted.replace(minute=0, second=0, microsecond=0)
     
     df_h = pd.DataFrame()
