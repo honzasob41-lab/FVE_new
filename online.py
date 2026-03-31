@@ -128,7 +128,7 @@ def vygeneruj_duvod_pulp(akce, cena, pv_vykon, soc):
         else:
             return f"Priprava na budouci spicku (nakup za {cena:.2f} Kc)."
     elif akce == "NABIJET_SOLAREM":
-        return "Ukladani solarnich prebytku pro pozdejsi vyuziti."
+        return "Ukladani prebytku."
     elif akce == "POKRYT_Z_BATERIE":
         return f"Vyhnuti se nakupu drahe energie (cena v siti je {cena:.2f} Kc)."
     elif akce == "PRODAVAT_DO_SITE":
