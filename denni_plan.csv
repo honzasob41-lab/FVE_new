@@ -1,35 +1,35 @@
 Datum;Hodina;Predpoved_FS_kWh;Predpoved_PVCZ_kWh;Predpoved_Prumer_kWh;Odhad_Spotreba_kWh;Cena_CZK_kWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-03-31;14:00;1,84;0,0;0,92;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Financni arbitraz (prodej za vysokou vykupni cenu).
-2026-03-31;15:00;1,47;0,0;0,74;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Financni arbitraz (prodej za vysokou vykupni cenu).
-2026-03-31;16:00;1,06;0,0;0,53;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Financni arbitraz (prodej za vysokou vykupni cenu).
-2026-03-31;17:00;0,66;0,0;0,33;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Financni arbitraz (prodej za vysokou vykupni cenu).
-2026-03-31;18:00;0,29;0,0;0,15;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Financni arbitraz (prodej za vysokou vykupni cenu).
-2026-03-31;19:00;0,0;0,0;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezna spotreba kryta sluncem.
-2026-03-31;20:00;0,0;0,0;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz (cekani na zmenu podminek).
-2026-03-31;21:00;0,0;0,0;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz (cekani na zmenu podminek).
-2026-03-31;22:00;0,0;0,0;0,0;0.9;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz (cekani na zmenu podminek).
-2026-03-31;23:00;0,0;0,0;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz (cekani na zmenu podminek).
-2026-04-01;00:00;0,0;0,0;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz (cekani na zmenu podminek).
-2026-04-01;01:00;0,0;0,0;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz (cekani na zmenu podminek).
-2026-04-01;02:00;0,0;0,0;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz (cekani na zmenu podminek).
-2026-04-01;03:00;0,0;0,0;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz (cekani na zmenu podminek).
-2026-04-01;04:00;0,0;0,0;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz (cekani na zmenu podminek).
-2026-04-01;05:00;0,0;0,0;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz (cekani na zmenu podminek).
-2026-04-01;06:00;0,0;0,0;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz (cekani na zmenu podminek).
-2026-04-01;07:00;0,32;0,0;0,16;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Financni arbitraz (prodej za vysokou vykupni cenu).
-2026-04-01;08:00;1,51;0,0;0,75;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Financni arbitraz (prodej za vysokou vykupni cenu).
-2026-04-01;09:00;2,43;0,7;1,56;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Financni arbitraz (prodej za vysokou vykupni cenu).
-2026-04-01;10:00;3,14;1,13;2,14;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Financni arbitraz (prodej za vysokou vykupni cenu).
-2026-04-01;11:00;3,82;1,5;2,66;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Financni arbitraz (prodej za vysokou vykupni cenu).
-2026-04-01;12:00;4,13;1,79;2,96;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Financni arbitraz (prodej za vysokou vykupni cenu).
-2026-04-01;13:00;3,69;1,95;2,82;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Financni arbitraz (prodej za vysokou vykupni cenu).
-2026-04-01;14:00;2,93;1,95;2,44;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Financni arbitraz (prodej za vysokou vykupni cenu).
-2026-04-01;15:00;2,05;1,83;1,94;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Financni arbitraz (prodej za vysokou vykupni cenu).
-2026-04-01;16:00;1,25;1,61;1,43;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Financni arbitraz (prodej za vysokou vykupni cenu).
-2026-04-01;17:00;0,67;1,28;0,97;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Financni arbitraz (prodej za vysokou vykupni cenu).
-2026-04-01;18:00;0,28;0,89;0,59;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Financni arbitraz (prodej za vysokou vykupni cenu).
-2026-04-01;19:00;0,01;0,46;0,23;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Financni arbitraz (prodej za vysokou vykupni cenu).
-2026-04-01;20:00;0,0;0,12;0,06;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezna spotreba kryta sluncem.
-2026-04-01;21:00;0,0;0,0;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz (cekani na zmenu podminek).
-2026-04-01;22:00;0,0;0,0;0,0;0.9;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz (cekani na zmenu podminek).
-2026-04-01;23:00;0,0;0,0;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz (cekani na zmenu podminek).
+2026-03-31;14:00;1,84;0,0;0,92;Nedostatek dat;3,1;63,1;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti.
+2026-03-31;15:00;1,47;0,0;0,74;Nedostatek dat;2,85;70,5;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti.
+2026-03-31;16:00;1,06;0,0;0,53;Nedostatek dat;3,17;75,8;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti.
+2026-03-31;17:00;0,66;0,0;0,33;Nedostatek dat;3,13;79,1;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti.
+2026-03-31;18:00;0,29;0,0;0,15;Nedostatek dat;3,03;80,5;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti.
+2026-03-31;19:00;0,0;0,0;0,0;Nedostatek dat;2,77;80,6;NORMALNI_PROVOZ;Bezna spotreba kryta sluncem.
+2026-03-31;20:00;0,0;0,0;0,0;Nedostatek dat;2,92;80,6;NORMALNI_PROVOZ;Cekani na zmenu podminek.
+2026-03-31;21:00;0,0;0,0;0,0;Nedostatek dat;2,82;80,6;NORMALNI_PROVOZ;Cekani na zmenu podminek.
+2026-03-31;22:00;0,0;0,0;0,0;0.9;3,07;71,6;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.07 Kc).
+2026-03-31;23:00;0,0;0,0;0,0;Nedostatek dat;3,46;71,6;NORMALNI_PROVOZ;Cekani na zmenu podminek.
+2026-04-01;00:00;0,0;0,0;0,0;Nedostatek dat;3,45;71,6;NORMALNI_PROVOZ;Cekani na zmenu podminek.
+2026-04-01;01:00;0,0;0,0;0,0;Nedostatek dat;3,56;71,6;NORMALNI_PROVOZ;Cekani na zmenu podminek.
+2026-04-01;02:00;0,0;0,0;0,0;Nedostatek dat;3,69;71,6;NORMALNI_PROVOZ;Cekani na zmenu podminek.
+2026-04-01;03:00;0,0;0,0;0,0;Nedostatek dat;3,62;71,6;NORMALNI_PROVOZ;Cekani na zmenu podminek.
+2026-04-01;04:00;0,0;0,0;0,0;Nedostatek dat;3,75;60,9;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti.
+2026-04-01;05:00;0,0;0,0;0,0;Nedostatek dat;3,82;30,9;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.82 Kc).
+2026-04-01;06:00;0,0;0,0;0,0;Nedostatek dat;3,63;30,9;NORMALNI_PROVOZ;Cekani na zmenu podminek.
+2026-04-01;07:00;0,32;0,0;0,16;Nedostatek dat;3,49;32,5;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti.
+2026-04-01;08:00;1,51;0,0;0,75;Nedostatek dat;3,72;40,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti.
+2026-04-01;09:00;2,43;0,7;1,56;Nedostatek dat;3,75;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.75 Kc).
+2026-04-01;10:00;3,14;1,13;2,14;Nedostatek dat;3,6;31,4;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti.
+2026-04-01;11:00;3,82;1,5;2,66;Nedostatek dat;3,5;58,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti.
+2026-04-01;12:00;4,13;1,79;2,96;Nedostatek dat;3,74;28,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.74 Kc).
+2026-04-01;13:00;3,69;1,95;2,82;Nedostatek dat;3,63;37,7;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti.
+2026-04-01;14:00;2,93;1,95;2,44;Nedostatek dat;3,5;62,1;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti.
+2026-04-01;15:00;2,05;1,83;1,94;Nedostatek dat;3,31;81,5;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti.
+2026-04-01;16:00;1,25;1,61;1,43;Nedostatek dat;3,77;51,5;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.77 Kc).
+2026-04-01;17:00;0,67;1,28;0,97;Nedostatek dat;3,56;61,2;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti.
+2026-04-01;18:00;0,28;0,89;0,59;Nedostatek dat;3,63;67,1;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti.
+2026-04-01;19:00;0,01;0,46;0,23;Nedostatek dat;3,56;69,4;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti.
+2026-04-01;20:00;0,0;0,12;0,06;Nedostatek dat;3,11;70,0;NORMALNI_PROVOZ;Bezna spotreba kryta sluncem.
+2026-04-01;21:00;0,0;0,0;0,0;Nedostatek dat;2,99;70,0;NORMALNI_PROVOZ;Cekani na zmenu podminek.
+2026-04-01;22:00;0,0;0,0;0,0;0.9;3,67;40,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.67 Kc).
+2026-04-01;23:00;0,0;0,0;0,0;Nedostatek dat;3,98;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.98 Kc).
