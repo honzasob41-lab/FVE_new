@@ -222,7 +222,7 @@ def main():
         
     pd.DataFrame(plan_data).to_csv(SOUBOR_PLAN, index=False, sep=';', decimal=',')
 
-    # --- C. AKTUALIZACE HISTORIE (REALNA DATA ZE SOLAXU) ---
+   # --- C. AKTUALIZACE HISTORIE (REALNA DATA ZE SOLAXU) ---
     m = nacti_solax_v2()
     if not m: return
 
@@ -250,6 +250,13 @@ def main():
     p_now = (fs_now + pvcz_now) / 2
     cena_h = nacti_ceny_entsoe_dnes(ted_cela_hodina).get(ted_cela_hodina.hour, 0.0)
 
+    # NOVINKA: Ziskani akce z PuLP planu pro tento konkretni okamzik
+    aktualni_akce_pulp = "NEDOSTUPNE"
+    for radek_planu in plan_data:
+        if radek_planu['Datum'] == ted_cela_hodina.strftime('%Y-%m-%d') and radek_planu['Hodina'] == f"{ted_cela_hodina.hour:02d}:00":
+            aktualni_akce_pulp = radek_planu['Akce_EMS']
+            break
+
     n_radek = pd.DataFrame([{
         'Cas': ted, 
         'Skutecny_AC_Vystup_kWh': round(h_vyroba, 2), 
@@ -263,7 +270,8 @@ def main():
         'Predpoved_FS_kWh': round(fs_now, 2),
         'Predpoved_PVCZ_kWh': round(pvcz_now, 2),
         'Predpoved_Prumer_kWh': round(p_now, 2),
-        'Doporucena_Akce': rozhodovaci_logika(p_now, o_spot, m['soc'], cena_h),
+        'Doporucena_Akce': rozhodovaci_logika(p_now, o_spot, m['soc'], cena_h), # Stara logika
+        'Akce_PuLP': aktualni_akce_pulp,                                        # Nova matematicka logika
         'AC_vyroba_Dnes_kWh': m['v_dnes'], 
         'Spotreba_Celkem_kWh': m['s_celkem']
     }])
