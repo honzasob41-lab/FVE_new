@@ -1175,3 +1175,4 @@ Cas;Skutecny_AC_Vystup_kWh;Skutecna_Spotreba_kWh;Celkovy_Vykon_Panelu_W;Cista_Vy
 2026-04-01 00:00:54.384408;8,2;0,0;0,0;0,0;0,0;0,0;28,0;3,45;0,0;0,0;0,0;UCENI_V_PRUBEHU;8,2;10600,06;NORMALNI_PROVOZ;Cekani na zmenu podminek.
 2026-04-01 00:05:31.541450;0,0;0,01;0,0;0,0;0,0;0,0;28,0;3,45;0,0;0,0;0,0;BEZNA_SPOTREBA;0,0;10600,07;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.45 Kc).
 2026-04-01 00:10:36.180333;0,0;0,0;0,0;0,0;0,0;0,0;28,0;3,45;0,0;0,0;0,0;BEZNA_SPOTREBA;0,0;10600,07;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.45 Kc).
+2026-04-01 00:15:37.654538;0,0;0,02;0,0;0,0;0,0;0,0;28,0;3,45;0,0;0,0;0,0;BEZNA_SPOTREBA;0,0;10600,09;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.45 Kc).
