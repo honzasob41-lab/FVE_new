@@ -118,7 +118,7 @@ def rozhodovaci_logika(prum_p, spot, soc, cena):
     elif cena > 4.0 and soc > 80: return "PRODAVAT_I_BATERII" if bilance > 0 else "POKRYT_Z_BATERIE"
     elif bilance > 0 and soc > 95: return "PRODAVAT_DO_SITE"
     elif bilance > 0 and soc <= 95: return "NABIJET_SOLAREM"
-    elif bilance < 0 and soc > 20: return "VYBIJET_PRO_DUM"
+    elif bilance < 0 and soc > 20: return "BEZNA_SPOTREBA"
     else: return "NORMALNI_PROVOZ"
 
 def vygeneruj_duvod_pulp(akce, cena, pv_vykon, soc):
@@ -135,11 +135,11 @@ def vygeneruj_duvod_pulp(akce, cena, pv_vykon, soc):
         if soc >= 95.0:
             return "Baterie je plna, prodej cistych prebytku se ziskem."
         else:
-            return "Financni arbitraz (prodej za vysokou vykupni cenu)."
+            return "Prodej za vysokou vykupni cenu."
     else:
         if pv_vykon > 0:
             return "Bezna spotreba kryta sluncem."
-        return "Bezny provoz (cekani na zmenu podminek)."
+        return "Cekani na zmenu podminek."
 
 def main():
     # --- A. PRIPRAVA CASU A HISTORIE ---
