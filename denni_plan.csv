@@ -1,8 +1,8 @@
 Datum;Hodina;Predpoved_FS_kWh;Predpoved_PVCZ_kWh;Predpoved_Prumer_kWh;Odhad_Spotreba_kWh;Cena_CZK_kWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-01;01:00;0,0;0,0;0,0;0.24;3,56;23,6;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.56 Kc).
-2026-04-01;02:00;0,0;0,0;0,0;Nedostatek dat;3,69;23,6;NORMALNI_PROVOZ;Cekani na zmenu podminek.
-2026-04-01;03:00;0,0;0,0;0,0;Nedostatek dat;3,62;23,6;NORMALNI_PROVOZ;Cekani na zmenu podminek.
-2026-04-01;04:00;0,0;0,0;0,0;Nedostatek dat;3,75;23,6;NORMALNI_PROVOZ;Cekani na zmenu podminek.
+2026-04-01;01:00;0,0;0,0;0,0;0.25;3,56;23,5;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.56 Kc).
+2026-04-01;02:00;0,0;0,0;0,0;Nedostatek dat;3,69;23,5;NORMALNI_PROVOZ;Cekani na zmenu podminek.
+2026-04-01;03:00;0,0;0,0;0,0;Nedostatek dat;3,62;23,5;NORMALNI_PROVOZ;Cekani na zmenu podminek.
+2026-04-01;04:00;0,0;0,0;0,0;Nedostatek dat;3,75;23,5;NORMALNI_PROVOZ;Cekani na zmenu podminek.
 2026-04-01;05:00;0,0;0,0;0,0;Nedostatek dat;3,82;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.82 Kc).
 2026-04-01;06:00;0,0;0,0;0,0;Nedostatek dat;3,63;10,0;NORMALNI_PROVOZ;Cekani na zmenu podminek.
 2026-04-01;07:00;0,4;0,0;0,2;Nedostatek dat;3,49;12,0;NABIJET_SOLAREM;Ukladani prebytku.
@@ -23,7 +23,7 @@ Datum;Hodina;Predpoved_FS_kWh;Predpoved_PVCZ_kWh;Predpoved_Prumer_kWh;Odhad_Spot
 2026-04-01;22:00;0,0;0,0;0,0;0.9;3,67;81,4;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.67 Kc).
 2026-04-01;23:00;0,0;0,0;0,0;0.22;3,98;79,3;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.98 Kc).
 2026-04-02;00:00;0,0;0,0;0,0;0.2;3,4;77,3;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.40 Kc).
-2026-04-02;01:00;0,0;0,0;0,0;0.24;4,01;74,8;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.01 Kc).
+2026-04-02;01:00;0,0;0,0;0,0;0.25;4,01;74,8;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.01 Kc).
 2026-04-02;02:00;0,0;0,0;0,0;Nedostatek dat;4,24;74,8;NORMALNI_PROVOZ;Cekani na zmenu podminek.
 2026-04-02;03:00;0,0;0,0;0,0;Nedostatek dat;4,66;70,0;NABIJET_SOLAREM;Ukladani prebytku.
 2026-04-02;04:00;0,0;0,0;0,0;Nedostatek dat;4,8;40,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.80 Kc).
