@@ -1085,3 +1085,4 @@ Cas;Skutecny_AC_Vystup_kWh;Skutecna_Spotreba_kWh;Celkovy_Vykon_Panelu_W;Cista_Vy
 2026-03-31 16:30:53.313856;0,0;0,3;591,0;0,0524;511,0;0,0;30,0;3,17;1,06;0,0;0,53;UCENI_V_PRUBEHU;7,0;10596,08;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti.
 2026-03-31 16:35:32.054355;0,1;0,28;1097,0;0,0849;981,0;0,0;30,0;3,17;1,06;0,0;0,53;UCENI_V_PRUBEHU;7,1;10596,36;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti.
 2026-03-31 16:40:37.944327;0,1;0,17;950,0;0,0807;851,0;0,0;30,0;3,17;1,06;0,0;0,53;UCENI_V_PRUBEHU;7,2;10596,53;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti.
+2026-03-31 16:45:39.028677;0,0;0,04;918,0;0,0768;355,0;380,0;31,0;3,17;1,06;0,0;0,53;UCENI_V_PRUBEHU;7,2;10596,57;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti.
