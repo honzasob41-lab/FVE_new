@@ -121,10 +121,28 @@ def rozhodovaci_logika(prum_p, spot, soc, cena):
     elif bilance < 0 and soc > 20: return "VYBIJET_PRO_DUM"
     else: return "NORMALNI_PROVOZ"
 
+def vygeneruj_duvod_pulp(akce, cena, pv_vykon, soc):
+    if akce == "NABIJET_ZE_SITE":
+        if cena <= 0.5:
+            return f"Vyuziti extremne levne energie ({cena:.2f} Kc) k dobiti."
+        else:
+            return f"Priprava na budouci spicku (nakup za {cena:.2f} Kc)."
+    elif akce == "NABIJET_SOLAREM":
+        return "Ukladani solarnich prebytku pro pozdejsi vyuziti."
+    elif akce == "POKRYT_Z_BATERIE":
+        return f"Vyhnuti se nakupu drahe energie (cena v siti je {cena:.2f} Kc)."
+    elif akce == "PRODAVAT_DO_SITE":
+        if soc >= 95.0:
+            return "Baterie je plna, prodej cistych prebytku se ziskem."
+        else:
+            return "Financni arbitraz (prodej za vysokou vykupni cenu)."
+    else:
+        if pv_vykon > 0:
+            return "Bezna spotreba kryta sluncem."
+        return "Bezny provoz (cekani na zmenu podminek)."
 
 def main():
     # --- A. PRIPRAVA CASU A HISTORIE ---
-    # Reseni problemu s casovymi pasmy: nacteme cas a ihned mu smazeme tzinfo
     ted = datetime.now(ZoneInfo("Europe/Prague")).replace(tzinfo=None)
     ted_cela_hodina = ted.replace(minute=0, second=0, microsecond=0)
     
@@ -208,6 +226,8 @@ def main():
             elif p_prodej[h].varValue > 0.1:
                 akce = "PRODAVAT_DO_SITE"
 
+            duvod_pulp = vygeneruj_duvod_pulp(akce, ceny_48[h], pv_48[h], soc[h].varValue)
+
             plan_data.append({
                 'Datum': aktualni_hodina_planu.strftime('%Y-%m-%d'), 
                 'Hodina': f"{aktualni_hodina_planu.hour:02d}:00",
@@ -217,12 +237,13 @@ def main():
                 'Odhad_Spotreba_kWh': round(spotreba_48[h], 2) if spotreba_48[h] > 0 else "Nedostatek dat",
                 'Cena_CZK_kWh': round(ceny_48[h], 2),
                 'Simulovane_SOC_%': round(soc[h].varValue, 1),
-                'Akce_EMS': akce
+                'Akce_EMS': akce,
+                'Duvod_Akce': duvod_pulp
             })
         
     pd.DataFrame(plan_data).to_csv(SOUBOR_PLAN, index=False, sep=';', decimal=',')
 
-   # --- C. AKTUALIZACE HISTORIE (REALNA DATA ZE SOLAXU) ---
+    # --- C. AKTUALIZACE HISTORIE (REALNA DATA ZE SOLAXU) ---
     m = nacti_solax_v2()
     if not m: return
 
@@ -250,7 +271,6 @@ def main():
     p_now = (fs_now + pvcz_now) / 2
     cena_h = nacti_ceny_entsoe_dnes(ted_cela_hodina).get(ted_cela_hodina.hour, 0.0)
 
-    # NOVINKA: Ziskani akce z PuLP planu pro tento konkretni okamzik
     aktualni_akce_pulp = "NEDOSTUPNE"
     for radek_planu in plan_data:
         if radek_planu['Datum'] == ted_cela_hodina.strftime('%Y-%m-%d') and radek_planu['Hodina'] == f"{ted_cela_hodina.hour:02d}:00":
@@ -270,8 +290,9 @@ def main():
         'Predpoved_FS_kWh': round(fs_now, 2),
         'Predpoved_PVCZ_kWh': round(pvcz_now, 2),
         'Predpoved_Prumer_kWh': round(p_now, 2),
-        'Doporucena_Akce': rozhodovaci_logika(p_now, o_spot, m['soc'], cena_h), # Stara logika
-        'Akce_PuLP': aktualni_akce_pulp,                                        # Nova matematicka logika
+        'Doporucena_Akce': rozhodovaci_logika(p_now, o_spot, m['soc'], cena_h),
+        'Akce_PuLP': aktualni_akce_pulp,
+        'Duvod_PuLP': vygeneruj_duvod_pulp(aktualni_akce_pulp, cena_h, p_now, m['soc']),
         'AC_vyroba_Dnes_kWh': m['v_dnes'], 
         'Spotreba_Celkem_kWh': m['s_celkem']
     }])
