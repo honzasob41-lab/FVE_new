@@ -24,13 +24,13 @@ Datum;Hodina;Predpoved_FS_kWh;Predpoved_PVCZ_kWh;Predpoved_Prumer_kWh;Odhad_Spot
 2026-04-02;22:00;0,0;0,0;0,0;0.75;3,09;53,8;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.09 Kc).
 2026-04-02;23:00;0,0;0,0;0,0;0.19;3,52;51,9;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.52 Kc).
 2026-04-03;00:00;0,0;0,0;0,0;0.18;3,38;50,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.38 Kc).
-2026-04-03;01:00;0,0;0,0;0,0;0.26;3,53;47,4;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.53 Kc).
+2026-04-03;01:00;0,0;0,0;0,0;0.26;3,53;47,5;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.53 Kc).
 2026-04-03;02:00;0,0;0,0;0,0;0.27;3,78;44,7;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.78 Kc).
-2026-04-03;03:00;0,0;0,0;0,0;0.3;4,04;41,7;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.04 Kc).
+2026-04-03;03:00;0,0;0,0;0,0;0.3;4,04;41,8;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.04 Kc).
 2026-04-03;04:00;0,0;0,0;0,0;0.19;3,67;39,9;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.67 Kc).
-2026-04-03;05:00;0,0;0,0;0,0;0.24;3,85;37,4;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.85 Kc).
-2026-04-03;06:00;0,0;0,0;0,0;0.18;3,78;35,6;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.78 Kc).
-2026-04-03;07:00;0,96;0,0;0,48;0.32;3,64;37,2;NABIJET_SOLAREM;Ukladani prebytku.
+2026-04-03;05:00;0,0;0,0;0,0;0.24;3,85;37,5;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.85 Kc).
+2026-04-03;06:00;0,0;0,0;0,0;0.18;3,78;35,7;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.78 Kc).
+2026-04-03;07:00;0,96;0,0;0,48;0.32;3,64;37,3;NABIJET_SOLAREM;Ukladani prebytku.
 2026-04-03;08:00;3,68;0,0;1,84;0.67;4,11;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.11 Kc).
 2026-04-03;09:00;5,12;0,0;2,56;1.36;3,81;10,0;PRODAVAT_DO_SITE;Prodej za vysokou vykupni cenu.
 2026-04-03;10:00;5,9;0,0;2,95;1.28;3,55;10,0;PRODAVAT_DO_SITE;Prodej za vysokou vykupni cenu.
