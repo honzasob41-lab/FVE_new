@@ -1,5 +1,4 @@
 Datum;Hodina;Predpoved_FS_kWh;Predpoved_PVCZ_kWh;Predpoved_Prumer_kWh;Odhad_Spotreba_kWh;Cena_CZK_kWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-01;08:00;1,35;0,0;0,68;0.69;4,14;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.14 Kc).
 2026-04-01;09:00;2,05;0,74;1,39;Nedostatek dat;4,09;10,0;PRODAVAT_DO_SITE;Prodej za vysokou vykupni cenu.
 2026-04-01;10:00;2,73;1,21;1,97;Nedostatek dat;3,77;29,7;NABIJET_SOLAREM;Ukladani prebytku.
 2026-04-01;11:00;3,07;1,56;2,32;Nedostatek dat;3,47;52,9;NABIJET_SOLAREM;Ukladani prebytku.
@@ -19,11 +18,11 @@ Datum;Hodina;Predpoved_FS_kWh;Predpoved_PVCZ_kWh;Predpoved_Prumer_kWh;Odhad_Spot
 2026-04-02;01:00;0,0;0,0;0,0;0.26;4,01;74,7;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.01 Kc).
 2026-04-02;02:00;0,0;0,0;0,0;0.27;4,16;72,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.16 Kc).
 2026-04-02;03:00;0,0;0,0;0,0;0.3;4,42;69,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.42 Kc).
-2026-04-02;04:00;0,0;0,0;0,0;0.19;5,07;43,6;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 5.07 Kc).
-2026-04-02;05:00;0,0;0,0;0,0;0.24;5,07;13,6;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 5.07 Kc).
-2026-04-02;06:00;0,0;0,0;0,0;0.18;4,14;11,8;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.14 Kc).
-2026-04-02;07:00;0,33;0,0;0,17;0.32;3,82;10,3;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.82 Kc).
-2026-04-02;08:00;1,31;0,0;0,66;0.69;4,3;10,0;NORMALNI_PROVOZ;Bezna spotreba kryta sluncem.
+2026-04-02;04:00;0,0;0,0;0,0;0.19;5,07;43,5;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 5.07 Kc).
+2026-04-02;05:00;0,0;0,0;0,0;0.24;5,07;13,5;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 5.07 Kc).
+2026-04-02;06:00;0,0;0,0;0,0;0.18;4,14;11,7;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.14 Kc).
+2026-04-02;07:00;0,33;0,0;0,17;0.32;3,82;10,2;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.82 Kc).
+2026-04-02;08:00;1,31;0,0;0,66;0.67;4,3;10,0;NORMALNI_PROVOZ;Bezna spotreba kryta sluncem.
 2026-04-02;09:00;1,8;0,0;0,9;Nedostatek dat;4,0;10,0;PRODAVAT_DO_SITE;Prodej za vysokou vykupni cenu.
 2026-04-02;10:00;2,11;0,0;1,05;Nedostatek dat;3,73;20,5;NABIJET_SOLAREM;Ukladani prebytku.
 2026-04-02;11:00;2,26;0,0;1,13;Nedostatek dat;3,4;31,8;NABIJET_SOLAREM;Ukladani prebytku.
