@@ -1,48 +1,47 @@
 Datum;Hodina;Predpoved_FS_kWh;Predpoved_PVCZ_kWh;Predpoved_Prumer_kWh;Odhad_Spotreba_kWh;Cena_CZK_kWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-01;01:00;0,0;0,0;0,0;0.25;3,56;22,5;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.56 Kc).
-2026-04-01;02:00;0,0;0,0;0,0;Nedostatek dat;3,69;22,5;NORMALNI_PROVOZ;Cekani na zmenu podminek.
-2026-04-01;03:00;0,0;0,0;0,0;Nedostatek dat;3,62;22,5;NORMALNI_PROVOZ;Cekani na zmenu podminek.
-2026-04-01;04:00;0,0;0,0;0,0;Nedostatek dat;3,75;22,5;NORMALNI_PROVOZ;Cekani na zmenu podminek.
-2026-04-01;05:00;0,0;0,0;0,0;Nedostatek dat;3,82;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.82 Kc).
-2026-04-01;06:00;0,0;0,0;0,0;Nedostatek dat;3,63;10,0;NORMALNI_PROVOZ;Cekani na zmenu podminek.
-2026-04-01;07:00;0,4;0,0;0,2;Nedostatek dat;3,49;12,0;NABIJET_SOLAREM;Ukladani prebytku.
-2026-04-01;08:00;1,65;0,0;0,83;Nedostatek dat;3,72;20,2;NABIJET_SOLAREM;Ukladani prebytku.
-2026-04-01;09:00;2,25;0,75;1,5;Nedostatek dat;3,75;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.75 Kc).
-2026-04-01;10:00;2,62;1,22;1,92;Nedostatek dat;3,6;29,2;NABIJET_SOLAREM;Ukladani prebytku.
-2026-04-01;11:00;2,77;1,9;2,33;Nedostatek dat;3,5;52,5;NABIJET_SOLAREM;Ukladani prebytku.
-2026-04-01;12:00;2,71;2,06;2,38;Nedostatek dat;3,74;31,2;NABIJET_SOLAREM;Ukladani prebytku.
-2026-04-01;13:00;2,45;2,67;2,56;Nedostatek dat;3,63;56,8;NABIJET_SOLAREM;Ukladani prebytku.
-2026-04-01;14:00;2,03;2,66;2,35;Nedostatek dat;3,5;80,3;NABIJET_SOLAREM;Ukladani prebytku.
-2026-04-01;15:00;1,55;2,4;1,97;Nedostatek dat;3,31;100,0;NABIJET_SOLAREM;Ukladani prebytku.
-2026-04-01;16:00;1,07;1,86;1,47;Nedostatek dat;3,77;82,3;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.77 Kc).
-2026-04-01;17:00;0,64;1,27;0,96;Nedostatek dat;3,56;91,9;NABIJET_SOLAREM;Ukladani prebytku.
-2026-04-01;18:00;0,29;0,88;0,58;Nedostatek dat;3,63;97,7;NABIJET_SOLAREM;Ukladani prebytku.
-2026-04-01;19:00;0,0;0,46;0,23;Nedostatek dat;3,56;100,0;NABIJET_SOLAREM;Ukladani prebytku.
-2026-04-01;20:00;0,0;0,12;0,06;0.58;3,11;94,8;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.11 Kc).
-2026-04-01;21:00;0,0;0,0;0,0;0.44;2,99;90,4;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 2.99 Kc).
-2026-04-01;22:00;0,0;0,0;0,0;0.9;3,67;81,4;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.67 Kc).
-2026-04-01;23:00;0,0;0,0;0,0;0.22;3,98;79,3;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.98 Kc).
-2026-04-02;00:00;0,0;0,0;0,0;0.2;3,4;77,3;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.40 Kc).
-2026-04-02;01:00;0,0;0,0;0,0;0.25;4,01;74,7;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.01 Kc).
-2026-04-02;02:00;0,0;0,0;0,0;Nedostatek dat;4,24;74,7;NORMALNI_PROVOZ;Cekani na zmenu podminek.
-2026-04-02;03:00;0,0;0,0;0,0;Nedostatek dat;4,66;70,0;NABIJET_SOLAREM;Ukladani prebytku.
-2026-04-02;04:00;0,0;0,0;0,0;Nedostatek dat;4,8;40,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.80 Kc).
-2026-04-02;05:00;0,0;0,0;0,0;Nedostatek dat;4,92;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.92 Kc).
-2026-04-02;06:00;0,0;0,0;0,0;Nedostatek dat;4,32;10,0;NORMALNI_PROVOZ;Cekani na zmenu podminek.
-2026-04-02;07:00;0,41;0,0;0,2;Nedostatek dat;4,15;12,0;NABIJET_SOLAREM;Ukladani prebytku.
-2026-04-02;08:00;1,54;0,0;0,77;Nedostatek dat;4,63;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.63 Kc).
-2026-04-02;09:00;2,06;0,0;1,03;Nedostatek dat;4,2;10,0;PRODAVAT_DO_SITE;Prodej za vysokou vykupni cenu.
-2026-04-02;10:00;2,43;0,0;1,21;Nedostatek dat;3,89;22,1;NABIJET_SOLAREM;Ukladani prebytku.
-2026-04-02;11:00;2,59;0,0;1,3;Nedostatek dat;3,51;35,1;NABIJET_SOLAREM;Ukladani prebytku.
-2026-04-02;12:00;2,54;0,0;1,27;Nedostatek dat;3,96;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.96 Kc).
-2026-04-02;13:00;2,32;0,0;1,16;Nedostatek dat;3,59;10,0;PRODAVAT_DO_SITE;Prodej za vysokou vykupni cenu.
-2026-04-02;14:00;1,98;0,0;0,99;Nedostatek dat;3,26;19,9;NABIJET_SOLAREM;Ukladani prebytku.
-2026-04-02;15:00;1,54;0,0;0,77;Nedostatek dat;3,06;27,6;NABIJET_SOLAREM;Ukladani prebytku.
-2026-04-02;16:00;1,08;0,0;0,54;Nedostatek dat;3,43;26,6;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.43 Kc).
-2026-04-02;17:00;0,65;0,0;0,32;Nedostatek dat;3,23;29,8;NABIJET_SOLAREM;Ukladani prebytku.
-2026-04-02;18:00;0,29;0,0;0,14;Nedostatek dat;3,35;31,3;NABIJET_SOLAREM;Ukladani prebytku.
-2026-04-02;19:00;0,01;0,0;0,0;Nedostatek dat;3,3;31,3;NORMALNI_PROVOZ;Bezna spotreba kryta sluncem.
-2026-04-02;20:00;0,0;0,0;0,0;0.58;3,15;25,5;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.15 Kc).
-2026-04-02;21:00;0,0;0,0;0,0;0.44;3,12;21,1;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.12 Kc).
-2026-04-02;22:00;0,0;0,0;0,0;0.9;2,99;12,2;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 2.99 Kc).
-2026-04-02;23:00;0,0;0,0;0,0;0.22;3,24;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.24 Kc).
+2026-04-01;02:00;0,0;0,0;0,0;Nedostatek dat;3,94;22,5;NORMALNI_PROVOZ;Cekani na zmenu podminek.
+2026-04-01;03:00;0,0;0,0;0,0;Nedostatek dat;3,9;22,5;NORMALNI_PROVOZ;Cekani na zmenu podminek.
+2026-04-01;04:00;0,0;0,0;0,0;Nedostatek dat;4,01;22,5;NORMALNI_PROVOZ;Cekani na zmenu podminek.
+2026-04-01;05:00;0,0;0,0;0,0;Nedostatek dat;4,01;22,5;NORMALNI_PROVOZ;Cekani na zmenu podminek.
+2026-04-01;06:00;0,0;0,0;0,0;Nedostatek dat;3,72;22,5;NORMALNI_PROVOZ;Cekani na zmenu podminek.
+2026-04-01;07:00;0,36;0,0;0,18;Nedostatek dat;3,56;24,3;NABIJET_SOLAREM;Ukladani prebytku.
+2026-04-01;08:00;1,52;0,0;0,76;Nedostatek dat;4,14;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.14 Kc).
+2026-04-01;09:00;2,26;0,75;1,51;Nedostatek dat;4,09;10,0;PRODAVAT_DO_SITE;Prodej za vysokou vykupni cenu.
+2026-04-01;10:00;2,92;1,22;2,07;Nedostatek dat;3,77;30,7;NABIJET_SOLAREM;Ukladani prebytku.
+2026-04-01;11:00;3,36;1,9;2,63;Nedostatek dat;3,47;57,0;NABIJET_SOLAREM;Ukladani prebytku.
+2026-04-01;12:00;3,41;2,06;2,73;Nedostatek dat;4,07;27,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.07 Kc).
+2026-04-01;13:00;3,05;2,67;2,86;Nedostatek dat;3,78;54,3;NABIJET_SOLAREM;Ukladani prebytku.
+2026-04-01;14:00;2,41;2,66;2,54;Nedostatek dat;3,53;79,6;NABIJET_SOLAREM;Ukladani prebytku.
+2026-04-01;15:00;1,68;2,4;2,04;Nedostatek dat;3,16;100,0;NABIJET_SOLAREM;Ukladani prebytku.
+2026-04-01;16:00;1,09;1,86;1,48;Nedostatek dat;3,94;82,3;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.94 Kc).
+2026-04-01;17:00;0,65;1,27;0,96;Nedostatek dat;3,58;91,9;NABIJET_SOLAREM;Ukladani prebytku.
+2026-04-01;18:00;0,29;0,88;0,58;Nedostatek dat;3,6;97,7;NABIJET_SOLAREM;Ukladani prebytku.
+2026-04-01;19:00;0,0;0,46;0,23;Nedostatek dat;3,44;100,0;NABIJET_SOLAREM;Ukladani prebytku.
+2026-04-01;20:00;0,0;0,12;0,06;0.58;3,44;94,8;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.44 Kc).
+2026-04-01;21:00;0,0;0,0;0,0;0.44;3,27;90,4;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.27 Kc).
+2026-04-01;22:00;0,0;0,0;0,0;0.9;4,05;81,4;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.05 Kc).
+2026-04-01;23:00;0,0;0,0;0,0;0.22;4,28;79,3;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.28 Kc).
+2026-04-02;00:00;0,0;0,0;0,0;0.2;3,67;77,3;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.67 Kc).
+2026-04-02;01:00;0,0;0,0;0,0;0.26;4,01;74,7;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.01 Kc).
+2026-04-02;02:00;0,0;0,0;0,0;Nedostatek dat;4,16;74,7;NORMALNI_PROVOZ;Cekani na zmenu podminek.
+2026-04-02;03:00;0,0;0,0;0,0;Nedostatek dat;4,42;70,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.42 Kc).
+2026-04-02;04:00;0,0;0,0;0,0;Nedostatek dat;5,07;40,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 5.07 Kc).
+2026-04-02;05:00;0,0;0,0;0,0;Nedostatek dat;5,07;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 5.07 Kc).
+2026-04-02;06:00;0,0;0,0;0,0;Nedostatek dat;4,14;10,0;NORMALNI_PROVOZ;Cekani na zmenu podminek.
+2026-04-02;07:00;0,35;0,0;0,18;Nedostatek dat;3,82;11,8;NABIJET_SOLAREM;Ukladani prebytku.
+2026-04-02;08:00;1,38;0,0;0,69;Nedostatek dat;4,3;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.30 Kc).
+2026-04-02;09:00;1,9;0,0;0,95;Nedostatek dat;4,0;10,0;PRODAVAT_DO_SITE;Prodej za vysokou vykupni cenu.
+2026-04-02;10:00;2,25;0,0;1,12;Nedostatek dat;3,73;21,2;NABIJET_SOLAREM;Ukladani prebytku.
+2026-04-02;11:00;2,42;0,0;1,21;Nedostatek dat;3,4;33,3;NABIJET_SOLAREM;Ukladani prebytku.
+2026-04-02;12:00;2,4;0,0;1,2;Nedostatek dat;3,8;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.80 Kc).
+2026-04-02;13:00;2,22;0,0;1,11;Nedostatek dat;3,65;10,0;PRODAVAT_DO_SITE;Prodej za vysokou vykupni cenu.
+2026-04-02;14:00;1,9;0,0;0,95;Nedostatek dat;3,3;19,5;NABIJET_SOLAREM;Ukladani prebytku.
+2026-04-02;15:00;1,49;0,0;0,74;Nedostatek dat;3,14;26,9;NABIJET_SOLAREM;Ukladani prebytku.
+2026-04-02;16:00;1,06;0,0;0,53;Nedostatek dat;3,39;32,2;NABIJET_SOLAREM;Ukladani prebytku.
+2026-04-02;17:00;0,65;0,0;0,33;Nedostatek dat;3,28;35,5;NABIJET_SOLAREM;Ukladani prebytku.
+2026-04-02;18:00;0,29;0,0;0,15;Nedostatek dat;3,52;37,0;NABIJET_SOLAREM;Ukladani prebytku.
+2026-04-02;19:00;0,01;0,0;0,0;Nedostatek dat;3,53;37,0;NORMALNI_PROVOZ;Bezna spotreba kryta sluncem.
+2026-04-02;20:00;0,0;0,0;0,0;0.58;3,28;31,2;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.28 Kc).
+2026-04-02;21:00;0,0;0,0;0,0;0.44;3,32;26,8;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.32 Kc).
+2026-04-02;22:00;0,0;0,0;0,0;0.9;3,15;17,8;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.15 Kc).
+2026-04-02;23:00;0,0;0,0;0,0;0.22;3,58;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.58 Kc).
