@@ -1,5 +1,5 @@
 Datum;Hodina;Predpoved_FS_kWh;Predpoved_PVCZ_kWh;Predpoved_Prumer_kWh;Odhad_Spotreba_kWh;Cena_CZK_kWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-01;05:00;0,0;0,0;0,0;0.24;4,01;15,4;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.01 Kc).
+2026-04-01;05:00;0,0;0,0;0,0;0.25;4,01;15,4;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.01 Kc).
 2026-04-01;06:00;0,0;0,0;0,0;Nedostatek dat;3,72;15,4;NORMALNI_PROVOZ;Cekani na zmenu podminek.
 2026-04-01;07:00;0,36;0,0;0,18;Nedostatek dat;3,56;17,2;NABIJET_SOLAREM;Ukladani prebytku.
 2026-04-01;08:00;1,52;0,0;0,76;Nedostatek dat;4,14;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.14 Kc).
@@ -23,7 +23,7 @@ Datum;Hodina;Predpoved_FS_kWh;Predpoved_PVCZ_kWh;Predpoved_Prumer_kWh;Odhad_Spot
 2026-04-02;02:00;0,0;0,0;0,0;0.27;4,16;72,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.16 Kc).
 2026-04-02;03:00;0,0;0,0;0,0;0.3;4,42;69,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.42 Kc).
 2026-04-02;04:00;0,0;0,0;0,0;0.19;5,07;40,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 5.07 Kc).
-2026-04-02;05:00;0,0;0,0;0,0;0.24;5,07;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 5.07 Kc).
+2026-04-02;05:00;0,0;0,0;0,0;0.25;5,07;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 5.07 Kc).
 2026-04-02;06:00;0,0;0,0;0,0;Nedostatek dat;4,14;10,0;NORMALNI_PROVOZ;Cekani na zmenu podminek.
 2026-04-02;07:00;0,35;0,0;0,18;Nedostatek dat;3,82;11,8;NABIJET_SOLAREM;Ukladani prebytku.
 2026-04-02;08:00;1,38;0,0;0,69;Nedostatek dat;4,3;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 4.30 Kc).
