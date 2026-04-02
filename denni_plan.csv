@@ -1,5 +1,5 @@
 Datum;Hodina;Predpoved_FS_kWh;Predpoved_PVCZ_kWh;Predpoved_Prumer_kWh;Odhad_Spotreba_kWh;Cena_CZK_kWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-02;18:00;0,28;0,0;0,14;0,48;0,0;10,0;NORMALNI_PROVOZ;Bezna spotreba kryta sluncem.
+2026-04-02;18:00;0,28;0,0;0,14;0,47;0,0;10,0;NORMALNI_PROVOZ;Bezna spotreba kryta sluncem.
 2026-04-02;19:00;0,0;0,0;0,0;16,68;0,0;10,0;NORMALNI_PROVOZ;Bezna spotreba kryta sluncem.
 2026-04-02;20:00;0,0;0,0;0,0;0,48;0,0;10,0;NORMALNI_PROVOZ;Cekani na zmenu podminek.
 2026-04-02;21:00;0,0;0,0;0,0;0,37;0,0;10,0;NORMALNI_PROVOZ;Cekani na zmenu podminek.
@@ -23,7 +23,7 @@ Datum;Hodina;Predpoved_FS_kWh;Predpoved_PVCZ_kWh;Predpoved_Prumer_kWh;Odhad_Spot
 2026-04-03;15:00;2,02;3,18;2,6;0,37;0,0;10,0;PRODAVAT_DO_SITE;Prodej za vysokou vykupni cenu.
 2026-04-03;16:00;1,27;2,5;1,88;0,53;0,0;10,0;PRODAVAT_DO_SITE;Prodej za vysokou vykupni cenu.
 2026-04-03;17:00;0,68;1,84;1,26;0,22;0,0;10,0;PRODAVAT_DO_SITE;Prodej za vysokou vykupni cenu.
-2026-04-03;18:00;0,29;1,23;0,76;0,48;0,0;10,0;PRODAVAT_DO_SITE;Prodej za vysokou vykupni cenu.
+2026-04-03;18:00;0,29;1,23;0,76;0,47;0,0;10,0;PRODAVAT_DO_SITE;Prodej za vysokou vykupni cenu.
 2026-04-03;19:00;0,01;0,62;0,31;16,68;0,0;10,0;NORMALNI_PROVOZ;Bezna spotreba kryta sluncem.
 2026-04-03;20:00;0,0;0,15;0,08;0,48;0,0;10,0;NORMALNI_PROVOZ;Bezna spotreba kryta sluncem.
 2026-04-03;21:00;0,0;0,0;0,0;0,37;0,0;10,0;NORMALNI_PROVOZ;Cekani na zmenu podminek.
