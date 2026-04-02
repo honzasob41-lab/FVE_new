@@ -1759,3 +1759,4 @@ Cas;Skutecny_AC_Vystup_kWh;Skutecna_Spotreba_kWh;Celkovy_Vykon_Panelu_W;Cista_Vy
 2026-04-03 00:35:30.482248;0,1;0,0;0,0;0,0;326,0;-330,0;42,0;3,65;0,0;0,0;0,0;VYBIJET_PRO_DUM;0,1;10605,63;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 3.65 Kc.
 2026-04-03 00:40:35.369527;0,0;0,0;0,0;0,0;390,0;-377,0;42,0;3,65;0,0;0,0;0,0;VYBIJET_PRO_DUM;0,1;10605,63;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 3.65 Kc.
 2026-04-03 00:45:33.444186;0,0;0,0;0,0;0,0;319,0;-306,0;42,0;3,65;0,0;0,0;0,0;VYBIJET_PRO_DUM;0,1;10605,63;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 3.65 Kc.
+2026-04-03 00:50:36.369498;0,1;0,01;0,0;0,0;301,0;-283,0;42,0;3,65;0,0;0,0;0,0;VYBIJET_PRO_DUM;0,2;10605,64;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 3.65 Kc.
