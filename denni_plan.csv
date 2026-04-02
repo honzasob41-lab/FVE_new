@@ -9,10 +9,10 @@ Datum;Hodina;Predpoved_FS_kWh;Predpoved_PVCZ_kWh;Predpoved_Prumer_kWh;Odhad_Spot
 2026-04-02;11:00;2,36;1,43;1,89;1.14;3,42;21,3;NABIJET_SOLAREM;Ukladani prebytku.
 2026-04-02;12:00;2,33;1,69;2,01;0.4;3,99;10,1;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.99 Kc).
 2026-04-02;13:00;2,17;1,84;2,0;0.37;3,67;26,5;NABIJET_SOLAREM;Ukladani prebytku.
-2026-04-02;14:00;1,87;1,9;1,89;0.49;3,27;40,4;NABIJET_SOLAREM;Ukladani prebytku.
+2026-04-02;14:00;1,87;1,9;1,89;0.49;3,27;40,5;NABIJET_SOLAREM;Ukladani prebytku.
 2026-04-02;15:00;1,48;1,8;1,64;0.44;2,96;52,4;NABIJET_SOLAREM;Ukladani prebytku.
 2026-04-02;16:00;1,06;1,58;1,32;0.63;3,44;59,3;NABIJET_SOLAREM;Ukladani prebytku.
-2026-04-02;17:00;0,65;1,26;0,95;0.26;3,19;66,2;NABIJET_SOLAREM;Ukladani prebytku.
+2026-04-02;17:00;0,65;1,26;0,95;0.26;3,19;66,3;NABIJET_SOLAREM;Ukladani prebytku.
 2026-04-02;18:00;0,29;0,89;0,59;Nedostatek dat;3,23;72,1;NABIJET_SOLAREM;Ukladani prebytku.
 2026-04-02;19:00;0,0;0,46;0,23;16.68;3,17;42,1;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.17 Kc).
 2026-04-02;20:00;0,0;0,12;0,06;0.48;3,33;38,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.33 Kc).
