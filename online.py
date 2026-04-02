@@ -133,7 +133,7 @@ def vygeneruj_duvod_pulp(akce, cena, pv_vykon, soc):
     else:
         if pv_vykon > 0:
             return "Bezna spotreba kryta primym slunecnim vykonem."
-        return "Bezny provoz a cekani na vyhodnejsi podminky."
+        return "Cekani na vyhodnejsi podminky."
 
 def main():
     ted = datetime.now(ZoneInfo("Europe/Prague")).replace(tzinfo=None)
