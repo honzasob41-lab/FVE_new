@@ -118,31 +118,24 @@ def rozhodovaci_logika(prum_p, spot, soc, cena):
     elif cena > 4.0 and soc > 80: return "PRODAVAT_I_BATERII" if bilance > 0 else "POKRYT_Z_BATERIE"
     elif bilance > 0 and soc > 95: return "PRODAVAT_DO_SITE"
     elif bilance > 0 and soc <= 95: return "NABIJET_SOLAREM"
-    elif bilance < 0 and soc > 20: return "BEZNA_SPOTREBA"
+    elif bilance < 0 and soc > 20: return "VYBIJET_PRO_DUM"
     else: return "NORMALNI_PROVOZ"
 
 def vygeneruj_duvod_pulp(akce, cena, pv_vykon, soc):
     if akce == "NABIJET_ZE_SITE":
-        if cena <= 0.5:
-            return f"Vyuziti extremne levne energie ({cena:.2f} Kc) k dobiti."
-        else:
-            return f"Priprava na budouci spicku (nakup za {cena:.2f} Kc)."
+        return f"Priprava na budoucí spicku (nakup za aktualni cenu {cena:.2f} Kc)."
     elif akce == "NABIJET_SOLAREM":
-        return "Ukladani prebytku."
+        return "Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora)."
     elif akce == "POKRYT_Z_BATERIE":
-        return f"Vyhnuti se nakupu drahe energie (cena v siti je {cena:.2f} Kc)."
+        return f"Vyhnuti se nakupu energie ze site za cenu {cena:.2f} Kc."
     elif akce == "PRODAVAT_DO_SITE":
-        if soc >= 95.0:
-            return "Baterie je plna, prodej cistych prebytku se ziskem."
-        else:
-            return "Prodej za vysokou vykupni cenu."
+        return f"Baterie je vyuzita nebo plna, prodej za cenu {cena:.2f} Kc."
     else:
         if pv_vykon > 0:
-            return "Bezna spotreba kryta sluncem."
-        return "Cekani na zmenu podminek."
+            return "Bezna spotreba kryta primym slunecnim vykonem."
+        return "Bezny provoz a cekani na vyhodnejsi podminky."
 
 def main():
-    # --- A. PRIPRAVA CASU A HISTORIE ---
     ted = datetime.now(ZoneInfo("Europe/Prague")).replace(tzinfo=None)
     ted_cela_hodina = ted.replace(minute=0, second=0, microsecond=0)
     
@@ -152,7 +145,6 @@ def main():
         if not df_h.empty and 'Cas' in df_h.columns:
             df_h['Cas'] = pd.to_datetime(df_h['Cas'])
 
-    # --- B. MATEMATICKA OPTIMALIZACE (DENNI PLAN) ---
     dnes_pulnoc = ted_cela_hodina.replace(hour=0)
     zitra_pulnoc = dnes_pulnoc + timedelta(days=1)
 
@@ -196,7 +188,8 @@ def main():
     p_vybijeni = pulp.LpVariable.dicts("Vybijeni", hodiny, lowBound=0, upBound=MAX_VYKON_STRIDACE)
     soc = pulp.LpVariable.dicts("SOC", hodiny, lowBound=10.0, upBound=100.0)
 
-    model += pulp.lpSum([p_nakup[h] * ceny_48[h] - p_prodej[h] * (ceny_48[h] * 0.5) for h in hodiny])
+    # UPDATED: Odstranen koeficient 0.5, pouziva se cista cena z ENTSO-E
+    model += pulp.lpSum([p_nakup[h] * ceny_48[h] - p_prodej[h] * ceny_48[h] for h in hodiny])
 
     for h in hodiny:
         model += (pv_48[h] + p_nakup[h] + p_vybijeni[h] == spotreba_48[h] + p_prodej[h] + p_nabijeni[h])
@@ -243,7 +236,6 @@ def main():
         
     pd.DataFrame(plan_data).to_csv(SOUBOR_PLAN, index=False, sep=';', decimal=',')
 
-    # --- C. AKTUALIZACE HISTORIE (REALNA DATA ZE SOLAXU) ---
     m = nacti_solax_v2()
     if not m: return
 
