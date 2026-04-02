@@ -1,5 +1,5 @@
 Datum;Hodina;Predpoved_FS_kWh;Predpoved_PVCZ_kWh;Predpoved_Prumer_kWh;Odhad_Spotreba_kWh;Cena_CZK_kWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-02;12:00;2,42;0,0;1,21;0.38;3,99;57,2;NABIJET_SOLAREM;Ukladani prebytku.
+2026-04-02;12:00;2,42;0,0;1,21;0.37;3,99;57,2;NABIJET_SOLAREM;Ukladani prebytku.
 2026-04-02;13:00;2,28;0,0;1,14;0.37;3,67;64,9;NABIJET_SOLAREM;Ukladani prebytku.
 2026-04-02;14:00;1,97;0,0;0,99;0.49;3,27;69,9;NABIJET_SOLAREM;Ukladani prebytku.
 2026-04-02;15:00;1,55;0,0;0,78;0.44;2,96;73,2;NABIJET_SOLAREM;Ukladani prebytku.
@@ -23,7 +23,7 @@ Datum;Hodina;Predpoved_FS_kWh;Predpoved_PVCZ_kWh;Predpoved_Prumer_kWh;Odhad_Spot
 2026-04-03;09:00;6,0;1,18;3,59;1.15;3,43;10,0;PRODAVAT_DO_SITE;Prodej za vysokou vykupni cenu.
 2026-04-03;10:00;6,63;2,25;4,44;1.07;3,14;10,0;PRODAVAT_DO_SITE;Prodej za vysokou vykupni cenu.
 2026-04-03;11:00;6,2;3,5;4,85;0.95;2,53;40,0;NABIJET_SOLAREM;Ukladani prebytku.
-2026-04-03;12:00;5,02;4,74;4,88;0.38;2,65;70,0;NABIJET_SOLAREM;Ukladani prebytku.
+2026-04-03;12:00;5,02;4,74;4,88;0.37;2,65;70,0;NABIJET_SOLAREM;Ukladani prebytku.
 2026-04-03;13:00;3,76;5,47;4,61;0.37;2,62;100,0;NABIJET_SOLAREM;Ukladani prebytku.
 2026-04-03;14:00;2,73;5,16;3,95;0.49;2,76;70,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 2.76 Kc).
 2026-04-03;15:00;1,89;4,0;2,94;0.44;2,74;74,3;NABIJET_SOLAREM;Ukladani prebytku.
