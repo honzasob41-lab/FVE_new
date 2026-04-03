@@ -85,8 +85,6 @@ def nacti_ceny_entsoe():
             return ceny
 
         root = ElementTree.fromstring(r.content)
-        
-        # Zjisteni, zda ENTSO-E neposlalo misto dat chybovy dokument
         if root.tag.endswith('ErrorDocument'):
             chyba = root.find('.//{*}text')
             print(f"CHYBA ENTSO-E XML: {chyba.text if chyba is not None else 'Neznama chyba'}")
@@ -97,7 +95,6 @@ def nacti_ceny_entsoe():
             period = ts.find('.//{*}Period')
             if not period: continue
             
-            # OPRAVA: Dynamicke cteni 15minutoveho vs hodinoveho rozliseni
             reso_element = period.find('.//{*}resolution')
             krok_minut = 15 if (reso_element is not None and reso_element.text == 'PT15M') else 60
             
@@ -112,8 +109,6 @@ def nacti_ceny_entsoe():
             df = pd.DataFrame(zaznamy).set_index("Cas").resample("15min").ffill().reset_index()
             for _, row in df.iterrows():
                 ceny[row["Cas"].to_pydatetime()] = (row["Cena"] * 25.0) / 1000.0
-        else:
-            print("ENTSO-E nevratilo zadne casove rady pro tento den.")
     except Exception as e: 
         print(f"Kriticka chyba pri cteni ENTSO-E: {e}")
     return ceny
@@ -122,9 +117,15 @@ def nacti_predpoved_fs():
     url = f"https://api.forecast.solar/estimate/{LAT}/{LON}/{DECLINATION}/{AZIMUTH}/{KW_PEAK}"
     predpoved = {}
     try:
-        r = requests.get(url, timeout=10).json()
+        r = requests.get(url, timeout=10)
+        # NOVÉ: Kontrola, zda nas Forecast.Solar nezablokoval
+        if r.status_code != 200:
+            print(f"CHYBA FORECAST.SOLAR (Kod {r.status_code}): {r.text[:200]}")
+            return predpoved
+            
+        data = r.json()
         raw_data = []
-        for cas_str, wh in r['result']['watt_hours_period'].items():
+        for cas_str, wh in data['result']['watt_hours_period'].items():
             cas = pd.to_datetime(cas_str).replace(tzinfo=None)
             raw_data.append({"Cas": cas, "Vykon_kW": float(wh) / 1000.0})
         
@@ -132,7 +133,8 @@ def nacti_predpoved_fs():
             df = pd.DataFrame(raw_data).set_index("Cas").resample("15min").interpolate(method='linear').reset_index()
             for _, row in df.iterrows():
                 predpoved[row["Cas"].to_pydatetime()] = max(0.0, row["Vykon_kW"])
-    except: pass
+    except Exception as e: 
+        print(f"Kriticka chyba pri cteni Forecast.Solar: {e}")
     return predpoved
 
 def nauc_se_spotrebu(df_h, aktualni_cas):
@@ -170,7 +172,7 @@ def vygeneruj_duvod_pulp(akce, cena, pv_vykon, soc):
         if soc >= 99.0:
             return f"Baterie je plna na 100 %, prodej prebytku za cenu {cena:.2f} Kc."
         if pv_vykon > MAX_VYKON_STRIDACE:
-            return f"Nabijeci vykon je na maximu, pretok do site (cena {cena:.2f} Kc)."
+            return f"Nabijeci vykon je na maximu, zbytek pretok do site (cena {cena:.2f} Kc)."
         return f"Vyhodny prodej z baterie kvuli vysoke cene ({cena:.2f} Kc)."
     
     if pv_vykon > 0:
