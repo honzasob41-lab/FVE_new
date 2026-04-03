@@ -296,7 +296,7 @@ def main():
         'Spotreba_Celkem_kWh': m['s_celkem']
     }])
 
-    pd.concat([df_h, n_radek]).drop_duplicates(subset=['Cas'], keep='last').to_csv(SOUBOR_HISTORIE, index=False, sep=';', decimal=',')
+    pd.concat([df_h, n_radek]).drop_duplicates(subset=['Cas'], keep='last').to_csv(SOUBOR_HISTORIE, index=False, sep=';', decimal=',', date_format='%Y-%m-%d %H:%M:%S')
 
 if __name__ == "__main__":
     try: 
