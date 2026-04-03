@@ -1,15 +1,4 @@
 Cas;Skutecny_AC_Vystup_kWh;Skutecna_Spotreba_kWh;Celkovy_Vykon_Panelu_W;Cista_Vyroba_Panelu_kWh;Aktualni_AC_Vystup_W;Vykon_Baterie_W;Baterie_SOC_%;Cena_CZK_kWh;Predpoved_FS_kWh;Predpoved_PVCZ_kWh;Predpoved_Prumer_kWh;Doporucena_Akce;AC_vyroba_Dnes_kWh;Spotreba_Celkem_kWh;Akce_PuLP;Duvod_PuLP;Import_5min_kWh;Export_5min_kWh;Aktualni_import/export_W;Denni_Import_kWh;Denni_Export_kWh;Export_Celkem_kWh;Aktualni_Tok_Sit_W
-1970-01-01 00:00:00;0,0;0,0;0,0;0,0;0,0;49,0;2,15;0,0;0,0;0,0;UCENI_V_PRUBEHU;40.8;10472,53;;;;;;;;;;
-1970-01-01 00:00:00;0,79;0,0;0,0;313,0;-283,0;34,0;2,55;0,0;0,0;0,0;UCENI_V_PRUBEHU;33.8;10473,32;;;;;;;;;;
-1970-01-01 00:00:00;0,02;0,0;0,0;0,0;0,0;30,0;2,25;0,0;0,0;0,0;UCENI_V_PRUBEHU;34.3;10473,87;;;;;;;;;;
-1970-01-01 00:00:00;0,01;0,0;0,0;0,0;0,0;30,0;1,6;0,0;0,0;0,0;UCENI_V_PRUBEHU;26.3;10476,75;;;;;;;;;;
-1970-01-01 00:00:00;0,01;0,0;0,0;0,0;0,0;27,0;2,0;0,0;0,0;0,0;UCENI_V_PRUBEHU;7.5;10494,54;;;;;;;;;;
-1970-01-01 00:00:00;70,67;0,0;0,0;478,0;-543,0;46,0;1,45;0,0;0,0;0,0;UCENI_V_PRUBEHU;13.8;10581,2;;;;;;;;;;
-1970-01-01 00:00:00;0,01;0,0;0,0;0,0;0,0;29,0;2,29;0,0;0,0;0,0;UCENI_V_PRUBEHU;15.6;10585,24;;;;;;;;;;
-1970-01-01 00:00:00;0,0;0,0;0,0;0,0;0,0;28,0;3,45;0,0;0,0;0,0;UCENI_V_PRUBEHU;8.2;10600,06;NORMALNI_PROVOZ;Cekani na zmenu podminek.;;;;;;;;
-1970-01-01 00:00:00;0,0;0,0;0,0;0,0;0,0;37,0;3,62;0,0;0,0;0,0;BEZNA_SPOTREBA;29.7;10602,43;POKRYT_Z_BATERIE;Vyhnuti se nakupu drahe energie (cena v siti je 3.62 Kc).;;;;;;;;
-1970-01-01 00:00:00;0,0;0,0;0,0;0,0;0,0;43,0;3,65;0,0;0,0;0,0;VYBIJET_PRO_DUM;21.8;10605,6;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 3.65 Kc.;;;;;;;;
-1970-01-01 00:00:00;0,13;0,0;0,0;1939,0;-2009,0;56,0;2,84;0,0;0,0;0,0;VYBIJET_PRO_DUM;45.7;10607,71;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 2.84 Kc).;;;;;;;;
-1970-01-01 00:00:00;10607,74;0,0;0,0;186,0;-189,0;46,0;0,0;0,0;;;UCENI_V_PRUBEHU;46.9;10607.74;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 0.00 Kc).;0.0;0,0;;0,0;0,0;11980,3;0,0;
 1970-01-01 00:00:00;0,0;0,0;0,0;112,0;-94,0;46,0;0,0;0,0;;;UCENI_V_PRUBEHU;46.9;10607.75;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.00 Kc.;0.0;0,0;;0,0;0,0;11980,3;0,0;
 2026-04-03 23:38:56;46,9;10607,75;0,0;0,0;0,0;0,0;46,0;0,0;0,0;;;UCENI_V_PRUBEHU;46.9;10607.75;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 0.00 Kc).;0,0163;0,0;;0,02;0,0;11980,3;-65,0
+2026-04-03 23:40:35;0,0;0,0;0,0;0,0;0,0;0,0;46,0;0,0;0,0;;;UCENI_V_PRUBEHU;46.9;10607.75;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.00 Kc.;0,0018;0,0;;0,02;0,0;11980,3;-65,0
