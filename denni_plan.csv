@@ -1,18 +1,18 @@
 Datum;Hodina;Predpoved_FS_kWh;Predpoved_PVCZ_kWh;Predpoved_Prumer_kWh;Odhad_Spotreba_kWh;Cena_CZK_kWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-03;10:00;7,88;2,32;5,1;1.06;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
-2026-04-03;11:00;7,04;3,31;5,18;0.95;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
-2026-04-03;12:00;5,33;3,89;4,61;0.34;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
-2026-04-03;13:00;4,21;4,0;4,1;0.32;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
-2026-04-03;14:00;3,27;3,65;3,46;0.41;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
-2026-04-03;15:00;2,0;3,26;2,63;0.37;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
-2026-04-03;16:00;1,17;2,63;1,9;0.53;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
-2026-04-03;17:00;0,66;1,95;1,31;0.22;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
-2026-04-03;18:00;0,29;1,28;0,78;0.42;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
-2026-04-03;19:00;0,0;0,62;0,31;13.56;0,0;10,0;NORMALNI_PROVOZ;Bezna spotreba kryta primym slunecnim vykonem.
-2026-04-03;20:00;0,0;0,15;0,08;0.41;0,0;10,0;NORMALNI_PROVOZ;Bezna spotreba kryta primym slunecnim vykonem.
-2026-04-03;21:00;0,0;0,0;0,0;0.31;0,0;40,0;NABIJET_ZE_SITE;Priprava na budoucí spicku (nakup za aktualni cenu 0.00 Kc).
-2026-04-03;22:00;0,0;0,0;0,0;0.65;0,0;70,0;NABIJET_ZE_SITE;Priprava na budoucí spicku (nakup za aktualni cenu 0.00 Kc).
-2026-04-03;23:00;0,0;0,0;0,0;0.17;0,0;100,0;NABIJET_ZE_SITE;Priprava na budoucí spicku (nakup za aktualni cenu 0.00 Kc).
+2026-04-03;10:00;7,88;2,32;5,1;1.05;3,36;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 3.36 Kc.
+2026-04-03;11:00;7,04;3,31;5,18;0.95;2,78;40,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-03;12:00;5,33;3,89;4,61;0.34;3,08;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 3.08 Kc.
+2026-04-03;13:00;4,21;4,0;4,1;0.32;2,93;40,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-03;14:00;3,27;3,65;3,46;0.41;2,87;70,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-03;15:00;2,0;3,26;2,63;0.37;2,79;100,0;NABIJET_ZE_SITE;Priprava na budoucí spicku (nakup za aktualni cenu 2.79 Kc).
+2026-04-03;16:00;1,17;2,63;1,9;0.53;3,05;70,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 3.05 Kc.
+2026-04-03;17:00;0,66;1,95;1,31;0.22;3,05;40,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 3.05 Kc.
+2026-04-03;18:00;0,29;1,28;0,78;0.42;2,97;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 2.97 Kc.
+2026-04-03;19:00;0,0;0,62;0,31;13.56;2,46;40,0;NABIJET_ZE_SITE;Priprava na budoucí spicku (nakup za aktualni cenu 2.46 Kc).
+2026-04-03;20:00;0,0;0,15;0,08;0.41;2,95;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 2.95 Kc.
+2026-04-03;21:00;0,0;0,0;0,0;0.31;2,84;40,0;NABIJET_ZE_SITE;Priprava na budoucí spicku (nakup za aktualni cenu 2.84 Kc).
+2026-04-03;22:00;0,0;0,0;0,0;0.65;2,85;70,0;NABIJET_ZE_SITE;Priprava na budoucí spicku (nakup za aktualni cenu 2.85 Kc).
+2026-04-03;23:00;0,0;0,0;0,0;0.17;2,81;100,0;NABIJET_ZE_SITE;Priprava na budoucí spicku (nakup za aktualni cenu 2.81 Kc).
 2026-04-04;00:00;0,0;0,0;0,0;Nedostatek dat;2,89;70,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 2.89 Kc.
 2026-04-04;01:00;0,0;0,0;0,0;Nedostatek dat;2,97;40,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 2.97 Kc.
 2026-04-04;02:00;0,0;0,0;0,0;Nedostatek dat;2,88;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 2.88 Kc.
