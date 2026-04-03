@@ -25,7 +25,6 @@ MAX_VYKON_STRIDACE = 10.0
 KAPACITA_BATERIE_KWH = 10.0 
 
 def bezpecny_float(val):
-    """Ochrana proti tomu, kdyz Pandas nacte cislo z CSV/Excelu jako text."""
     try:
         if pd.isna(val): return 0.0
         if isinstance(val, str):
@@ -81,23 +80,42 @@ def nacti_ceny_entsoe():
     ceny = {}
     try:
         r = requests.get(url, timeout=15)
+        if r.status_code != 200:
+            print(f"CHYBA ENTSO-E (Kod {r.status_code}): {r.text[:200]}")
+            return ceny
+
         root = ElementTree.fromstring(r.content)
+        
+        # Zjisteni, zda ENTSO-E neposlalo misto dat chybovy dokument
+        if root.tag.endswith('ErrorDocument'):
+            chyba = root.find('.//{*}text')
+            print(f"CHYBA ENTSO-E XML: {chyba.text if chyba is not None else 'Neznama chyba'}")
+            return ceny
+
         zaznamy = []
         for ts in root.findall('.//{*}TimeSeries'):
             period = ts.find('.//{*}Period')
             if not period: continue
+            
+            # OPRAVA: Dynamicke cteni 15minutoveho vs hodinoveho rozliseni
+            reso_element = period.find('.//{*}resolution')
+            krok_minut = 15 if (reso_element is not None and reso_element.text == 'PT15M') else 60
+            
             start_dt = pd.to_datetime(period.find('.//{*}start').text)
             for point in period.findall('.//{*}Point'):
                 pos = int(point.find('{*}position').text)
                 price = float(point.find('{*}price.amount').text)
-                cas_local = (start_dt + timedelta(minutes=(pos - 1) * 60)).tz_convert('Europe/Prague').tz_localize(None)
+                cas_local = (start_dt + timedelta(minutes=(pos - 1) * krok_minut)).tz_convert('Europe/Prague').tz_localize(None)
                 zaznamy.append({"Cas": cas_local, "Cena": price})
         
         if zaznamy:
             df = pd.DataFrame(zaznamy).set_index("Cas").resample("15min").ffill().reset_index()
             for _, row in df.iterrows():
                 ceny[row["Cas"].to_pydatetime()] = (row["Cena"] * 25.0) / 1000.0
-    except: pass
+        else:
+            print("ENTSO-E nevratilo zadne casove rady pro tento den.")
+    except Exception as e: 
+        print(f"Kriticka chyba pri cteni ENTSO-E: {e}")
     return ceny
 
 def nacti_predpoved_fs():
@@ -127,7 +145,6 @@ def nauc_se_spotrebu(df_h, aktualni_cas):
                 ((df_h['Cas'].dt.weekday >= 5) == je_vikend)].dropna(subset=['Skutecna_Spotreba_kWh'])
     
     if df_f['Cas'].dt.date.nunique() >= MIN_DNI_PRO_UCENI:
-        # Pouzivame bezpecny float i na cely sloupec pro vypocet prumeru
         cisty_sloupec = pd.to_numeric(df_f['Skutecna_Spotreba_kWh'].astype(str).str.replace(',', '.'), errors='coerce')
         return cisty_sloupec.mean() * 12
     return None
@@ -153,7 +170,7 @@ def vygeneruj_duvod_pulp(akce, cena, pv_vykon, soc):
         if soc >= 99.0:
             return f"Baterie je plna na 100 %, prodej prebytku za cenu {cena:.2f} Kc."
         if pv_vykon > MAX_VYKON_STRIDACE:
-            return f"Nabijeci vykon je na maximu, zbytek pretok do site (cena {cena:.2f} Kc)."
+            return f"Nabijeci vykon je na maximu, pretok do site (cena {cena:.2f} Kc)."
         return f"Vyhodny prodej z baterie kvuli vysoke cene ({cena:.2f} Kc)."
     
     if pv_vykon > 0:
@@ -311,7 +328,7 @@ def main():
         'Export_5min_kWh': round(h_export, 4),               
         'Denni_Import_kWh': round(denni_import, 2),          
         'Denni_Export_kWh': round(denni_export, 2),          
-        'Aktualni_import/export_W': m['sit_w'],                    
+        'Aktualni_Tok_Sit_W': m['sit_w'],                    
         'Celkovy_Vykon_Panelu_W': celkovy_dc_vykon_w, 
         'Cista_Vyroba_Panelu_kWh': round(cista_vyroba_pv_kwh, 4),
         'Aktualni_AC_Vystup_W': m['ac_out'],
