@@ -29,9 +29,11 @@ def nacti_solax_v2():
         r = requests.post(url, json=payload, headers=headers, timeout=15)
         data = r.json()
         if data.get("success") is not True: 
+            print(f"CHYBA SOLAX API (Odpoved neni success): {data}")
             return None
         res = data.get("result")
         if not res: 
+            print("CHYBA SOLAX API: Stridac vratil prazdny result (muze byt offline).")
             return None
         return {
             "v_dnes": float(res.get("yieldtoday", 0)),
@@ -42,7 +44,8 @@ def nacti_solax_v2():
             "ac_out": float(res.get("acpower", 0)),
             "bat_p": float(res.get("batPower", 0))
         }
-    except Exception: 
+    except Exception as e: 
+        print(f"CHYBA SOLAX API (Sitovy nebo technicky problem): {e}")
         return None
 
 def nacti_ceny_entsoe_dnes(dnesni_datum):
@@ -123,7 +126,7 @@ def rozhodovaci_logika(prum_p, spot, soc, cena):
 
 def vygeneruj_duvod_pulp(akce, cena, pv_vykon, soc):
     if akce == "NABIJET_ZE_SITE":
-        return f"Priprava na budoucí spicku (nakup za aktualni cenu {cena:.2f} Kc)."
+        return f"Priprava na budouci spicku (nakup za aktualni cenu {cena:.2f} Kc)."
     elif akce == "NABIJET_SOLAREM":
         return "Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora)."
     elif akce == "POKRYT_Z_BATERIE":
@@ -136,10 +139,10 @@ def vygeneruj_duvod_pulp(akce, cena, pv_vykon, soc):
     else:
         if pv_vykon > 0:
             return "Bezna spotreba kryta primym slunecnim vykonem."
-        return "Cekani na vyhodnejsi podminky."
+        return "Bezny provoz a cekani na vyhodnejsi podminky."
 
 def main():
-    ted = datetime.now(ZoneInfo("Europe/Prague")).replace(tzinfo=None)
+    ted = datetime.now(ZoneInfo("Europe/Prague")).replace(tzinfo=None, microsecond=0)
     ted_cela_hodina = ted.replace(minute=0, second=0, microsecond=0)
     
     df_h = pd.DataFrame()
@@ -170,14 +173,14 @@ def main():
         else:
             fs_val, pvcz_val, cena = fs_zitra.get(h, 0.0), pvcz_zitra.get(h, 0.0), ceny_zitra.get(h, 0.0)
             
-        pv_48.append((fs_val + pvcz_val) / 2)
+        pv_48.append(fs_val)
         ceny_48.append(cena)
         
         spot = nauc_se_spotrebu(df_h, aktualni_hodina_planu)
         spotreba_48.append(spot if spot is not None else 0.0)
 
     KAPACITA_BATERIE_KWH = 10.0 
-    MAX_VYKON_DOBIJENI = 6.0    
+    MAX_VYKON_STRIDACE = 10.0    
     pocatecni_soc = 50.0
     if not df_h.empty and 'Baterie_SOC_%' in df_h.columns:
         pocatecni_soc = float(df_h.iloc[-1]['Baterie_SOC_%'])
@@ -191,7 +194,6 @@ def main():
     p_vybijeni = pulp.LpVariable.dicts("Vybijeni", hodiny, lowBound=0, upBound=MAX_VYKON_STRIDACE)
     soc = pulp.LpVariable.dicts("SOC", hodiny, lowBound=10.0, upBound=100.0)
 
-    # UPDATED: Odstranen koeficient 0.5, pouziva se cista cena z ENTSO-E
     model += pulp.lpSum([p_nakup[h] * ceny_48[h] - p_prodej[h] * ceny_48[h] for h in hodiny])
 
     for h in hodiny:
@@ -240,7 +242,9 @@ def main():
     pd.DataFrame(plan_data).to_csv(SOUBOR_PLAN, index=False, sep=';', decimal=',')
 
     m = nacti_solax_v2()
-    if not m: return
+    if not m: 
+        print("Skript neulozil historii: Ziskavani dat ze SolaXu selhalo.")
+        return
 
     h_vyroba = m['v_dnes']
     h_spotreba = 0.0
@@ -263,7 +267,7 @@ def main():
     o_spot = nauc_se_spotrebu(df_h, ted_cela_hodina)
     fs_now = nacti_predpoved_fs_dnes(ted_cela_hodina).get(ted_cela_hodina.hour, 0.0)
     pvcz_now = nacti_predpoved_pvcz_dnes(ted_cela_hodina).get(ted_cela_hodina.hour, 0.0)
-    p_now = (fs_now + pvcz_now) / 2
+    p_now = fs_now
     cena_h = nacti_ceny_entsoe_dnes(ted_cela_hodina).get(ted_cela_hodina.hour, 0.0)
 
     aktualni_akce_pulp = "NEDOSTUPNE"
