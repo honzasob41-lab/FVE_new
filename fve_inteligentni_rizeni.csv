@@ -1,3 +1,1 @@
-Cas;Skutecny_AC_Vystup_kWh;Skutecna_Spotreba_kWh;Cista_Vyroba_Panelu_kWh;Celkovy_Vykon_Panelu_W;Aktualni_Tok_Sit_W;Aktualni_AC_Vystup_W;Vykon_Baterie_W;Baterie_SOC_%;Cena_CZK_kWh;Predpoved_FS_kWh;Predpoved_PVCZ_kWh;Predpoved_Prumer_kWh;Doporucena_Akce;AC_vyroba_Dnes_kWh;Spotreba_Celkem_kWh;Akce_PuLP;Duvod_PuLP;Import_5min_kWh;Export_5min_kWh;Aktualni_import/export_W;Denni_Import_kWh;Denni_Export_kWh;Export_Celkem_kWh
-2026-04-03 23:50:33;0,0;0,01;0,0;0,0;-47,0;0,0;0,0;46,0;0,0;0,0;;;VYBIJET_PRO_DUM;46.9;10607.76;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.00 Kc.;0,0038;0,0;;0,01;0,0;11980,3
-2026-04-03 23:55:31;0,1;0,0;0,0;0,0;0,0;206,0;-213,0;46,0;0,0;0,0;;;VYBIJET_PRO_DUM;47.0;10607.76;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.00 Kc.;0,0;0,0;;0,01;0,0;11980,3
+
