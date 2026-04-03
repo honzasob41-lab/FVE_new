@@ -174,7 +174,7 @@ def main():
         spotreba_48.append(spot if spot is not None else 0.0)
 
     KAPACITA_BATERIE_KWH = 10.0 
-    MAX_VYKON_STRIDACE = 3.0    
+    MAX_VYKON_DOBIJENI = 6.0    
     pocatecni_soc = 50.0
     if not df_h.empty and 'Baterie_SOC_%' in df_h.columns:
         pocatecni_soc = float(df_h.iloc[-1]['Baterie_SOC_%'])
