@@ -129,7 +129,10 @@ def vygeneruj_duvod_pulp(akce, cena, pv_vykon, soc):
     elif akce == "POKRYT_Z_BATERIE":
         return f"Vyhnuti se nakupu energie ze site za cenu {cena:.2f} Kc."
     elif akce == "PRODAVAT_DO_SITE":
-        return f"Baterie je vyuzita nebo plna, prodej za cenu {cena:.2f} Kc."
+        if soc >= 99.0:
+            return f"Baterie je plna na 100 %, prodej prebytku za cenu {cena:.2f} Kc."
+        else:
+            return f"Nabijeci vykon je na maximu, zbytek pretok do site (cena {cena:.2f} Kc)."
     else:
         if pv_vykon > 0:
             return "Bezna spotreba kryta primym slunecnim vykonem."
