@@ -1,9 +1,8 @@
 Datum;Hodina;Predpoved_FS_kWh;Predpoved_PVCZ_kWh;Predpoved_Prumer_kWh;Odhad_Spotreba_kWh;Cena_CZK_kWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-03;13:00;4,84;0,0;2,42;0.27;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
-2026-04-03;14:00;3,32;0,0;1,66;0.41;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
-2026-04-03;15:00;2,16;0,0;1,08;0.37;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
-2026-04-03;16:00;1,28;0,0;0,64;0.53;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
-2026-04-03;17:00;0,68;0,0;0,34;0.22;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
+2026-04-03;14:00;3,27;0,0;1,64;0.41;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
+2026-04-03;15:00;2,24;0,0;1,12;0.37;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
+2026-04-03;16:00;1,32;0,0;0,66;0.53;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
+2026-04-03;17:00;0,69;0,0;0,34;0.22;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
 2026-04-03;18:00;0,29;0,0;0,15;0.42;0,0;10,0;NORMALNI_PROVOZ;Bezna spotreba kryta primym slunecnim vykonem.
 2026-04-03;19:00;0,0;0,0;0,0;13.56;0,0;10,0;NORMALNI_PROVOZ;Bezna spotreba kryta primym slunecnim vykonem.
 2026-04-03;20:00;0,0;0,0;0,0;0.41;0,0;10,0;NORMALNI_PROVOZ;Cekani na vyhodnejsi podminky.
@@ -17,16 +16,16 @@ Datum;Hodina;Predpoved_FS_kWh;Predpoved_PVCZ_kWh;Predpoved_Prumer_kWh;Odhad_Spot
 2026-04-04;04:00;0,0;0,0;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Cekani na vyhodnejsi podminky.
 2026-04-04;05:00;0,0;0,0;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Cekani na vyhodnejsi podminky.
 2026-04-04;06:00;0,0;0,0;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Cekani na vyhodnejsi podminky.
-2026-04-04;07:00;0,6;0,0;0,3;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
-2026-04-04;08:00;2,03;0,0;1,01;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
-2026-04-04;09:00;2,55;1,59;2,07;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
-2026-04-04;10:00;2,69;2,62;2,65;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
-2026-04-04;11:00;2,66;3,26;2,96;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
-2026-04-04;12:00;2,5;3,58;3,04;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
-2026-04-04;13:00;2,18;3,55;2,87;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
-2026-04-04;14:00;1,82;3,35;2,59;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
-2026-04-04;15:00;1,44;2,73;2,09;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
-2026-04-04;16:00;1,04;1,86;1,45;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
+2026-04-04;07:00;0,61;0,0;0,3;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
+2026-04-04;08:00;2,07;0,0;1,04;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
+2026-04-04;09:00;2,66;1,59;2,12;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
+2026-04-04;10:00;2,83;2,62;2,72;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
+2026-04-04;11:00;2,72;3,26;2,99;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
+2026-04-04;12:00;2,49;3,58;3,03;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
+2026-04-04;13:00;2,19;3,55;2,87;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
+2026-04-04;14:00;1,87;3,35;2,61;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
+2026-04-04;15:00;1,47;2,73;2,1;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
+2026-04-04;16:00;1,05;1,86;1,45;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
 2026-04-04;17:00;0,65;1,3;0,98;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
 2026-04-04;18:00;0,3;0,98;0,64;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
 2026-04-04;19:00;0,01;0,47;0,24;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
