@@ -1,5 +1,5 @@
 Datum;Hodina;Predpoved_FS_kWh;Predpoved_PVCZ_kWh;Predpoved_Prumer_kWh;Odhad_Spotreba_kWh;Cena_CZK_kWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-03;16:00;1,59;0,0;0,8;0.47;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
+2026-04-03;16:00;1,59;0,0;0,8;0.46;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
 2026-04-03;17:00;0,72;0,0;0,36;0.22;0,0;10,0;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
 2026-04-03;18:00;0,29;0,0;0,15;0.42;0,0;10,0;NORMALNI_PROVOZ;Bezna spotreba kryta primym slunecnim vykonem.
 2026-04-03;19:00;0,0;0,0;0,0;13.56;0,0;10,0;NORMALNI_PROVOZ;Bezna spotreba kryta primym slunecnim vykonem.
