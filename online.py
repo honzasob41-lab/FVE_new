@@ -6,6 +6,7 @@ from zoneinfo import ZoneInfo
 import os
 import warnings
 import traceback
+import time
 from xml.etree import ElementTree
 
 warnings.simplefilter(action='ignore', category=UserWarning)
@@ -23,33 +24,52 @@ MIN_DNI_PRO_UCENI = 5
 MAX_VYKON_STRIDACE = 10.0
 KAPACITA_BATERIE_KWH = 10.0 
 
+def bezpecny_float(val):
+    """Ochrana proti tomu, kdyz Pandas nacte cislo z CSV/Excelu jako text."""
+    try:
+        if pd.isna(val): return 0.0
+        if isinstance(val, str):
+            return float(val.replace(' ', '').replace(',', '.'))
+        return float(val)
+    except:
+        return 0.0
+
 def nacti_solax_v2():
     url = "https://global.solaxcloud.com/proxyApp/proxy/api/v2/dataAccess/realtimeInfo/get"
     payload = {"wifiSn": WIFI_SN}
     headers = {"tokenId": TOKEN_SOLAX, "Content-Type": "application/json"}
-    try:
-        r = requests.post(url, json=payload, headers=headers, timeout=15)
-        data = r.json()
-        if data.get("success") is not True: 
-            print(f"CHYBA SOLAX API: {data}")
-            return None
-        res = data.get("result")
-        if not res: 
-            return None
-        return {
-            "v_dnes": float(res.get("yieldtoday", 0)),
-            "soc": float(res.get("soc", 0)),
-            "s_celkem": float(res.get("consumeenergy", 0)),
-            "dc1": float(res.get("powerdc1", 0)),
-            "dc2": float(res.get("powerdc2", 0)),
-            "ac_out": float(res.get("acpower", 0)),
-            "bat_p": float(res.get("batPower", 0)),
-            "sit_w": float(res.get("feedinpower", 0)),
-            "e_celkem": float(res.get("feedinenergy", 0))
-        }
-    except Exception as e: 
-        print(f"CHYBA SOLAX: {e}")
-        return None
+    
+    for pokus in range(3):
+        try:
+            r = requests.post(url, json=payload, headers=headers, timeout=15)
+            data = r.json()
+            if data.get("success") is not True: 
+                print(f"SolaX API zamitlo pozadavek (Pokus {pokus+1}/3): {data}")
+                time.sleep(5)
+                continue
+            
+            res = data.get("result")
+            if not res: 
+                print(f"SolaX API nevratilo zadna data (Pokus {pokus+1}/3).")
+                time.sleep(5)
+                continue
+                
+            return {
+                "v_dnes": float(res.get("yieldtoday", 0)),
+                "soc": float(res.get("soc", 0)),
+                "s_celkem": float(res.get("consumeenergy", 0)),
+                "dc1": float(res.get("powerdc1", 0)),
+                "dc2": float(res.get("powerdc2", 0)),
+                "ac_out": float(res.get("acpower", 0)),
+                "bat_p": float(res.get("batPower", 0)),
+                "sit_w": float(res.get("feedinpower", 0)),
+                "e_celkem": float(res.get("feedinenergy", 0))
+            }
+        except Exception as e: 
+            print(f"SolaX sitova chyba (Pokus {pokus+1}/3): {e}")
+            time.sleep(5)
+            
+    return None
 
 def nacti_ceny_entsoe():
     TOKEN_ENTSOE = "680f2687-dd26-443a-81d1-db067ee6b029"
@@ -76,7 +96,7 @@ def nacti_ceny_entsoe():
         if zaznamy:
             df = pd.DataFrame(zaznamy).set_index("Cas").resample("15min").ffill().reset_index()
             for _, row in df.iterrows():
-                ceny[row["Cas"]] = (row["Cena"] * 25.0) / 1000.0
+                ceny[row["Cas"].to_pydatetime()] = (row["Cena"] * 25.0) / 1000.0
     except: pass
     return ceny
 
@@ -93,7 +113,7 @@ def nacti_predpoved_fs():
         if raw_data:
             df = pd.DataFrame(raw_data).set_index("Cas").resample("15min").interpolate(method='linear').reset_index()
             for _, row in df.iterrows():
-                predpoved[row["Cas"]] = max(0.0, row["Vykon_kW"])
+                predpoved[row["Cas"].to_pydatetime()] = max(0.0, row["Vykon_kW"])
     except: pass
     return predpoved
 
@@ -107,7 +127,9 @@ def nauc_se_spotrebu(df_h, aktualni_cas):
                 ((df_h['Cas'].dt.weekday >= 5) == je_vikend)].dropna(subset=['Skutecna_Spotreba_kWh'])
     
     if df_f['Cas'].dt.date.nunique() >= MIN_DNI_PRO_UCENI:
-        return df_f['Skutecna_Spotreba_kWh'].mean() * 12
+        # Pouzivame bezpecny float i na cely sloupec pro vypocet prumeru
+        cisty_sloupec = pd.to_numeric(df_f['Skutecna_Spotreba_kWh'].astype(str).str.replace(',', '.'), errors='coerce')
+        return cisty_sloupec.mean() * 12
     return None
 
 def rozhodovaci_logika(prum_p, spot, soc, cena):
@@ -167,7 +189,7 @@ def main():
 
     pocatecni_soc = 50.0
     if not df_h.empty and 'Baterie_SOC_%' in df_h.columns:
-        pocatecni_soc = float(df_h.iloc[-1]['Baterie_SOC_%'])
+        pocatecni_soc = bezpecny_float(df_h.iloc[-1]['Baterie_SOC_%'])
 
     model = pulp.LpProblem("Optimalizace_FVE_15min", pulp.LpMinimize)
 
@@ -207,7 +229,7 @@ def main():
         plan_data.append({
             'Datum': aktualni_cas_planu.strftime('%Y-%m-%d'), 
             'Cas': aktualni_cas_planu.strftime('%H:%M'),
-            'Predpoved_FS_kWh': round(pv_192[i], 2),             # OPRAVENO ZPET NA kWh
+            'Predpoved_FS_kWh': round(pv_192[i], 2),             
             'Odhad_Spotreba_kW': round(spotreba_192[i], 2) if spotreba_192[i] > 0 else "Nedostatek dat",
             'Cena_CZK_kWh': round(ceny_192[i], 2),
             'Simulovane_SOC_%': round(soc[i].varValue, 1),
@@ -219,7 +241,7 @@ def main():
 
     m = nacti_solax_v2()
     if not m: 
-        print("Skript neulozil historii: Ziskavani dat ze SolaXu selhalo.")
+        print("Skript se ukoncuje: Data ze SolaXu nesla nacist ani po 3 pokusech.")
         return
 
     h_vyroba = m['v_dnes']
@@ -235,10 +257,12 @@ def main():
             delta_h = rozdil_sekund / 3600.0
 
         if 'Spotreba_Celkem_kWh' in posledni_zaznam.index:
-            h_spotreba = max(0.0, m['s_celkem'] - posledni_zaznam['Spotreba_Celkem_kWh'])
+            stara_spotreba = bezpecny_float(posledni_zaznam['Spotreba_Celkem_kWh'])
+            h_spotreba = max(0.0, m['s_celkem'] - stara_spotreba)
         
         if 'Export_Celkem_kWh' in posledni_zaznam.index:
-            h_export = max(0.0, m['e_celkem'] - posledni_zaznam['Export_Celkem_kWh'])
+            stary_export = bezpecny_float(posledni_zaznam['Export_Celkem_kWh'])
+            h_export = max(0.0, m['e_celkem'] - stary_export) if stary_export > 0 else ((m['sit_w'] / 1000.0) * delta_h if m['sit_w'] > 0 else 0.0)
         else:
             h_export = (m['sit_w'] / 1000.0) * delta_h if m['sit_w'] > 0 else 0.0
             
@@ -247,9 +271,20 @@ def main():
 
         dnesni_zaznamy = df_h[df_h['Cas'].dt.date == ted.date()]
         if not dnesni_zaznamy.empty:
-            h_vyroba = max(0.0, m['v_dnes'] - dnesni_zaznamy['AC_vyroba_Dnes_kWh'].iloc[-1])
-            denni_export = dnesni_zaznamy['Export_5min_kWh'].sum() + h_export if 'Export_5min_kWh' in dnesni_zaznamy.columns else h_export
-            denni_import = dnesni_zaznamy['Import_5min_kWh'].sum() + h_import if 'Import_5min_kWh' in dnesni_zaznamy.columns else h_import
+            stara_vyroba = bezpecny_float(dnesni_zaznamy['AC_vyroba_Dnes_kWh'].iloc[-1])
+            h_vyroba = max(0.0, m['v_dnes'] - stara_vyroba)
+            
+            if 'Export_5min_kWh' in dnesni_zaznamy.columns:
+                suma_export = pd.to_numeric(dnesni_zaznamy['Export_5min_kWh'].astype(str).str.replace(',', '.'), errors='coerce').sum()
+                denni_export = suma_export + h_export
+            else:
+                denni_export = h_export
+                
+            if 'Import_5min_kWh' in dnesni_zaznamy.columns:
+                suma_import = pd.to_numeric(dnesni_zaznamy['Import_5min_kWh'].astype(str).str.replace(',', '.'), errors='coerce').sum()
+                denni_import = suma_import + h_import
+            else:
+                denni_import = h_import
         else:
             denni_export = h_export
             denni_import = h_import
@@ -273,7 +308,9 @@ def main():
         'Skutecny_AC_Vystup_kWh': round(h_vyroba, 4), 
         'Skutecna_Spotreba_kWh': round(h_spotreba, 4),
         'Import_5min_kWh': round(h_import, 4),               
-        'Export_5min_kWh': round(h_export, 4),                       
+        'Export_5min_kWh': round(h_export, 4),               
+        'Denni_Import_kWh': round(denni_import, 2),          
+        'Denni_Export_kWh': round(denni_export, 2),          
         'Aktualni_Tok_Sit_W': m['sit_w'],                    
         'Celkovy_Vykon_Panelu_W': celkovy_dc_vykon_w, 
         'Cista_Vyroba_Panelu_kWh': round(cista_vyroba_pv_kwh, 4),
@@ -281,18 +318,17 @@ def main():
         'Vykon_Baterie_W': m['bat_p'], 
         'Baterie_SOC_%': m['soc'], 
         'Cena_CZK_kWh': round(cena_h, 2),
-        'Predpoved_FS_kWh': round(fs_now, 2),                # OPRAVENO ZPET NA kWh
+        'Predpoved_FS_kWh': round(fs_now, 2),                
         'Doporucena_Akce': rozhodovaci_logika(fs_now, o_spot, m['soc'], cena_h),
         'Akce_PuLP': aktualni_akce_pulp,
         'Duvod_PuLP': vygeneruj_duvod_pulp(aktualni_akce_pulp, cena_h, fs_now, m['soc']),
         'AC_vyroba_Dnes_kWh': m['v_dnes'], 
-        'Denni_Import_kWh': round(denni_import, 2),          
-        'Denni_Export_kWh': round(denni_export, 2),  
         'Spotreba_Celkem_kWh': m['s_celkem'],
         'Export_Celkem_kWh': m['e_celkem']                   
     }])
 
     pd.concat([df_h, n_radek]).drop_duplicates(subset=['Cas'], keep='last').to_csv(SOUBOR_HISTORIE, index=False, sep=';', decimal=',', date_format='%Y-%m-%d %H:%M:%S')
+    print("Zapis do historie uspesne dokoncen!")
 
 if __name__ == "__main__":
     try: main()
