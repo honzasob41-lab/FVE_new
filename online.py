@@ -311,7 +311,7 @@ def main():
         'Export_5min_kWh': round(h_export, 4),               
         'Denni_Import_kWh': round(denni_import, 2),          
         'Denni_Export_kWh': round(denni_export, 2),          
-        'Aktualni_Tok_Sit_W': m['sit_w'],                    
+        'Aktualni_import/export_W': m['sit_w'],                    
         'Celkovy_Vykon_Panelu_W': celkovy_dc_vykon_w, 
         'Cista_Vyroba_Panelu_kWh': round(cista_vyroba_pv_kwh, 4),
         'Aktualni_AC_Vystup_W': m['ac_out'],
