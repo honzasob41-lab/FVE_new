@@ -1,5 +1,5 @@
 Datum;Hodina;Predpoved_FS_kWh;Predpoved_PVCZ_kWh;Predpoved_Prumer_kWh;Odhad_Spotreba_kWh;Cena_CZK_kWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-03;22:00;0,0;0,0;0,0;0.6;2,85;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 2.85 Kc.
+2026-04-03;22:00;0,0;0,0;0,0;0.59;2,85;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 2.85 Kc.
 2026-04-03;23:00;0,0;0,0;0,0;0.17;2,81;100,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 2.81 Kc).
 2026-04-04;00:00;0,0;0,0;0,0;Nedostatek dat;3,26;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 3.26 Kc.
 2026-04-04;01:00;0,0;0,0;0,0;Nedostatek dat;2,58;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
