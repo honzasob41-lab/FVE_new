@@ -1810,3 +1810,4 @@ Cas;Skutecny_AC_Vystup_kWh;Skutecna_Spotreba_kWh;Celkovy_Vykon_Panelu_W;Cista_Vy
 2026-04-03 04:55:29.158948;0,0;0,0;0,0;0,0;172,0;-164,0;35,0;3,6;0,0;0,0;0,0;VYBIJET_PRO_DUM;1,0;10605,71;NABIJET_ZE_SITE;Priprava na budoucí spicku (nakup za aktualni cenu 3.60 Kc).
 2026-04-03 05:00:52.793484;0,0;0,0;0,0;0,0;169,0;-165,0;34,0;0,0;0,0;0,0;0,0;VYBIJET_PRO_DUM;1,0;10605,71;NORMALNI_PROVOZ;Cekani na vyhodnejsi podminky.
 2026-04-03 05:05:32.226629;0,0;0,0;0,0;0,0;171,0;-188,0;34,0;3,63;0,0;0,0;0,0;VYBIJET_PRO_DUM;1,0;10605,71;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 3.63 Kc.
+2026-04-03 05:10:37.846277;0,1;0,0;0,0;0,0;162,0;-141,0;34,0;3,63;0,0;0,0;0,0;VYBIJET_PRO_DUM;1,1;10605,71;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 3.63 Kc.
