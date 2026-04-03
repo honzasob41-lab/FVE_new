@@ -1898,3 +1898,4 @@ Cas;Skutecny_AC_Vystup_kWh;Skutecna_Spotreba_kWh;Celkovy_Vykon_Panelu_W;Cista_Vy
 2026-04-03 12:15:33.308853;0,6;0,0;7962,0;0,6571;7399,0;0,0;100,0;0,0;6,55;0,0;3,28;PRODAVAT_DO_SITE;20,0;10607,57;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
 2026-04-03 12:20:35.425000;0,6;0,0;1798,0;0,1509;1607,0;0,0;100,0;0,0;6,55;0,0;3,28;PRODAVAT_DO_SITE;20,6;10607,57;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.00 Kc.
 2026-04-03 12:25:28.396717;0,2;0,0;5515,0;0,4488;5107,0;0,0;100,0;3,08;6,55;0,0;3,28;PRODAVAT_DO_SITE;20,8;10607,57;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 3.08 Kc.
+2026-04-03 12:30:43.556014;0,4;0,0;8842,0;0,7741;8172,0;0,0;100,0;0,0;6,55;0,0;3,28;PRODAVAT_DO_SITE;21,2;10607,57;PRODAVAT_DO_SITE;Baterie je vyuzita nebo plna, prodej za cenu 0.00 Kc.
