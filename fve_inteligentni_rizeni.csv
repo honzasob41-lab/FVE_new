@@ -1976,3 +1976,4 @@ Cas;Skutecny_AC_Vystup_kWh;Skutecna_Spotreba_kWh;Cista_Vyroba_Panelu_kWh;Celkovy
 2026-04-03 23:40:35;0,0;0,0;0,0;0,0;0,0;0,0;46,0;0,0;0,0;;;UCENI_V_PRUBEHU;46.9;10607.75;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.00 Kc.;0.0018;0,0;;0,02;0,0;11980,3;-65,0
 2026-04-03 23:45:43;0,0;10607,75;0,0;0,0;-65,0;0,0;0,0;46,0;0,0;0,0;;;UCENI_V_PRUBEHU;46.9;10607.75;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 0.00 Kc).;0,0056;0,0;;0,01;0,0;11980,3
 2026-04-03 23:50:33;0,0;0,01;0,0;0,0;-47,0;0,0;0,0;46,0;0,0;0,0;;;VYBIJET_PRO_DUM;46.9;10607.76;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.00 Kc.;0,0038;0,0;;0,01;0,0;11980,3
+2026-04-03 23:55:31;0,1;0,0;0,0;0,0;0,0;206,0;-213,0;46,0;0,0;0,0;;;VYBIJET_PRO_DUM;47.0;10607.76;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.00 Kc.;0,0;0,0;;0,01;0,0;11980,3
