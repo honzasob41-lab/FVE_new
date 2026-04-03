@@ -7,6 +7,7 @@ import os
 import warnings
 import traceback
 import time
+import json
 from xml.etree import ElementTree
 
 warnings.simplefilter(action='ignore', category=UserWarning)
@@ -20,6 +21,7 @@ KW_PEAK = 10.0
 
 SOUBOR_HISTORIE = "fve_inteligentni_rizeni.csv"
 SOUBOR_PLAN = "denni_plan.csv"
+SOUBOR_PREDPOVEDI = "predpoved_cache.json"  # NOVÉ: Ukladaci soubor pro pocasi
 MIN_DNI_PRO_UCENI = 5
 MAX_VYKON_STRIDACE = 10.0
 KAPACITA_BATERIE_KWH = 10.0 
@@ -116,25 +118,68 @@ def nacti_ceny_entsoe():
 def nacti_predpoved_fs():
     url = f"https://api.forecast.solar/estimate/{LAT}/{LON}/{DECLINATION}/{AZIMUTH}/{KW_PEAK}"
     predpoved = {}
-    try:
-        r = requests.get(url, timeout=10)
-        # NOVÉ: Kontrola, zda nas Forecast.Solar nezablokoval
-        if r.status_code != 200:
-            print(f"CHYBA FORECAST.SOLAR (Kod {r.status_code}): {r.text[:200]}")
-            return predpoved
+    data = None
+    
+    # NOVÉ: Logika vyrovnavaci pameti (Cache)
+    potrebujeme_stahnout = True
+    if os.path.exists(SOUBOR_PREDPOVEDI):
+        cas_zmeny = datetime.fromtimestamp(os.path.getmtime(SOUBOR_PREDPOVEDI))
+        # Pokud je soubor mladsi nez 3 hodiny, nebudeme API vubec volat
+        if datetime.now() - cas_zmeny < timedelta(hours=3):
+            potrebujeme_stahnout = False
             
-        data = r.json()
+    if potrebujeme_stahnout:
+        try:
+            r = requests.get(url, timeout=10)
+            if r.status_code == 200:
+                data = r.json()
+                # Ulozime uspesna data do souboru pro priste
+                with open(SOUBOR_PREDPOVEDI, 'w') as f:
+                    json.dump(data, f)
+            else:
+                print(f"CHYBA FORECAST.SOLAR (Kod {r.status_code}). API limit pravdepodobne vycerpan.")
+        except Exception as e:
+            print(f"Chyba spojeni Forecast.Solar: {e}")
+
+    # Pokud jsme stahovani preskocili, nebo zrovna selhalo, precteme si posledni dobrou zalohu z disku
+    if not data and os.path.exists(SOUBOR_PREDPOVEDI):
+        try:
+            with open(SOUBOR_PREDPOVEDI, 'r') as f:
+                data = json.load(f)
+        except Exception as e:
+            print(f"Chyba pri cteni cache souboru: {e}")
+
+    # Pokud se nam nepodarilo ziskat data vubec nijak, vratime nuly
+    if not data:
+        return predpoved
+
+    # Preklad JSONu do slovniku pro PuLP
+    try:
         raw_data = []
         for cas_str, wh in data['result']['watt_hours_period'].items():
-            cas = pd.to_datetime(cas_str).replace(tzinfo=None)
-            raw_data.append({"Cas": cas, "Vykon_kW": float(wh) / 1000.0})
+            cas = pd.to_datetime(cas_str, errors='coerce')
+            if pd.isna(cas): continue
+            cas = cas.replace(tzinfo=None)
+            try:
+                vykon = float(wh) / 1000.0
+            except:
+                vykon = 0.0
+            raw_data.append({"Cas": cas, "Vykon_kW": vykon})
         
         if raw_data:
-            df = pd.DataFrame(raw_data).set_index("Cas").resample("15min").interpolate(method='linear').reset_index()
+            df = pd.DataFrame(raw_data)
+            df['Vykon_kW'] = pd.to_numeric(df['Vykon_kW'], errors='coerce').fillna(0.0)
+            df = df.set_index("Cas").resample("15min").interpolate(method='linear').fillna(0.0).reset_index()
+            
             for _, row in df.iterrows():
-                predpoved[row["Cas"].to_pydatetime()] = max(0.0, row["Vykon_kW"])
+                if pd.notna(row["Cas"]):
+                    try:
+                        cisty_vykon = float(row["Vykon_kW"])
+                        predpoved[row["Cas"].to_pydatetime()] = max(0.0, cisty_vykon)
+                    except: pass
     except Exception as e: 
-        print(f"Kriticka chyba pri cteni Forecast.Solar: {e}")
+        print(f"Kriticka chyba pri cteni Forecast.Solar dat: {e}")
+        
     return predpoved
 
 def nauc_se_spotrebu(df_h, aktualni_cas):
