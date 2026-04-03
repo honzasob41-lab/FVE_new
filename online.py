@@ -44,8 +44,8 @@ def nacti_solax_v2():
             "dc2": float(res.get("powerdc2", 0)),
             "ac_out": float(res.get("acpower", 0)),
             "bat_p": float(res.get("batPower", 0)),
-            "sit_w": float(res.get("feedinpower", 0)),     # Okamzity tok: >0 prodej, <0 nakup
-            "e_celkem": float(res.get("feedinenergy", 0))  # Celkovy historicky export
+            "sit_w": float(res.get("feedinpower", 0)),
+            "e_celkem": float(res.get("feedinenergy", 0))
         }
     except Exception as e: 
         print(f"CHYBA SOLAX: {e}")
@@ -207,7 +207,7 @@ def main():
         plan_data.append({
             'Datum': aktualni_cas_planu.strftime('%Y-%m-%d'), 
             'Cas': aktualni_cas_planu.strftime('%H:%M'),
-            'Predpoved_FS_kW': round(pv_192[i], 2),
+            'Predpoved_FS_kWh': round(pv_192[i], 2),             # OPRAVENO ZPET NA kWh
             'Odhad_Spotreba_kW': round(spotreba_192[i], 2) if spotreba_192[i] > 0 else "Nedostatek dat",
             'Cena_CZK_kWh': round(ceny_192[i], 2),
             'Simulovane_SOC_%': round(soc[i].varValue, 1),
@@ -272,24 +272,24 @@ def main():
         'Cas': ted, 
         'Skutecny_AC_Vystup_kWh': round(h_vyroba, 4), 
         'Skutecna_Spotreba_kWh': round(h_spotreba, 4),
-        'Import_5min_kWh': round(h_import, 4),               # NOVÉ
-        'Export_5min_kWh': round(h_export, 4),               # NOVÉ
-        'Aktualni_import/export_W': m['sit_w'],                    # NOVÉ (+ prodej, - nakup)
+        'Import_5min_kWh': round(h_import, 4),               
+        'Export_5min_kWh': round(h_export, 4),                       
+        'Aktualni_Tok_Sit_W': m['sit_w'],                    
         'Celkovy_Vykon_Panelu_W': celkovy_dc_vykon_w, 
         'Cista_Vyroba_Panelu_kWh': round(cista_vyroba_pv_kwh, 4),
         'Aktualni_AC_Vystup_W': m['ac_out'],
         'Vykon_Baterie_W': m['bat_p'], 
         'Baterie_SOC_%': m['soc'], 
         'Cena_CZK_kWh': round(cena_h, 2),
-        'Predpoved_FS_kW': round(fs_now, 2),
+        'Predpoved_FS_kWh': round(fs_now, 2),                # OPRAVENO ZPET NA kWh
         'Doporucena_Akce': rozhodovaci_logika(fs_now, o_spot, m['soc'], cena_h),
         'Akce_PuLP': aktualni_akce_pulp,
         'Duvod_PuLP': vygeneruj_duvod_pulp(aktualni_akce_pulp, cena_h, fs_now, m['soc']),
         'AC_vyroba_Dnes_kWh': m['v_dnes'], 
-        'Denni_Import_kWh': round(denni_import, 2),          # NOVÉ
-        'Denni_Export_kWh': round(denni_export, 2),          # NOVÉ
+        'Denni_Import_kWh': round(denni_import, 2),          
+        'Denni_Export_kWh': round(denni_export, 2),  
         'Spotreba_Celkem_kWh': m['s_celkem'],
-        'Export_Celkem_kWh': m['e_celkem']                   # NOVÉ
+        'Export_Celkem_kWh': m['e_celkem']                   
     }])
 
     pd.concat([df_h, n_radek]).drop_duplicates(subset=['Cas'], keep='last').to_csv(SOUBOR_HISTORIE, index=False, sep=';', decimal=',', date_format='%Y-%m-%d %H:%M:%S')
