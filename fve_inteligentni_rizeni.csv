@@ -1,4 +1,4 @@
-Cas;Skutecna_Spotreba_kWh;Skutecny_AC_Vystup_kWh;Unnamed: 3;Celkovy_Vykon_Panelu_W;Cista_Vyroba_Panelu_kWh;Aktualni_AC_Vystup_W;Vykon_Baterie_W;Baterie_SOC_%;Cena_CZK_kWh;Predpoved_FS_kWh;Predpoved_PVCZ_kWh;Predpoved_Prumer_kWh;Doporucena_Akce;AC_vyroba_Dnes_kWh;Spotreba_Celkem_kWh;Akce_PuLP;Duvod_PuLP;Import_5min_kWh;Export_5min_kWh;Aktualni_import/export_W;Denni_Import_kWh;Denni_Export_kWh;Export_Celkem_kWh
+Cas;Skutecna_Spotreba_kWh;Skutecny_AC_Vystup_kWh;Celkovy_Vykon_Panelu_W;Cista_Vyroba_Panelu_kWh;Aktualni_AC_Vystup_W;Vykon_Baterie_W;Baterie_SOC_%;Cena_CZK_kWh;Predpoved_FS_kWh;Predpoved_PVCZ_kWh;Predpoved_Prumer_kWh;Doporucena_Akce;AC_vyroba_Dnes_kWh;Spotreba_Celkem_kWh;Akce_PuLP;Duvod_PuLP;Import_5min_kWh;Export_5min_kWh;Aktualni_import/export_W;Denni_Import_kWh;Denni_Export_kWh;Export_Celkem_kWh
 2026-03-23 22:09:00;0,0;;;;;;;;;;;;;;10472,53;;;;;;;;
 2026-03-23 22:10:00;0,0;;;;;;;;;;;;;;10472,53;;;;;;;;
 2026-03-24 20:39:00;0,79;;;;;;;;;;;;;;10473,32;;;;;;;;
