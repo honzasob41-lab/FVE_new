@@ -218,3 +218,4 @@ Cas;Celkovy_Vykon_Panelu_W;Aktualni_import/export_W;Aktualni_AC_Vystup_W;Vykon_B
 2026-04-04 17:50:36;523,0;0,0;2318,0;-2019,0;63,0;2,62;0.39;UCENI_V_PRUBEHU;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).;28,8;0,2;0,0;0,0439;10608,18;0,0;0,0;0,23;9,82;11990,12;
 2026-04-04 17:55:33;615,0;0,0;2255,0;-1811,0;62,0;2,62;0.39;UCENI_V_PRUBEHU;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).;28,9;0,1;0,0;0,0507;10608,18;0,0;0,0;0,23;9,82;11990,12;
 2026-04-04 18:00:53;652,0;0,0;2250,0;-1811,0;61,0;0,0;0.3;UCENI_V_PRUBEHU;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.00 Kc.;29,1;0,2;0,01;0,058;10608,19;0,0;0,0;0,23;9,82;11990,12;
+2026-04-04 18:05:30;646,0;0,0;289,0;190,0;60,0;1,58;0.3;UCENI_V_PRUBEHU;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 1.58 Kc).;29,2;0,1;0,0;0,0497;10608,19;0,0;0,01;0,23;9,83;11990,13;
