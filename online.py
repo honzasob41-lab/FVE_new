@@ -111,7 +111,7 @@ def nacti_ceny_entsoe():
         if zaznamy:
             df = pd.DataFrame(zaznamy).set_index("Cas").resample("15min").ffill().reset_index()
             for _, row in df.iterrows():
-                ceny[row["Cas"].to_pydatetime()] = (row["Cena"]
+                ceny[row["Cas"].to_pydatetime()] = row["Cena"]
     except Exception as e: 
         print(f"Kriticka chyba pri cteni ENTSO-E: {e}")
     return ceny
