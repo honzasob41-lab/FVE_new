@@ -318,6 +318,7 @@ def main():
 
     model.solve(pulp.PULP_CBC_CMD(msg=False))
 
+    # --- ZÁPIS PLÁNU - NATVRDO S ČÁRKOU ---
     plan_data = []
     for i in kroky_15min:
         aktualni_cas_planu = casy_192[i]
@@ -331,26 +332,18 @@ def main():
         elif vyb_val > 0.1: akce = "POKRYT_Z_BATERIE"
         elif p_prodej[i].varValue > 0.1: akce = "PRODAVAT_DO_SITE"
 
-        # Tady pouštíme pouze čistá čísla, pro prázdnou spotřebu dáme None
         plan_data.append({
             'Datum': aktualni_cas_planu.strftime('%Y-%m-%d'), 
             'Cas': aktualni_cas_planu.strftime('%H:%M'),
-            'Predpoved_FS_kWh': round(pv_192[i], 2),              
-            'Odhad_Spotreba_kW': round(spotreba_192[i], 2) if spotreba_192[i] > 0 else None,
-            'Cena_CZK_kWh': round(ceny_192[i], 2),
-            'Simulovane_SOC_%': round(soc[i].varValue, 1),
+            'Predpoved_FS_kWh': str(round(pv_192[i], 2)).replace('.', ','),              
+            'Odhad_Spotreba_kW': str(round(spotreba_192[i], 2)).replace('.', ',') if spotreba_192[i] > 0 else "Nedostatek dat",
+            'Cena_CZK_kWh': str(round(ceny_192[i], 2)).replace('.', ','),
+            'Simulovane_SOC_%': str(round(soc[i].varValue, 1)).replace('.', ','),
             'Akce_EMS': akce,
             'Duvod_Akce': vygeneruj_duvod_pulp(akce, ceny_192[i], pv_192[i], soc[i].varValue)
         })
         
-    # Pandas export zajistí desetinnou čárku a nahrazení None za váš text
-    pd.DataFrame(plan_data).to_csv(
-        SOUBOR_PLAN, 
-        index=False, 
-        sep=';', 
-        decimal=',', 
-        na_rep='Nedostatek dat'
-    )
+    pd.DataFrame(plan_data).to_csv(SOUBOR_PLAN, index=False, sep=';')
 
     m = nacti_solax_v2()
     if not m: 
@@ -415,32 +408,39 @@ def main():
     cena_h = vsechny_ceny.get(ted_ctvrthodina, 0.0)
 
     aktualni_akce_pulp = plan_data[0]['Akce_EMS'] if plan_data else "NEDOSTUPNE"
+    
+    # Tyto dve promenne uchovavaji to, co si skript PRED chvili nasimuloval
+    simulovane_soc_ted = plan_data[0]['Simulovane_SOC_%'] if plan_data else "0,0"
+    odhad_spotreby_ted = plan_data[0]['Odhad_Spotreba_kW'] if plan_data else "Nedostatek dat"
 
+    # --- ZÁPIS HISTORIE - NATVRDO S ČÁRKOU A NOVYMI ANALYTICKYMI SLOUPCI ---
     n_radek = pd.DataFrame([{
         'Cas': ted, 
-        'Skutecny_AC_Vystup_kWh': round(h_vyroba, 4), 
-        'Skutecna_Spotreba_kWh': round(h_spotreba, 4),
-        'Import_5min_kWh': round(h_import, 4),                
-        'Export_5min_kWh': round(h_export, 4),                
-        'Denni_Import_kWh': round(denni_import, 2),          
-        'Denni_Export_kWh': round(denni_export, 2),          
-        'Aktualni_import/export_W': m['sit_w'],                    
-        'Celkovy_Vykon_Panelu_W': celkovy_dc_vykon_w, 
-        'Cista_Vyroba_Panelu_kWh': round(cista_vyroba_pv_kwh, 4),
-        'Aktualni_AC_Vystup_W': m['ac_out'],
-        'Vykon_Baterie_W': m['bat_p'], 
-        'Baterie_SOC_%': m['soc'], 
-        'Cena_CZK_kWh': round(cena_h, 2),
-        'Predpoved_FS_kWh': round(fs_now, 2),                
+        'Skutecny_AC_Vystup_kWh': str(round(h_vyroba, 4)).replace('.', ','), 
+        'Skutecna_Spotreba_kWh': str(round(h_spotreba, 4)).replace('.', ','),
+        'Odhad_Spotreba_Modelu_kW': odhad_spotreby_ted,  # NOVY SLOUPEC: Jakou spotrebu skript cekal
+        'Import_5min_kWh': str(round(h_import, 4)).replace('.', ','),                
+        'Export_5min_kWh': str(round(h_export, 4)).replace('.', ','),                
+        'Denni_Import_kWh': str(round(denni_import, 2)).replace('.', ','),          
+        'Denni_Export_kWh': str(round(denni_export, 2)).replace('.', ','),          
+        'Aktualni_import/export_W': str(m['sit_w']).replace('.', ','),                    
+        'Celkovy_Vykon_Panelu_W': str(celkovy_dc_vykon_w).replace('.', ','), 
+        'Cista_Vyroba_Panelu_kWh': str(round(cista_vyroba_pv_kwh, 4)).replace('.', ','),
+        'Aktualni_AC_Vystup_W': str(m['ac_out']).replace('.', ','),
+        'Vykon_Baterie_W': str(m['bat_p']).replace('.', ','), 
+        'Baterie_SOC_%': str(m['soc']).replace('.', ','), 
+        'Simulovane_SOC_%': simulovane_soc_ted,  # NOVY SLOUPEC: Jaka by podle simulace mela baterie prave byt
+        'Cena_CZK_kWh': str(round(cena_h, 2)).replace('.', ','),
+        'Predpoved_FS_kWh': str(round(fs_now, 2)).replace('.', ','),                
         'Doporucena_Akce': rozhodovaci_logika(fs_now, o_spot, m['soc'], cena_h),
         'Akce_PuLP': aktualni_akce_pulp,
         'Duvod_PuLP': vygeneruj_duvod_pulp(aktualni_akce_pulp, cena_h, fs_now, m['soc']),
-        'AC_vyroba_Dnes_kWh': m['v_dnes'], 
-        'Spotreba_Celkem_kWh': m['s_celkem'],
-        'Export_Celkem_kWh': m['e_celkem']                   
+        'AC_vyroba_Dnes_kWh': str(m['v_dnes']).replace('.', ','), 
+        'Spotreba_Celkem_kWh': str(m['s_celkem']).replace('.', ','),
+        'Export_Celkem_kWh': str(m['e_celkem']).replace('.', ',')                   
     }])
 
-    pd.concat([df_h, n_radek]).drop_duplicates(subset=['Cas'], keep='last').to_csv(SOUBOR_HISTORIE, index=False, sep=';', decimal=',', date_format='%Y-%m-%d %H:%M:%S')
+    pd.concat([df_h, n_radek]).drop_duplicates(subset=['Cas'], keep='last').to_csv(SOUBOR_HISTORIE, index=False, sep=';')
     print("Zapis do historie uspesne dokoncen!")
 
 if __name__ == "__main__":
