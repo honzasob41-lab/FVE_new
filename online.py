@@ -331,11 +331,11 @@ def main():
         elif vyb_val > 0.1: akce = "POKRYT_Z_BATERIE"
         elif p_prodej[i].varValue > 0.1: akce = "PRODAVAT_DO_SITE"
 
-       plan_data.append({
+        # Tady pouštíme pouze čistá čísla, pro prázdnou spotřebu dáme None
+        plan_data.append({
             'Datum': aktualni_cas_planu.strftime('%Y-%m-%d'), 
             'Cas': aktualni_cas_planu.strftime('%H:%M'),
             'Predpoved_FS_kWh': round(pv_192[i], 2),              
-            # Zde misto textu posleme ciste None, aby sloupec zustal ciselny
             'Odhad_Spotreba_kW': round(spotreba_192[i], 2) if spotreba_192[i] > 0 else None,
             'Cena_CZK_kWh': round(ceny_192[i], 2),
             'Simulovane_SOC_%': round(soc[i].varValue, 1),
@@ -343,13 +343,13 @@ def main():
             'Duvod_Akce': vygeneruj_duvod_pulp(akce, ceny_192[i], pv_192[i], soc[i].varValue)
         })
         
-    # Pridame parametr na_rep pro prazdne hodnoty
+    # Pandas export zajistí desetinnou čárku a nahrazení None za váš text
     pd.DataFrame(plan_data).to_csv(
         SOUBOR_PLAN, 
         index=False, 
         sep=';', 
         decimal=',', 
-        na_rep='Nedostatek dat' # Vsechna 'None' se pri zapisu zmeni na tento text
+        na_rep='Nedostatek dat'
     )
 
     m = nacti_solax_v2()
