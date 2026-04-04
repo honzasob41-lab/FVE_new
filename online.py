@@ -23,7 +23,7 @@ KW_PEAK = 10.0
 SOUBOR_HISTORIE = "fve_inteligentni_rizeni.csv"
 SOUBOR_PLAN = "denni_plan.csv"
 SOUBOR_PREDPOVEDI = "predpoved_cache.json"
-MIN_DNI_PRO_UCENI = 5
+MIN_DNI_PRO_UCENI = 2
 MAX_VYKON_STRIDACE = 10.0
 KAPACITA_BATERIE_KWH = 10.0 
 
