@@ -1,5 +1,5 @@
 Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_CZK_kWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-04;18:15;0,25;Nedostatek dat;2,39;85,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 2.39 Kc).
+2026-04-04;18:15;0,25;Nedostatek dat;2,39;84,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 2.39 Kc).
 2026-04-04;18:30;0,19;Nedostatek dat;3,17;100,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 3.17 Kc).
 2026-04-04;18:45;0,14;Nedostatek dat;4,26;75,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 4.26 Kc.
 2026-04-04;19:00;0,08;Nedostatek dat;3,36;100,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 3.36 Kc).
