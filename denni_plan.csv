@@ -1,5 +1,4 @@
 Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-05;00:15;0,43;Nedostatek dat;59,68;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 59.68 EUR.
 2026-04-05;00:30;0,44;Nedostatek dat;39,18;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 39.18 EUR).
 2026-04-05;00:45;0,46;Nedostatek dat;3,25;60,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 3.25 EUR).
 2026-04-05;01:00;0,48;Nedostatek dat;44,61;35,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 44.61 EUR.
@@ -66,8 +65,8 @@ Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_
 2026-04-05;16:15;1,23;Nedostatek dat;-33,12;100,0;PRODAVAT_DO_SITE;Baterie je plna na 100 %, prodej prebytku za cenu -33.12 EUR.
 2026-04-05;16:30;1,05;Nedostatek dat;-27,66;100,0;PRODAVAT_DO_SITE;Baterie je plna na 100 %, prodej prebytku za cenu -27.66 EUR.
 2026-04-05;16:45;0,87;Nedostatek dat;-16,9;100,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-05;17:00;0,7;Nedostatek dat;-16,35;100,0;PRODAVAT_DO_SITE;Baterie je plna na 100 %, prodej prebytku za cenu -16.35 EUR.
-2026-04-05;17:15;0,59;Nedostatek dat;-7,33;100,0;PRODAVAT_DO_SITE;Baterie je plna na 100 %, prodej prebytku za cenu -7.33 EUR.
+2026-04-05;17:00;0,7;Nedostatek dat;-16,35;100,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-05;17:15;0,59;Nedostatek dat;-7,33;100,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
 2026-04-05;17:30;0,49;Nedostatek dat;-3,64;100,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
 2026-04-05;17:45;0,39;Nedostatek dat;-1,82;75,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu -1.82 EUR.
 2026-04-05;18:00;0,29;Nedostatek dat;-2,4;100,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu -2.40 EUR).
@@ -191,3 +190,4 @@ Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_
 2026-04-06;23:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;23:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-07;00:00;0,0;0,12;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;00:15;0,0;0,17;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
