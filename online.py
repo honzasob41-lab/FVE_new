@@ -149,6 +149,32 @@ def nacti_predpoved_fs():
     if not data:
         return predpoved
 
+    # --- TADY ZAČÍNÁ ÚPRAVA ZPRACOVÁNÍ DAT ---
+    try:
+        raw_data = []
+        # Projdeme data a vytvoříme seznam bodů
+        for cas_str, wh in data['result']['watt_hours_period'].items():
+            cas = pd.to_datetime(cas_str, errors='coerce')
+            if pd.isna(cas): continue
+            cas = cas.replace(tzinfo=None)
+            raw_data.append({"Cas": cas, "Vykon_kW": float(wh) / 1000.0})
+        
+        if raw_data:
+            df = pd.DataFrame(raw_data).set_index("Cas").sort_index()
+            
+            # TATO ČÁST OPRAVUJE NOC:
+            # resample vytvoří mřížku po 15 min
+            # interpolate s limit=3 propojí body v rámci hodiny, ale ne přes celou noc
+            # fillna(0.0) zajistí, že zbytek noci bude čistá nula
+            df = df.resample("15min").interpolate(method='linear', limit=3).fillna(0.0).reset_index()
+            
+            for _, row in df.iterrows():
+                if pd.notna(row["Cas"]):
+                    predpoved[row["Cas"].to_pydatetime()] = max(0.0, float(row["Vykon_kW"]))
+    except Exception as e: 
+        print(f"Kriticka chyba pri cteni Forecast.Solar dat: {e}")
+        
+    return predpoved
     try:
         raw_data = []
         for cas_str, wh in data['result']['watt_hours_period'].items():
