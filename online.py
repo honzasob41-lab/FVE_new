@@ -249,17 +249,17 @@ def rozhodovaci_logika(prum_p, spot, soc, cena):
 
 def vygeneruj_duvod_pulp(akce, cena, pv_vykon, soc):
     if akce == "NABIJET_ZE_SITE":
-        return f"Priprava na budouci spicku (nakup za aktualni cenu {cena:.2f} Kc)."
+        return f"Priprava na budouci spicku (nakup za aktualni cenu {cena:.2f} EUR)."
     elif akce == "NABIJET_SOLAREM":
         return "Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora)."
     elif akce == "POKRYT_Z_BATERIE":
-        return f"Vyhnuti se nakupu energie ze site za cenu {cena:.2f} Kc."
+        return f"Vyhnuti se nakupu energie ze site za cenu {cena:.2f} EUR."
     elif akce == "PRODAVAT_DO_SITE":
         if soc >= 99.0:
-            return f"Baterie je plna na 100 %, prodej prebytku za cenu {cena:.2f} Kc."
+            return f"Baterie je plna na 100 %, prodej prebytku za cenu {cena:.2f} EUR."
         if pv_vykon > MAX_VYKON_STRIDACE:
-            return f"Nabijeci vykon je na maximu, zbytek pretok do site (cena {cena:.2f} Kc)."
-        return f"Vyhodny prodej z baterie kvuli vysoke cene ({cena:.2f} Kc)."
+            return f"Nabijeci vykon je na maximu, zbytek pretok do site (cena {cena:.2f} EUR)."
+        return f"Vyhodny prodej z baterie kvuli vysoke cene ({cena:.2f} EUR)."
     
     if pv_vykon > 0:
         return "Bezna spotreba kryta primym slunecnim vykonem."
