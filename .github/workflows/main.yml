@@ -19,7 +19,7 @@ jobs:
           python-version: '3.10'
 
       - name: Instalace knihoven
-        run: pip install requests pandas tzdata pulp
+        run: pip install requests pandas tzdata pulp holidays
 
       - name: Spusteni online.py
         env:
