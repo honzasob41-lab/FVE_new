@@ -331,13 +331,14 @@ def main():
         elif vyb_val > 0.1: akce = "POKRYT_Z_BATERIE"
         elif p_prodej[i].varValue > 0.1: akce = "PRODAVAT_DO_SITE"
 
+        # OPRAVA ZDE: Vynuceni desetinne carky u vsech ciselnych sloupcu pro CSV
         plan_data.append({
             'Datum': aktualni_cas_planu.strftime('%Y-%m-%d'), 
             'Cas': aktualni_cas_planu.strftime('%H:%M'),
-            'Predpoved_FS_kWh': round(pv_192[i], 2),             
-            'Odhad_Spotreba_kW': round(spotreba_192[i], 2) if spotreba_192[i] > 0 else "Nedostatek dat",
-            'Cena_CZK_kWh': round(ceny_192[i], 2),
-            'Simulovane_SOC_%': round(soc[i].varValue, 1),
+            'Predpoved_FS_kWh': f"{pv_192[i]:.2f}".replace('.', ','),              
+            'Odhad_Spotreba_kW': f"{spotreba_192[i]:.2f}".replace('.', ',') if spotreba_192[i] > 0 else "Nedostatek dat",
+            'Cena_CZK_kWh': f"{ceny_192[i]:.2f}".replace('.', ','),
+            'Simulovane_SOC_%': f"{soc[i].varValue:.1f}".replace('.', ','),
             'Akce_EMS': akce,
             'Duvod_Akce': vygeneruj_duvod_pulp(akce, ceny_192[i], pv_192[i], soc[i].varValue)
         })
@@ -412,8 +413,8 @@ def main():
         'Cas': ted, 
         'Skutecny_AC_Vystup_kWh': round(h_vyroba, 4), 
         'Skutecna_Spotreba_kWh': round(h_spotreba, 4),
-        'Import_5min_kWh': round(h_import, 4),               
-        'Export_5min_kWh': round(h_export, 4),               
+        'Import_5min_kWh': round(h_import, 4),                
+        'Export_5min_kWh': round(h_export, 4),                
         'Denni_Import_kWh': round(denni_import, 2),          
         'Denni_Export_kWh': round(denni_export, 2),          
         'Aktualni_import/export_W': m['sit_w'],                    
