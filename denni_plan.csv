@@ -1,9 +1,8 @@
 Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_CZK_kWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-04;10:15;3,6;Nedostatek dat;0,18;69,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.18 Kc.
-2026-04-04;10:30;3,44;Nedostatek dat;0,16;44,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.16 Kc.
-2026-04-04;10:45;3,27;Nedostatek dat;0,09;19,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.09 Kc.
-2026-04-04;11:00;3,11;Nedostatek dat;0,08;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.08 Kc.
-2026-04-04;11:15;2,96;Nedostatek dat;0,07;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.07 Kc).
+2026-04-04;10:30;3,44;Nedostatek dat;0,16;69,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.16 Kc.
+2026-04-04;10:45;3,27;Nedostatek dat;0,09;44,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.09 Kc.
+2026-04-04;11:00;3,11;Nedostatek dat;0,08;19,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.08 Kc.
+2026-04-04;11:15;2,96;Nedostatek dat;0,07;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.07 Kc.
 2026-04-04;11:30;2,82;Nedostatek dat;0,04;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.04 Kc).
 2026-04-04;11:45;2,68;Nedostatek dat;0,01;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 0.01 Kc).
 2026-04-04;12:00;2,53;Nedostatek dat;0,04;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.04 Kc.
@@ -20,7 +19,7 @@ Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_CZK_kWh;Simulovane_SOC_%;Akce_
 2026-04-04;14:45;1,55;Nedostatek dat;0,0;50,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
 2026-04-04;15:00;1,45;Nedostatek dat;0,0;75,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 0.00 Kc).
 2026-04-04;15:15;1,35;Nedostatek dat;0,0;100,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 0.00 Kc).
-2026-04-04;15:30;1,25;Nedostatek dat;0,0;100,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-04;15:30;1,25;Nedostatek dat;0,0;100,0;PRODAVAT_DO_SITE;Baterie je plna na 100 %, prodej prebytku za cenu 0.00 Kc.
 2026-04-04;15:45;1,15;Nedostatek dat;0,0;100,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
 2026-04-04;16:00;1,05;Nedostatek dat;0,0;100,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
 2026-04-04;16:15;0,95;Nedostatek dat;0,07;100,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
@@ -191,3 +190,4 @@ Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_CZK_kWh;Simulovane_SOC_%;Akce_
 2026-04-06;09:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;09:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;10:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;10:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
