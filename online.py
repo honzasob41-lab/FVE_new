@@ -9,6 +9,7 @@ import traceback
 import time
 import json
 from xml.etree import ElementTree
+import holidays
 
 warnings.simplefilter(action='ignore', category=UserWarning)
 
@@ -21,7 +22,7 @@ KW_PEAK = 10.0
 
 SOUBOR_HISTORIE = "fve_inteligentni_rizeni.csv"
 SOUBOR_PLAN = "denni_plan.csv"
-SOUBOR_PREDPOVEDI = "predpoved_cache.json"  # NOVÉ: Ukladaci soubor pro pocasi
+SOUBOR_PREDPOVEDI = "predpoved_cache.json"
 MIN_DNI_PRO_UCENI = 5
 MAX_VYKON_STRIDACE = 10.0
 KAPACITA_BATERIE_KWH = 10.0 
@@ -120,11 +121,9 @@ def nacti_predpoved_fs():
     predpoved = {}
     data = None
     
-    # NOVÉ: Logika vyrovnavaci pameti (Cache)
     potrebujeme_stahnout = True
     if os.path.exists(SOUBOR_PREDPOVEDI):
         cas_zmeny = datetime.fromtimestamp(os.path.getmtime(SOUBOR_PREDPOVEDI))
-        # Pokud je soubor mladsi nez 3 hodiny, nebudeme API vubec volat
         if datetime.now() - cas_zmeny < timedelta(hours=3):
             potrebujeme_stahnout = False
             
@@ -133,7 +132,6 @@ def nacti_predpoved_fs():
             r = requests.get(url, timeout=10)
             if r.status_code == 200:
                 data = r.json()
-                # Ulozime uspesna data do souboru pro priste
                 with open(SOUBOR_PREDPOVEDI, 'w') as f:
                     json.dump(data, f)
             else:
@@ -141,7 +139,6 @@ def nacti_predpoved_fs():
         except Exception as e:
             print(f"Chyba spojeni Forecast.Solar: {e}")
 
-    # Pokud jsme stahovani preskocili, nebo zrovna selhalo, precteme si posledni dobrou zalohu z disku
     if not data and os.path.exists(SOUBOR_PREDPOVEDI):
         try:
             with open(SOUBOR_PREDPOVEDI, 'r') as f:
@@ -149,11 +146,9 @@ def nacti_predpoved_fs():
         except Exception as e:
             print(f"Chyba pri cteni cache souboru: {e}")
 
-    # Pokud se nam nepodarilo ziskat data vubec nijak, vratime nuly
     if not data:
         return predpoved
 
-    # Preklad JSONu do slovniku pro PuLP
     try:
         raw_data = []
         for cas_str, wh in data['result']['watt_hours_period'].items():
@@ -183,17 +178,63 @@ def nacti_predpoved_fs():
     return predpoved
 
 def nauc_se_spotrebu(df_h, aktualni_cas):
-    if df_h.empty or 'Skutecna_Spotreba_kWh' not in df_h.columns: return None
-    je_vikend = aktualni_cas.weekday() >= 5
+    if df_h.empty or 'Skutecna_Spotreba_kWh' not in df_h.columns: 
+        return None
+
     df_h['Cas'] = pd.to_datetime(df_h['Cas'])
-    
-    df_f = df_h[(df_h['Cas'].dt.hour == aktualni_cas.hour) & 
+
+    maska_nedavna = df_h['Cas'] >= (aktualni_cas - timedelta(days=90))
+    cas_pred_rokem = aktualni_cas - timedelta(days=365)
+    maska_lonska = (df_h['Cas'] >= (cas_pred_rokem - timedelta(days=45))) & (df_h['Cas'] <= (cas_pred_rokem + timedelta(days=45)))
+
+    df_h = df_h[maska_nedavna | maska_lonska].copy()
+
+    cz_holidays = holidays.CZ(years=[aktualni_cas.year, aktualni_cas.year - 1])
+
+    def urci_typ_dne(dt):
+        if dt.date() in cz_holidays: 
+            return "Svatek"
+        wd = dt.weekday()
+        if wd == 0: return "Pondeli"
+        elif wd == 1: return "Utery"
+        elif wd == 2: return "Streda"
+        elif wd == 3: return "Ctvrtek"
+        elif wd == 4: return "Patek"
+        elif wd == 5: return "Sobota"
+        elif wd == 6: return "Nedele"
+
+    cilovy_typ = urci_typ_dne(aktualni_cas)
+    df_h['Typ_Dne'] = df_h['Cas'].apply(urci_typ_dne)
+
+    df_f = df_h[
+        (df_h['Cas'].dt.hour == aktualni_cas.hour) & 
+        (df_h['Cas'].dt.minute // 15 == aktualni_cas.minute // 15) & 
+        (df_h['Typ_Dne'] == cilovy_typ)
+    ].dropna(subset=['Skutecna_Spotreba_kWh'])
+
+    pocet_dostupnych_dni = df_f['Cas'].dt.date.nunique()
+
+    if pocet_dostupnych_dni < MIN_DNI_PRO_UCENI:
+        pracovni_dny = ["Pondeli", "Utery", "Streda", "Ctvrtek", "Patek"]
+        vikend = ["Sobota", "Nedele"]
+
+        if cilovy_typ in pracovni_dny:
+            df_f = df_h[
+                (df_h['Cas'].dt.hour == aktualni_cas.hour) & 
                 (df_h['Cas'].dt.minute // 15 == aktualni_cas.minute // 15) & 
-                ((df_h['Cas'].dt.weekday >= 5) == je_vikend)].dropna(subset=['Skutecna_Spotreba_kWh'])
-    
+                (df_h['Typ_Dne'].isin(pracovni_dny))
+            ].dropna(subset=['Skutecna_Spotreba_kWh'])
+        elif cilovy_typ in vikend or cilovy_typ == "Svatek":
+            df_f = df_h[
+                (df_h['Cas'].dt.hour == aktualni_cas.hour) & 
+                (df_h['Cas'].dt.minute // 15 == aktualni_cas.minute // 15) & 
+                (df_h['Typ_Dne'].isin(vikend + ["Svatek"]))
+            ].dropna(subset=['Skutecna_Spotreba_kWh'])
+
     if df_f['Cas'].dt.date.nunique() >= MIN_DNI_PRO_UCENI:
         cisty_sloupec = pd.to_numeric(df_f['Skutecna_Spotreba_kWh'].astype(str).str.replace(',', '.'), errors='coerce')
         return cisty_sloupec.mean() * 12
+
     return None
 
 def rozhodovaci_logika(prum_p, spot, soc, cena):
