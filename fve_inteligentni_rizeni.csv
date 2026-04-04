@@ -1,5 +1,5 @@
 Cas;Skutecna_Spotreba_kWh;Skutecny_AC_Vystup_kWh;Celkovy_Vykon_Panelu_W;Cista_Vyroba_Panelu_kWh;Aktualni_AC_Vystup_W;Vykon_Baterie_W;Baterie_SOC_%;Cena_CZK_kWh;Predpoved_FS_kWh;Doporucena_Akce;AC_vyroba_Dnes_kWh;Spotreba_Celkem_kWh;Akce_PuLP;Duvod_PuLP;Import_5min_kWh;Export_5min_kWh;Aktualni_import/export_W;Denni_Import_kWh;Denni_Export_kWh;Export_Celkem_kWh
 ;;;;;;;;;;;;10607,74;;;;;;;;
-1970-01-01 00:00:00;0,0;0,0;303,0;-306,0;34.0;1.99;0.26;;;UCENI_V_PRUBEHU;32,5;10608,29;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 1.99 Kc).;0,0;0,0;0,0;0,0;0,0;11990,22
 1970-01-01 00:00:00;0,0;0,0;204,0;-188,0;33.0;2.84;0.28;UCENI_V_PRUBEHU;32,6;10608,29;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 2.84 Kc.;0,0;0,0;0,0;0,0;0,0;11990,22;;
 2026-04-04 22:15:33;10608,29;32,6;0,0;0,0;230.0;-212.0;33.0;2.03;0,3;UCENI_V_PRUBEHU;32.6;10608.29;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 2.03 Kc).;0,0;0,0;0,0;0,0;0,0;11990,22
+2026-04-04 22:21:39;0,0;0,1;0,0;0,0;278.0;-283.0;33.0;2.03;0,3;UCENI_V_PRUBEHU;32.7;10608.29;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 2.03 Kc.;0,0;0,0;0,0;0,0;0,0;11990,22
