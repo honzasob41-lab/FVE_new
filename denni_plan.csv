@@ -1,84 +1,84 @@
 Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_CZK_kWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-04;04:00;0,0;Nedostatek dat;0,0;35,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.00 Kc.
-2026-04-04;04:15;0,0;Nedostatek dat;0,0;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.00 Kc.
-2026-04-04;04:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-04;04:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-04;05:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-04;05:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-04;05:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-04;05:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-04;06:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-04;06:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-04;06:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-04;06:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-04;07:00;1,0;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;07:15;1,58;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;07:30;2,17;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;07:45;2,76;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;08:00;3,34;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;08:15;3,51;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;08:30;3,67;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;08:45;3,84;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;09:00;4,0;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;09:15;3,94;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;09:30;3,88;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;09:45;3,82;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;10:00;3,76;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;10:15;3,6;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;10:30;3,44;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;10:45;3,27;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;11:00;3,11;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;11:15;2,96;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;11:30;2,82;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;11:45;2,68;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;12:00;2,53;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;12:15;2,44;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;12:30;2,34;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;12:45;2,24;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;13:00;2,15;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;13:15;2,07;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
+2026-04-04;04:00;0,0;Nedostatek dat;1,75;35,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 1.75 Kc.
+2026-04-04;04:15;0,0;Nedostatek dat;1,79;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 1.79 Kc.
+2026-04-04;04:30;0,0;Nedostatek dat;1,55;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 1.55 Kc).
+2026-04-04;04:45;0,0;Nedostatek dat;1,71;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 1.71 Kc.
+2026-04-04;05:00;0,0;Nedostatek dat;0,88;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 0.88 Kc).
+2026-04-04;05:15;0,0;Nedostatek dat;1,35;60,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 1.35 Kc).
+2026-04-04;05:30;0,0;Nedostatek dat;1,57;75,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 1.57 Kc).
+2026-04-04;05:45;0,0;Nedostatek dat;1,79;50,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 1.79 Kc.
+2026-04-04;06:00;0,0;Nedostatek dat;1,35;75,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 1.35 Kc).
+2026-04-04;06:15;0,0;Nedostatek dat;1,57;100,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 1.57 Kc).
+2026-04-04;06:30;0,0;Nedostatek dat;1,9;85,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 1.90 Kc.
+2026-04-04;06:45;0,0;Nedostatek dat;2,18;60,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 2.18 Kc.
+2026-04-04;07:00;1,0;Nedostatek dat;2,76;35,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 2.76 Kc.
+2026-04-04;07:15;1,58;Nedostatek dat;2,25;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 2.25 Kc.
+2026-04-04;07:30;2,17;Nedostatek dat;1,75;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (1.75 Kc).
+2026-04-04;07:45;2,76;Nedostatek dat;1,07;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 1.07 Kc).
+2026-04-04;08:00;3,34;Nedostatek dat;1,59;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 1.59 Kc.
+2026-04-04;08:15;3,51;Nedostatek dat;0,87;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.87 Kc).
+2026-04-04;08:30;3,67;Nedostatek dat;0,73;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.73 Kc).
+2026-04-04;08:45;3,84;Nedostatek dat;0,41;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 0.41 Kc).
+2026-04-04;09:00;4,0;Nedostatek dat;0,92;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.92 Kc.
+2026-04-04;09:15;3,94;Nedostatek dat;0,48;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.48 Kc).
+2026-04-04;09:30;3,88;Nedostatek dat;0,41;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.41 Kc).
+2026-04-04;09:45;3,82;Nedostatek dat;0,22;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 0.22 Kc).
+2026-04-04;10:00;3,76;Nedostatek dat;0,37;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.37 Kc.
+2026-04-04;10:15;3,6;Nedostatek dat;0,18;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.18 Kc).
+2026-04-04;10:30;3,44;Nedostatek dat;0,16;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.16 Kc).
+2026-04-04;10:45;3,27;Nedostatek dat;0,09;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.09 Kc).
+2026-04-04;11:00;3,11;Nedostatek dat;0,08;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.08 Kc).
+2026-04-04;11:15;2,96;Nedostatek dat;0,07;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.07 Kc).
+2026-04-04;11:30;2,82;Nedostatek dat;0,04;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.04 Kc).
+2026-04-04;11:45;2,68;Nedostatek dat;0,01;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 0.01 Kc).
+2026-04-04;12:00;2,53;Nedostatek dat;0,04;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.04 Kc.
+2026-04-04;12:15;2,44;Nedostatek dat;0,01;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.01 Kc).
+2026-04-04;12:30;2,34;Nedostatek dat;0,0;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 0.00 Kc).
+2026-04-04;12:45;2,24;Nedostatek dat;-0,0;60,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu -0.00 Kc).
+2026-04-04;13:00;2,15;Nedostatek dat;0,0;35,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.00 Kc.
+2026-04-04;13:15;2,07;Nedostatek dat;0,0;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.00 Kc.
 2026-04-04;13:30;1,99;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
 2026-04-04;13:45;1,91;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;14:00;1,82;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;14:15;1,73;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;14:30;1,64;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;14:45;1,55;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;15:00;1,45;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;15:15;1,35;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;15:30;1,25;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;15:45;1,15;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;16:00;1,05;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;16:15;0,95;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;16:30;0,85;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;16:45;0,76;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;17:00;0,66;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;17:15;0,57;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;17:30;0,48;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;17:45;0,39;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;18:00;0,3;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;18:15;0,25;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;18:30;0,19;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;18:45;0,14;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;19:00;0,08;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezna spotreba kryta primym slunecnim vykonem.
-2026-04-04;19:15;0,1;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;19:30;0,12;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;19:45;0,13;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;20:00;0,15;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;20:15;0,17;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;20:30;0,18;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;20:45;0,2;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;21:00;0,21;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;21:15;0,23;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;21:30;0,25;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;21:45;0,26;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;22:00;0,28;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;22:15;0,3;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;22:30;0,31;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;22:45;0,33;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;23:00;0,34;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;23:15;0,36;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;23:30;0,38;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
-2026-04-04;23:45;0,39;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
+2026-04-04;14:00;1,82;Nedostatek dat;-0,0;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu -0.00 Kc).
+2026-04-04;14:15;1,73;Nedostatek dat;-0,0;60,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu -0.00 Kc).
+2026-04-04;14:30;1,64;Nedostatek dat;0,0;35,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.00 Kc.
+2026-04-04;14:45;1,55;Nedostatek dat;0,0;50,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 0.00 Kc).
+2026-04-04;15:00;1,45;Nedostatek dat;0,0;75,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 0.00 Kc).
+2026-04-04;15:15;1,35;Nedostatek dat;0,0;100,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 0.00 Kc).
+2026-04-04;15:30;1,25;Nedostatek dat;0,0;100,0;PRODAVAT_DO_SITE;Baterie je plna na 100 %, prodej prebytku za cenu 0.00 Kc.
+2026-04-04;15:45;1,15;Nedostatek dat;0,0;100,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-04;16:00;1,05;Nedostatek dat;0,0;100,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-04;16:15;0,95;Nedostatek dat;0,07;100,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-04;16:30;0,85;Nedostatek dat;0,18;100,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-04;16:45;0,76;Nedostatek dat;0,9;75,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.90 Kc.
+2026-04-04;17:00;0,66;Nedostatek dat;0,36;100,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 0.36 Kc).
+2026-04-04;17:15;0,57;Nedostatek dat;1,27;100,0;PRODAVAT_DO_SITE;Baterie je plna na 100 %, prodej prebytku za cenu 1.27 Kc.
+2026-04-04;17:30;0,48;Nedostatek dat;2,42;75,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 2.42 Kc.
+2026-04-04;17:45;0,39;Nedostatek dat;2,62;50,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 2.62 Kc.
+2026-04-04;18:00;0,3;Nedostatek dat;1,58;75,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 1.58 Kc).
+2026-04-04;18:15;0,25;Nedostatek dat;2,39;100,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 2.39 Kc).
+2026-04-04;18:30;0,19;Nedostatek dat;3,17;100,0;PRODAVAT_DO_SITE;Baterie je plna na 100 %, prodej prebytku za cenu 3.17 Kc.
+2026-04-04;18:45;0,14;Nedostatek dat;4,26;75,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 4.26 Kc.
+2026-04-04;19:00;0,08;Nedostatek dat;3,36;100,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 3.36 Kc).
+2026-04-04;19:15;0,1;Nedostatek dat;3,58;85,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 3.58 Kc.
+2026-04-04;19:30;0,12;Nedostatek dat;4,19;60,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 4.19 Kc.
+2026-04-04;19:45;0,13;Nedostatek dat;4,24;35,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 4.24 Kc.
+2026-04-04;20:00;0,15;Nedostatek dat;4,57;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 4.57 Kc.
+2026-04-04;20:15;0,17;Nedostatek dat;3,54;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (3.54 Kc).
+2026-04-04;20:30;0,18;Nedostatek dat;3,29;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (3.29 Kc).
+2026-04-04;20:45;0,2;Nedostatek dat;2,67;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 2.67 Kc).
+2026-04-04;21:00;0,21;Nedostatek dat;3,48;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 3.48 Kc.
+2026-04-04;21:15;0,23;Nedostatek dat;2,76;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (2.76 Kc).
+2026-04-04;21:30;0,25;Nedostatek dat;2,42;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (2.42 Kc).
+2026-04-04;21:45;0,26;Nedostatek dat;1,99;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 1.99 Kc).
+2026-04-04;22:00;0,28;Nedostatek dat;2,84;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 2.84 Kc.
+2026-04-04;22:15;0,3;Nedostatek dat;2,03;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (2.03 Kc).
+2026-04-04;22:30;0,31;Nedostatek dat;1,52;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 1.52 Kc).
+2026-04-04;22:45;0,33;Nedostatek dat;1,28;60,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 1.28 Kc).
+2026-04-04;23:00;0,34;Nedostatek dat;2,81;35,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 2.81 Kc.
+2026-04-04;23:15;0,36;Nedostatek dat;2,3;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 2.30 Kc.
+2026-04-04;23:30;0,38;Nedostatek dat;1,65;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (1.65 Kc).
+2026-04-04;23:45;0,39;Nedostatek dat;0,55;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.55 Kc).
 2026-04-05;00:00;0,41;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
 2026-04-05;00:15;0,43;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
 2026-04-05;00:30;0,44;Nedostatek dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 Kc).
