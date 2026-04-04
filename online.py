@@ -111,7 +111,7 @@ def nacti_ceny_entsoe():
         if zaznamy:
             df = pd.DataFrame(zaznamy).set_index("Cas").resample("15min").ffill().reset_index()
             for _, row in df.iterrows():
-                ceny[row["Cas"].to_pydatetime()] = (row["Cena"] * 25.0) / 1000.0
+                ceny[row["Cas"].to_pydatetime()] = (row["Cena"]
     except Exception as e: 
         print(f"Kriticka chyba pri cteni ENTSO-E: {e}")
     return ceny
@@ -337,7 +337,7 @@ def main():
             'Cas': aktualni_cas_planu.strftime('%H:%M'),
             'Predpoved_FS_kWh': str(round(pv_192[i], 2)).replace('.', ','),              
             'Odhad_Spotreba_kW': str(round(spotreba_192[i], 2)).replace('.', ',') if spotreba_192[i] > 0 else "Nedostatek dat",
-            'Cena_CZK_kWh': str(round(ceny_192[i], 2)).replace('.', ','),
+            'Cena_EUR/MWh': str(round(ceny_192[i], 2)).replace('.', ','),
             'Simulovane_SOC_%': str(round(soc[i].varValue, 1)).replace('.', ','),
             'Akce_EMS': akce,
             'Duvod_Akce': vygeneruj_duvod_pulp(akce, ceny_192[i], pv_192[i], soc[i].varValue)
@@ -430,7 +430,7 @@ def main():
         'Vykon_Baterie_W': str(m['bat_p']).replace('.', ','), 
         'Baterie_SOC_%': str(m['soc']).replace('.', ','), 
         'Simulovane_SOC_%': simulovane_soc_ted,  # NOVY SLOUPEC: Jaka by podle simulace mela baterie prave byt
-        'Cena_CZK_kWh': str(round(cena_h, 2)).replace('.', ','),
+        'Cena_EUR/MWh': str(round(cena_h, 2)).replace('.', ','),
         'Predpoved_FS_kWh': str(round(fs_now, 2)).replace('.', ','),                
         'Doporucena_Akce': rozhodovaci_logika(fs_now, o_spot, m['soc'], cena_h),
         'Akce_PuLP': aktualni_akce_pulp,
