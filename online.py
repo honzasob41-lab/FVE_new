@@ -331,19 +331,26 @@ def main():
         elif vyb_val > 0.1: akce = "POKRYT_Z_BATERIE"
         elif p_prodej[i].varValue > 0.1: akce = "PRODAVAT_DO_SITE"
 
-        # OPRAVA ZDE: Vynuceni desetinne carky u vsech ciselnych sloupcu pro CSV
-        plan_data.append({
+       plan_data.append({
             'Datum': aktualni_cas_planu.strftime('%Y-%m-%d'), 
             'Cas': aktualni_cas_planu.strftime('%H:%M'),
-            'Predpoved_FS_kWh': f"{pv_192[i]:.2f}".replace('.', ','),              
-            'Odhad_Spotreba_kW': f"{spotreba_192[i]:.2f}".replace('.', ',') if spotreba_192[i] > 0 else "Nedostatek dat",
-            'Cena_CZK_kWh': f"{ceny_192[i]:.2f}".replace('.', ','),
-            'Simulovane_SOC_%': f"{soc[i].varValue:.1f}".replace('.', ','),
+            'Predpoved_FS_kWh': round(pv_192[i], 2),              
+            # Zde misto textu posleme ciste None, aby sloupec zustal ciselny
+            'Odhad_Spotreba_kW': round(spotreba_192[i], 2) if spotreba_192[i] > 0 else None,
+            'Cena_CZK_kWh': round(ceny_192[i], 2),
+            'Simulovane_SOC_%': round(soc[i].varValue, 1),
             'Akce_EMS': akce,
             'Duvod_Akce': vygeneruj_duvod_pulp(akce, ceny_192[i], pv_192[i], soc[i].varValue)
         })
         
-    pd.DataFrame(plan_data).to_csv(SOUBOR_PLAN, index=False, sep=';', decimal=',')
+    # Pridame parametr na_rep pro prazdne hodnoty
+    pd.DataFrame(plan_data).to_csv(
+        SOUBOR_PLAN, 
+        index=False, 
+        sep=';', 
+        decimal=',', 
+        na_rep='Nedostatek dat' # Vsechna 'None' se pri zapisu zmeni na tento text
+    )
 
     m = nacti_solax_v2()
     if not m: 
