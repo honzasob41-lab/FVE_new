@@ -1,29 +1,29 @@
 Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-05;00:45;0,46;Nedostatek dat;3,25;55,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 3.25 EUR).
-2026-04-05;01:00;0,48;Nedostatek dat;44,61;35,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 44.61 EUR.
-2026-04-05;01:15;0,49;Nedostatek dat;54,12;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 54.12 EUR.
-2026-04-05;01:30;0,51;Nedostatek dat;32,1;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (32.10 EUR).
-2026-04-05;01:45;0,52;Nedostatek dat;8,66;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 8.66 EUR).
-2026-04-05;02:00;0,54;Nedostatek dat;54,8;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 54.80 EUR.
-2026-04-05;02:15;0,56;Nedostatek dat;24,56;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (24.56 EUR).
-2026-04-05;02:30;0,57;Nedostatek dat;7,75;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 7.75 EUR).
-2026-04-05;02:45;0,59;Nedostatek dat;9,62;60,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 9.62 EUR).
-2026-04-05;03:00;0,61;Nedostatek dat;11,48;85,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 11.48 EUR).
-2026-04-05;03:15;0,62;Nedostatek dat;21,37;75,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 21.37 EUR.
-2026-04-05;03:30;0,64;Nedostatek dat;53,79;50,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 53.79 EUR.
-2026-04-05;03:45;0,65;Nedostatek dat;66,0;25,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 66.00 EUR.
-2026-04-05;04:00;0,67;Nedostatek dat;13,12;50,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 13.12 EUR).
-2026-04-05;04:15;0,69;Nedostatek dat;44,87;25,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 44.87 EUR.
-2026-04-05;04:30;0,7;Nedostatek dat;13,99;50,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 13.99 EUR).
-2026-04-05;04:45;0,72;Nedostatek dat;21,0;75,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 21.00 EUR).
-2026-04-05;05:00;0,74;Nedostatek dat;16,77;100,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 16.77 EUR).
-2026-04-05;05:15;0,75;Nedostatek dat;28,52;100,0;PRODAVAT_DO_SITE;Baterie je plna na 100 %, prodej prebytku za cenu 28.52 EUR.
-2026-04-05;05:30;0,77;Nedostatek dat;39,8;85,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 39.80 EUR.
-2026-04-05;05:45;0,78;Nedostatek dat;55,1;60,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 55.10 EUR.
-2026-04-05;06:00;0,8;Nedostatek dat;55,88;35,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 55.88 EUR.
-2026-04-05;06:15;0,82;Nedostatek dat;48,0;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 48.00 EUR.
-2026-04-05;06:30;0,83;Nedostatek dat;18,84;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (18.84 EUR).
-2026-04-05;06:45;0,85;Nedostatek dat;15,69;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 15.69 EUR).
+2026-04-05;00:45;0,0;Nedostatek dat;3,25;55,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 3.25 EUR).
+2026-04-05;01:00;0,0;Nedostatek dat;44,61;35,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 44.61 EUR.
+2026-04-05;01:15;0,0;Nedostatek dat;54,12;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 54.12 EUR.
+2026-04-05;01:30;0,0;Nedostatek dat;32,1;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-05;01:45;0,0;Nedostatek dat;8,66;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 8.66 EUR).
+2026-04-05;02:00;0,0;Nedostatek dat;54,8;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 54.80 EUR.
+2026-04-05;02:15;0,0;Nedostatek dat;24,56;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-05;02:30;0,0;Nedostatek dat;7,75;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 7.75 EUR).
+2026-04-05;02:45;0,0;Nedostatek dat;9,62;60,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 9.62 EUR).
+2026-04-05;03:00;0,0;Nedostatek dat;11,48;85,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 11.48 EUR).
+2026-04-05;03:15;0,0;Nedostatek dat;21,37;75,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 21.37 EUR.
+2026-04-05;03:30;0,0;Nedostatek dat;53,79;50,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 53.79 EUR.
+2026-04-05;03:45;0,0;Nedostatek dat;66,0;25,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 66.00 EUR.
+2026-04-05;04:00;0,0;Nedostatek dat;13,12;50,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 13.12 EUR).
+2026-04-05;04:15;0,0;Nedostatek dat;44,87;25,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 44.87 EUR.
+2026-04-05;04:30;0,0;Nedostatek dat;13,99;50,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 13.99 EUR).
+2026-04-05;04:45;0,0;Nedostatek dat;21,0;75,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 21.00 EUR).
+2026-04-05;05:00;0,0;Nedostatek dat;16,77;100,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 16.77 EUR).
+2026-04-05;05:15;0,0;Nedostatek dat;28,52;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-05;05:30;0,0;Nedostatek dat;39,8;85,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 39.80 EUR.
+2026-04-05;05:45;0,0;Nedostatek dat;55,1;60,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 55.10 EUR.
+2026-04-05;06:00;0,0;Nedostatek dat;55,88;35,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 55.88 EUR.
+2026-04-05;06:15;0,0;Nedostatek dat;48,0;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 48.00 EUR.
+2026-04-05;06:30;0,0;Nedostatek dat;18,84;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-05;06:45;0,0;Nedostatek dat;15,69;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 15.69 EUR).
 2026-04-05;07:00;0,87;Nedostatek dat;23,31;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 23.31 EUR.
 2026-04-05;07:15;1,39;Nedostatek dat;6,25;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (6.25 EUR).
 2026-04-05;07:30;1,91;Nedostatek dat;0,06;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.06 EUR).
@@ -64,8 +64,8 @@ Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_
 2026-04-05;16:15;1,23;Nedostatek dat;-33,12;100,0;PRODAVAT_DO_SITE;Baterie je plna na 100 %, prodej prebytku za cenu -33.12 EUR.
 2026-04-05;16:30;1,05;Nedostatek dat;-27,66;100,0;PRODAVAT_DO_SITE;Baterie je plna na 100 %, prodej prebytku za cenu -27.66 EUR.
 2026-04-05;16:45;0,87;Nedostatek dat;-16,9;100,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-05;17:00;0,7;Nedostatek dat;-16,35;100,0;PRODAVAT_DO_SITE;Baterie je plna na 100 %, prodej prebytku za cenu -16.35 EUR.
-2026-04-05;17:15;0,59;Nedostatek dat;-7,33;100,0;PRODAVAT_DO_SITE;Baterie je plna na 100 %, prodej prebytku za cenu -7.33 EUR.
+2026-04-05;17:00;0,7;Nedostatek dat;-16,35;100,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-05;17:15;0,59;Nedostatek dat;-7,33;100,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
 2026-04-05;17:30;0,49;Nedostatek dat;-3,64;100,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
 2026-04-05;17:45;0,39;Nedostatek dat;-1,82;75,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu -1.82 EUR.
 2026-04-05;18:00;0,29;Nedostatek dat;-2,4;100,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu -2.40 EUR).
