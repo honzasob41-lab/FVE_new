@@ -1,49 +1,49 @@
 Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-05;01:00;0,0;Nedostatek dat;44,61;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 44.61 EUR).
-2026-04-05;01:15;0,0;Nedostatek dat;54,12;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 54.12 EUR.
-2026-04-05;01:30;0,0;Nedostatek dat;32,1;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-05;01:00;0,0;0,02;44,61;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 44.61 EUR).
+2026-04-05;01:15;0,0;0,02;54,12;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 54.12 EUR.
+2026-04-05;01:30;0,0;0,02;32,1;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-05;01:45;0,0;Nedostatek dat;8,66;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 8.66 EUR).
-2026-04-05;02:00;0,0;Nedostatek dat;54,8;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 54.80 EUR.
-2026-04-05;02:15;0,0;Nedostatek dat;24,56;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-05;02:30;0,0;Nedostatek dat;7,75;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 7.75 EUR).
-2026-04-05;02:45;0,0;Nedostatek dat;9,62;60,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 9.62 EUR).
+2026-04-05;02:00;0,0;0,02;54,8;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 54.80 EUR.
+2026-04-05;02:15;0,0;0,02;24,56;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-05;02:30;0,0;0,06;7,75;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 7.75 EUR).
+2026-04-05;02:45;0,0;0,02;9,62;60,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 9.62 EUR).
 2026-04-05;03:00;0,0;Nedostatek dat;11,48;85,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 11.48 EUR).
-2026-04-05;03:15;0,0;Nedostatek dat;21,37;75,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 21.37 EUR.
-2026-04-05;03:30;0,0;Nedostatek dat;53,79;50,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 53.79 EUR.
-2026-04-05;03:45;0,0;Nedostatek dat;66,0;25,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 66.00 EUR.
-2026-04-05;04:00;0,0;Nedostatek dat;13,12;50,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 13.12 EUR).
+2026-04-05;03:15;0,0;0,04;21,37;75,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 21.37 EUR.
+2026-04-05;03:30;0,0;0,04;53,79;50,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 53.79 EUR.
+2026-04-05;03:45;0,0;0,02;66,0;25,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 66.00 EUR.
+2026-04-05;04:00;0,0;0,02;13,12;50,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 13.12 EUR).
 2026-04-05;04:15;0,0;Nedostatek dat;44,87;25,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 44.87 EUR.
-2026-04-05;04:30;0,0;Nedostatek dat;13,99;50,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 13.99 EUR).
-2026-04-05;04:45;0,0;Nedostatek dat;21,0;75,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 21.00 EUR).
-2026-04-05;05:00;0,0;Nedostatek dat;16,77;100,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 16.77 EUR).
-2026-04-05;05:15;0,0;Nedostatek dat;28,52;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-05;05:30;0,0;Nedostatek dat;39,8;85,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 39.80 EUR.
+2026-04-05;04:30;0,0;0,04;13,99;50,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 13.99 EUR).
+2026-04-05;04:45;0,0;0,02;21,0;75,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 21.00 EUR).
+2026-04-05;05:00;0,0;0,06;16,77;100,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 16.77 EUR).
+2026-04-05;05:15;0,0;0,06;28,52;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-05;05:30;0,0;0,02;39,8;85,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 39.80 EUR.
 2026-04-05;05:45;0,0;Nedostatek dat;55,1;60,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 55.10 EUR.
-2026-04-05;06:00;0,0;Nedostatek dat;55,88;35,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 55.88 EUR.
+2026-04-05;06:00;0,0;0,02;55,88;35,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 55.88 EUR.
 2026-04-05;06:15;0,0;Nedostatek dat;48,0;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 48.00 EUR.
-2026-04-05;06:30;0,0;Nedostatek dat;18,84;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-05;06:45;0,0;Nedostatek dat;15,69;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 15.69 EUR).
-2026-04-05;07:00;0,87;Nedostatek dat;23,31;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 23.31 EUR.
-2026-04-05;07:15;1,39;Nedostatek dat;6,25;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (6.25 EUR).
-2026-04-05;07:30;1,91;Nedostatek dat;0,06;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.06 EUR).
-2026-04-05;07:45;2,43;Nedostatek dat;-0,21;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu -0.21 EUR).
-2026-04-05;08:00;2,95;Nedostatek dat;0,01;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.01 EUR.
-2026-04-05;08:15;3,28;Nedostatek dat;-0,27;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (-0.27 EUR).
-2026-04-05;08:30;3,62;Nedostatek dat;-2,76;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (-2.76 EUR).
+2026-04-05;06:30;0,0;0,6;18,84;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-05;06:45;0,0;0,9;15,69;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 15.69 EUR).
+2026-04-05;07:00;0,87;0,82;23,31;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 23.31 EUR.
+2026-04-05;07:15;1,39;0,08;6,25;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (6.25 EUR).
+2026-04-05;07:30;1,91;0,3;0,06;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.06 EUR).
+2026-04-05;07:45;2,43;0,26;-0,21;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu -0.21 EUR).
+2026-04-05;08:00;2,95;0,06;0,01;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.01 EUR.
+2026-04-05;08:15;3,28;0,46;-0,27;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (-0.27 EUR).
+2026-04-05;08:30;3,62;0,18;-2,76;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (-2.76 EUR).
 2026-04-05;08:45;3,95;Nedostatek dat;-3,39;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (-3.39 EUR).
-2026-04-05;09:00;4,28;Nedostatek dat;-4,19;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (-4.19 EUR).
+2026-04-05;09:00;4,28;0,02;-4,19;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (-4.19 EUR).
 2026-04-05;09:15;4,57;Nedostatek dat;-5,01;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (-5.01 EUR).
-2026-04-05;09:30;4,85;Nedostatek dat;-6,02;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (-6.02 EUR).
+2026-04-05;09:30;4,85;0,02;-6,02;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (-6.02 EUR).
 2026-04-05;09:45;5,13;Nedostatek dat;-10,72;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (-10.72 EUR).
-2026-04-05;10:00;5,42;Nedostatek dat;-12,68;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (-12.68 EUR).
-2026-04-05;10:15;5,56;Nedostatek dat;-17,57;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (-17.57 EUR).
-2026-04-05;10:30;5,7;Nedostatek dat;-24,61;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (-24.61 EUR).
-2026-04-05;10:45;5,85;Nedostatek dat;-31,3;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu -31.30 EUR).
+2026-04-05;10:00;5,42;0,06;-12,68;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (-12.68 EUR).
+2026-04-05;10:15;5,56;0,04;-17,57;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (-17.57 EUR).
+2026-04-05;10:30;5,7;0,02;-24,61;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (-24.61 EUR).
+2026-04-05;10:45;5,85;0,02;-31,3;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu -31.30 EUR).
 2026-04-05;11:00;5,99;Nedostatek dat;-27,58;60,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu -27.58 EUR).
-2026-04-05;11:15;5,93;Nedostatek dat;-30,82;85,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu -30.82 EUR).
-2026-04-05;11:30;5,88;Nedostatek dat;-17,89;60,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu -17.89 EUR.
+2026-04-05;11:15;5,93;0,02;-30,82;85,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu -30.82 EUR).
+2026-04-05;11:30;5,88;0,02;-17,89;60,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu -17.89 EUR.
 2026-04-05;11:45;5,82;Nedostatek dat;-29,7;85,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu -29.70 EUR).
-2026-04-05;12:00;5,76;Nedostatek dat;-17,69;60,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu -17.69 EUR.
+2026-04-05;12:00;5,76;0,02;-17,69;60,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu -17.69 EUR.
 2026-04-05;12:15;5,55;Nedostatek dat;-14,46;35,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu -14.46 EUR.
 2026-04-05;12:30;5,34;Nedostatek dat;-21,14;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu -21.14 EUR.
 2026-04-05;12:45;5,13;Nedostatek dat;-36,27;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (-36.27 EUR).
@@ -53,24 +53,24 @@ Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_
 2026-04-05;13:45;4,05;Nedostatek dat;-57,69;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu -57.69 EUR).
 2026-04-05;14:00;3,76;Nedostatek dat;-55,3;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu -55.30 EUR.
 2026-04-05;14:15;3,44;Nedostatek dat;-55,65;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (-55.65 EUR).
-2026-04-05;14:30;3,13;Nedostatek dat;-80,01;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu -80.01 EUR).
-2026-04-05;14:45;2,81;Nedostatek dat;-82,96;60,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu -82.96 EUR).
-2026-04-05;15:00;2,49;Nedostatek dat;-70,58;85,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu -70.58 EUR).
-2026-04-05;15:15;2,22;Nedostatek dat;-60,84;100,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu -60.84 EUR).
+2026-04-05;14:30;3,13;0,02;-80,01;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu -80.01 EUR).
+2026-04-05;14:45;2,81;0,02;-82,96;60,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu -82.96 EUR).
+2026-04-05;15:00;2,49;0,02;-70,58;85,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu -70.58 EUR).
+2026-04-05;15:15;2,22;0,02;-60,84;100,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu -60.84 EUR).
 2026-04-05;15:30;1,95;Nedostatek dat;-54,83;100,0;PRODAVAT_DO_SITE;Baterie je plna na 100 %, prodej prebytku za cenu -54.83 EUR.
 2026-04-05;15:45;1,68;Nedostatek dat;-48,33;75,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu -48.33 EUR.
-2026-04-05;16:00;1,41;Nedostatek dat;-53,12;100,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu -53.12 EUR).
-2026-04-05;16:15;1,23;Nedostatek dat;-33,12;100,0;PRODAVAT_DO_SITE;Baterie je plna na 100 %, prodej prebytku za cenu -33.12 EUR.
+2026-04-05;16:00;1,41;0,02;-53,12;100,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu -53.12 EUR).
+2026-04-05;16:15;1,23;0,02;-33,12;100,0;PRODAVAT_DO_SITE;Baterie je plna na 100 %, prodej prebytku za cenu -33.12 EUR.
 2026-04-05;16:30;1,05;Nedostatek dat;-27,66;100,0;PRODAVAT_DO_SITE;Baterie je plna na 100 %, prodej prebytku za cenu -27.66 EUR.
-2026-04-05;16:45;0,87;Nedostatek dat;-16,9;100,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-05;17:00;0,7;Nedostatek dat;-16,35;100,0;PRODAVAT_DO_SITE;Baterie je plna na 100 %, prodej prebytku za cenu -16.35 EUR.
+2026-04-05;16:45;0,87;0,02;-16,9;100,0;PRODAVAT_DO_SITE;Baterie je plna na 100 %, prodej prebytku za cenu -16.90 EUR.
+2026-04-05;17:00;0,7;0,02;-16,35;100,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
 2026-04-05;17:15;0,59;Nedostatek dat;-7,33;100,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
 2026-04-05;17:30;0,49;Nedostatek dat;-3,64;100,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
 2026-04-05;17:45;0,39;Nedostatek dat;-1,82;75,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu -1.82 EUR.
 2026-04-05;18:00;0,29;Nedostatek dat;-2,4;100,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu -2.40 EUR).
 2026-04-05;18:15;0,24;Nedostatek dat;0,93;100,0;PRODAVAT_DO_SITE;Baterie je plna na 100 %, prodej prebytku za cenu 0.93 EUR.
 2026-04-05;18:30;0,19;Nedostatek dat;2,53;100,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-05;18:45;0,14;Nedostatek dat;5,53;100,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-05;18:45;0,14;Nedostatek dat;5,53;100,0;PRODAVAT_DO_SITE;Baterie je plna na 100 %, prodej prebytku za cenu 5.53 EUR.
 2026-04-05;19:00;0,09;Nedostatek dat;21,77;100,0;NORMALNI_PROVOZ;Bezna spotreba kryta primym slunecnim vykonem.
 2026-04-05;19:15;0,09;Nedostatek dat;25,83;100,0;NORMALNI_PROVOZ;Bezna spotreba kryta primym slunecnim vykonem.
 2026-04-05;19:30;0,0;Nedostatek dat;31,64;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
@@ -84,62 +84,62 @@ Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_
 2026-04-05;21:30;0,0;Nedostatek dat;41,56;50,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 41.56 EUR).
 2026-04-05;21:45;0,0;Nedostatek dat;34,93;75,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 34.93 EUR).
 2026-04-05;22:00;0,0;Nedostatek dat;74,33;50,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 74.33 EUR.
-2026-04-05;22:15;0,0;Nedostatek dat;71,7;25,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 71.70 EUR.
-2026-04-05;22:30;0,0;Nedostatek dat;54,14;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 54.14 EUR).
-2026-04-05;22:45;0,0;Nedostatek dat;39,83;60,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 39.83 EUR).
+2026-04-05;22:15;0,0;0,02;71,7;25,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 71.70 EUR.
+2026-04-05;22:30;0,0;0,02;54,14;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 54.14 EUR).
+2026-04-05;22:45;0,0;0,02;39,83;60,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 39.83 EUR).
 2026-04-05;23:00;0,0;Nedostatek dat;109,0;35,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 109.00 EUR.
 2026-04-05;23:15;0,0;Nedostatek dat;68,43;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 68.43 EUR.
 2026-04-05;23:30;0,0;Nedostatek dat;46,35;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-05;23:45;0,0;Nedostatek dat;25,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;00:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;00:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;00:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;00:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;01:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;01:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;01:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;00:00;0,0;0,45;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;00:15;0,0;0,08;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;00:30;0,0;0,09;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;00:45;0,0;0,08;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;01:00;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;01:15;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;01:30;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;01:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;02:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;02:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;02:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;02:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;02:00;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;02:15;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;02:30;0,0;0,06;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;02:45;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;03:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;03:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;03:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;03:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;04:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;03:15;0,0;0,04;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;03:30;0,0;0,04;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;03:45;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;04:00;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;04:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;04:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;04:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;05:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;05:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;05:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;04:30;0,0;0,04;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;04:45;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;05:00;0,0;0,06;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;05:15;0,0;0,06;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;05:30;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;05:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;06:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;06:00;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;06:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;06:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;06:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;07:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;07:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;07:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;07:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;08:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;08:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;08:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;06:30;0,0;0,6;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;06:45;0,0;0,9;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;07:00;0,0;0,82;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;07:15;0,0;0,08;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;07:30;0,0;0,3;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;07:45;0,0;0,26;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;08:00;0,0;0,06;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;08:15;0,0;0,46;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;08:30;0,0;0,18;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;08:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;09:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;09:00;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;09:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;09:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;09:30;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;09:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;10:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;10:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;10:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;10:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;10:00;0,0;0,06;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;10:15;0,0;0,04;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;10:30;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;10:45;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;11:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;11:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;11:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;11:15;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;11:30;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;11:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;12:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;12:00;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;12:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;12:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;12:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
@@ -149,17 +149,17 @@ Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_
 2026-04-06;13:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;14:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;14:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;14:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;14:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;15:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;15:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;14:30;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;14:45;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;15:00;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;15:15;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;15:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;15:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;16:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;16:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;16:00;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;16:15;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;16:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;16:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;17:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;16:45;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;17:00;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;17:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;17:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;17:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
@@ -180,9 +180,9 @@ Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_
 2026-04-06;21:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;21:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;22:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;22:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;22:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;22:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;22:15;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;22:30;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;22:45;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;23:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;23:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;23:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
