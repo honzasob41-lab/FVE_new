@@ -1,7 +1,7 @@
 Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_CZK_kWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-04;10:15;3,6;Nedostatek dat;0,18;71,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.18 Kc.
-2026-04-04;10:30;3,44;Nedostatek dat;0,16;46,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.16 Kc.
-2026-04-04;10:45;3,27;Nedostatek dat;0,09;21,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.09 Kc.
+2026-04-04;10:15;3,6;Nedostatek dat;0,18;70,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.18 Kc.
+2026-04-04;10:30;3,44;Nedostatek dat;0,16;45,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.16 Kc.
+2026-04-04;10:45;3,27;Nedostatek dat;0,09;20,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.09 Kc.
 2026-04-04;11:00;3,11;Nedostatek dat;0,08;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.08 Kc.
 2026-04-04;11:15;2,96;Nedostatek dat;0,07;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.07 Kc).
 2026-04-04;11:30;2,82;Nedostatek dat;0,04;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.04 Kc).
