@@ -1,7 +1,1 @@
-# Ignorovat vygenerovana data a historii
-fve_historie_*.csv
-denni_plan.csv
-predpoved_cache.json
 
-# Ignorovat skryte soubory s hesly
-.env
