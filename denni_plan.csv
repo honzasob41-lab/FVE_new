@@ -1,7 +1,6 @@
 Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-05;08:15;3,28;0,34;-0,27;17,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu -0.27 EUR.
-2026-04-05;08:30;3,62;0,18;-2,76;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu -2.76 EUR.
-2026-04-05;08:45;3,95;Nedostatek dat;-3,39;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (-3.39 EUR).
+2026-04-05;08:30;3,62;0,18;-2,76;20,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu -2.76 EUR.
+2026-04-05;08:45;3,95;Nedostatek dat;-3,39;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu -3.39 EUR.
 2026-04-05;09:00;4,28;0,02;-4,19;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (-4.19 EUR).
 2026-04-05;09:15;4,57;Nedostatek dat;-5,01;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (-5.01 EUR).
 2026-04-05;09:30;4,85;0,02;-6,02;10,0;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (-6.02 EUR).
@@ -95,7 +94,7 @@ Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_
 2026-04-06;07:30;0,0;0,2;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;07:45;0,0;0,19;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;08:00;0,0;0,04;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;08:15;0,0;0,34;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;08:15;0,0;0,31;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;08:30;0,0;0,18;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;08:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-06;09:00;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
@@ -191,3 +190,4 @@ Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_
 2026-04-07;07:30;0,0;0,25;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-07;07:45;0,0;0,54;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-07;08:00;0,0;0,53;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;08:15;0,0;0,75;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
