@@ -10,6 +10,7 @@ import time
 import json
 from xml.etree import ElementTree
 import holidays
+import glob
 
 warnings.simplefilter(action='ignore', category=UserWarning)
 
@@ -20,11 +21,10 @@ LAT, LON = "49.848", "18.409"
 DECLINATION, AZIMUTH = "35", "-50"
 KW_PEAK = 10.0
 
-SOUBOR_HISTORIE = "fve_inteligentni_rizeni.csv"
 SOUBOR_PLAN = "denni_plan.csv"
 SOUBOR_PREDPOVEDI = "predpoved_cache.json"
 MIN_DNI_PRO_UCENI = 2
-MAX_VYKON_STRIDACE = 6.0
+MAX_VYKON_STRIDACE = 10.0
 KAPACITA_BATERIE_KWH = 10.0 
 
 def bezpecny_float(val):
@@ -275,11 +275,25 @@ def main():
     minuty_15 = (ted.minute // 15) * 15
     ted_ctvrthodina = ted.replace(minute=minuty_15, second=0)
     
-    df_h = pd.DataFrame()
-    if os.path.exists(SOUBOR_HISTORIE):
-        df_h = pd.read_csv(SOUBOR_HISTORIE, sep=';', decimal=',')
-        if not df_h.empty and 'Cas' in df_h.columns:
+    # --- NACITANI CELE HISTORIE PRO UCENI (Vsechny mesice) ---
+    vsechny_soubory = glob.glob("fve_historie_*.csv")
+    df_list = []
+    
+    for soubor in vsechny_soubory:
+        try:
+            df = pd.read_csv(soubor, sep=';', decimal=',')
+            df_list.append(df)
+        except Exception as e:
+            print(f"Chyba pri cteni {soubor}: {e}")
+            
+    if df_list:
+        df_h = pd.concat(df_list, ignore_index=True)
+        if 'Cas' in df_h.columns:
             df_h['Cas'] = pd.to_datetime(df_h['Cas'])
+        # Zajisteni sezeni zaznamu chronologicky, pro jistotu
+        df_h = df_h.sort_values(by='Cas').reset_index(drop=True)
+    else:
+        df_h = pd.DataFrame()
 
     vsechny_ceny = nacti_ceny_entsoe()
     vsechny_fs = nacti_predpoved_fs()
@@ -311,8 +325,9 @@ def main():
 
     DELTA_T = 0.25 
 
-    POPLATEK_DISTRIBUCE_NAKUP_EUR = 60.0  # Nutno upravit dle vaseho vyuctovani (zde cca 1.5 Kc/kWh)
-    MARZE_OBCHODNIKA_PRODEJ_EUR = 10.0    # Realny prumer pro prodej na spotu v CR
+    # Poplatky zmenit dle realne distribucni sazby!
+    POPLATEK_DISTRIBUCE_NAKUP_EUR = 60.0  
+    MARZE_OBCHODNIKA_PRODEJ_EUR = 10.0    
 
     model += pulp.lpSum([
         (p_nakup[i] * (ceny_192[i] + POPLATEK_DISTRIBUCE_NAKUP_EUR) * DELTA_T) - 
@@ -457,9 +472,13 @@ def main():
         'Export_Celkem_kWh': str(m['e_celkem']).replace('.', ',')                   
     }])
 
-    pd.concat([df_h, n_radek]).drop_duplicates(subset=['Cas'], keep='last').to_csv(SOUBOR_HISTORIE, index=False, sep=';')
-    print("Zapis do historie uspesne dokoncen!")
+    # --- CHYTRY ZAPIS (Log Rotation) ---
+    aktualni_mesic_soubor = f"fve_historie_{ted.strftime('%Y_%m')}.csv"
+    vlozit_hlavicku = not os.path.exists(aktualni_mesic_soubor)
+
+    n_radek.to_csv(aktualni_mesic_soubor, mode='a', header=vlozit_hlavicku, index=False, sep=';')
+    print(f"Zapis do mesicni historie ({aktualni_mesic_soubor}) uspesne dokoncen!")
 
 if __name__ == "__main__":
     try: main()
-    except Exception as e: traceback.print_exc()
+    except Exception as e: traceback.print_exc() 
