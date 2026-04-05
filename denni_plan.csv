@@ -1,7 +1,6 @@
 Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-05;10:15;5,56;Nedostatek dat;-17,57;72,0;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-17.57 EUR). Nucene zapnuti bojleru k pohlceni energie.
-2026-04-05;10:30;5,7;Nedostatek dat;-24,61;51,0;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-24.61 EUR). Nucene zapnuti bojleru k pohlceni energie.
-2026-04-05;10:45;5,85;Nedostatek dat;-31,3;65,6;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-31.30 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-05;10:30;5,7;Nedostatek dat;-24,61;72,0;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-24.61 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-05;10:45;5,85;Nedostatek dat;-31,3;86,6;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-31.30 EUR). Nucene zapnuti bojleru k pohlceni energie.
 2026-04-05;11:00;5,99;Nedostatek dat;-27,58;80,6;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-27.58 EUR). Nucene zapnuti bojleru k pohlceni energie.
 2026-04-05;11:15;5,93;Nedostatek dat;-30,82;95,5;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-30.82 EUR). Nucene zapnuti bojleru k pohlceni energie.
 2026-04-05;11:30;5,88;Nedostatek dat;-17,89;70,5;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-17.89 EUR). Nucene zapnuti bojleru k pohlceni energie.
@@ -38,7 +37,7 @@ Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_
 2026-04-05;19:15;0,09;Nedostatek dat;25,83;100,0;NORMALNI_PROVOZ;Bezna spotreba kryta primym slunecnim vykonem.
 2026-04-05;19:30;0,0;Nedostatek dat;31,64;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-05;19:45;0,0;Nedostatek dat;84,35;75,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 84.35 EUR.
-2026-04-05;20:00;0,0;Nedostatek dat;48,23;75,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-05;20:00;0,0;Nedostatek dat;48,23;75,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-05;20:15;0,0;Nedostatek dat;50,0;75,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
 2026-04-05;20:30;0,0;Nedostatek dat;40,0;75,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-05;20:45;0,0;Nedostatek dat;61,18;75,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
@@ -191,3 +190,4 @@ Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_
 2026-04-07;09:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-07;09:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-07;10:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;10:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
