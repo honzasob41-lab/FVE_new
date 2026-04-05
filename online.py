@@ -24,7 +24,7 @@ SOUBOR_HISTORIE = "fve_inteligentni_rizeni.csv"
 SOUBOR_PLAN = "denni_plan.csv"
 SOUBOR_PREDPOVEDI = "predpoved_cache.json"
 MIN_DNI_PRO_UCENI = 2
-MAX_VYKON_STRIDACE = 10.0
+MAX_VYKON_STRIDACE = 6.0
 KAPACITA_BATERIE_KWH = 10.0 
 
 def bezpecny_float(val):
@@ -149,10 +149,8 @@ def nacti_predpoved_fs():
     if not data:
         return predpoved
 
-    # --- TADY ZAČÍNÁ ÚPRAVA ZPRACOVÁNÍ DAT ---
     try:
         raw_data = []
-        # Projdeme data a vytvoříme seznam bodů
         for cas_str, wh in data['result']['watt_hours_period'].items():
             cas = pd.to_datetime(cas_str, errors='coerce')
             if pd.isna(cas): continue
@@ -161,43 +159,11 @@ def nacti_predpoved_fs():
         
         if raw_data:
             df = pd.DataFrame(raw_data).set_index("Cas").sort_index()
-            
-            # TATO ČÁST OPRAVUJE NOC:
-            # resample vytvoří mřížku po 15 min
-            # interpolate s limit=3 propojí body v rámci hodiny, ale ne přes celou noc
-            # fillna(0.0) zajistí, že zbytek noci bude čistá nula
             df = df.resample("15min").interpolate(method='linear', limit=3).fillna(0.0).reset_index()
             
             for _, row in df.iterrows():
                 if pd.notna(row["Cas"]):
                     predpoved[row["Cas"].to_pydatetime()] = max(0.0, float(row["Vykon_kW"]))
-    except Exception as e: 
-        print(f"Kriticka chyba pri cteni Forecast.Solar dat: {e}")
-        
-    return predpoved
-    try:
-        raw_data = []
-        for cas_str, wh in data['result']['watt_hours_period'].items():
-            cas = pd.to_datetime(cas_str, errors='coerce')
-            if pd.isna(cas): continue
-            cas = cas.replace(tzinfo=None)
-            try:
-                vykon = float(wh) / 1000.0
-            except:
-                vykon = 0.0
-            raw_data.append({"Cas": cas, "Vykon_kW": vykon})
-        
-        if raw_data:
-            df = pd.DataFrame(raw_data)
-            df['Vykon_kW'] = pd.to_numeric(df['Vykon_kW'], errors='coerce').fillna(0.0)
-            df = df.set_index("Cas").resample("15min").interpolate(method='linear').fillna(0.0).reset_index()
-            
-            for _, row in df.iterrows():
-                if pd.notna(row["Cas"]):
-                    try:
-                        cisty_vykon = float(row["Vykon_kW"])
-                        predpoved[row["Cas"].to_pydatetime()] = max(0.0, cisty_vykon)
-                    except: pass
     except Exception as e: 
         print(f"Kriticka chyba pri cteni Forecast.Solar dat: {e}")
         
@@ -265,15 +231,28 @@ def nauc_se_spotrebu(df_h, aktualni_cas):
 
 def rozhodovaci_logika(prum_p, spot, soc, cena):
     if spot is None: return "UCENI_V_PRUBEHU"
+    
+    if cena < 0.0:
+        if soc < 100.0:
+            return "ZAPNOUT_BOJLERY_A_NABIJET"
+        else:
+            return "ZAPNOUT_BOJLERY"
+
     bilance = prum_p - spot
     if cena < 1.0 and soc < 20 and bilance <= 0: return "NABIJET_ZE_SITE"
     elif cena > 4.0 and soc > 80: return "PRODAVAT_I_BATERII" if bilance > 0 else "POKRYT_Z_BATERIE"
     elif bilance > 0 and soc > 95: return "PRODAVAT_DO_SITE"
     elif bilance > 0 and soc <= 95: return "NABIJET_SOLAREM"
     elif bilance < 0 and soc > 20: return "VYBIJET_PRO_DUM"
+    
     return "NORMALNI_PROVOZ"
 
 def vygeneruj_duvod_pulp(akce, cena, pv_vykon, soc):
+    if cena < 0.0:
+        if "BOJLERY" in akce:
+            return f"Zaporna cena ({cena:.2f} EUR). Nucene zapnuti bojleru k pohlceni energie."
+        return f"Zaporna cena ({cena:.2f} EUR). Blokace prodeje a odesilani do site."
+
     if akce == "NABIJET_ZE_SITE":
         return f"Priprava na budouci spicku (nakup za aktualni cenu {cena:.2f} EUR)."
     elif akce == "NABIJET_SOLAREM":
@@ -332,7 +311,14 @@ def main():
 
     DELTA_T = 0.25 
 
-    model += pulp.lpSum([(p_nakup[i] * ceny_192[i] * DELTA_T) - (p_prodej[i] * ceny_192[i] * DELTA_T) for i in kroky_15min])
+    POPLATEK_DISTRIBUCE_NAKUP_EUR = 60.0  # Nutno upravit dle vaseho vyuctovani (zde cca 1.5 Kc/kWh)
+    MARZE_OBCHODNIKA_PRODEJ_EUR = 10.0    # Realny prumer pro prodej na spotu v CR
+
+    model += pulp.lpSum([
+        (p_nakup[i] * (ceny_192[i] + POPLATEK_DISTRIBUCE_NAKUP_EUR) * DELTA_T) - 
+        (p_prodej[i] * (ceny_192[i] - MARZE_OBCHODNIKA_PRODEJ_EUR) * DELTA_T) 
+        for i in kroky_15min
+    ])
 
     for i in kroky_15min:
         model += (pv_192[i] + p_nakup[i] + p_vybijeni[i] == spotreba_192[i] + p_prodej[i] + p_nabijeni[i])
@@ -344,29 +330,36 @@ def main():
 
     model.solve(pulp.PULP_CBC_CMD(msg=False))
 
-    # --- ZÁPIS PLÁNU - NATVRDO S ČÁRKOU ---
     plan_data = []
     for i in kroky_15min:
         aktualni_cas_planu = casy_192[i]
         nab_val = p_nabijeni[i].varValue
         vyb_val = p_vybijeni[i].varValue
         nak_val = p_nakup[i].varValue
+        cena_v_tomto_kroku = ceny_192[i]
         
         akce = "NORMALNI_PROVOZ"
-        if nab_val > 0.1 and nak_val > 0.1: akce = "NABIJET_ZE_SITE"
-        elif nab_val > 0.1: akce = "NABIJET_SOLAREM"
-        elif vyb_val > 0.1: akce = "POKRYT_Z_BATERIE"
-        elif p_prodej[i].varValue > 0.1: akce = "PRODAVAT_DO_SITE"
+        
+        if cena_v_tomto_kroku < 0.0:
+            if soc[i].varValue < 100.0:
+                akce = "ZAPNOUT_BOJLERY_A_NABIJET"
+            else:
+                akce = "ZAPNOUT_BOJLERY"
+        else:
+            if nab_val > 0.1 and nak_val > 0.1: akce = "NABIJET_ZE_SITE"
+            elif nab_val > 0.1: akce = "NABIJET_SOLAREM"
+            elif vyb_val > 0.1: akce = "POKRYT_Z_BATERIE"
+            elif p_prodej[i].varValue > 0.1: akce = "PRODAVAT_DO_SITE"
 
         plan_data.append({
             'Datum': aktualni_cas_planu.strftime('%Y-%m-%d'), 
             'Cas': aktualni_cas_planu.strftime('%H:%M'),
             'Predpoved_FS_kWh': str(round(pv_192[i], 2)).replace('.', ','),              
             'Odhad_Spotreba_kW': str(round(spotreba_192[i], 2)).replace('.', ',') if spotreba_192[i] > 0 else "Nedostatek dat",
-            'Cena_EUR/MWh': str(round(ceny_192[i], 2)).replace('.', ','),
+            'Cena_EUR/MWh': str(round(cena_v_tomto_kroku, 2)).replace('.', ','),
             'Simulovane_SOC_%': str(round(soc[i].varValue, 1)).replace('.', ','),
             'Akce_EMS': akce,
-            'Duvod_Akce': vygeneruj_duvod_pulp(akce, ceny_192[i], pv_192[i], soc[i].varValue)
+            'Duvod_Akce': vygeneruj_duvod_pulp(akce, cena_v_tomto_kroku, pv_192[i], soc[i].varValue)
         })
         
     pd.DataFrame(plan_data).to_csv(SOUBOR_PLAN, index=False, sep=';')
@@ -435,16 +428,14 @@ def main():
 
     aktualni_akce_pulp = plan_data[0]['Akce_EMS'] if plan_data else "NEDOSTUPNE"
     
-    # Tyto dve promenne uchovavaji to, co si skript PRED chvili nasimuloval
     simulovane_soc_ted = plan_data[0]['Simulovane_SOC_%'] if plan_data else "0,0"
     odhad_spotreby_ted = plan_data[0]['Odhad_Spotreba_kW'] if plan_data else "Nedostatek dat"
 
-    # --- ZÁPIS HISTORIE - NATVRDO S ČÁRKOU A NOVYMI ANALYTICKYMI SLOUPCI ---
     n_radek = pd.DataFrame([{
         'Cas': ted, 
         'Skutecny_AC_Vystup_kWh': str(round(h_vyroba, 4)).replace('.', ','), 
         'Skutecna_Spotreba_kWh': str(round(h_spotreba, 4)).replace('.', ','),
-        'Odhad_Spotreba_Modelu_kW': odhad_spotreby_ted,  # NOVY SLOUPEC: Jakou spotrebu skript cekal
+        'Odhad_Spotreba_Modelu_kW': odhad_spotreby_ted,
         'Import_5min_kWh': str(round(h_import, 4)).replace('.', ','),                
         'Export_5min_kWh': str(round(h_export, 4)).replace('.', ','),                
         'Denni_Import_kWh': str(round(denni_import, 2)).replace('.', ','),          
@@ -455,7 +446,7 @@ def main():
         'Aktualni_AC_Vystup_W': str(m['ac_out']).replace('.', ','),
         'Vykon_Baterie_W': str(m['bat_p']).replace('.', ','), 
         'Baterie_SOC_%': str(m['soc']).replace('.', ','), 
-        'Simulovane_SOC_%': simulovane_soc_ted,  # NOVY SLOUPEC: Jaka by podle simulace mela baterie prave byt
+        'Simulovane_SOC_%': simulovane_soc_ted,
         'Cena_EUR/MWh': str(round(cena_h, 2)).replace('.', ','),
         'Predpoved_FS_kWh': str(round(fs_now, 2)).replace('.', ','),                
         'Doporucena_Akce': rozhodovaci_logika(fs_now, o_spot, m['soc'], cena_h),
