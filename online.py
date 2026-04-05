@@ -275,7 +275,6 @@ def main():
     minuty_15 = (ted.minute // 15) * 15
     ted_ctvrthodina = ted.replace(minute=minuty_15, second=0)
     
-    # --- NACITANI CELE HISTORIE PRO UCENI (Vsechny mesice) ---
     vsechny_soubory = glob.glob("fve_historie_*.csv")
     df_list = []
     
@@ -290,7 +289,6 @@ def main():
         df_h = pd.concat(df_list, ignore_index=True)
         if 'Cas' in df_h.columns:
             df_h['Cas'] = pd.to_datetime(df_h['Cas'])
-        # Zajisteni sezeni zaznamu chronologicky, pro jistotu
         df_h = df_h.sort_values(by='Cas').reset_index(drop=True)
     else:
         df_h = pd.DataFrame()
@@ -325,7 +323,6 @@ def main():
 
     DELTA_T = 0.25 
 
-    # Poplatky zmenit dle realne distribucni sazby!
     POPLATEK_DISTRIBUCE_NAKUP_EUR = 60.0  
     MARZE_OBCHODNIKA_PRODEJ_EUR = 10.0    
 
@@ -441,12 +438,10 @@ def main():
     fs_now = vsechny_fs.get(ted_ctvrthodina, 0.0)
     cena_h = vsechny_ceny.get(ted_ctvrthodina, 0.0)
 
-    # TOTO JSOU TY CHYBEJICI RADKY:
     aktualni_akce_pulp = plan_data[0]['Akce_EMS'] if plan_data else "NEDOSTUPNE"
     simulovane_soc_ted = plan_data[0]['Simulovane_SOC_%'] if plan_data else "0,0"
     odhad_spotreby_ted = plan_data[0]['Odhad_Spotreba_kW'] if plan_data else "Nedostatek dat"
 
-    # --- ZDE JE TVE VLASTNI PORADI ---
     n_radek = pd.DataFrame([{
         'Cas': ted, 
         'Skutecny_AC_Vystup_kWh': str(round(h_vyroba, 4)).replace('.', ','), 
@@ -473,7 +468,6 @@ def main():
         'Export_Celkem_kWh': str(m['e_celkem']).replace('.', ',')                   
     }])
 
-    # --- CHYTRY ZAPIS (Log Rotation) ---
     aktualni_mesic_soubor = f"fve_historie_{ted.strftime('%Y_%m')}.csv"
     vlozit_hlavicku = not os.path.exists(aktualni_mesic_soubor)
 
