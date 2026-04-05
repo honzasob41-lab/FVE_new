@@ -68,3 +68,4 @@ Cas;Skutecny_AC_Vystup_kWh;Skutecna_Spotreba_kWh;Odhad_Spotreba_Modelu_kW;Aktual
 2026-04-05 18:55:28;0,0;0,05;Nedostatek dat;-106,0;0,0085;0,0;157,0;0,0126;119,0;0,0;99,0;99,4;5,53;0,14;UCENI_V_PRUBEHU;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).;1,58;12,19;41,8;10611,89;12016,87
 2026-04-05 19:00:53;0,0;0,05;Nedostatek dat;-129,0;0,0116;0,0;133,0;0,012;100,0;0,0;99,0;99,2;21,77;0,09;UCENI_V_PRUBEHU;NORMALNI_PROVOZ;Bezna spotreba kryta primym slunecnim vykonem.;1,59;12,19;41,8;10611,94;12016,87
 2026-04-05 19:05:31;0,0;0,07;Nedostatek dat;-252,0;0,0195;0,0;119,0;0,0092;71,0;0,0;99,0;99,2;21,77;0,09;UCENI_V_PRUBEHU;NORMALNI_PROVOZ;Bezna spotreba kryta primym slunecnim vykonem.;1,61;12,19;41,8;10612,01;12016,87
+2026-04-05 19:10:37;0,1;0,06;Nedostatek dat;-269,0;0,0229;0,0;62,0;0,0053;50,0;0,0;99,0;99,2;21,77;0,09;UCENI_V_PRUBEHU;NORMALNI_PROVOZ;Bezna spotreba kryta primym slunecnim vykonem.;1,63;12,19;41,9;10612,07;12016,87
