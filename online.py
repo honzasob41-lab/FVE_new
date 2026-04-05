@@ -233,7 +233,7 @@ def rozhodovaci_logika(prum_p, spot, soc, cena):
     if spot is None: return "UCENI_V_PRUBEHU"
     
     if cena < 0.0:
-        if soc < 100.0:
+        if soc < 99.0:
             return "ZAPNOUT_BOJLERY_A_NABIJET"
         else:
             return "ZAPNOUT_BOJLERY"
