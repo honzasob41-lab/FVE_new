@@ -1,193 +1,193 @@
 Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-05;14:00;3,76;Nedostatek dat;0,0;90,9;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.00 EUR.
-2026-04-05;14:15;3,44;Nedostatek dat;0,0;65,9;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 0.00 EUR.
-2026-04-05;14:30;3,13;Nedostatek dat;0,0;65,9;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 EUR).
-2026-04-05;14:45;2,81;Nedostatek dat;0,0;65,9;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 EUR).
-2026-04-05;15:00;2,49;Nedostatek dat;0,0;65,9;PRODAVAT_DO_SITE;Vyhodny prodej z baterie kvuli vysoke cene (0.00 EUR).
-2026-04-05;15:15;2,22;Nedostatek dat;0,0;71,4;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-05;15:30;1,95;Nedostatek dat;0,0;76,3;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-05;15:45;1,68;Nedostatek dat;0,0;80,5;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-05;16:00;1,41;Nedostatek dat;0,0;84,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-05;16:15;1,23;Nedostatek dat;0,0;87,1;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-05;16:30;1,05;Nedostatek dat;0,0;89,8;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-05;16:45;0,87;Nedostatek dat;0,0;91,9;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-05;17:00;0,7;Nedostatek dat;0,0;93,7;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-05;17:15;0,59;Nedostatek dat;0,0;95,2;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-05;17:30;0,49;Nedostatek dat;0,0;96,4;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-05;17:45;0,39;Nedostatek dat;0,0;97,4;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-05;18:00;0,29;Nedostatek dat;0,0;98,1;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-05;18:15;0,24;Nedostatek dat;0,0;98,7;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-05;18:30;0,19;Nedostatek dat;0,0;99,2;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-05;18:45;0,14;Nedostatek dat;0,0;99,5;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-05;19:00;0,09;Nedostatek dat;0,0;99,8;NORMALNI_PROVOZ;Bezna spotreba kryta primym slunecnim vykonem.
-2026-04-05;19:15;0,09;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezna spotreba kryta primym slunecnim vykonem.
-2026-04-05;19:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-05;19:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-05;20:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-05;20:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-05;20:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-05;20:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-05;21:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-05;21:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-05;21:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-05;21:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-05;22:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-05;22:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-05;22:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-05;22:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-05;23:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-05;23:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-05;23:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-05;23:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;00:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;00:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;00:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;00:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;01:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;01:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;01:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;01:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;02:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;02:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;02:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;02:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;03:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;03:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;03:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;03:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;04:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;04:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;04:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;04:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;05:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;05:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;05:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;05:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;06:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;06:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;06:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;06:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;07:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;07:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;07:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;07:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;08:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;08:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;08:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;08:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;09:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;09:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;09:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;09:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;10:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;10:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;10:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;10:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;11:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;11:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;11:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;11:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;12:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;12:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;12:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;12:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;13:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;13:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;13:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;13:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;14:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;14:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;14:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;14:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;15:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;15:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;15:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;15:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;16:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;16:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;16:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;16:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;17:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;17:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;17:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;17:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;18:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;18:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;18:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;18:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;19:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;19:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;19:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;19:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;20:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;20:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;20:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;20:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;21:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;21:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;21:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;21:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;22:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;22:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;22:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;22:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;23:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;23:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;23:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-06;23:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;00:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;00:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;00:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;00:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;01:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;01:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;01:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;01:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;02:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;02:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;02:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;02:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;03:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;03:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;03:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;03:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;04:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;04:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;04:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;04:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;05:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;05:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;05:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;05:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;06:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;06:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;06:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;06:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;07:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;07:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;07:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;07:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;08:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;08:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;08:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;08:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;09:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;09:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;09:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;09:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;10:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;10:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;10:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;10:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;11:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;11:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;11:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;11:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;12:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;12:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;12:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;12:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;13:00;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;13:15;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;13:30;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-07;13:45;0,0;Nedostatek dat;0,0;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-05;14:00;3,76;Nedostatek dat;-55,3;74,0;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-55.30 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-05;14:15;3,44;Nedostatek dat;-55,65;73,4;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-55.65 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-05;14:30;3,13;Nedostatek dat;-80,01;81,2;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-80.01 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-05;14:45;2,81;Nedostatek dat;-82,96;88,2;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-82.96 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-05;15:00;2,49;Nedostatek dat;-70,58;94,4;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-70.58 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-05;15:15;2,22;Nedostatek dat;-60,84;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-60.84 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-05;15:30;1,95;Nedostatek dat;-54,83;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-54.83 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-05;15:45;1,68;Nedostatek dat;-48,33;96,5;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-48.33 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-05;16:00;1,41;Nedostatek dat;-53,12;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-53.12 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-05;16:15;1,23;Nedostatek dat;-33,12;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-33.12 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-05;16:30;1,05;Nedostatek dat;-27,66;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-27.66 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-05;16:45;0,87;Nedostatek dat;-16,9;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-16.90 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-05;17:00;0,7;Nedostatek dat;-16,35;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-16.35 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-05;17:15;0,59;Nedostatek dat;-7,33;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-7.33 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-05;17:30;0,49;Nedostatek dat;-3,64;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-3.64 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-05;17:45;0,39;Nedostatek dat;-1,82;99,3;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-1.82 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-05;18:00;0,29;Nedostatek dat;-2,4;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-2.40 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-05;18:15;0,24;Nedostatek dat;0,93;100,0;PRODAVAT_DO_SITE;Baterie je plna na 100 %, prodej prebytku za cenu 0.93 EUR.
+2026-04-05;18:30;0,19;Nedostatek dat;2,53;100,0;PRODAVAT_DO_SITE;Baterie je plna na 100 %, prodej prebytku za cenu 2.53 EUR.
+2026-04-05;18:45;0,14;Nedostatek dat;5,53;100,0;PRODAVAT_DO_SITE;Baterie je plna na 100 %, prodej prebytku za cenu 5.53 EUR.
+2026-04-05;19:00;0,09;Nedostatek dat;21,77;100,0;NORMALNI_PROVOZ;Bezna spotreba kryta primym slunecnim vykonem.
+2026-04-05;19:15;0,09;Nedostatek dat;25,83;100,0;NORMALNI_PROVOZ;Bezna spotreba kryta primym slunecnim vykonem.
+2026-04-05;19:30;0,0;Nedostatek dat;31,64;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-05;19:45;0,0;Nedostatek dat;84,35;75,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 84.35 EUR.
+2026-04-05;20:00;0,0;Nedostatek dat;48,23;75,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-05;20:15;0,0;Nedostatek dat;50,0;75,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-05;20:30;0,0;Nedostatek dat;40,0;75,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-05;20:45;0,0;Nedostatek dat;61,18;75,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-05;21:00;0,0;Nedostatek dat;67,09;75,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-05;21:15;0,0;Nedostatek dat;72,22;60,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-05;21:30;0,0;Nedostatek dat;41,56;60,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-05;21:45;0,0;Nedostatek dat;34,93;60,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-05;22:00;0,0;Nedostatek dat;74,33;35,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 74.33 EUR.
+2026-04-05;22:15;0,0;Nedostatek dat;71,7;35,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-05;22:30;0,0;Nedostatek dat;54,14;35,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-05;22:45;0,0;Nedostatek dat;39,83;35,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-05;23:00;0,0;Nedostatek dat;109,0;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 109.00 EUR.
+2026-04-05;23:15;0,0;Nedostatek dat;68,43;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-05;23:30;0,0;Nedostatek dat;46,35;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-05;23:45;0,0;Nedostatek dat;25,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;00:00;0,0;Nedostatek dat;3,13;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;00:15;0,0;Nedostatek dat;10,01;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;00:30;0,0;Nedostatek dat;8,03;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;00:45;0,0;Nedostatek dat;6,73;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;01:00;0,0;Nedostatek dat;12,7;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;01:15;0,0;Nedostatek dat;10,28;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;01:30;0,0;Nedostatek dat;8,69;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;01:45;0,0;Nedostatek dat;7,7;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;02:00;0,0;Nedostatek dat;9,26;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;02:15;0,0;Nedostatek dat;8,77;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;02:30;0,0;Nedostatek dat;4,97;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;02:45;0,0;Nedostatek dat;3,98;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;03:00;0,0;Nedostatek dat;5,62;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;03:15;0,0;Nedostatek dat;5,63;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;03:30;0,0;Nedostatek dat;13,23;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;03:45;0,0;Nedostatek dat;15,52;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;04:00;0,0;Nedostatek dat;5,53;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;04:15;0,0;Nedostatek dat;8,92;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;04:30;0,0;Nedostatek dat;16,36;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;04:45;0,0;Nedostatek dat;12,07;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;05:00;0,0;Nedostatek dat;2,49;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;05:15;0,0;Nedostatek dat;2,5;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;05:30;0,0;Nedostatek dat;4,65;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;05:45;0,0;Nedostatek dat;6,26;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;06:00;0,0;Nedostatek dat;1,98;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;06:15;0,0;Nedostatek dat;2,12;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;06:30;0,0;Nedostatek dat;4,62;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;06:45;0,0;Nedostatek dat;5,48;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;07:00;0,0;Nedostatek dat;2,11;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;07:15;0,0;Nedostatek dat;8,07;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;07:30;0,0;Nedostatek dat;17,64;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;07:45;0,0;Nedostatek dat;19,1;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;08:00;0,0;Nedostatek dat;27,89;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;08:15;0,0;Nedostatek dat;15,37;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;08:30;0,0;Nedostatek dat;14,75;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;08:45;0,0;Nedostatek dat;2,76;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;09:00;0,0;Nedostatek dat;6,1;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;09:15;0,0;Nedostatek dat;-1,94;10,0;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-1.94 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;09:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;09:45;0,0;Nedostatek dat;0,45;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;10:00;0,0;Nedostatek dat;-2,04;10,0;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-2.04 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;10:15;0,0;Nedostatek dat;-19,98;10,0;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-19.98 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;10:30;0,0;Nedostatek dat;-24,24;10,0;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-24.24 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;10:45;0,0;Nedostatek dat;-32,17;10,0;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-32.17 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;11:00;0,0;Nedostatek dat;-28,65;10,0;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-28.65 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;11:15;0,0;Nedostatek dat;-31,37;10,0;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-31.37 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;11:30;0,0;Nedostatek dat;-20,67;10,0;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-20.67 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;11:45;0,0;Nedostatek dat;-39,31;10,0;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-39.31 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;12:00;0,0;Nedostatek dat;-13,27;10,0;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-13.27 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;12:15;0,0;Nedostatek dat;-62,3;10,0;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-62.30 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;12:30;0,0;Nedostatek dat;-66,04;10,0;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-66.04 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;12:45;0,0;Nedostatek dat;-78,4;10,0;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-78.40 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;13:00;0,0;Nedostatek dat;-99,54;10,0;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-99.54 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;13:15;0,0;Nedostatek dat;-108,75;10,0;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-108.75 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;13:30;0,0;Nedostatek dat;-125,1;25,0;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-125.10 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;13:45;0,0;Nedostatek dat;-134,96;50,0;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-134.96 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;14:00;0,0;Nedostatek dat;-134,94;75,0;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-134.94 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;14:15;0,0;Nedostatek dat;-125,57;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-125.57 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;14:30;0,0;Nedostatek dat;-121,17;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-121.17 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;14:45;0,0;Nedostatek dat;-106,06;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-106.06 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;15:00;0,0;Nedostatek dat;-104,1;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-104.10 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;15:15;0,0;Nedostatek dat;-90,0;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-90.00 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;15:30;0,0;Nedostatek dat;-74,0;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-74.00 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;15:45;0,0;Nedostatek dat;-59,9;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-59.90 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;16:00;0,0;Nedostatek dat;-58,59;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-58.59 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;16:15;0,0;Nedostatek dat;-32,72;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-32.72 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;16:30;0,0;Nedostatek dat;-15,69;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-15.69 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;16:45;0,0;Nedostatek dat;-6,89;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-6.89 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;17:00;0,0;Nedostatek dat;-13,72;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-13.72 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;17:15;0,0;Nedostatek dat;-5,57;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-5.57 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-06;17:30;0,0;Nedostatek dat;1,28;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;17:45;0,0;Nedostatek dat;2,34;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;18:00;0,0;Nedostatek dat;2,5;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;18:15;0,0;Nedostatek dat;9,52;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;18:30;0,0;Nedostatek dat;70,27;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;18:45;0,0;Nedostatek dat;97,84;100,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-06;19:00;0,0;Nedostatek dat;85,78;100,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-06;19:15;0,0;Nedostatek dat;92,65;100,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-06;19:30;0,0;Nedostatek dat;107,06;100,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;19:45;0,0;Nedostatek dat;120,65;85,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-06;20:00;0,0;Nedostatek dat;113,39;85,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-06;20:15;0,0;Nedostatek dat;117,47;85,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-06;20:30;0,0;Nedostatek dat;119,76;85,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;20:45;0,0;Nedostatek dat;114,28;85,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;21:00;0,0;Nedostatek dat;113,44;85,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;21:15;0,0;Nedostatek dat;114,87;85,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;21:30;0,0;Nedostatek dat;112,13;85,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;21:45;0,0;Nedostatek dat;108,92;85,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;22:00;0,0;Nedostatek dat;123,61;60,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 123.61 EUR.
+2026-04-06;22:15;0,0;Nedostatek dat;126,62;35,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 126.62 EUR.
+2026-04-06;22:30;0,0;Nedostatek dat;124,03;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 124.03 EUR.
+2026-04-06;22:45;0,0;Nedostatek dat;113,1;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;23:00;0,0;Nedostatek dat;119,67;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;23:15;0,0;Nedostatek dat;113,69;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;23:30;0,0;Nedostatek dat;109,54;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-06;23:45;0,0;Nedostatek dat;105,9;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;00:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;00:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;00:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;00:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;01:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;01:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;01:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;01:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;02:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;02:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;02:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;02:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;03:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;03:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;03:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;03:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;04:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;04:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;04:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;04:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;05:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;05:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;05:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;05:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;06:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;06:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;06:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;06:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;07:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;07:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;07:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;07:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;08:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;08:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;08:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;08:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;09:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;09:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;09:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;09:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;10:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;10:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;10:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;10:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;11:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;11:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;11:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;11:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;12:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;12:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;12:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;12:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;13:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;13:15;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;13:30;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-07;13:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
