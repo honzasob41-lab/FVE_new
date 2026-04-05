@@ -441,8 +441,8 @@ def main():
     fs_now = vsechny_fs.get(ted_ctvrthodina, 0.0)
     cena_h = vsechny_ceny.get(ted_ctvrthodina, 0.0)
 
+    # TOTO JSOU TY CHYBEJICI RADKY:
     aktualni_akce_pulp = plan_data[0]['Akce_EMS'] if plan_data else "NEDOSTUPNE"
-    
     simulovane_soc_ted = plan_data[0]['Simulovane_SOC_%'] if plan_data else "0,0"
     odhad_spotreby_ted = plan_data[0]['Odhad_Spotreba_kW'] if plan_data else "Nedostatek dat"
 
