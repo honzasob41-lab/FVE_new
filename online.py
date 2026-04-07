@@ -173,8 +173,7 @@ def nauc_se_spotrebu(df_h, aktualni_cas):
     if df_h.empty or 'Skutecna_Spotreba_kWh' not in df_h.columns: 
         return None
 
-    df_h['Cas'] = pd.to_datetime(df_h['Cas'])
-
+    df_h['Cas'] = pd.to_datetime(df_h['Cas'], format='mixed', errors='coerce')
     maska_nedavna = df_h['Cas'] >= (aktualni_cas - timedelta(days=90))
     cas_pred_rokem = aktualni_cas - timedelta(days=365)
     maska_lonska = (df_h['Cas'] >= (cas_pred_rokem - timedelta(days=45))) & (df_h['Cas'] <= (cas_pred_rokem + timedelta(days=45)))
