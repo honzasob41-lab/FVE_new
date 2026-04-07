@@ -1,9 +1,9 @@
 Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-08;00:45;0,0;0,34;103,76;97,2;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 103.76 EUR.
-2026-04-08;01:00;0,0;0,36;105,91;96,2;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-08;00:45;0,0;0,33;103,76;97,2;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 103.76 EUR.
+2026-04-08;01:00;0,0;0,36;105,91;96,3;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
 2026-04-08;01:15;0,0;0,34;104,96;95,4;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
 2026-04-08;01:30;0,0;0,26;103,42;94,8;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 103.42 EUR.
-2026-04-08;01:45;0,0;0,28;102,21;94,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 102.21 EUR.
+2026-04-08;01:45;0,0;0,28;102,21;94,1;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 102.21 EUR.
 2026-04-08;02:00;0,0;0,34;103,7;93,2;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 103.70 EUR.
 2026-04-08;02:15;0,0;0,24;101,84;97,2;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 101.84 EUR).
 2026-04-08;02:30;0,0;0,28;102,28;96,5;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 102.28 EUR.
