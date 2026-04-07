@@ -287,7 +287,7 @@ def main():
     if df_list:
         df_h = pd.concat(df_list, ignore_index=True)
         if 'Cas' in df_h.columns:
-            df_h['Cas'] = pd.to_datetime(df_h['Cas'])
+            df_h['Cas'] = pd.to_datetime(df_h['Cas'], format='mixed', errors='coerce')
         df_h = df_h.sort_values(by='Cas').reset_index(drop=True)
     else:
         df_h = pd.DataFrame()
@@ -475,4 +475,4 @@ def main():
 
 if __name__ == "__main__":
     try: main()
-    except Exception as e: traceback.print_exc()
+    except Exception as e: traceback.print_exc() 
