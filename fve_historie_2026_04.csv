@@ -2643,3 +2643,4 @@ Cas;Skutecny_AC_Vystup_kWh;Skutecna_Spotreba_kWh;Odhad_Spotreba_Modelu_kW;Aktual
 2026-04-08 20:46:05;0,0;0,16;Nedostatek dat;-2078,0;0,1859;0,0;0,0;0,0;0,0;0,0;98,0;98,0;132,14;0,0;POKRYT_Z_BATERIE;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.;13,46;7,85;18,5;10653,24;12089,9
 2026-04-08 20:50:44;0,0;0,13;0,27;-2090,0;0,162;0,0;0,0;0,0;0,0;0,0;98,0;97,3;132,14;0,0;POKRYT_Z_BATERIE;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 132.14 EUR.;13,62;7,85;18,5;10653,37;12089,9
 2026-04-08 20:55:42;0,0;0,13;0,44;-1977,0;0,1637;0,0;0,0;0,0;0,0;0,0;98,0;96,9;132,14;0,0;POKRYT_Z_BATERIE;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 132.14 EUR.;13,79;7,85;18,5;10653,5;12089,9
+2026-04-08 21:00:57;0,0;0,14;0,04;-138,0;0,0121;0,0;0,0;0,0;0,0;0,0;98,0;97,9;0,0;0,0;VYBIJET_PRO_DUM;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.;13,8;7,85;18,5;10653,64;12089,9
