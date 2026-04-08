@@ -2473,3 +2473,4 @@ Cas;Skutecny_AC_Vystup_kWh;Skutecna_Spotreba_kWh;Odhad_Spotreba_Modelu_kW;Aktual
 2026-04-08 06:35:33;0,0;0,01;0,07;0,0;0,0;0,0;234,0;0,0187;236,0;0,0;96,0;95,8;157,33;0,0;POKRYT_Z_BATERIE;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.;1,0;0,0;0,1;10640,91;12082,05
 2026-04-08 06:40:35;0,0;0,0;0,08;0,0;0,0;0,0;272,0;0,0228;245,0;0,0;96,0;95,8;157,33;0,0;POKRYT_Z_BATERIE;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.;1,0;0,0;0,1;10640,91;12082,05
 2026-04-08 06:45:37;0,1;0,0;0,02;0,0;0,0;0,0;303,0;0,0254;234,0;0,0;96,0;85,5;162,57;0,0;POKRYT_Z_BATERIE;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).;1,0;0,0;0,2;10640,91;12082,05
+2026-04-08 06:50:38;0,0;0,0;0,02;0,0;0,0;0,0;487,0;0,0407;169,0;216,0;96,0;85,5;162,57;0,0;POKRYT_Z_BATERIE;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).;1,0;0,0;0,2;10640,91;12082,05
