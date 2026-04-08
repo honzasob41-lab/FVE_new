@@ -1,5 +1,5 @@
 Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-08;11:15;0,0;0,02;-0,01;99,0;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-0.01 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-08;11:15;0,0;0,03;-0,01;98,9;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-0.01 EUR). Nucene zapnuti bojleru k pohlceni energie.
 2026-04-08;11:30;0,0;0,02;-1,09;98,9;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-1.09 EUR). Nucene zapnuti bojleru k pohlceni energie.
 2026-04-08;11:45;0,0;Nedostatek dat;-5,0;98,9;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-5.00 EUR). Nucene zapnuti bojleru k pohlceni energie.
 2026-04-08;12:00;0,0;Nedostatek dat;-5,3;98,9;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-5.30 EUR). Nucene zapnuti bojleru k pohlceni energie.
