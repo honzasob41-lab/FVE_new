@@ -1,5 +1,5 @@
 Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-08;07:00;0,0;0,1;176,38;71,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 176.38 EUR.
+2026-04-08;07:00;0,0;0,32;176,38;71,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 176.38 EUR.
 2026-04-08;07:15;0,0;0,1;174,88;46,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 174.88 EUR.
 2026-04-08;07:30;0,0;0,1;162,4;35,2;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 162.40 EUR.
 2026-04-08;07:45;0,0;0,04;134,32;35,1;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
