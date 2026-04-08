@@ -1,17 +1,17 @@
 Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-08;10:30;0,0;0,1;26,13;98,7;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-08;10:45;0,0;0,02;0,0;98,7;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-08;11:00;0,0;0,02;5,92;98,6;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-08;11:15;0,0;0,02;-0,01;98,6;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-0.01 EUR). Nucene zapnuti bojleru k pohlceni energie.
-2026-04-08;11:30;0,0;0,02;-1,09;98,5;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-1.09 EUR). Nucene zapnuti bojleru k pohlceni energie.
-2026-04-08;11:45;0,0;Nedostatek dat;-5,0;98,5;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-5.00 EUR). Nucene zapnuti bojleru k pohlceni energie.
-2026-04-08;12:00;0,0;Nedostatek dat;-5,3;98,5;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-5.30 EUR). Nucene zapnuti bojleru k pohlceni energie.
-2026-04-08;12:15;0,0;Nedostatek dat;-9,96;98,5;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-9.96 EUR). Nucene zapnuti bojleru k pohlceni energie.
-2026-04-08;12:30;0,0;Nedostatek dat;-11,19;98,5;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-11.19 EUR). Nucene zapnuti bojleru k pohlceni energie.
-2026-04-08;12:45;0,0;Nedostatek dat;-14,17;98,5;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-14.17 EUR). Nucene zapnuti bojleru k pohlceni energie.
-2026-04-08;13:00;0,0;Nedostatek dat;-13,1;98,5;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-13.10 EUR). Nucene zapnuti bojleru k pohlceni energie.
-2026-04-08;13:15;0,0;Nedostatek dat;-15,1;98,5;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-15.10 EUR). Nucene zapnuti bojleru k pohlceni energie.
-2026-04-08;13:30;0,0;Nedostatek dat;-16,62;98,5;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-16.62 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-08;10:30;0,0;0,18;26,13;98,5;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-08;10:45;0,0;0,02;0,0;98,5;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-08;11:00;0,0;0,02;5,92;98,5;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-08;11:15;0,0;0,02;-0,01;98,4;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-0.01 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-08;11:30;0,0;0,02;-1,09;98,3;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-1.09 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-08;11:45;0,0;Nedostatek dat;-5,0;98,3;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-5.00 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-08;12:00;0,0;Nedostatek dat;-5,3;98,3;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-5.30 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-08;12:15;0,0;Nedostatek dat;-9,96;98,3;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-9.96 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-08;12:30;0,0;Nedostatek dat;-11,19;98,3;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-11.19 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-08;12:45;0,0;Nedostatek dat;-14,17;98,3;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-14.17 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-08;13:00;0,0;Nedostatek dat;-13,1;98,3;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-13.10 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-08;13:15;0,0;Nedostatek dat;-15,1;98,3;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-15.10 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-08;13:30;0,0;Nedostatek dat;-16,62;98,3;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-16.62 EUR). Nucene zapnuti bojleru k pohlceni energie.
 2026-04-08;13:45;0,0;Nedostatek dat;-19,75;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-19.75 EUR). Nucene zapnuti bojleru k pohlceni energie.
 2026-04-08;14:00;0,0;Nedostatek dat;-16,9;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-16.90 EUR). Nucene zapnuti bojleru k pohlceni energie.
 2026-04-08;14:15;0,0;Nedostatek dat;-16,28;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-16.28 EUR). Nucene zapnuti bojleru k pohlceni energie.
