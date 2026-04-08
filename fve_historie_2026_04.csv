@@ -2655,3 +2655,4 @@ Cas;Skutecny_AC_Vystup_kWh;Skutecna_Spotreba_kWh;Odhad_Spotreba_Modelu_kW;Aktual
 2026-04-08 21:45:44;0,0;0,14;0,04;-155,0;0,0131;0,0;0,0;0,0;0,0;0,0;98,0;97,9;114,9;0,0;POKRYT_Z_BATERIE;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.;14,87;7,85;18,5;10654,96;12089,9
 2026-04-08 21:50:35;0,0;0,02;0,27;-155,0;0,0125;0,0;0,0;0,0;0,0;0,0;98,0;97,3;114,9;0,0;POKRYT_Z_BATERIE;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 114.90 EUR.;14,88;7,85;18,5;10654,98;12089,9
 2026-04-08 21:55:31;0,0;0,02;0,27;-273,0;0,0224;0,0;0,0;0,0;0,0;0,0;98,0;97,3;114,9;0,0;POKRYT_Z_BATERIE;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 114.90 EUR.;14,91;7,85;18,5;10655,0;12089,9
+2026-04-08 22:00:54;0,0;0,04;0,02;-2083,0;0,1869;0,0;0,0;0,0;0,0;0,0;98,0;98,0;124,43;0,0;POKRYT_Z_BATERIE;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).;15,09;7,85;18,5;10655,04;12089,9
