@@ -1,8 +1,8 @@
 Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-09;12:45;0,0;0,05;-3,04;94,9;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-3.04 EUR). Nucene zapnuti bojleru k pohlceni energie.
-2026-04-09;13:00;0,0;0,04;-3,23;94,8;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-3.23 EUR). Nucene zapnuti bojleru k pohlceni energie.
-2026-04-09;13:15;0,0;0,04;-5,54;94,7;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-5.54 EUR). Nucene zapnuti bojleru k pohlceni energie.
-2026-04-09;13:30;0,0;0,04;-9,29;94,6;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-9.29 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-09;12:45;0,0;0,09;-3,04;93,8;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-3.04 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-09;13:00;0,0;0,04;-3,23;93,7;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-3.23 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-09;13:15;0,0;0,04;-5,54;93,6;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-5.54 EUR). Nucene zapnuti bojleru k pohlceni energie.
+2026-04-09;13:30;0,0;0,04;-9,29;93,5;ZAPNOUT_BOJLERY_A_NABIJET;Zaporna cena (-9.29 EUR). Nucene zapnuti bojleru k pohlceni energie.
 2026-04-09;13:45;0,0;0,06;-12,45;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-12.45 EUR). Nucene zapnuti bojleru k pohlceni energie.
 2026-04-09;14:00;0,0;0,02;-9,83;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-9.83 EUR). Nucene zapnuti bojleru k pohlceni energie.
 2026-04-09;14:15;0,0;0,04;-9,31;100,0;ZAPNOUT_BOJLERY;Zaporna cena (-9.31 EUR). Nucene zapnuti bojleru k pohlceni energie.
@@ -95,7 +95,7 @@ Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_
 2026-04-10;12:00;0,0;0,22;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-10;12:15;0,0;0,4;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-10;12:30;0,0;0,4;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-10;12:45;0,0;0,15;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-10;12:45;0,0;0,16;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-10;13:00;0,0;0,28;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-10;13:15;0,0;0,49;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-10;13:30;0,0;0,43;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
