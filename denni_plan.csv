@@ -1,11 +1,10 @@
 Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-09;22:45;0,0;0,12;91,17;42,7;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 91.17 EUR.
-2026-04-09;23:00;0,0;0,06;97,64;42,5;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-09;23:15;0,0;0,1;91,25;42,3;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-09;23:30;0,0;0,08;86,14;42,1;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-09;23:45;0,0;0,08;77,07;41,9;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
-2026-04-10;00:00;0,0;0,14;89,33;41,6;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 89.33 EUR.
-2026-04-10;00:15;0,0;0,16;81,9;41,2;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 81.90 EUR.
+2026-04-09;23:00;0,0;0,06;97,64;40,9;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-09;23:15;0,0;0,1;91,25;40,6;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-09;23:30;0,0;0,08;86,14;40,4;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-09;23:45;0,0;0,08;77,07;40,2;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-10;00:00;0,0;0,14;89,33;39,9;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 89.33 EUR.
+2026-04-10;00:15;0,0;0,16;81,9;39,5;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 81.90 EUR.
 2026-04-10;00:30;0,0;0,15;74,73;51,5;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 74.73 EUR).
 2026-04-10;00:45;0,0;0,2;78,87;51,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 78.87 EUR.
 2026-04-10;01:00;0,0;0,2;76,15;50,5;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 76.15 EUR.
@@ -95,7 +94,7 @@ Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_
 2026-04-10;22:00;0,0;0,59;165,95;14,1;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 165.95 EUR.
 2026-04-10;22:15;0,0;0,8;150,0;12,1;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 150.00 EUR.
 2026-04-10;22:30;0,0;0,84;141,9;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 141.90 EUR.
-2026-04-10;22:45;0,0;0,7;127,32;12,8;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 127.32 EUR).
+2026-04-10;22:45;0,0;0,67;127,32;12,8;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 127.32 EUR).
 2026-04-10;23:00;0,0;0,41;139,1;11,8;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 139.10 EUR.
 2026-04-10;23:15;0,0;0,36;134,61;10,9;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 134.61 EUR.
 2026-04-10;23:30;0,0;0,25;132,2;10,3;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 132.20 EUR.
@@ -191,3 +190,4 @@ Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_
 2026-04-11;22:00;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-11;22:15;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-11;22:30;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-11;22:45;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
