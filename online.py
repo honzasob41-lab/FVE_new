@@ -320,6 +320,9 @@ def main():
     p_vybijeni = pulp.LpVariable.dicts("Vybijeni", kroky_15min, lowBound=0, upBound=MAX_VYKON_STRIDACE)
     soc = pulp.LpVariable.dicts("SOC", kroky_15min, lowBound=10.0, upBound=100.0)
 
+    # --- PŘIDANÁ BINÁRNÍ PROMĚNNÁ PRO KONTROLU CHODU ---
+    is_charging = pulp.LpVariable.dicts("IsCharging", kroky_15min, cat=pulp.LpBinary)
+
     DELTA_T = 0.25 
 
     POPLATEK_DISTRIBUCE_NAKUP_EUR = 60.0  
@@ -338,6 +341,11 @@ def main():
             model += soc[i] == pocatecni_soc + zmena_soc
         else:
             model += soc[i] == soc[i-1] + zmena_soc
+
+        # --- PŘIDANÉ BIG-M PODMÍNKY ---
+        # Využíváme MAX_VYKON_STRIDACE jako dostatečně velkou konstantu M
+        model += p_nabijeni[i] <= MAX_VYKON_STRIDACE * is_charging[i]
+        model += p_vybijeni[i] <= MAX_VYKON_STRIDACE * (1 - is_charging[i])
 
     model.solve(pulp.PULP_CBC_CMD(msg=False))
 
@@ -448,7 +456,7 @@ def main():
         'Odhad_Spotreba_Modelu_kW': odhad_spotreby_ted,
         'Aktualni_import/export_W': str(m['sit_w']).replace('.', ','),
         'Import_5min_kWh': str(round(h_import, 4)).replace('.', ','),                
-        'Export_5min_kWh': str(round(h_export, 4)).replace('.', ','),                                                    
+        'Export_5min_kWh': str(round(h_export, 4)).replace('.', ','),                                                                      
         'Celkovy_Vykon_Panelu_W': str(celkovy_dc_vykon_w).replace('.', ','), 
         'Cista_Vyroba_Panelu_kWh': str(round(cista_vyroba_pv_kwh, 4)).replace('.', ','),
         'Aktualni_AC_Vystup_W': str(m['ac_out']).replace('.', ','),
@@ -475,4 +483,4 @@ def main():
 
 if __name__ == "__main__":
     try: main()
-    except Exception as e: traceback.print_exc() 
+    except Exception as e: traceback.print_exc()
