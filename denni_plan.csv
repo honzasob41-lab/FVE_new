@@ -1,25 +1,24 @@
 Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-10;11:15;4,68;1,61;114,9;70,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 114.90 EUR.
-2026-04-10;11:30;4,34;0,75;110,62;45,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 110.62 EUR.
-2026-04-10;11:45;4,0;0,72;107,59;23,7;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 107.59 EUR.
-2026-04-10;12:00;3,65;0,22;107,0;32,3;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-10;12:15;3,45;0,4;96,6;39,9;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-10;12:30;3,24;0,4;99,37;47,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-10;12:45;3,03;0,24;87,36;53,9;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-10;13:00;2,82;0,5;100,84;59,7;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-10;13:15;2,66;0,68;89,68;64,7;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-10;13:30;2,5;0,38;87,46;70,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-10;13:45;2,34;0,22;95,14;75,3;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-10;14:00;2,19;0,29;89,32;80,1;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-10;14:15;2,04;0,38;83,44;84,2;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-10;14:30;1,9;0,53;89,01;87,7;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-10;14:45;1,76;0,86;86,31;89,9;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-10;15:00;1,62;0,86;90,2;91,8;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-10;15:15;1,49;0,58;98,04;94,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-10;15:30;1,36;0,58;101,27;96,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-10;15:45;1,23;0,4;102,94;98,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-10;16:00;1,09;0,55;97,81;99,4;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
-2026-04-10;16:15;0,99;0,74;107,56;100,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-10;11:30;4,34;0,75;110,62;70,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 110.62 EUR.
+2026-04-10;11:45;4,0;0,72;107,59;45,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 107.59 EUR.
+2026-04-10;12:00;3,65;0,22;107,0;32,9;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 107.00 EUR.
+2026-04-10;12:15;3,45;0,4;96,6;40,5;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-10;12:30;3,24;0,4;99,37;47,6;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-10;12:45;3,03;0,24;87,36;54,5;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-10;13:00;2,82;0,5;100,84;60,3;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-10;13:15;2,66;0,68;89,68;65,3;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-10;13:30;2,5;0,38;87,46;70,6;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-10;13:45;2,34;0,22;95,14;75,9;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-10;14:00;2,19;0,29;89,32;80,7;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-10;14:15;2,04;0,38;83,44;84,8;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-10;14:30;1,9;0,53;89,01;88,3;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-10;14:45;1,76;0,86;86,31;90,5;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-10;15:00;1,62;0,86;90,2;92,4;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-10;15:15;1,49;0,58;98,04;94,6;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-10;15:30;1,36;0,58;101,27;96,6;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-10;15:45;1,23;0,4;102,94;98,6;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-10;16:00;1,09;0,55;97,81;100,0;NABIJET_SOLAREM;Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora).
+2026-04-10;16:15;0,99;0,74;107,56;100,0;PRODAVAT_DO_SITE;Baterie je plna na 100 %, prodej prebytku za cenu 107.56 EUR.
 2026-04-10;16:30;0,88;0,8;116,68;100,0;NORMALNI_PROVOZ;Bezna spotreba kryta primym slunecnim vykonem.
 2026-04-10;16:45;0,77;0,76;127,81;100,0;NORMALNI_PROVOZ;Bezna spotreba kryta primym slunecnim vykonem.
 2026-04-10;17:00;0,66;0,67;114,82;100,0;NORMALNI_PROVOZ;Bezna spotreba kryta primym slunecnim vykonem.
@@ -191,3 +190,4 @@ Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_
 2026-04-12;10:30;0,0;0,02;0,0;79,8;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-12;10:45;0,0;0,02;0,0;79,8;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-12;11:00;0,0;Nedostatek dat;0,0;79,8;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-12;11:15;0,0;0,02;0,0;79,7;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
