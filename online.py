@@ -21,7 +21,6 @@ LAT, LON = "49.848", "18.409"
 DECLINATION, AZIMUTH = "35", "-50"
 KW_PEAK = 10.0
 
-SOUBOR_PLAN = "denni_plan.csv"
 SOUBOR_PREDPOVEDI = "predpoved_cache.json"
 SOUBOR_PREDPOVEDI_PVF = "predpoved_pvf_cache.json"
 SOUBOR_CENY = "ceny_cache.json"
@@ -128,18 +127,7 @@ def nacti_predpoved_fs():
     return predpoved
 
 def nacti_predpoved_pvf():
-    url = "https://wp2.pvforecast.cz/api/v1/power/calculate"
-    headers = {"x-api-key": "8slpgw"}
-    payload = {
-        "latitude": 49.84838,
-        "longitude": 18.40898,
-        "elevation": 250,
-        "plane1_inclination": float(DECLINATION),
-        "plane1_azimuth": float(AZIMUTH),
-        "plane1_power": int(KW_PEAK * 1000),
-        "timezone": "Europe/Prague"
-    }
-    
+    url = f"https://www.pvforecast.cz/api/?key=8slpgw&lat={LAT}&lon={LON}&format=json"
     predpoved, data = {}, None
     if os.path.exists(SOUBOR_PREDPOVEDI_PVF):
         try:
@@ -150,10 +138,11 @@ def nacti_predpoved_pvf():
         
     if not data:
         try:
-            r = requests.post(url, json=payload, headers=headers, timeout=15)
-            if r.status_code in [200, 201]:
-                data = r.json()
-                data["_last_download"] = datetime.now().isoformat()
+            r = requests.get(url, timeout=15)
+            if r.status_code == 200:
+                try: raw_json = r.json()
+                except: raw_json = json.loads(r.text)
+                data = {"_last_download": datetime.now().isoformat(), "forecast": raw_json}
                 with open(SOUBOR_PREDPOVEDI_PVF, 'w') as f: json.dump(data, f)
         except: pass
         
@@ -162,8 +151,11 @@ def nacti_predpoved_pvf():
     try:
         raw = []
         for item in data['forecast']:
-            cas = pd.to_datetime(item['date_time']).tz_convert('Europe/Prague').tz_localize(None)
-            raw.append({"Cas": cas, "W": float(item['power'])})
+            cas_str = item[0]
+            osvit_w_m2 = float(item[1])
+            cas = pd.to_datetime(cas_str).replace(tzinfo=None)
+            vykon_w = osvit_w_m2 * KW_PEAK
+            raw.append({"Cas": cas, "W": vykon_w})
             
         if raw:
             df = pd.DataFrame(raw).set_index("Cas").resample("5min").interpolate(method='linear').fillna(0.0)
@@ -228,6 +220,7 @@ def main():
     for i in range(192):
         c = ted_ctvrt + timedelta(minutes=15 * i)
         casy_192.append(c)
+        # ZMĚNA: Vráceno na původní předpověď Forecast.Solar
         pv_192.append(vsechny_fs.get(c, 0.0))
         ceny_192.append(vsechny_ceny.get(c, 0.0))
         spot = nauc_se_spotrebu(df_h, c)
