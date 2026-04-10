@@ -14,7 +14,7 @@ import glob
 
 warnings.simplefilter(action='ignore', category=UserWarning)
 
-# Konfigurace prostředí
+# Konfigurace
 TOKEN_SOLAX = os.environ.get("TOKEN_SOLAX")
 WIFI_SN = os.environ.get("SN")
 LAT, LON = "49.848", "18.409"
@@ -118,17 +118,16 @@ def nacti_predpoved_fs():
         raw_data = []
         for cas_str, wh in data['result']['watt_hours_period'].items():
             cas = pd.to_datetime(cas_str).replace(tzinfo=None)
-            raw_data.append({"Cas": cas, "W": float(wh)}) # Wh za hodinu = prumerny vykon ve W
+            raw_data.append({"Cas": cas, "W": float(wh)})
         if raw_data:
             df = pd.DataFrame(raw_data).set_index("Cas").resample("15min").interpolate(method='linear', limit=3).fillna(0.0)
             for c, r in df.iterrows():
-                predpoved[c.to_pydatetime()] = r["W"] / 1000.0 # Pro PuLP ukladame v kW
+                predpoved[c.to_pydatetime()] = r["W"] / 1000.0
     except: pass
     return predpoved
 
 def nauc_se_spotrebu(df_h, aktualni_cas):
     if df_h.empty or 'Skutecna_Spotreba_W' not in df_h.columns: return None
-    df_h['Cas'] = pd.to_datetime(df_h['Cas'], format='mixed', errors='coerce')
     maska = (df_h['Cas'] >= (aktualni_cas - timedelta(days=90)))
     df_temp = df_h[maska].copy()
     cz_holidays = holidays.CZ(years=[aktualni_cas.year])
@@ -208,13 +207,37 @@ def main():
     m = nacti_solax_v2()
     if not m: return
 
-    # Vygenerování nového řádku
-    h_spot = max(0, m['ac_out'] - m['sit_w'])
+    # VÝPOČET DENNÍHO IMPORTU/EXPORTU Z HISTORIE
+    denni_import_kwh = 0.0
+    denni_export_kwh = 0.0
+    h_spotreba_w = 0
+
+    if not df_h.empty:
+        # Získáme data pro dnešní den
+        dnesni_data = df_h[df_h['Cas'].dt.date == ted.date()]
+        if not dnesni_data.empty:
+            # První ranní záznam (půlnoc) pro odečet
+            start_import = bezpecny_float(dnesni_data.iloc[0].get('Spotreba_Celkem_kWh', m['s_celkem']))
+            start_export = bezpecny_float(dnesni_data.iloc[0].get('Export_Celkem_kWh', m['e_celkem']))
+            
+            denni_import_kwh = max(0.0, m['s_celkem'] - start_import)
+            denni_export_kwh = max(0.0, m['e_celkem'] - start_export)
+
+        # Výpočet aktuální 5min spotřeby W (pro učení)
+        posledni_s_celkem = bezpecny_float(df_h.iloc[-1].get('Spotreba_Celkem_kWh', m['s_celkem']))
+        rozdil_kwh = m['s_celkem'] - posledni_s_celkem
+        if 0 < rozdil_kwh < 10:
+             h_spotreba_w = int(round(rozdil_kwh * 12000)) # Přepočet 5min kWh na průměrné W
+        else:
+             h_spotreba_w = int(round(max(0, m['ac_out'] - m['sit_w'])))
+    else:
+        h_spotreba_w = int(round(max(0, m['ac_out'] - m['sit_w'])))
+
     akce = rozhodovaci_logika(pv_192[0], spotreba_192[0], m['soc'], ceny_192[0])
     
     n_radek = pd.DataFrame([{
         'Cas': ted.strftime('%Y-%m-%d %H:%M:%S'),
-        'Skutecna_Spotreba_W': int(round(h_spot)),
+        'Skutecna_Spotreba_W': h_spotreba_w,
         'Odhad_Spotreba_Modelu_W': int(round(spotreba_192[0] * 1000)),
         'Aktualni_import/export_W': str(m['sit_w']).replace('.', ','),
         'Aktualni_AC_Vystup_W': str(m['ac_out']).replace('.', ','),
@@ -227,16 +250,16 @@ def main():
         'Doporucena_Akce': akce, 'Akce_PuLP': akce,
         'Duvod_PuLP': vygeneruj_duvod_pulp(akce, ceny_192[0], pv_192[0], m['soc']),
         'Skutecny_AC_Vystup_kWh': str(round(m['v_dnes'], 4)).replace('.', ','),
-        'Cista_Vyroba_Panelu_kWh': str(round((m['dc1']+m['dc2'])/1000*0.25, 4)).replace('.', ','),
-        'Import_5min_kWh': str(round((abs(m['sit_w'])/1000*0.25 if m['sit_w']<0 else 0), 4)).replace('.', ','),
-        'Export_5min_kWh': str(round((m['sit_w']/1000*0.25 if m['sit_w']>0 else 0), 4)).replace('.', ','),
-        'Denni_Import_kWh': '0,0', 'Denni_Export_kWh': '0,0',
+        'Cista_Vyroba_Panelu_kWh': str(round((m['dc1']+m['dc2'])/1000*0.0833, 4)).replace('.', ','), # Oprava na 5 minut
+        'Import_5min_kWh': str(round((abs(m['sit_w'])/1000*0.0833 if m['sit_w']<0 else 0), 4)).replace('.', ','), # Oprava na 5 minut
+        'Export_5min_kWh': str(round((m['sit_w']/1000*0.0833 if m['sit_w']>0 else 0), 4)).replace('.', ','), # Oprava na 5 minut
+        'Denni_Import_kWh': str(round(denni_import_kwh, 2)).replace('.', ','), 
+        'Denni_Export_kWh': str(round(denni_export_kwh, 2)).replace('.', ','),
         'AC_vyroba_Dnes_kWh': str(m['v_dnes']).replace('.', ','),
         'Spotreba_Celkem_kWh': str(m['s_celkem']).replace('.', ','),
         'Export_Celkem_kWh': str(m['e_celkem']).replace('.', ',')
     }])
 
-    # Definitivní a pevné pořadí sloupců
     poradi = [
         'Cas', 'Skutecna_Spotreba_W', 'Odhad_Spotreba_Modelu_W', 'Aktualni_import/export_W', 
         'Aktualni_AC_Vystup_W', 'Celkovy_Vykon_Panelu_W', 'Predpoved_FS_W', 'Vykon_Baterie_W', 
