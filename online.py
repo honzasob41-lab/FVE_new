@@ -14,9 +14,9 @@ import glob
 
 warnings.simplefilter(action='ignore', category=UserWarning)
 
+# Konfigurace prostředí
 TOKEN_SOLAX = os.environ.get("TOKEN_SOLAX")
 WIFI_SN = os.environ.get("SN")
-
 LAT, LON = "49.848", "18.409"
 DECLINATION, AZIMUTH = "35", "-50"
 KW_PEAK = 10.0
@@ -41,34 +41,24 @@ def nacti_solax_v2():
     url = "https://global.solaxcloud.com/proxyApp/proxy/api/v2/dataAccess/realtimeInfo/get"
     payload = {"wifiSn": WIFI_SN}
     headers = {"tokenId": TOKEN_SOLAX, "Content-Type": "application/json"}
-    
     for pokus in range(3):
         try:
             r = requests.post(url, json=payload, headers=headers, timeout=15)
             data = r.json()
-            if data.get("success") is not True: 
-                print(f"SolaX API zamitlo pozadavek: {data}")
-                time.sleep(5)
-                continue
-            
-            res = data.get("result")
-            if not res: 
-                time.sleep(5)
-                continue
-                
-            return {
-                "v_dnes": float(res.get("yieldtoday", 0)),
-                "soc": float(res.get("soc", 0)),
-                "s_celkem": float(res.get("consumeenergy", 0)),
-                "dc1": float(res.get("powerdc1", 0)),
-                "dc2": float(res.get("powerdc2", 0)),
-                "ac_out": float(res.get("acpower", 0)),
-                "bat_p": float(res.get("batPower", 0)),
-                "sit_w": float(res.get("feedinpower", 0)),
-                "e_celkem": float(res.get("feedinenergy", 0))
-            }
-        except Exception as e: 
-            print(f"SolaX sitova chyba: {e}")
+            if data.get("success") is True:
+                res = data.get("result")
+                return {
+                    "v_dnes": float(res.get("yieldtoday", 0)),
+                    "soc": float(res.get("soc", 0)),
+                    "s_celkem": float(res.get("consumeenergy", 0)),
+                    "dc1": float(res.get("powerdc1", 0)),
+                    "dc2": float(res.get("powerdc2", 0)),
+                    "ac_out": float(res.get("acpower", 0)),
+                    "bat_p": float(res.get("batPower", 0)),
+                    "sit_w": float(res.get("feedinpower", 0)),
+                    "e_celkem": float(res.get("feedinenergy", 0))
+                }
+        except:
             time.sleep(5)
     return None
 
@@ -77,7 +67,6 @@ def nacti_ceny_entsoe():
     DOMENA_CZ = "10YCZ-CEPS-----N"
     cas_utc = datetime.now(timezone.utc)
     ceny, data = {}, {}
-    
     if os.path.exists(SOUBOR_CENY):
         try:
             with open(SOUBOR_CENY, 'r') as f: data = json.load(f)
@@ -85,11 +74,9 @@ def nacti_ceny_entsoe():
             if last_dl and datetime.now() - datetime.fromisoformat(last_dl) < timedelta(hours=6):
                 return {pd.to_datetime(k).to_pydatetime(): v for k, v in data["ceny"].items()}
         except: pass
-
     start = (cas_utc - timedelta(days=1)).strftime("%Y%m%d0000")
     stop = (cas_utc + timedelta(days=3)).strftime("%Y%m%d0000")
     url = f"https://web-api.tp.entsoe.eu/api?securityToken={TOKEN_ENTSOE}&documentType=A44&in_Domain={DOMENA_CZ}&out_Domain={DOMENA_CZ}&periodStart={start}&periodEnd={stop}"
-    
     try:
         r = requests.get(url, timeout=15)
         if r.status_code == 200:
@@ -97,21 +84,19 @@ def nacti_ceny_entsoe():
             zaznamy = []
             for ts in root.findall('.//{*}TimeSeries'):
                 period = ts.find('.//{*}Period')
-                if not period: continue
-                krok = 15 if period.find('.//{*}resolution').text == 'PT15M' else 60
+                reso = period.find('.//{*}resolution').text
+                krok = 15 if reso == 'PT15M' else 60
                 start_dt = pd.to_datetime(period.find('.//{*}start').text)
                 for point in period.findall('.//{*}Point'):
                     pos = int(point.find('{*}position').text)
                     price = float(point.find('{*}price.amount').text)
                     cas_local = (start_dt + timedelta(minutes=(pos - 1) * krok)).tz_convert('Europe/Prague').tz_localize(None)
                     zaznamy.append({"Cas": cas_local, "Cena": price})
-            
             if zaznamy:
                 df = pd.DataFrame(zaznamy).drop_duplicates(subset=["Cas"]).set_index("Cas").resample("15min").ffill().reset_index()
                 for _, row in df.iterrows(): ceny[row["Cas"].to_pydatetime()] = row["Cena"]
                 with open(SOUBOR_CENY, 'w') as f:
                     json.dump({"_last_download": datetime.now().isoformat(), "ceny": {k.strftime('%Y-%m-%d %H:%M:%S'): v for k, v in ceny.items()}}, f)
-                return ceny
     except: pass
     return ceny
 
@@ -121,12 +106,9 @@ def nacti_predpoved_fs():
     if os.path.exists(SOUBOR_PREDPOVEDI):
         try:
             with open(SOUBOR_PREDPOVEDI, 'r') as f: data = json.load(f)
-            last_dl = data.get("_last_download")
-            if last_dl and datetime.now() - datetime.fromisoformat(last_dl) < timedelta(hours=3):
-                pass 
-            else: data = None
+            if datetime.now() - datetime.fromisoformat(data.get("_last_download", "2000-01-01")) > timedelta(hours=3):
+                data = None
         except: data = None
-
     if not data:
         try:
             r = requests.get(url, timeout=10)
@@ -135,23 +117,19 @@ def nacti_predpoved_fs():
                 data["_last_download"] = datetime.now().isoformat()
                 with open(SOUBOR_PREDPOVEDI, 'w') as f: json.dump(data, f)
         except: pass
-
     if not data or 'result' not in data: return predpoved
     try:
-        raw_data = []
         for cas_str, wh in data['result']['watt_hours_period'].items():
             cas = pd.to_datetime(cas_str, errors='coerce')
-            if pd.notna(cas): 
-                raw_data.append({"Cas": cas.replace(tzinfo=None), "Vykon_kW": float(wh) * 0.004})
-        if raw_data:
-            df = pd.DataFrame(raw_data).drop_duplicates(subset=["Cas"]).set_index("Cas").sort_index()
-            df = df.resample("15min").interpolate(method='linear', limit=3).fillna(0.0).reset_index()
-            for _, row in df.iterrows(): predpoved[row["Cas"].to_pydatetime()] = max(0.0, float(row["Vykon_kW"]))
+            if pd.notna(cas):
+                # Prevod Wh za 15 minut na prumerny vykon v kW
+                predpoved[cas.replace(tzinfo=None).to_pydatetime()] = float(wh) * 0.004
     except: pass
     return predpoved
 
 def nauc_se_spotrebu(df_h, aktualni_cas):
     if df_h.empty or 'Skutecna_Spotreba_W' not in df_h.columns: return None
+    df_h['Cas'] = pd.to_datetime(df_h['Cas'], format='mixed', errors='coerce')
     maska = (df_h['Cas'] >= (aktualni_cas - timedelta(days=90)))
     df_temp = df_h[maska].copy()
     cz_holidays = holidays.CZ(years=[aktualni_cas.year])
@@ -181,23 +159,26 @@ def rozhodovaci_logika(prum_p, spot, soc, cena):
     return "NORMALNI_PROVOZ"
 
 def vygeneruj_duvod_pulp(akce, cena, pv, soc):
-    if cena < 0.0: return f"Zaporna cena ({cena:.2f} EUR). Nucena spotreba."
-    if akce == "NABIJET_ZE_SITE": return f"Levny nakup ({cena:.2f} EUR)."
-    if akce == "POKRYT_Z_BATERIE": return f"Vyhnuti se cene {cena:.2f} EUR."
+    if cena < 0.0:
+        return f"Zaporna cena ({cena:.2f} EUR). Nucena spotreba a ohrev bojleru."
+    if akce == "PRODAVAT_Z_BATERII":
+        if cena > 150.0: return f"Extremne vysoka cena ({cena:.2f} EUR). Maximalni vyboj pro zisk."
+        if soc > 90.0: return f"Baterie je skoro plna ({soc:.1f} %). Vyuziti spicky ({cena:.2f} EUR)."
+        return f"Optimalizace zisku: Prodej pri cene {cena:.2f} EUR."
+    if akce == "NABIJET_ZE_SITE": return f"Levny nakup ({cena:.2f} EUR) pro pokryti budoucich drahych hodin."
+    if akce == "POKRYT_Z_BATERIE": return f"Kryti spotreby z baterie, cena na trhu je {cena:.2f} EUR."
     return "Bezny provoz EMS."
 
 def main():
     ted = datetime.now(ZoneInfo("Europe/Prague")).replace(tzinfo=None, microsecond=0)
     ted_ctvrt = ted.replace(minute=(ted.minute // 15) * 15, second=0)
     
-    # Načtení historie - klíčové: decimal=','
     vsechny_soubory = glob.glob("fve_historie_*.csv")
     df_list = [pd.read_csv(f, sep=';', decimal=',') for f in vsechny_soubory]
-    if df_list:
-        df_h = pd.concat(df_list, ignore_index=True)
+    df_h = pd.concat(df_list, ignore_index=True) if df_list else pd.DataFrame()
+    if not df_h.empty:
         df_h['Cas'] = pd.to_datetime(df_h['Cas'], format='mixed', errors='coerce')
         df_h = df_h.sort_values(by='Cas').reset_index(drop=True)
-    else: df_h = pd.DataFrame()
 
     vsechny_ceny = nacti_ceny_entsoe()
     vsechny_fs = nacti_predpoved_fs()
@@ -226,26 +207,13 @@ def main():
         model += soc_vars[i] == (p_soc if i==0 else soc_vars[i-1]) + zmena
         model += p_nab[i] <= MAX_VYKON_STRIDACE * is_chg[i]
         model += p_vyb[i] <= MAX_VYKON_STRIDACE * (1 - is_chg[i])
-
     model += pulp.lpSum([(p_nakup[i]*(ceny_192[i]+60) - p_prodej[i]*(ceny_192[i]-10))*0.25 for i in range(192)])
     model.solve(pulp.PULP_CBC_CMD(msg=False))
-
-    # Plán pro denni_plan.csv
-    plan_out = []
-    for i in range(192):
-        plan_out.append({
-            'Datum': casy_192[i].strftime('%Y-%m-%d'), 'Cas': casy_192[i].strftime('%H:%M'),
-            'Predpoved_FS_W': int(round(pv_192[i] * 1000)),
-            'Odhad_Spotreba_W': int(round(spotreba_192[i] * 1000)) if spotreba_192[i] > 0 else "Nedostatek dat",
-            'Cena_EUR/MWh': str(round(ceny_192[i], 2)).replace('.', ','),
-            'Simulovane_SOC_%': str(round(soc_vars[i].varValue, 1)).replace('.', ',')
-        })
-    pd.DataFrame(plan_out).to_csv(SOUBOR_PLAN, index=False, sep=';', decimal=',')
 
     m = nacti_solax_v2()
     if not m: return
 
-    # Výpočet a uložení řádku historie
+    # Výpočet hodnot
     h_spot = max(0, m['ac_out'] - m['sit_w'])
     akce = rozhodovaci_logika(pv_192[0], spotreba_192[0], m['soc'], ceny_192[0])
     
@@ -253,34 +221,36 @@ def main():
         'Cas': ted.strftime('%Y-%m-%d %H:%M:%S'),
         'Skutecna_Spotreba_W': int(round(h_spot)),
         'Odhad_Spotreba_Modelu_W': int(round(spotreba_192[0] * 1000)),
-        'Aktualni_import/export_W': m['sit_w'],
-        'Aktualni_AC_Vystup_W': m['ac_out'],
-        'Celkovy_Vykon_Panelu_W': m['dc1']+m['dc2'],
+        'Aktualni_import/export_W': str(m['sit_w']).replace('.', ','),
+        'Aktualni_AC_Vystup_W': str(m['ac_out']).replace('.', ','),
+        'Celkovy_Vykon_Panelu_W': int(m['dc1']+m['dc2']),
         'Predpoved_FS_W': int(round(pv_192[0] * 1000)),
-        'Vykon_Baterie_W': m['bat_p'],
-        'Baterie_SOC_%': m['soc'],
-        'Simulovane_SOC_%': soc_vars[0].varValue,
-        'Cena_EUR/MWh': ceny_192[0],
+        'Vykon_Baterie_W': int(m['bat_p']),
+        'Baterie_SOC_%': str(m['soc']).replace('.', ','),
+        'Simulovane_SOC_%': str(round(float(soc_vars[0].varValue), 1)).replace('.', ','),
+        'Cena_EUR/MWh': str(round(ceny_192[0], 2)).replace('.', ','),
         'Doporucena_Akce': akce, 'Akce_PuLP': akce,
         'Duvod_PuLP': vygeneruj_duvod_pulp(akce, ceny_192[0], pv_192[0], m['soc']),
-        'Skutecny_AC_Vystup_kWh': round(m['v_dnes'], 4),
-        'Cista_Vyroba_Panelu_kWh': round((m['dc1']+m['dc2'])/1000*0.25, 4),
-        'Import_5min_kWh': round((abs(m['sit_w'])/1000*0.25 if m['sit_w']<0 else 0), 4),
-        'Export_5min_kWh': round((m['sit_w']/1000*0.25 if m['sit_w']>0 else 0), 4),
-        'Denni_Import_kWh': 0, 'Denni_Export_kWh': 0,
-        'AC_vyroba_Dnes_kWh': m['v_dnes'], 'Spotreba_Celkem_kWh': m['s_celkem'], 'Export_Celkem_kWh': m['e_celkem']
+        'Skutecny_AC_Vystup_kWh': str(round(m['v_dnes'], 4)).replace('.', ','),
+        'Cista_Vyroba_Panelu_kWh': str(round((m['dc1']+m['dc2'])/1000*0.25, 4)).replace('.', ','),
+        'Import_5min_kWh': str(round((abs(m['sit_w'])/1000*0.25 if m['sit_w']<0 else 0), 4)).replace('.', ','),
+        'Export_5min_kWh': str(round((m['sit_w']/1000*0.25 if m['sit_w']>0 else 0), 4)).replace('.', ','),
+        'Denni_Import_kWh': '0,0', 'Denni_Export_kWh': '0,0',
+        'AC_vyroba_Dnes_kWh': str(m['v_dnes']).replace('.', ','),
+        'Spotreba_Celkem_kWh': str(m['s_celkem']).replace('.', ','),
+        'Export_Celkem_kWh': str(m['e_celkem']).replace('.', ',')
     }])
 
     poradi = [
-        'Cas', 'Skutecna_Spotreba_W', 'Odhad_Spotreba_Modelu_W', 'Aktualni_import/export_W', 'Aktualni_AC_Vystup_W',
-        'Celkovy_Vykon_Panelu_W', 'Predpoved_FS_W', 'Vykon_Baterie_W', 'Baterie_SOC_%', 'Simulovane_SOC_%',
-        'Cena_EUR/MWh', 'Doporucena_Akce', 'Akce_PuLP', 'Duvod_PuLP', 'Skutecny_AC_Vystup_kWh',
-        'Cista_Vyroba_Panelu_kWh', 'Import_5min_kWh', 'Export_5min_kWh', 'Denni_Import_kWh',
-        'Denni_Export_kWh', 'AC_vyroba_Dnes_kWh', 'Spotreba_Celkem_kWh', 'Export_Celkem_kWh'
+        'Cas', 'Skutecna_Spotreba_W', 'Odhad_Spotreba_Modelu_W', 'Aktualni_import/export_W', 
+        'Aktualni_AC_Vystup_W', 'Celkovy_Vykon_Panelu_W', 'Predpoved_FS_W', 'Vykon_Baterie_W', 
+        'Baterie_SOC_%', 'Simulovane_SOC_%', 'Cena_EUR/MWh', 'Doporucena_Akce', 'Akce_PuLP', 
+        'Duvod_PuLP', 'Skutecny_AC_Vystup_kWh', 'Cista_Vyroba_Panelu_kWh', 'Import_5min_kWh', 
+        'Export_5min_kWh', 'Denni_Import_kWh', 'Denni_Export_kWh', 'AC_vyroba_Dnes_kWh', 
+        'Spotreba_Celkem_kWh', 'Export_Celkem_kWh'
     ]
     
     soubor_hist = f"fve_historie_{ted.strftime('%Y_%m')}.csv"
-    # Tady je ta nejdůležitější oprava: decimal=','
     n_radek[poradi].to_csv(soubor_hist, mode='a', header=not os.path.exists(soubor_hist), index=False, sep=';', decimal=',')
 
 if __name__ == "__main__":
