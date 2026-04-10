@@ -188,7 +188,7 @@ def rozhodovaci_logika(prum_p, spot, soc, cena):
     if cena < 0.0: return "ZAPNOUT_BOJLERY_A_NABIJET" if soc < 99 else "ZAPNOUT_BOJLERY"
     bilance = prum_p - spot
     if cena < 1.0 and soc < 20 and bilance <= 0: return "NABIJET_ZE_SITE"
-    elif cena > 4.0 and soc > 80: return "PRODAVAT_I_BATERII" if bilance > 0 else "POKRYT_Z_BATERIE"
+    elif cena > 4.0 and soc > 80: return "PRODAVAT_Z_BATERII" if bilance > 0 else "POKRYT_Z_BATERIE"
     elif bilance > 0 and soc > 95: return "PRODAVAT_DO_SITE"
     elif bilance > 0: return "NABIJET_SOLAREM"
     elif soc > 20: return "VYBIJET_PRO_DUM"
