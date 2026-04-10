@@ -23,6 +23,7 @@ KW_PEAK = 10.0
 
 SOUBOR_PLAN = "denni_plan.csv"
 SOUBOR_PREDPOVEDI = "predpoved_cache.json"
+SOUBOR_PREDPOVEDI_PVF = "predpoved_pvf_cache.json"
 SOUBOR_CENY = "ceny_cache.json"
 MIN_DNI_PRO_UCENI = 2
 MAX_VYKON_STRIDACE = 10.0
@@ -116,15 +117,59 @@ def nacti_predpoved_fs():
     if not data or 'result' not in data: return predpoved
     try:
         raw_data = []
-        # Opraveno na "watts" pro přesný okamžitý výkon
         for cas_str, w in data['result']['watts'].items():
             cas = pd.to_datetime(cas_str).replace(tzinfo=None)
             raw_data.append({"Cas": cas, "W": float(w)})
         if raw_data:
-            df = pd.DataFrame(raw_data).set_index("Cas").resample("15min").interpolate(method='linear', limit=3).fillna(0.0)
+            df = pd.DataFrame(raw_data).set_index("Cas").resample("5min").interpolate(method='linear').fillna(0.0)
             for c, r in df.iterrows():
                 predpoved[c.to_pydatetime()] = r["W"] / 1000.0
     except: pass
+    return predpoved
+
+def nacti_predpoved_pvf():
+    url = "https://wp2.pvforecast.cz/api/v1/power/calculate"
+    headers = {"x-api-key": "8slpgw"}
+    payload = {
+        "latitude": 49.84838,
+        "longitude": 18.40898,
+        "elevation": 250,
+        "plane1_inclination": float(DECLINATION),
+        "plane1_azimuth": float(AZIMUTH),
+        "plane1_power": int(KW_PEAK * 1000),
+        "timezone": "Europe/Prague"
+    }
+    
+    predpoved, data = {}, None
+    if os.path.exists(SOUBOR_PREDPOVEDI_PVF):
+        try:
+            with open(SOUBOR_PREDPOVEDI_PVF, 'r') as f: data = json.load(f)
+            if datetime.now() - datetime.fromisoformat(data.get("_last_download", "2000-01-01")) > timedelta(hours=3):
+                data = None
+        except: data = None
+        
+    if not data:
+        try:
+            r = requests.post(url, json=payload, headers=headers, timeout=15)
+            if r.status_code in [200, 201]:
+                data = r.json()
+                data["_last_download"] = datetime.now().isoformat()
+                with open(SOUBOR_PREDPOVEDI_PVF, 'w') as f: json.dump(data, f)
+        except: pass
+        
+    if not data or 'forecast' not in data: return predpoved
+    
+    try:
+        raw = []
+        for item in data['forecast']:
+            cas = pd.to_datetime(item['date_time']).tz_convert('Europe/Prague').tz_localize(None)
+            raw.append({"Cas": cas, "W": float(item['power'])})
+            
+        if raw:
+            df = pd.DataFrame(raw).set_index("Cas").resample("5min").interpolate(method='linear').fillna(0.0)
+            for c, r in df.iterrows():
+                predpoved[c.to_pydatetime()] = r["W"] / 1000.0
+    except: traceback.print_exc()
     return predpoved
 
 def nauc_se_spotrebu(df_h, aktualni_cas):
@@ -165,10 +210,7 @@ def vygeneruj_duvod_pulp(akce, cena, pv, soc):
     return "Bezny provoz EMS."
 
 def main():
-    # Čas zaokrouhlen na 0 vteřin a mikrosekund hned od začátku
     ted = datetime.now(ZoneInfo("Europe/Prague")).replace(tzinfo=None, second=0, microsecond=0)
-    
-    # Čas pro plánování PuLP (musí být po 15 minutách)
     ted_ctvrt = ted.replace(minute=(ted.minute // 15) * 15)
     
     vsechny_soubory = glob.glob("fve_historie_*.csv")
@@ -180,8 +222,8 @@ def main():
 
     vsechny_ceny = nacti_ceny_entsoe()
     vsechny_fs = nacti_predpoved_fs()
+    vsechny_pvf = nacti_predpoved_pvf()
 
-    # Příprava 48h okna pro PuLP
     ceny_192, pv_192, spotreba_192, casy_192 = [], [], [], []
     for i in range(192):
         c = ted_ctvrt + timedelta(minutes=15 * i)
@@ -193,7 +235,6 @@ def main():
 
     p_soc = bezpecny_float(df_h.iloc[-1].get('Baterie_SOC_%', 50.0)) if not df_h.empty else 50.0
     
-    # Matematický model PuLP
     model = pulp.LpProblem("EMS", pulp.LpMinimize)
     p_nab = pulp.LpVariable.dicts("Nab", range(192), lowBound=0, upBound=MAX_VYKON_STRIDACE)
     p_vyb = pulp.LpVariable.dicts("Vyb", range(192), lowBound=0, upBound=MAX_VYKON_STRIDACE)
@@ -214,7 +255,6 @@ def main():
     m = nacti_solax_v2()
     if not m: return
 
-    # Výpočet denního importu/exportu z historie
     denni_import_kwh = 0.0
     denni_export_kwh = 0.0
     h_spotreba_w = 0
@@ -238,14 +278,19 @@ def main():
 
     akce = rozhodovaci_logika(pv_192[0], spotreba_192[0], m['soc'], ceny_192[0])
     
+    ted_5min = ted.replace(minute=(ted.minute // 5) * 5)
+    fs_aktualni_w = int(round(vsechny_fs.get(ted_5min, 0.0) * 1000))
+    pvf_aktualni_w = int(round(vsechny_pvf.get(ted_5min, 0.0) * 1000))
+    
     n_radek = pd.DataFrame([{
-        'Cas': ted.strftime('%Y-%m-%d %H:%M'), # STRIKTNĚ BEZ VTEŘIN
+        'Cas': ted.strftime('%Y-%m-%d %H:%M'),
         'Skutecna_Spotreba_W': h_spotreba_w,
         'Odhad_Spotreba_Modelu_W': int(round(spotreba_192[0] * 1000)),
         'Aktualni_import/export_W': str(m['sit_w']).replace('.', ','),
         'Aktualni_AC_Vystup_W': str(m['ac_out']).replace('.', ','),
         'Celkovy_Vykon_Panelu_W': int(m['dc1']+m['dc2']),
-        'Predpoved_FS_W': int(round(pv_192[0] * 1000)), # Zde už to bere správně přes watts
+        'Predpoved_FS_W': fs_aktualni_w,
+        'Predpoved_PVF_W': pvf_aktualni_w,
         'Vykon_Baterie_W': int(m['bat_p']),
         'Baterie_SOC_%': str(m['soc']).replace('.', ','),
         'Simulovane_SOC_%': str(round(float(soc_vars[0].varValue), 1)).replace('.', ','),
@@ -265,11 +310,11 @@ def main():
 
     poradi = [
         'Cas', 'Skutecna_Spotreba_W', 'Odhad_Spotreba_Modelu_W', 'Aktualni_import/export_W', 
-        'Aktualni_AC_Vystup_W', 'Celkovy_Vykon_Panelu_W', 'Predpoved_FS_W', 'Vykon_Baterie_W', 
-        'Baterie_SOC_%', 'Simulovane_SOC_%', 'Cena_EUR/MWh', 'Doporucena_Akce', 'Akce_PuLP', 
-        'Duvod_PuLP', 'Skutecny_AC_Vystup_kWh', 'Cista_Vyroba_Panelu_kWh', 'Import_5min_kWh', 
-        'Export_5min_kWh', 'Denni_Import_kWh', 'Denni_Export_kWh', 'AC_vyroba_Dnes_kWh', 
-        'Spotreba_Celkem_kWh', 'Export_Celkem_kWh'
+        'Aktualni_AC_Vystup_W', 'Celkovy_Vykon_Panelu_W', 'Predpoved_FS_W', 'Predpoved_PVF_W', 
+        'Vykon_Baterie_W', 'Baterie_SOC_%', 'Simulovane_SOC_%', 'Cena_EUR/MWh', 'Doporucena_Akce', 
+        'Akce_PuLP', 'Duvod_PuLP', 'Skutecny_AC_Vystup_kWh', 'Cista_Vyroba_Panelu_kWh', 
+        'Import_5min_kWh', 'Export_5min_kWh', 'Denni_Import_kWh', 'Denni_Export_kWh', 
+        'AC_vyroba_Dnes_kWh', 'Spotreba_Celkem_kWh', 'Export_Celkem_kWh'
     ]
     
     n_radek = n_radek[poradi]
