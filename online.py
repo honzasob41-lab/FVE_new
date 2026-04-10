@@ -14,7 +14,7 @@ import glob
 
 warnings.simplefilter(action='ignore', category=UserWarning)
 
-# Konfigurace
+# Konfigurace prostředí
 TOKEN_SOLAX = os.environ.get("TOKEN_SOLAX")
 WIFI_SN = os.environ.get("SN")
 LAT, LON = "49.848", "18.409"
@@ -116,9 +116,10 @@ def nacti_predpoved_fs():
     if not data or 'result' not in data: return predpoved
     try:
         raw_data = []
-        for cas_str, wh in data['result']['watt_hours_period'].items():
+        # Opraveno na "watts" pro přesný okamžitý výkon
+        for cas_str, w in data['result']['watts'].items():
             cas = pd.to_datetime(cas_str).replace(tzinfo=None)
-            raw_data.append({"Cas": cas, "W": float(wh)})
+            raw_data.append({"Cas": cas, "W": float(w)})
         if raw_data:
             df = pd.DataFrame(raw_data).set_index("Cas").resample("15min").interpolate(method='linear', limit=3).fillna(0.0)
             for c, r in df.iterrows():
@@ -164,8 +165,11 @@ def vygeneruj_duvod_pulp(akce, cena, pv, soc):
     return "Bezny provoz EMS."
 
 def main():
-    ted = datetime.now(ZoneInfo("Europe/Prague")).replace(tzinfo=None, microsecond=0)
-    ted_ctvrt = ted.replace(minute=(ted.minute // 15) * 15, second=0)
+    # Čas zaokrouhlen na 0 vteřin a mikrosekund hned od začátku
+    ted = datetime.now(ZoneInfo("Europe/Prague")).replace(tzinfo=None, second=0, microsecond=0)
+    
+    # Čas pro plánování PuLP (musí být po 15 minutách)
+    ted_ctvrt = ted.replace(minute=(ted.minute // 15) * 15)
     
     vsechny_soubory = glob.glob("fve_historie_*.csv")
     df_list = [pd.read_csv(f, sep=';', decimal=',') for f in vsechny_soubory]
@@ -177,6 +181,7 @@ def main():
     vsechny_ceny = nacti_ceny_entsoe()
     vsechny_fs = nacti_predpoved_fs()
 
+    # Příprava 48h okna pro PuLP
     ceny_192, pv_192, spotreba_192, casy_192 = [], [], [], []
     for i in range(192):
         c = ted_ctvrt + timedelta(minutes=15 * i)
@@ -186,7 +191,9 @@ def main():
         spot = nauc_se_spotrebu(df_h, c)
         spotreba_192.append(spot if spot is not None else 0.0)
 
-    p_soc = bezpecny_float(df_h.iloc[-1]['Baterie_SOC_%']) if not df_h.empty else 50.0
+    p_soc = bezpecny_float(df_h.iloc[-1].get('Baterie_SOC_%', 50.0)) if not df_h.empty else 50.0
+    
+    # Matematický model PuLP
     model = pulp.LpProblem("EMS", pulp.LpMinimize)
     p_nab = pulp.LpVariable.dicts("Nab", range(192), lowBound=0, upBound=MAX_VYKON_STRIDACE)
     p_vyb = pulp.LpVariable.dicts("Vyb", range(192), lowBound=0, upBound=MAX_VYKON_STRIDACE)
@@ -207,27 +214,23 @@ def main():
     m = nacti_solax_v2()
     if not m: return
 
-    # VÝPOČET DENNÍHO IMPORTU/EXPORTU Z HISTORIE
+    # Výpočet denního importu/exportu z historie
     denni_import_kwh = 0.0
     denni_export_kwh = 0.0
     h_spotreba_w = 0
 
     if not df_h.empty:
-        # Získáme data pro dnešní den
         dnesni_data = df_h[df_h['Cas'].dt.date == ted.date()]
         if not dnesni_data.empty:
-            # První ranní záznam (půlnoc) pro odečet
             start_import = bezpecny_float(dnesni_data.iloc[0].get('Spotreba_Celkem_kWh', m['s_celkem']))
             start_export = bezpecny_float(dnesni_data.iloc[0].get('Export_Celkem_kWh', m['e_celkem']))
-            
             denni_import_kwh = max(0.0, m['s_celkem'] - start_import)
             denni_export_kwh = max(0.0, m['e_celkem'] - start_export)
 
-        # Výpočet aktuální 5min spotřeby W (pro učení)
         posledni_s_celkem = bezpecny_float(df_h.iloc[-1].get('Spotreba_Celkem_kWh', m['s_celkem']))
         rozdil_kwh = m['s_celkem'] - posledni_s_celkem
         if 0 < rozdil_kwh < 10:
-             h_spotreba_w = int(round(rozdil_kwh * 12000)) # Přepočet 5min kWh na průměrné W
+             h_spotreba_w = int(round(rozdil_kwh * 12000))
         else:
              h_spotreba_w = int(round(max(0, m['ac_out'] - m['sit_w'])))
     else:
@@ -236,13 +239,13 @@ def main():
     akce = rozhodovaci_logika(pv_192[0], spotreba_192[0], m['soc'], ceny_192[0])
     
     n_radek = pd.DataFrame([{
-        'Cas': ted.strftime('%Y-%m-%d %H:%M:%S'),
+        'Cas': ted.strftime('%Y-%m-%d %H:%M'), # STRIKTNĚ BEZ VTEŘIN
         'Skutecna_Spotreba_W': h_spotreba_w,
         'Odhad_Spotreba_Modelu_W': int(round(spotreba_192[0] * 1000)),
         'Aktualni_import/export_W': str(m['sit_w']).replace('.', ','),
         'Aktualni_AC_Vystup_W': str(m['ac_out']).replace('.', ','),
         'Celkovy_Vykon_Panelu_W': int(m['dc1']+m['dc2']),
-        'Predpoved_FS_W': int(round(pv_192[0] * 1000)),
+        'Predpoved_FS_W': int(round(pv_192[0] * 1000)), # Zde už to bere správně přes watts
         'Vykon_Baterie_W': int(m['bat_p']),
         'Baterie_SOC_%': str(m['soc']).replace('.', ','),
         'Simulovane_SOC_%': str(round(float(soc_vars[0].varValue), 1)).replace('.', ','),
@@ -250,10 +253,10 @@ def main():
         'Doporucena_Akce': akce, 'Akce_PuLP': akce,
         'Duvod_PuLP': vygeneruj_duvod_pulp(akce, ceny_192[0], pv_192[0], m['soc']),
         'Skutecny_AC_Vystup_kWh': str(round(m['v_dnes'], 4)).replace('.', ','),
-        'Cista_Vyroba_Panelu_kWh': str(round((m['dc1']+m['dc2'])/1000*0.0833, 4)).replace('.', ','), # Oprava na 5 minut
-        'Import_5min_kWh': str(round((abs(m['sit_w'])/1000*0.0833 if m['sit_w']<0 else 0), 4)).replace('.', ','), # Oprava na 5 minut
-        'Export_5min_kWh': str(round((m['sit_w']/1000*0.0833 if m['sit_w']>0 else 0), 4)).replace('.', ','), # Oprava na 5 minut
-        'Denni_Import_kWh': str(round(denni_import_kwh, 2)).replace('.', ','), 
+        'Cista_Vyroba_Panelu_kWh': str(round((m['dc1']+m['dc2'])/1000*0.0833, 4)).replace('.', ','),
+        'Import_5min_kWh': str(round((abs(m['sit_w'])/1000*0.0833 if m['sit_w']<0 else 0), 4)).replace('.', ','),
+        'Export_5min_kWh': str(round((m['sit_w']/1000*0.0833 if m['sit_w']>0 else 0), 4)).replace('.', ','),
+        'Denni_Import_kWh': str(round(denni_import_kwh, 2)).replace('.', ','),
         'Denni_Export_kWh': str(round(denni_export_kwh, 2)).replace('.', ','),
         'AC_vyroba_Dnes_kWh': str(m['v_dnes']).replace('.', ','),
         'Spotreba_Celkem_kWh': str(m['s_celkem']).replace('.', ','),
