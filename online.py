@@ -14,7 +14,6 @@ import glob
 
 warnings.simplefilter(action='ignore', category=UserWarning)
 
-# Konfigurace prostředí
 TOKEN_SOLAX = os.environ.get("TOKEN_SOLAX")
 WIFI_SN = os.environ.get("SN")
 LAT, LON = "49.848", "18.409"
@@ -31,21 +30,19 @@ KAPACITA_BATERIE_KWH = 10.0
 def bezpecny_float(val):
     try:
         if pd.isna(val): return 0.0
-        if isinstance(val, str):
-            return float(val.replace(' ', '').replace(',', '.'))
-        return float(val)
-    except:
-        return 0.0
+        s = str(val).replace(' ', '').replace(',', '.')
+        return float(s)
+    except: return 0.0
 
 def nacti_solax_v2():
     url = "https://global.solaxcloud.com/proxyApp/proxy/api/v2/dataAccess/realtimeInfo/get"
     payload = {"wifiSn": WIFI_SN}
     headers = {"tokenId": TOKEN_SOLAX, "Content-Type": "application/json"}
-    for pokus in range(3):
+    for _ in range(3):
         try:
             r = requests.post(url, json=payload, headers=headers, timeout=15)
             data = r.json()
-            if data.get("success") is True:
+            if data.get("success"):
                 res = data.get("result")
                 return {
                     "v_dnes": float(res.get("yieldtoday", 0)),
@@ -58,8 +55,7 @@ def nacti_solax_v2():
                     "sit_w": float(res.get("feedinpower", 0)),
                     "e_celkem": float(res.get("feedinenergy", 0))
                 }
-        except:
-            time.sleep(5)
+        except: time.sleep(5)
     return None
 
 def nacti_ceny_entsoe():
@@ -122,8 +118,8 @@ def nacti_predpoved_fs():
         for cas_str, wh in data['result']['watt_hours_period'].items():
             cas = pd.to_datetime(cas_str, errors='coerce')
             if pd.notna(cas):
-                # Prevod Wh za 15 minut na prumerny vykon v kW
-                predpoved[cas.replace(tzinfo=None).to_pydatetime()] = float(wh) * 0.004
+                # OPRAVENO: Wh za periodu (hodinu) odpovidá prumernému výkonu W
+                predpoved[cas.replace(tzinfo=None).to_pydatetime()] = float(wh) / 1000.0
     except: pass
     return predpoved
 
@@ -141,10 +137,11 @@ def nauc_se_spotrebu(df_h, aktualni_cas):
     df_f = df_temp[(df_temp['Cas'].dt.hour == aktualni_cas.hour) & (df_temp['Cas'].dt.minute // 15 == aktualni_cas.minute // 15)]
     df_final = df_f[df_f['Typ_Dne'] == cilovy_typ]
     if df_final['Cas'].dt.date.nunique() < MIN_DNI_PRO_UCENI:
-        pracovni = ["Pondeli", "Utery", "Streda", "Ctvrtek", "Patek"]
-        df_final = df_f[df_f['Typ_Dne'].isin(pracovni if cilovy_typ in pracovni else ["Sobota", "Nedele", "Svatek"])]
+        prac = ["Pondeli", "Utery", "Streda", "Ctvrtek", "Patek"]
+        df_final = df_f[df_f['Typ_Dne'].isin(prac if cilovy_typ in prac else ["Sobota", "Nedele", "Svatek"])]
     if df_final['Cas'].dt.date.nunique() >= MIN_DNI_PRO_UCENI:
-        return pd.to_numeric(df_final['Skutecna_Spotreba_W'].astype(str).str.replace(',', '.'), errors='coerce').mean() / 1000.0
+        val = pd.to_numeric(df_final['Skutecna_Spotreba_W'].astype(str).str.replace(',', '.'), errors='coerce').mean()
+        return max(0.0, val / 1000.0) # POJISTKA PROTI MINUSU
     return None
 
 def rozhodovaci_logika(prum_p, spot, soc, cena):
@@ -159,14 +156,9 @@ def rozhodovaci_logika(prum_p, spot, soc, cena):
     return "NORMALNI_PROVOZ"
 
 def vygeneruj_duvod_pulp(akce, cena, pv, soc):
-    if cena < 0.0:
-        return f"Zaporna cena ({cena:.2f} EUR). Nucena spotreba a ohrev bojleru."
-    if akce == "PRODAVAT_Z_BATERII":
-        if cena > 150.0: return f"Extremne vysoka cena ({cena:.2f} EUR). Maximalni vyboj pro zisk."
-        if soc > 90.0: return f"Baterie je skoro plna ({soc:.1f} %). Vyuziti spicky ({cena:.2f} EUR)."
-        return f"Optimalizace zisku: Prodej pri cene {cena:.2f} EUR."
-    if akce == "NABIJET_ZE_SITE": return f"Levny nakup ({cena:.2f} EUR) pro pokryti budoucich drahych hodin."
-    if akce == "POKRYT_Z_BATERIE": return f"Kryti spotreby z baterie, cena na trhu je {cena:.2f} EUR."
+    if cena < 0.0: return f"Zaporna cena ({cena:.2f} EUR). Nucena spotreba."
+    if akce == "PRODAVAT_Z_BATERII": return f"Vysoka cena ({cena:.2f} EUR), prodavame prebytek."
+    if akce == "POKRYT_Z_BATERIE": return f"Kryti spotreby z baterie pri cene {cena:.2f} EUR."
     return "Bezny provoz EMS."
 
 def main():
@@ -213,7 +205,7 @@ def main():
     m = nacti_solax_v2()
     if not m: return
 
-    # Výpočet hodnot
+    # Vygenerování nového řádku s pevným pořadím
     h_spot = max(0, m['ac_out'] - m['sit_w'])
     akce = rozhodovaci_logika(pv_192[0], spotreba_192[0], m['soc'], ceny_192[0])
     
