@@ -1,5 +1,5 @@
 Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-10;05:15;0,0;0,09;94,96;51,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 94.96 EUR).
+2026-04-10;05:15;0,0;0,07;94,96;51,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 94.96 EUR).
 2026-04-10;05:30;0,0;0,4;98,59;50,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 98.59 EUR.
 2026-04-10;05:45;0,0;0,43;106,26;48,9;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 106.26 EUR.
 2026-04-10;06:00;0,0;0,2;99,79;48,4;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 99.79 EUR.
