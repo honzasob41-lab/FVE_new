@@ -14,6 +14,7 @@ import glob
 
 warnings.simplefilter(action='ignore', category=UserWarning)
 
+# Konfigurace prostředí
 TOKEN_SOLAX = os.environ.get("TOKEN_SOLAX")
 WIFI_SN = os.environ.get("SN")
 LAT, LON = "49.848", "18.409"
@@ -30,8 +31,7 @@ KAPACITA_BATERIE_KWH = 10.0
 def bezpecny_float(val):
     try:
         if pd.isna(val): return 0.0
-        s = str(val).replace(' ', '').replace(',', '.')
-        return float(s)
+        return float(str(val).replace(' ', '').replace(',', '.'))
     except: return 0.0
 
 def nacti_solax_v2():
@@ -115,11 +115,14 @@ def nacti_predpoved_fs():
         except: pass
     if not data or 'result' not in data: return predpoved
     try:
+        raw_data = []
         for cas_str, wh in data['result']['watt_hours_period'].items():
-            cas = pd.to_datetime(cas_str, errors='coerce')
-            if pd.notna(cas):
-                # OPRAVENO: Wh za periodu (hodinu) odpovidá prumernému výkonu W
-                predpoved[cas.replace(tzinfo=None).to_pydatetime()] = float(wh) / 1000.0
+            cas = pd.to_datetime(cas_str).replace(tzinfo=None)
+            raw_data.append({"Cas": cas, "W": float(wh)}) # Wh za hodinu = prumerny vykon ve W
+        if raw_data:
+            df = pd.DataFrame(raw_data).set_index("Cas").resample("15min").interpolate(method='linear', limit=3).fillna(0.0)
+            for c, r in df.iterrows():
+                predpoved[c.to_pydatetime()] = r["W"] / 1000.0 # Pro PuLP ukladame v kW
     except: pass
     return predpoved
 
@@ -137,11 +140,11 @@ def nauc_se_spotrebu(df_h, aktualni_cas):
     df_f = df_temp[(df_temp['Cas'].dt.hour == aktualni_cas.hour) & (df_temp['Cas'].dt.minute // 15 == aktualni_cas.minute // 15)]
     df_final = df_f[df_f['Typ_Dne'] == cilovy_typ]
     if df_final['Cas'].dt.date.nunique() < MIN_DNI_PRO_UCENI:
-        prac = ["Pondeli", "Utery", "Streda", "Ctvrtek", "Patek"]
-        df_final = df_f[df_f['Typ_Dne'].isin(prac if cilovy_typ in prac else ["Sobota", "Nedele", "Svatek"])]
+        pracovni = ["Pondeli", "Utery", "Streda", "Ctvrtek", "Patek"]
+        df_final = df_f[df_f['Typ_Dne'].isin(pracovni if cilovy_typ in pracovni else ["Sobota", "Nedele", "Svatek"])]
     if df_final['Cas'].dt.date.nunique() >= MIN_DNI_PRO_UCENI:
         val = pd.to_numeric(df_final['Skutecna_Spotreba_W'].astype(str).str.replace(',', '.'), errors='coerce').mean()
-        return max(0.0, val / 1000.0) # POJISTKA PROTI MINUSU
+        return max(0.0, val / 1000.0)
     return None
 
 def rozhodovaci_logika(prum_p, spot, soc, cena):
@@ -157,8 +160,8 @@ def rozhodovaci_logika(prum_p, spot, soc, cena):
 
 def vygeneruj_duvod_pulp(akce, cena, pv, soc):
     if cena < 0.0: return f"Zaporna cena ({cena:.2f} EUR). Nucena spotreba."
-    if akce == "PRODAVAT_Z_BATERII": return f"Vysoka cena ({cena:.2f} EUR), prodavame prebytek."
-    if akce == "POKRYT_Z_BATERIE": return f"Kryti spotreby z baterie pri cene {cena:.2f} EUR."
+    if akce == "PRODAVAT_Z_BATERII": return f"Vysoka cena ({cena:.2f} EUR), vyuziti kapacity pro zisk."
+    if akce == "POKRYT_Z_BATERIE": return f"Kryti spotreby z baterie, cena je {cena:.2f} EUR."
     return "Bezny provoz EMS."
 
 def main():
@@ -205,7 +208,7 @@ def main():
     m = nacti_solax_v2()
     if not m: return
 
-    # Vygenerování nového řádku s pevným pořadím
+    # Vygenerování nového řádku
     h_spot = max(0, m['ac_out'] - m['sit_w'])
     akce = rozhodovaci_logika(pv_192[0], spotreba_192[0], m['soc'], ceny_192[0])
     
@@ -233,6 +236,7 @@ def main():
         'Export_Celkem_kWh': str(m['e_celkem']).replace('.', ',')
     }])
 
+    # Definitivní a pevné pořadí sloupců
     poradi = [
         'Cas', 'Skutecna_Spotreba_W', 'Odhad_Spotreba_Modelu_W', 'Aktualni_import/export_W', 
         'Aktualni_AC_Vystup_W', 'Celkovy_Vykon_Panelu_W', 'Predpoved_FS_W', 'Vykon_Baterie_W', 
@@ -242,8 +246,9 @@ def main():
         'Spotreba_Celkem_kWh', 'Export_Celkem_kWh'
     ]
     
-    soubor_hist = f"fve_historie_{ted.strftime('%Y_%m')}.csv"
-    n_radek[poradi].to_csv(soubor_hist, mode='a', header=not os.path.exists(soubor_hist), index=False, sep=';', decimal=',')
+    n_radek = n_radek[poradi]
+    aktualni_soubor = f"fve_historie_{ted.strftime('%Y_%m')}.csv"
+    n_radek.to_csv(aktualni_soubor, mode='a', header=not os.path.exists(aktualni_soubor), index=False, sep=';', decimal=',')
 
 if __name__ == "__main__":
     try: main()
