@@ -1,22 +1,21 @@
 Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-10;09:00;0,0;3,0;126,64;30,5;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 126.64 EUR.
-2026-04-10;09:15;0,0;1,18;125,0;27,6;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 125.00 EUR.
-2026-04-10;09:30;0,0;0,52;121,45;26,2;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 121.45 EUR.
-2026-04-10;09:45;0,0;1,13;103,77;23,4;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 103.77 EUR.
-2026-04-10;10:00;0,0;1,47;115,64;19,7;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 115.64 EUR.
-2026-04-10;10:15;0,0;1,25;121,67;16,6;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 121.67 EUR.
-2026-04-10;10:30;0,0;0,74;108,36;14,8;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 108.36 EUR.
-2026-04-10;10:45;0,0;0,94;97,01;18,2;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 97.01 EUR).
-2026-04-10;11:00;0,0;0,96;127,01;15,8;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 127.01 EUR.
-2026-04-10;11:15;0,0;0,62;114,9;14,2;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 114.90 EUR.
-2026-04-10;11:30;0,0;0,75;110,62;12,3;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 110.62 EUR.
-2026-04-10;11:45;0,0;0,72;107,59;10,5;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 107.59 EUR.
-2026-04-10;12:00;0,0;0,22;107,0;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 107.00 EUR.
-2026-04-10;12:15;0,0;0,4;96,6;11,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 96.60 EUR).
-2026-04-10;12:30;0,0;0,4;99,37;10,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 99.37 EUR.
-2026-04-10;12:45;0,0;0,24;87,36;35,0;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 87.36 EUR).
-2026-04-10;13:00;0,0;0,5;100,84;33,8;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 100.84 EUR.
-2026-04-10;13:15;0,0;0,68;89,68;32,1;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 89.68 EUR.
+2026-04-10;09:15;0,0;1,18;125,0;39,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 125.00 EUR.
+2026-04-10;09:30;0,0;0,52;121,45;37,7;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 121.45 EUR.
+2026-04-10;09:45;0,0;1,13;103,77;34,9;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 103.77 EUR.
+2026-04-10;10:00;0,0;1,47;115,64;31,2;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 115.64 EUR.
+2026-04-10;10:15;0,0;1,25;121,67;28,1;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 121.67 EUR.
+2026-04-10;10:30;0,0;0,74;108,36;26,3;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 108.36 EUR.
+2026-04-10;10:45;0,0;0,94;97,01;23,9;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 97.01 EUR.
+2026-04-10;11:00;0,0;0,96;127,01;21,5;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 127.01 EUR.
+2026-04-10;11:15;0,0;0,62;114,9;20,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 114.90 EUR.
+2026-04-10;11:30;0,0;0,75;110,62;18,1;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 110.62 EUR.
+2026-04-10;11:45;0,0;0,72;107,59;16,3;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 107.59 EUR.
+2026-04-10;12:00;0,0;0,22;107,0;15,8;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 107.00 EUR.
+2026-04-10;12:15;0,0;0,4;96,6;14,8;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 96.60 EUR.
+2026-04-10;12:30;0,0;0,4;99,37;13,8;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 99.37 EUR.
+2026-04-10;12:45;0,0;0,24;87,36;38,8;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 87.36 EUR).
+2026-04-10;13:00;0,0;0,5;100,84;37,5;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 100.84 EUR.
+2026-04-10;13:15;0,0;0,68;89,68;35,8;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 89.68 EUR.
 2026-04-10;13:30;0,0;0,38;87,46;52,6;NABIJET_ZE_SITE;Priprava na budouci spicku (nakup za aktualni cenu 87.46 EUR).
 2026-04-10;13:45;0,0;0,22;95,14;52,0;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 95.14 EUR.
 2026-04-10;14:00;0,0;0,29;89,32;51,3;POKRYT_Z_BATERIE;Vyhnuti se nakupu energie ze site za cenu 89.32 EUR.
@@ -191,3 +190,4 @@ Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_
 2026-04-12;08:15;0,0;0,46;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-12;08:30;0,0;0,18;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
 2026-04-12;08:45;0,0;Nedostatek dat;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
+2026-04-12;09:00;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny provoz a cekani na vyhodnejsi podminky.
