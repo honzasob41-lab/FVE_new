@@ -23,7 +23,7 @@ KW_PEAK = 10.0
 
 SOUBOR_PLAN = "denni_plan.csv"
 SOUBOR_PREDPOVEDI = "predpoved_cache.json"
-SOUBOR_CENY = "ceny_cache.json"  # Přidán soubor pro cachování cen
+SOUBOR_CENY = "ceny_cache.json"
 MIN_DNI_PRO_UCENI = 2
 MAX_VYKON_STRIDACE = 10.0
 KAPACITA_BATERIE_KWH = 10.0
@@ -47,13 +47,13 @@ def nacti_solax_v2():
             r = requests.post(url, json=payload, headers=headers, timeout=15)
             data = r.json()
             if data.get("success") is not True: 
-                print(f"SolaX API zamitlo pozadavek (Pokus {pokus+1}/3): {data}")
+                print(f"SolaX API zamietlo poziadavku (Pokus {pokus+1}/3): {data}")
                 time.sleep(5)
                 continue
             
             res = data.get("result")
             if not res: 
-                print(f"SolaX API nevratilo zadna data (Pokus {pokus+1}/3).")
+                print(f"SolaX API nevratilo ziadne data (Pokus {pokus+1}/3).")
                 time.sleep(5)
                 continue
                 
@@ -69,7 +69,7 @@ def nacti_solax_v2():
                 "e_celkem": float(res.get("feedinenergy", 0))
             }
         except Exception as e: 
-            print(f"SolaX sitova chyba (Pokus {pokus+1}/3): {e}")
+            print(f"SolaX sietova chyba (Pokus {pokus+1}/3): {e}")
             time.sleep(5)
             
     return None
@@ -81,24 +81,21 @@ def nacti_ceny_entsoe():
     ceny = {}
     data = {}
     
-    # 1. CACHOVÁNÍ ODOLNÉ VŮČI GITHUBU
-    potrebujeme_stahnout = True
+    potrebujeme_stiahnut = True
     if os.path.exists(SOUBOR_CENY):
         try:
             with open(SOUBOR_CENY, 'r') as f:
                 data = json.load(f)
-            # Čteme čas zevnitř souboru, nikoliv z operačního systému
             last_dl_str = data.get("_last_download")
             if last_dl_str:
                 last_dl = datetime.fromisoformat(last_dl_str)
                 if datetime.now() - last_dl < timedelta(hours=6):
-                    potrebujeme_stahnout = False
+                    potrebujeme_stiahnut = False
         except: pass
 
-    if not potrebujeme_stahnout and "ceny" in data:
+    if not potrebujeme_stiahnut and "ceny" in data:
         return {pd.to_datetime(k).to_pydatetime(): v for k, v in data["ceny"].items()}
 
-    # 2. STAŽENÍ NOVÝCH DAT
     start = (cas_utc - timedelta(days=1)).strftime("%Y%m%d0000")
     stop = (cas_utc + timedelta(days=3)).strftime("%Y%m%d0000")
     url = f"https://web-api.tp.entsoe.eu/api?securityToken={TOKEN_ENTSOE}&documentType=A44&in_Domain={DOMENA_CZ}&out_Domain={DOMENA_CZ}&periodStart={start}&periodEnd={stop}"
@@ -122,12 +119,10 @@ def nacti_ceny_entsoe():
                     zaznamy.append({"Cas": cas_local, "Cena": price})
             
             if zaznamy:
-                # Ochrana proti pádům Pandas - drop_duplicates
                 df = pd.DataFrame(zaznamy).drop_duplicates(subset=["Cas"]).set_index("Cas").resample("15min").ffill().reset_index()
                 for _, row in df.iterrows():
                     ceny[row["Cas"].to_pydatetime()] = row["Cena"]
                     
-                # Uložíme data i s naší speciální časovou značkou
                 with open(SOUBOR_CENY, 'w') as f:
                     json.dump({
                         "_last_download": datetime.now().isoformat(),
@@ -136,7 +131,6 @@ def nacti_ceny_entsoe():
                 return ceny
     except Exception as e: print(f"Chyba pri stahovani ENTSO-E: {e}")
         
-    # Pokud stahování selže, zkusíme vrátit alespoň stará data z cache, pokud existují
     if "ceny" in data:
         return {pd.to_datetime(k).to_pydatetime(): v for k, v in data["ceny"].items()}
     return ceny
@@ -146,36 +140,32 @@ def nacti_predpoved_fs():
     predpoved = {}
     data = None
     
-    # 1. CACHOVÁNÍ ODOLNÉ VŮČI GITHUBU
-    potrebujeme_stahnout = True
+    potrebujeme_stiahnut = True
     if os.path.exists(SOUBOR_PREDPOVEDI):
         try:
             with open(SOUBOR_PREDPOVEDI, 'r') as f:
                 data = json.load(f)
-            
-            # Čteme čas zevnitř souboru
             last_dl_str = data.get("_last_download")
             if last_dl_str:
                 last_dl = datetime.fromisoformat(last_dl_str)
                 if datetime.now() - last_dl < timedelta(hours=3):
-                    potrebujeme_stahnout = False
+                    potrebujeme_stiahnut = False
         except: pass
 
-    if potrebujeme_stahnout:
+    if potrebujeme_stiahnut:
         try:
             r = requests.get(url, timeout=10)
             if r.status_code == 200:
                 data = r.json()
-                data["_last_download"] = datetime.now().isoformat() # Vložení razítka
+                data["_last_download"] = datetime.now().isoformat() 
                 with open(SOUBOR_PREDPOVEDI, 'w') as f: json.dump(data, f)
             else:
-                print(f"CHYBA FORECAST.SOLAR: Server zamitl pozadavek (Kod {r.status_code}).")
-                # Posuneme razítko, abychom API nespamovali
+                print(f"CHYBA FORECAST.SOLAR: Server zamietol poziadavku (Kod {r.status_code}).")
                 if data:
                     data["_last_download"] = datetime.now().isoformat()
                     with open(SOUBOR_PREDPOVEDI, 'w') as f: json.dump(data, f)
         except Exception as e:
-            print(f"Chyba spojeni Forecast.Solar: {e}")
+            print(f"Chyba spojenia Forecast.Solar: {e}")
             if data:
                 data["_last_download"] = datetime.now().isoformat()
                 with open(SOUBOR_PREDPOVEDI, 'w') as f: json.dump(data, f)
@@ -183,7 +173,6 @@ def nacti_predpoved_fs():
     if not data or 'result' not in data:
         return predpoved
 
-    # 3. ZPRACOVÁNÍ DAT Z CACHE (s ochranou proti duplicitám a linearizací)
     try:
         raw_data = []
         for cas_str, wh in data['result']['watt_hours_period'].items():
@@ -194,17 +183,18 @@ def nacti_predpoved_fs():
         
         if raw_data:
             df = pd.DataFrame(raw_data).drop_duplicates(subset=["Cas"]).set_index("Cas").sort_index()
+            # Linearizacia a nulovanie v noci
             df = df.resample("15min").interpolate(method='linear', limit=3).fillna(0.0).reset_index()
             
             for _, row in df.iterrows():
                 if pd.notna(row["Cas"]):
                     predpoved[row["Cas"].to_pydatetime()] = max(0.0, float(row["Vykon_kW"]))
-    except Exception as e: print(f"Kriticka chyba pri cteni Forecast.Solar dat: {e}")
+    except Exception as e: print(f"Kriticka chyba pri citani Forecast.Solar dat: {e}")
         
     return predpoved
 
 def nauc_se_spotrebu(df_h, aktualni_cas):
-    if df_h.empty or 'Skutecna_Spotreba_kWh' not in df_h.columns: 
+    if df_h.empty or 'Skutecna_Spotreba_W' not in df_h.columns: 
         return None
 
     df_h['Cas'] = pd.to_datetime(df_h['Cas'], format='mixed', errors='coerce')
@@ -212,30 +202,24 @@ def nauc_se_spotrebu(df_h, aktualni_cas):
     cas_pred_rokem = aktualni_cas - timedelta(days=365)
     maska_lonska = (df_h['Cas'] >= (cas_pred_rokem - timedelta(days=45))) & (df_h['Cas'] <= (cas_pred_rokem + timedelta(days=45)))
 
-    df_h = df_h[maska_nedavna | maska_lonska].copy()
+    df_temp = df_h[maska_nedavna | maska_lonska].copy()
 
     cz_holidays = holidays.CZ(years=[aktualni_cas.year, aktualni_cas.year - 1])
 
     def urci_typ_dne(dt):
-        if dt.date() in cz_holidays: 
-            return "Svatek"
+        if dt.date() in cz_holidays: return "Svatek"
         wd = dt.weekday()
-        if wd == 0: return "Pondeli"
-        elif wd == 1: return "Utery"
-        elif wd == 2: return "Streda"
-        elif wd == 3: return "Ctvrtek"
-        elif wd == 4: return "Patek"
-        elif wd == 5: return "Sobota"
-        elif wd == 6: return "Nedele"
+        if wd < 5: return ["Pondeli", "Utery", "Streda", "Ctvrtek", "Patek"][wd]
+        return ["Sobota", "Nedele"][wd - 5]
 
     cilovy_typ = urci_typ_dne(aktualni_cas)
-    df_h['Typ_Dne'] = df_h['Cas'].apply(urci_typ_dne)
+    df_temp['Typ_Dne'] = df_temp['Cas'].apply(urci_typ_dne)
 
-    df_f = df_h[
-        (df_h['Cas'].dt.hour == aktualni_cas.hour) & 
-        (df_h['Cas'].dt.minute // 15 == aktualni_cas.minute // 15) & 
-        (df_h['Typ_Dne'] == cilovy_typ)
-    ].dropna(subset=['Skutecna_Spotreba_kWh'])
+    df_f = df_temp[
+        (df_temp['Cas'].dt.hour == aktualni_cas.hour) & 
+        (df_temp['Cas'].dt.minute // 15 == aktualni_cas.minute // 15) & 
+        (df_temp['Typ_Dne'] == cilovy_typ)
+    ].dropna(subset=['Skutecna_Spotreba_W'])
 
     pocet_dostupnych_dni = df_f['Cas'].dt.date.nunique()
 
@@ -244,21 +228,22 @@ def nauc_se_spotrebu(df_h, aktualni_cas):
         vikend = ["Sobota", "Nedele"]
 
         if cilovy_typ in pracovni_dny:
-            df_f = df_h[
-                (df_h['Cas'].dt.hour == aktualni_cas.hour) & 
-                (df_h['Cas'].dt.minute // 15 == aktualni_cas.minute // 15) & 
-                (df_h['Typ_Dne'].isin(pracovni_dny))
-            ].dropna(subset=['Skutecna_Spotreba_kWh'])
-        elif cilovy_typ in vikend or cilovy_typ == "Svatek":
-            df_f = df_h[
-                (df_h['Cas'].dt.hour == aktualni_cas.hour) & 
-                (df_h['Cas'].dt.minute // 15 == aktualni_cas.minute // 15) & 
-                (df_h['Typ_Dne'].isin(vikend + ["Svatek"]))
-            ].dropna(subset=['Skutecna_Spotreba_kWh'])
+            df_f = df_temp[
+                (df_temp['Cas'].dt.hour == aktualni_cas.hour) & 
+                (df_temp['Cas'].dt.minute // 15 == aktualni_cas.minute // 15) & 
+                (df_temp['Typ_Dne'].isin(pracovni_dny))
+            ].dropna(subset=['Skutecna_Spotreba_W'])
+        else:
+            df_f = df_temp[
+                (df_temp['Cas'].dt.hour == aktualni_cas.hour) & 
+                (df_temp['Cas'].dt.minute // 15 == aktualni_cas.minute // 15) & 
+                (df_temp['Typ_Dne'].isin(vikend + ["Svatek"]))
+            ].dropna(subset=['Skutecna_Spotreba_W'])
 
     if df_f['Cas'].dt.date.nunique() >= MIN_DNI_PRO_UCENI:
-        cisty_sloupec = pd.to_numeric(df_f['Skutecna_Spotreba_kWh'].astype(str).str.replace(',', '.'), errors='coerce')
-        return cisty_sloupec.mean() * 12
+        cisty_sloupec = pd.to_numeric(df_f['Skutecna_Spotreba_W'].astype(str).str.replace(',', '.'), errors='coerce')
+        # Algoritmus PuLP očakáva kW, preto z W urobíme kW (delíme 1000)
+        return cisty_sloupec.mean() / 1000.0 
 
     return None
 
@@ -283,25 +268,25 @@ def rozhodovaci_logika(prum_p, spot, soc, cena):
 def vygeneruj_duvod_pulp(akce, cena, pv_vykon, soc):
     if cena < 0.0:
         if "BOJLERY" in akce:
-            return f"Zaporna cena ({cena:.2f} EUR). Nucene zapnuti bojleru k pohlceni energie."
-        return f"Zaporna cena ({cena:.2f} EUR). Blokace prodeje a odesilani do site."
+            return f"Zaporna cena ({cena:.2f} EUR). Nutene zapnutie bojleru."
+        return f"Zaporna cena ({cena:.2f} EUR). Blokovanie predaja."
 
     if akce == "NABIJET_ZE_SITE":
-        return f"Priprava na budouci spicku (nakup za aktualni cenu {cena:.2f} EUR)."
+        return f"Priprava na buducu spicku (nakup za {cena:.2f} EUR)."
     elif akce == "NABIJET_SOLAREM":
-        return "Ukladani solarnich prebytku pro pozdejsi vyuziti (budouci uspora)."
+        return "Ukladanie solarnych prebytkov pre neskorsie vyuzitie."
     elif akce == "POKRYT_Z_BATERIE":
-        return f"Vyhnuti se nakupu energie ze site za cenu {cena:.2f} EUR."
+        return f"Vyhnutie sa nakupu energie zo siete za cenu {cena:.2f} EUR."
     elif akce == "PRODAVAT_DO_SITE":
         if soc >= 99.0:
-            return f"Baterie je plna na 100 %, prodej prebytku za cenu {cena:.2f} EUR."
+            return f"Bateria je plna, predaj prebytkov za {cena:.2f} EUR."
         if pv_vykon > MAX_VYKON_STRIDACE:
-            return f"Nabijeci vykon je na maximu, zbytek pretok do site (cena {cena:.2f} EUR)."
-        return f"Vyhodny prodej z baterie kvuli vysoke cene ({cena:.2f} EUR)."
+            return f"Nabijaci vykon na maxime, zbytok do siete ({cena:.2f} EUR)."
+        return f"Vyhodny predaj z baterie ({cena:.2f} EUR)."
     
     if pv_vykon > 0:
-        return "Bezna spotreba kryta primym slunecnim vykonem."
-    return "Bezny provoz a cekani na vyhodnejsi podminky."
+        return "Bezna spotreba kryta priamym slnecnym vykonom."
+    return "Bezny prevadzkovy stav."
 
 def main():
     ted = datetime.now(ZoneInfo("Europe/Prague")).replace(tzinfo=None, microsecond=0)
@@ -316,7 +301,7 @@ def main():
             df = pd.read_csv(soubor, sep=';', decimal=',')
             df_list.append(df)
         except Exception as e:
-            print(f"Chyba pri cteni {soubor}: {e}")
+            print(f"Chyba pri citani {soubor}: {e}")
             
     if df_list:
         df_h = pd.concat(df_list, ignore_index=True)
@@ -353,12 +338,9 @@ def main():
     p_nabijeni = pulp.LpVariable.dicts("Nabijeni", kroky_15min, lowBound=0, upBound=MAX_VYKON_STRIDACE)
     p_vybijeni = pulp.LpVariable.dicts("Vybijeni", kroky_15min, lowBound=0, upBound=MAX_VYKON_STRIDACE)
     soc = pulp.LpVariable.dicts("SOC", kroky_15min, lowBound=10.0, upBound=100.0)
-
-    # --- PŘIDANÁ BINÁRNÍ PROMĚNNÁ PRO KONTROLU CHODU ---
     is_charging = pulp.LpVariable.dicts("IsCharging", kroky_15min, cat=pulp.LpBinary)
 
     DELTA_T = 0.25 
-
     POPLATEK_DISTRIBUCE_NAKUP_EUR = 60.0  
     MARZE_OBCHODNIKA_PRODEJ_EUR = 10.0    
 
@@ -376,7 +358,6 @@ def main():
         else:
             model += soc[i] == soc[i-1] + zmena_soc
 
-        # --- PŘIDANÉ BIG-M PODMÍNKY ---
         model += p_nabijeni[i] <= MAX_VYKON_STRIDACE * is_charging[i]
         model += p_vybijeni[i] <= MAX_VYKON_STRIDACE * (1 - is_charging[i])
 
@@ -391,12 +372,9 @@ def main():
         cena_v_tomto_kroku = ceny_192[i]
         
         akce = "NORMALNI_PROVOZ"
-        
         if cena_v_tomto_kroku < 0.0:
-            if soc[i].varValue < 100.0:
-                akce = "ZAPNOUT_BOJLERY_A_NABIJET"
-            else:
-                akce = "ZAPNOUT_BOJLERY"
+            if soc[i].varValue < 100.0: akce = "ZAPNOUT_BOJLERY_A_NABIJET"
+            else: akce = "ZAPNOUT_BOJLERY"
         else:
             if nab_val > 0.1 and nak_val > 0.1: akce = "NABIJET_ZE_SITE"
             elif nab_val > 0.1: akce = "NABIJET_SOLAREM"
@@ -407,7 +385,7 @@ def main():
             'Datum': aktualni_cas_planu.strftime('%Y-%m-%d'), 
             'Cas': aktualni_cas_planu.strftime('%H:%M'),
             'Predpoved_FS_kWh': str(round(pv_192[i], 2)).replace('.', ','),              
-            'Odhad_Spotreba_kW': str(round(spotreba_192[i], 2)).replace('.', ',') if spotreba_192[i] > 0 else "Nedostatek dat",
+            'Odhad_Spotreba_kW': str(round(spotreba_192[i], 2)).replace('.', ',') if spotreba_192[i] > 0 else "Nedostatok dat",
             'Cena_EUR/MWh': str(round(cena_v_tomto_kroku, 2)).replace('.', ','),
             'Simulovane_SOC_%': str(round(soc[i].varValue, 1)).replace('.', ','),
             'Akce_EMS': akce,
@@ -418,13 +396,10 @@ def main():
 
     m = nacti_solax_v2()
     if not m: 
-        print("Skript se ukoncuje: Data ze SolaXu nesla nacist ani po 3 pokusech.")
+        print("Skript sa ukoncuje: Data zo SolaXu nesli nacitat.")
         return
 
     h_vyroba = m['v_dnes']
-    h_spotreba = 0.0
-    h_export = 0.0
-    h_import = 0.0
     delta_h = 0.25
     
     if not df_h.empty:
@@ -433,43 +408,39 @@ def main():
         if 0 < rozdil_sekund <= 3600:
             delta_h = rozdil_sekund / 3600.0
 
-        if 'Spotreba_Celkem_kWh' in posledni_zaznam.index:
-            stara_spotreba = bezpecny_float(posledni_zaznam['Spotreba_Celkem_kWh'])
-            h_spotreba = max(0.0, m['s_celkem'] - stara_spotreba)
-        
-        if 'Export_Celkem_kWh' in posledni_zaznam.index:
-            stary_export = bezpecny_float(posledni_zaznam['Export_Celkem_kWh'])
-            h_export = max(0.0, m['e_celkem'] - stary_export) if stary_export > 0 else ((m['sit_w'] / 1000.0) * delta_h if m['sit_w'] > 0 else 0.0)
-        else:
-            h_export = (m['sit_w'] / 1000.0) * delta_h if m['sit_w'] > 0 else 0.0
-            
-        if m['sit_w'] < 0:
-            h_import = (abs(m['sit_w']) / 1000.0) * delta_h
-
         dnesni_zaznamy = df_h[df_h['Cas'].dt.date == ted.date()]
         if not dnesni_zaznamy.empty:
             stara_vyroba = bezpecny_float(dnesni_zaznamy['AC_vyroba_Dnes_kWh'].iloc[-1])
             h_vyroba = max(0.0, m['v_dnes'] - stara_vyroba)
-            
-            if 'Export_5min_kWh' in dnesni_zaznamy.columns:
-                suma_export = pd.to_numeric(dnesni_zaznamy['Export_5min_kWh'].astype(str).str.replace(',', '.'), errors='coerce').sum()
-                denni_export = suma_export + h_export
-            else:
-                denni_export = h_export
-                
-            if 'Import_5min_kWh' in dnesni_zaznamy.columns:
-                suma_import = pd.to_numeric(dnesni_zaznamy['Import_5min_kWh'].astype(str).str.replace(',', '.'), errors='coerce').sum()
-                denni_import = suma_import + h_import
-            else:
-                denni_import = h_import
-        else:
-            denni_export = h_export
-            denni_import = h_import
+
+    # OPRAVA: SolaX má + pre nákup (Import), - pre predaj (Export)
+    if m['sit_w'] > 0: 
+        h_import = (m['sit_w'] / 1000.0) * delta_h
+        h_export = 0.0
+    elif m['sit_w'] < 0: 
+        h_export = (abs(m['sit_w']) / 1000.0) * delta_h
+        h_import = 0.0
     else:
-        if m['sit_w'] > 0: h_export = (m['sit_w'] / 1000.0) * delta_h
-        if m['sit_w'] < 0: h_import = (abs(m['sit_w']) / 1000.0) * delta_h
-        denni_export = h_export
-        denni_import = h_import
+        h_import = 0.0
+        h_export = 0.0
+
+    # OPRAVA: Vypocet dalsej okamzitej spotreby (Watty)
+    okamzita_spotreba_w = m['ac_out'] + m['sit_w']
+    if okamzita_spotreba_w < 0: 
+        okamzita_spotreba_w = 0.0
+        
+    h_spotreba = okamzita_spotreba_w # Ukladame rovnou W
+
+    # Denni sucty importu a exportu (kumulativne)
+    denni_export = h_export
+    denni_import = h_import
+    if not df_h.empty and not dnesni_zaznamy.empty:
+        if 'Export_5min_kWh' in dnesni_zaznamy.columns:
+            suma_export = pd.to_numeric(dnesni_zaznamy['Export_5min_kWh'].astype(str).str.replace(',', '.'), errors='coerce').sum()
+            denni_export = suma_export + h_export
+        if 'Import_5min_kWh' in dnesni_zaznamy.columns:
+            suma_import = pd.to_numeric(dnesni_zaznamy['Import_5min_kWh'].astype(str).str.replace(',', '.'), errors='coerce').sum()
+            denni_import = suma_import + h_import
 
     celkovy_dc_vykon_w = m['dc1'] + m['dc2']
     cista_vyroba_pv_kwh = (celkovy_dc_vykon_w / 1000.0) * delta_h
@@ -480,12 +451,12 @@ def main():
 
     aktualni_akce_pulp = plan_data[0]['Akce_EMS'] if plan_data else "NEDOSTUPNE"
     simulovane_soc_ted = plan_data[0]['Simulovane_SOC_%'] if plan_data else "0,0"
-    odhad_spotreby_ted = plan_data[0]['Odhad_Spotreba_kW'] if plan_data else "Nedostatek dat"
+    odhad_spotreby_ted = plan_data[0]['Odhad_Spotreba_kW'] if plan_data else "Nedostatok dat"
 
     n_radek = pd.DataFrame([{
         'Cas': ted, 
         'Skutecny_AC_Vystup_kWh': str(round(h_vyroba, 4)).replace('.', ','), 
-        'Skutecna_Spotreba_kWh': str(round(h_spotreba, 4)).replace('.', ','),
+        'Skutecna_Spotreba_W': str(round(h_spotreba, 0)).replace('.', ','), # Sloupec upraveny na W a zaokruhleny
         'Odhad_Spotreba_Modelu_kW': odhad_spotreby_ted,
         'Aktualni_import/export_W': str(m['sit_w']).replace('.', ','),
         'Import_5min_kWh': str(round(h_import, 4)).replace('.', ','),                
@@ -512,7 +483,7 @@ def main():
     vlozit_hlavicku = not os.path.exists(aktualni_mesic_soubor)
 
     n_radek.to_csv(aktualni_mesic_soubor, mode='a', header=vlozit_hlavicku, index=False, sep=';')
-    print(f"Zapis do mesicni historie ({aktualni_mesic_soubor}) uspesne dokoncen!")
+    print(f"Zapis do mesacnej historie ({aktualni_mesic_soubor}) uspesne dokonceny!")
 
 if __name__ == "__main__":
     try: main()
