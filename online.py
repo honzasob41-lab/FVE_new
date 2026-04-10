@@ -40,7 +40,7 @@ def nacti_solax_v2():
     headers = {"tokenId": TOKEN_SOLAX, "Content-Type": "application/json"}
     for _ in range(3):
         try:
-            r = requests.post(url, json=payload, headers=headers, timeout=15)
+            r = requests.post(url, json=payload, headers=headers, timeout=20)
             data = r.json()
             if data.get("success"):
                 res = data.get("result")
@@ -74,7 +74,7 @@ def nacti_ceny_entsoe():
     stop = (cas_utc + timedelta(days=3)).strftime("%Y%m%d0000")
     url = f"https://web-api.tp.entsoe.eu/api?securityToken={TOKEN_ENTSOE}&documentType=A44&in_Domain={DOMENA_CZ}&out_Domain={DOMENA_CZ}&periodStart={start}&periodEnd={stop}"
     try:
-        r = requests.get(url, timeout=15)
+        r = requests.get(url, timeout=20)
         if r.status_code == 200:
             root = ElementTree.fromstring(r.content)
             zaznamy = []
