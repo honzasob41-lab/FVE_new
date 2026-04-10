@@ -1,193 +1,193 @@
 Datum;Cas;Predpoved_FS_kWh;Odhad_Spotreba_kW;Cena_EUR/MWh;Simulovane_SOC_%;Akce_EMS;Duvod_Akce
-2026-04-10;11:45;4,0;Nedostatok dat;107,59;25,0;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 107.59 EUR.
-2026-04-10;12:00;3,65;Nedostatok dat;107,0;13,2;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 107.00 EUR.
-2026-04-10;12:15;3,45;Nedostatok dat;96,6;21,9;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-10;12:30;3,24;Nedostatok dat;99,37;29,9;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-10;12:45;3,03;Nedostatok dat;87,36;37,5;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-10;13:00;2,82;Nedostatok dat;100,84;44,6;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-10;13:15;2,66;Nedostatok dat;89,68;51,2;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-10;13:30;2,5;Nedostatok dat;87,46;57,5;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-10;13:45;2,34;Nedostatok dat;95,14;63,3;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-10;14:00;2,19;Nedostatok dat;89,32;68,8;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-10;14:15;2,04;Nedostatok dat;83,44;73,9;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-10;14:30;1,9;Nedostatok dat;89,01;78,7;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-10;14:45;1,76;Nedostatok dat;86,31;83,1;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-10;15:00;1,62;Nedostatok dat;90,2;87,1;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-10;15:15;1,49;Nedostatok dat;98,04;90,8;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-10;15:30;1,36;Nedostatok dat;101,27;94,2;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-10;15:45;1,23;Nedostatok dat;102,94;97,3;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-10;16:00;1,09;Nedostatok dat;97,81;100,0;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-10;16:15;0,99;Nedostatok dat;107,56;100,0;PRODAVAT_DO_SITE;Bateria je plna, predaj prebytkov za 107.56 EUR.
-2026-04-10;16:30;0,88;Nedostatok dat;116,68;100,0;PRODAVAT_DO_SITE;Bateria je plna, predaj prebytkov za 116.68 EUR.
-2026-04-10;16:45;0,77;Nedostatok dat;127,81;98,4;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 127.81 EUR.
-2026-04-10;17:00;0,66;Nedostatok dat;114,82;100,0;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-10;17:15;0,57;Nedostatok dat;127,99;100,0;PRODAVAT_DO_SITE;Bateria je plna, predaj prebytkov za 127.99 EUR.
-2026-04-10;17:30;0,48;Nedostatok dat;136,51;100,0;PRODAVAT_DO_SITE;Bateria je plna, predaj prebytkov za 136.51 EUR.
-2026-04-10;17:45;0,4;Nedostatok dat;161,88;98,1;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 161.88 EUR.
-2026-04-10;18:00;0,31;Nedostatok dat;123,15;98,9;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-10;18:15;0,25;Nedostatok dat;130,35;99,5;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-10;18:30;0,2;Nedostatok dat;159,9;100,0;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-10;18:45;0,14;Nedostatok dat;195,87;99,5;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 195.87 EUR.
-2026-04-10;19:00;0,09;Nedostatok dat;163,18;99,7;NORMALNI_PROVOZ;Bezna spotreba kryta priamym slnecnym vykonom.
-2026-04-10;19:15;0,12;Nedostatok dat;190,0;100,0;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-10;19:30;0,15;Nedostatok dat;231,73;100,0;PRODAVAT_DO_SITE;Bateria je plna, predaj prebytkov za 231.73 EUR.
-2026-04-10;19:45;0,18;Nedostatok dat;299,4;75,0;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 299.40 EUR.
-2026-04-10;20:00;0,0;Nedostatok dat;272,0;50,0;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 272.00 EUR.
-2026-04-10;20:15;0,0;Nedostatok dat;259,0;25,0;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 259.00 EUR.
-2026-04-10;20:30;0,0;Nedostatok dat;236,9;10,0;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 236.90 EUR.
-2026-04-10;20:45;0,0;Nedostatok dat;207,77;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-10;21:00;0,0;Nedostatok dat;208,67;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-10;21:15;0,0;Nedostatok dat;177,03;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-10;21:30;0,0;Nedostatok dat;158,01;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-10;21:45;0,0;Nedostatok dat;136,82;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-10;22:00;0,0;Nedostatok dat;165,95;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-10;22:15;0,0;Nedostatok dat;150,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-10;22:30;0,0;Nedostatok dat;141,9;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-10;22:45;0,0;Nedostatok dat;127,32;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-10;23:00;0,0;Nedostatok dat;139,1;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-10;23:15;0,0;Nedostatok dat;134,61;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-10;23:30;0,0;Nedostatok dat;132,2;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-10;23:45;0,0;Nedostatok dat;127,48;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;00:00;0,0;Nedostatok dat;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;00:15;0,0;Nedostatok dat;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;00:30;0,0;Nedostatok dat;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;00:45;0,0;Nedostatok dat;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;01:00;0,0;Nedostatok dat;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;01:15;0,0;Nedostatok dat;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;01:30;0,0;Nedostatok dat;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-10;12:00;3,65;0,22;107,0;70,0;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 107.00 EUR.
+2026-04-10;12:15;3,45;0,4;96,6;77,6;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-10;12:30;3,24;0,4;99,37;83,7;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-10;12:45;3,03;0,24;87,36;90,7;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-10;13:00;2,82;0,5;100,84;65,7;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 100.84 EUR.
+2026-04-10;13:15;2,66;0,68;89,68;70,7;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-10;13:30;2,5;0,38;87,46;76,0;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-10;13:45;2,34;0,22;95,14;81,3;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-10;14:00;2,19;0,29;89,32;86,0;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-10;14:15;2,04;0,38;83,44;90,2;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-10;14:30;1,9;0,53;89,01;93,6;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-10;14:45;1,76;0,86;86,31;95,9;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-10;15:00;1,62;0,86;90,2;97,7;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-10;15:15;1,49;0,58;98,04;100,0;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-10;15:30;1,36;0,58;101,27;100,0;PRODAVAT_DO_SITE;Bateria je plna, predaj prebytkov za 101.27 EUR.
+2026-04-10;15:45;1,23;0,4;102,94;98,6;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 102.94 EUR.
+2026-04-10;16:00;1,09;0,55;97,81;100,0;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-10;16:15;0,99;0,74;107,56;100,0;PRODAVAT_DO_SITE;Bateria je plna, predaj prebytkov za 107.56 EUR.
+2026-04-10;16:30;0,88;0,8;116,68;100,0;NORMALNI_PROVOZ;Bezna spotreba kryta priamym slnecnym vykonom.
+2026-04-10;16:45;0,77;0,76;127,81;100,0;NORMALNI_PROVOZ;Bezna spotreba kryta priamym slnecnym vykonom.
+2026-04-10;17:00;0,66;0,67;114,82;100,0;NORMALNI_PROVOZ;Bezna spotreba kryta priamym slnecnym vykonom.
+2026-04-10;17:15;0,57;0,21;127,99;100,0;PRODAVAT_DO_SITE;Bateria je plna, predaj prebytkov za 127.99 EUR.
+2026-04-10;17:30;0,48;0,18;136,51;100,0;PRODAVAT_DO_SITE;Bateria je plna, predaj prebytkov za 136.51 EUR.
+2026-04-10;17:45;0,4;0,2;161,88;99,8;PRODAVAT_DO_SITE;Bateria je plna, predaj prebytkov za 161.88 EUR.
+2026-04-10;18:00;0,31;0,22;123,15;100,0;NORMALNI_PROVOZ;Bezna spotreba kryta priamym slnecnym vykonom.
+2026-04-10;18:15;0,25;0,3;130,35;100,0;NORMALNI_PROVOZ;Bezna spotreba kryta priamym slnecnym vykonom.
+2026-04-10;18:30;0,2;10,85;159,9;100,0;NORMALNI_PROVOZ;Bezna spotreba kryta priamym slnecnym vykonom.
+2026-04-10;18:45;0,14;0,68;195,87;98,7;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 195.87 EUR.
+2026-04-10;19:00;0,09;0,53;163,18;100,0;NABIJET_ZE_SITE;Priprava na buducu spicku (nakup za 163.18 EUR).
+2026-04-10;19:15;0,12;0,7;190,0;98,5;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 190.00 EUR.
+2026-04-10;19:30;0,15;34,63;231,73;73,5;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 231.73 EUR.
+2026-04-10;19:45;0,18;0,54;299,4;48,5;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 299.40 EUR.
+2026-04-10;20:00;0,0;0,55;272,0;23,5;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 272.00 EUR.
+2026-04-10;20:15;0,0;0,39;259,0;13,9;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 259.00 EUR.
+2026-04-10;20:30;0,0;0,74;236,9;12,1;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 236.90 EUR.
+2026-04-10;20:45;0,0;0,42;207,77;11,0;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 207.77 EUR.
+2026-04-10;21:00;0,0;0,4;208,67;10,0;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 208.67 EUR.
+2026-04-10;21:15;0,0;0,44;177,03;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-10;21:30;0,0;0,41;158,01;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-10;21:45;0,0;0,34;136,82;15,6;NABIJET_ZE_SITE;Priprava na buducu spicku (nakup za 136.82 EUR).
+2026-04-10;22:00;0,0;0,59;165,95;14,1;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 165.95 EUR.
+2026-04-10;22:15;0,0;0,8;150,0;12,1;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 150.00 EUR.
+2026-04-10;22:30;0,0;0,84;141,9;10,0;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 141.90 EUR.
+2026-04-10;22:45;0,0;0,67;127,32;12,6;NABIJET_ZE_SITE;Priprava na buducu spicku (nakup za 127.32 EUR).
+2026-04-10;23:00;0,0;0,37;139,1;11,7;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 139.10 EUR.
+2026-04-10;23:15;0,0;0,32;134,61;10,8;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 134.61 EUR.
+2026-04-10;23:30;0,0;0,23;132,2;10,3;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 132.20 EUR.
+2026-04-10;23:45;0,0;0,11;127,48;10,0;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 127.48 EUR.
+2026-04-11;00:00;0,0;0,45;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;00:15;0,0;0,08;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;00:30;0,0;0,09;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;00:45;0,0;0,09;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;01:00;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;01:15;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;01:30;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
 2026-04-11;01:45;0,0;Nedostatok dat;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;02:00;0,0;Nedostatok dat;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;02:15;0,0;Nedostatok dat;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;02:30;0,0;Nedostatok dat;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;02:45;0,0;Nedostatok dat;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;02:00;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;02:15;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;02:30;0,0;0,06;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;02:45;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
 2026-04-11;03:00;0,0;Nedostatok dat;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;03:15;0,0;Nedostatok dat;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;03:30;0,0;Nedostatok dat;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;03:45;0,0;Nedostatok dat;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;04:00;0,0;Nedostatok dat;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;03:15;0,0;0,04;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;03:30;0,0;0,04;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;03:45;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;04:00;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
 2026-04-11;04:15;0,0;Nedostatok dat;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;04:30;0,0;Nedostatok dat;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;04:45;0,0;Nedostatok dat;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;05:00;0,0;Nedostatok dat;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;05:15;0,0;Nedostatok dat;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;05:30;0,0;Nedostatok dat;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;04:30;0,0;0,04;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;04:45;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;05:00;0,0;0,06;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;05:15;0,0;0,06;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;05:30;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
 2026-04-11;05:45;0,0;Nedostatok dat;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;06:00;0,0;Nedostatok dat;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;06:00;0,0;0,02;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
 2026-04-11;06:15;0,0;Nedostatok dat;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;06:30;0,0;Nedostatok dat;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;06:45;0,0;Nedostatok dat;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;07:00;1,53;Nedostatok dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
-2026-04-11;07:15;2,14;Nedostatok dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
-2026-04-11;07:30;2,75;Nedostatok dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
-2026-04-11;07:45;3,36;Nedostatok dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
-2026-04-11;08:00;3,98;Nedostatok dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
-2026-04-11;08:15;4,28;Nedostatok dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
-2026-04-11;08:30;4,59;Nedostatok dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
+2026-04-11;06:30;0,0;0,6;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;06:45;0,0;0,9;0,0;10,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;07:00;1,53;0,82;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
+2026-04-11;07:15;2,14;0,08;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
+2026-04-11;07:30;2,75;0,3;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
+2026-04-11;07:45;3,36;0,26;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
+2026-04-11;08:00;3,98;0,06;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
+2026-04-11;08:15;4,28;0,46;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
+2026-04-11;08:30;4,59;0,18;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
 2026-04-11;08:45;4,89;Nedostatok dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
-2026-04-11;09:00;5,2;Nedostatok dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
+2026-04-11;09:00;5,2;0,02;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
 2026-04-11;09:15;5,29;Nedostatok dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
-2026-04-11;09:30;5,39;Nedostatok dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
+2026-04-11;09:30;5,39;0,02;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
 2026-04-11;09:45;5,49;Nedostatok dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
-2026-04-11;10:00;5,59;Nedostatok dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
-2026-04-11;10:15;5,5;Nedostatok dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
-2026-04-11;10:30;5,42;Nedostatok dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
-2026-04-11;10:45;5,33;Nedostatok dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
+2026-04-11;10:00;5,59;0,06;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
+2026-04-11;10:15;5,5;0,04;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
+2026-04-11;10:30;5,42;0,02;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
+2026-04-11;10:45;5,33;0,02;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
 2026-04-11;11:00;5,25;Nedostatok dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
-2026-04-11;11:15;5,06;Nedostatok dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
-2026-04-11;11:30;4,87;Nedostatok dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
+2026-04-11;11:15;5,06;0,02;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
+2026-04-11;11:30;4,87;0,02;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
 2026-04-11;11:45;4,68;Nedostatok dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
-2026-04-11;12:00;4,49;Nedostatok dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
+2026-04-11;12:00;4,49;0,02;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
 2026-04-11;12:15;4,28;Nedostatok dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
 2026-04-11;12:30;4,06;Nedostatok dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
-2026-04-11;12:45;3,85;Nedostatok dat;0,0;10,0;PRODAVAT_DO_SITE;Vyhodny predaj z baterie (0.00 EUR).
-2026-04-11;13:00;3,63;Nedostatok dat;0,0;17,1;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-11;13:15;3,41;Nedostatok dat;0,0;25,6;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-11;13:30;3,19;Nedostatok dat;0,0;33,6;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-11;13:45;2,96;Nedostatok dat;0,0;41,0;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-11;14:00;2,74;Nedostatok dat;0,0;47,9;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-11;14:15;2,53;Nedostatok dat;0,0;54,2;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-11;14:30;2,32;Nedostatok dat;0,0;60,0;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-11;14:45;2,1;Nedostatok dat;0,0;65,2;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-11;15:00;1,89;Nedostatok dat;0,0;69,9;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-11;15:15;1,72;Nedostatok dat;0,0;74,2;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-11;15:30;1,54;Nedostatok dat;0,0;78,1;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-11;15:45;1,37;Nedostatok dat;0,0;81,5;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-11;16:00;1,19;Nedostatok dat;0,0;84,5;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-11;16:15;1,06;Nedostatok dat;0,0;87,1;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-11;16:30;0,93;Nedostatok dat;0,0;89,5;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-11;16:45;0,81;Nedostatok dat;0,0;91,5;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-11;17:00;0,68;Nedostatok dat;0,0;93,2;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-11;17:15;0,59;Nedostatok dat;0,0;94,6;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-11;17:30;0,49;Nedostatok dat;0,0;95,9;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-11;17:45;0,4;Nedostatok dat;0,0;96,9;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-11;18:00;0,31;Nedostatok dat;0,0;97,6;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-11;18:15;0,26;Nedostatok dat;0,0;98,3;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-11;18:30;0,21;Nedostatok dat;0,0;98,8;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-11;18:45;0,16;Nedostatok dat;0,0;99,2;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-11;19:00;0,11;Nedostatok dat;0,0;99,5;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-11;19:15;0,11;Nedostatok dat;0,0;99,7;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-11;19:30;0,11;Nedostatok dat;0,0;100,0;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
-2026-04-11;19:45;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;20:00;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;20:15;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;20:30;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;20:45;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;21:00;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;21:15;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;21:30;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;21:45;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;22:00;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;22:15;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;22:30;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;22:45;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;23:00;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;23:15;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;23:30;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-11;23:45;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;00:00;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;00:15;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;00:30;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;00:45;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;01:00;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;01:15;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;01:30;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;01:45;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;02:00;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;02:15;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;02:30;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;02:45;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;03:00;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;03:15;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;03:30;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;03:45;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;04:00;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;04:15;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;04:30;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;04:45;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;05:00;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;05:15;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;05:30;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;05:45;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;06:00;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;06:15;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;06:30;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;06:45;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;07:00;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;07:15;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;07:30;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;07:45;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;08:00;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;08:15;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;08:30;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;08:45;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;09:00;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;09:15;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;09:30;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;09:45;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;10:00;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;10:15;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;10:30;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;10:45;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;11:00;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;11:15;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
-2026-04-12;11:30;0,0;Nedostatok dat;0,0;100,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;12:45;3,85;Nedostatok dat;0,0;14,5;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-11;13:00;3,63;Nedostatok dat;0,0;23,5;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-11;13:15;3,41;Nedostatok dat;0,0;32,1;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-11;13:30;3,19;Nedostatok dat;0,0;40,0;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-11;13:45;2,96;Nedostatok dat;0,0;47,5;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-11;14:00;2,74;Nedostatok dat;0,0;54,3;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-11;14:15;2,53;Nedostatok dat;0,0;60,6;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-11;14:30;2,32;0,01;0,0;66,4;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-11;14:45;2,1;0,01;0,0;71,6;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-11;15:00;1,89;0,12;0,0;76,0;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-11;15:15;1,72;0,01;0,0;80,3;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-11;15:30;1,54;Nedostatok dat;0,0;84,1;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-11;15:45;1,37;Nedostatok dat;0,0;87,6;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-11;16:00;1,19;0,01;0,0;90,5;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-11;16:15;1,06;0,03;0,0;93,1;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-11;16:30;0,93;0,03;0,0;95,4;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-11;16:45;0,81;0,11;0,0;97,1;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-11;17:00;0,68;0,19;0,0;98,3;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-11;17:15;0,59;0,07;0,0;99,6;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-11;17:30;0,49;0,34;0,0;100,0;NABIJET_SOLAREM;Ukladanie solarnych prebytkov pre neskorsie vyuzitie.
+2026-04-11;17:45;0,4;0,94;0,0;98,7;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 0.00 EUR.
+2026-04-11;18:00;0,31;0,28;0,0;98,7;NORMALNI_PROVOZ;Bezna spotreba kryta priamym slnecnym vykonom.
+2026-04-11;18:15;0,26;0,24;0,0;98,8;NORMALNI_PROVOZ;Bezna spotreba kryta priamym slnecnym vykonom.
+2026-04-11;18:30;0,21;0,26;0,0;98,6;NORMALNI_PROVOZ;Bezna spotreba kryta priamym slnecnym vykonom.
+2026-04-11;18:45;0,16;0,34;0,0;98,2;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 0.00 EUR.
+2026-04-11;19:00;0,11;0,38;0,0;97,5;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 0.00 EUR.
+2026-04-11;19:15;0,11;0,82;0,0;95,7;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 0.00 EUR.
+2026-04-11;19:30;0,11;0,68;0,0;94,3;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 0.00 EUR.
+2026-04-11;19:45;0,0;0,27;0,0;93,6;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 0.00 EUR.
+2026-04-11;20:00;0,0;0,12;0,0;93,3;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 0.00 EUR.
+2026-04-11;20:15;0,0;0,27;0,0;92,6;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 0.00 EUR.
+2026-04-11;20:30;0,0;Nedostatok dat;0,0;92,6;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;20:45;0,0;Nedostatok dat;0,0;92,6;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;21:00;0,0;Nedostatok dat;0,0;92,6;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;21:15;0,0;Nedostatok dat;0,0;92,6;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;21:30;0,0;Nedostatok dat;0,0;92,6;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;21:45;0,0;Nedostatok dat;0,0;92,6;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;22:00;0,0;Nedostatok dat;0,0;92,6;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;22:15;0,0;0,02;0,0;92,6;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;22:30;0,0;0,02;0,0;92,5;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;22:45;0,0;0,02;0,0;92,5;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;23:00;0,0;Nedostatok dat;0,0;92,5;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;23:15;0,0;Nedostatok dat;0,0;92,5;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;23:30;0,0;Nedostatok dat;0,0;92,5;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-11;23:45;0,0;Nedostatok dat;0,0;92,5;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;00:00;0,0;0,45;0,0;91,3;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 0.00 EUR.
+2026-04-12;00:15;0,0;0,08;0,0;91,1;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;00:30;0,0;0,09;0,0;90,9;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;00:45;0,0;0,09;0,0;90,7;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;01:00;0,0;0,02;0,0;90,6;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;01:15;0,0;0,02;0,0;90,6;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;01:30;0,0;0,02;0,0;90,5;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;01:45;0,0;Nedostatok dat;0,0;90,5;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;02:00;0,0;0,02;0,0;90,5;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;02:15;0,0;0,02;0,0;90,4;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;02:30;0,0;0,06;0,0;90,3;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;02:45;0,0;0,02;0,0;90,2;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;03:00;0,0;Nedostatok dat;0,0;90,2;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;03:15;0,0;0,04;0,0;90,1;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;03:30;0,0;0,04;0,0;90,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;03:45;0,0;0,02;0,0;90,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;04:00;0,0;0,02;0,0;89,9;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;04:15;0,0;Nedostatok dat;0,0;89,9;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;04:30;0,0;0,04;0,0;89,8;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;04:45;0,0;0,02;0,0;89,8;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;05:00;0,0;0,06;0,0;89,6;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;05:15;0,0;0,06;0,0;89,5;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;05:30;0,0;0,02;0,0;89,4;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;05:45;0,0;Nedostatok dat;0,0;89,4;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;06:00;0,0;0,02;0,0;89,4;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;06:15;0,0;Nedostatok dat;0,0;89,4;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;06:30;0,0;0,6;0,0;87,9;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 0.00 EUR.
+2026-04-12;06:45;0,0;0,9;0,0;85,6;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 0.00 EUR.
+2026-04-12;07:00;0,0;0,82;0,0;83,6;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 0.00 EUR.
+2026-04-12;07:15;0,0;0,08;0,0;83,4;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;07:30;0,0;0,3;0,0;82,6;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 0.00 EUR.
+2026-04-12;07:45;0,0;0,26;0,0;82,0;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 0.00 EUR.
+2026-04-12;08:00;0,0;0,06;0,0;81,8;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;08:15;0,0;0,46;0,0;80,7;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 0.00 EUR.
+2026-04-12;08:30;0,0;0,18;0,0;80,2;POKRYT_Z_BATERIE;Vyhnutie sa nakupu energie zo siete za cenu 0.00 EUR.
+2026-04-12;08:45;0,0;Nedostatok dat;0,0;80,2;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;09:00;0,0;0,02;0,0;80,2;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;09:15;0,0;Nedostatok dat;0,0;80,2;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;09:30;0,0;0,02;0,0;80,1;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;09:45;0,0;Nedostatok dat;0,0;80,1;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;10:00;0,0;0,06;0,0;80,0;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;10:15;0,0;0,04;0,0;79,9;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;10:30;0,0;0,02;0,0;79,8;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;10:45;0,0;0,02;0,0;79,8;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;11:00;0,0;Nedostatok dat;0,0;79,8;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;11:15;0,0;0,02;0,0;79,7;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;11:30;0,0;0,02;0,0;79,7;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
+2026-04-12;11:45;0,0;Nedostatok dat;0,0;79,7;NORMALNI_PROVOZ;Bezny prevadzkovy stav.
