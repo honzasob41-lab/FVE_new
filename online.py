@@ -23,6 +23,7 @@ KW_PEAK = 10.0
 
 SOUBOR_PLAN = "denni_plan.csv"
 SOUBOR_PREDPOVEDI = "predpoved_cache.json"
+SOUBOR_CENY = "ceny_cache.json"  # Přidán soubor pro cachování cen
 MIN_DNI_PRO_UCENI = 2
 MAX_VYKON_STRIDACE = 10.0
 KAPACITA_BATERIE_KWH = 10.0
@@ -77,43 +78,67 @@ def nacti_ceny_entsoe():
     TOKEN_ENTSOE = "680f2687-dd26-443a-81d1-db067ee6b029"
     DOMENA_CZ = "10YCZ-CEPS-----N"
     cas_utc = datetime.now(timezone.utc)
+    ceny = {}
+    data = {}
+    
+    # 1. CACHOVÁNÍ ODOLNÉ VŮČI GITHUBU
+    potrebujeme_stahnout = True
+    if os.path.exists(SOUBOR_CENY):
+        try:
+            with open(SOUBOR_CENY, 'r') as f:
+                data = json.load(f)
+            # Čteme čas zevnitř souboru, nikoliv z operačního systému
+            last_dl_str = data.get("_last_download")
+            if last_dl_str:
+                last_dl = datetime.fromisoformat(last_dl_str)
+                if datetime.now() - last_dl < timedelta(hours=6):
+                    potrebujeme_stahnout = False
+        except: pass
+
+    if not potrebujeme_stahnout and "ceny" in data:
+        return {pd.to_datetime(k).to_pydatetime(): v for k, v in data["ceny"].items()}
+
+    # 2. STAŽENÍ NOVÝCH DAT
     start = (cas_utc - timedelta(days=1)).strftime("%Y%m%d0000")
     stop = (cas_utc + timedelta(days=3)).strftime("%Y%m%d0000")
     url = f"https://web-api.tp.entsoe.eu/api?securityToken={TOKEN_ENTSOE}&documentType=A44&in_Domain={DOMENA_CZ}&out_Domain={DOMENA_CZ}&periodStart={start}&periodEnd={stop}"
-    ceny = {}
+    
     try:
         r = requests.get(url, timeout=15)
-        if r.status_code != 200:
-            print(f"CHYBA ENTSO-E (Kod {r.status_code}): {r.text[:200]}")
-            return ceny
-
-        root = ElementTree.fromstring(r.content)
-        if root.tag.endswith('ErrorDocument'):
-            chyba = root.find('.//{*}text')
-            print(f"CHYBA ENTSO-E XML: {chyba.text if chyba is not None else 'Neznama chyba'}")
-            return ceny
-
-        zaznamy = []
-        for ts in root.findall('.//{*}TimeSeries'):
-            period = ts.find('.//{*}Period')
-            if not period: continue
+        if r.status_code == 200:
+            root = ElementTree.fromstring(r.content)
+            zaznamy = []
+            for ts in root.findall('.//{*}TimeSeries'):
+                period = ts.find('.//{*}Period')
+                if not period: continue
+                reso_element = period.find('.//{*}resolution')
+                krok_minut = 15 if (reso_element is not None and reso_element.text == 'PT15M') else 60
+                start_dt = pd.to_datetime(period.find('.//{*}start').text)
+                
+                for point in period.findall('.//{*}Point'):
+                    pos = int(point.find('{*}position').text)
+                    price = float(point.find('{*}price.amount').text)
+                    cas_local = (start_dt + timedelta(minutes=(pos - 1) * krok_minut)).tz_convert('Europe/Prague').tz_localize(None)
+                    zaznamy.append({"Cas": cas_local, "Cena": price})
             
-            reso_element = period.find('.//{*}resolution')
-            krok_minut = 15 if (reso_element is not None and reso_element.text == 'PT15M') else 60
-            
-            start_dt = pd.to_datetime(period.find('.//{*}start').text)
-            for point in period.findall('.//{*}Point'):
-                pos = int(point.find('{*}position').text)
-                price = float(point.find('{*}price.amount').text)
-                cas_local = (start_dt + timedelta(minutes=(pos - 1) * krok_minut)).tz_convert('Europe/Prague').tz_localize(None)
-                zaznamy.append({"Cas": cas_local, "Cena": price})
+            if zaznamy:
+                # Ochrana proti pádům Pandas - drop_duplicates
+                df = pd.DataFrame(zaznamy).drop_duplicates(subset=["Cas"]).set_index("Cas").resample("15min").ffill().reset_index()
+                for _, row in df.iterrows():
+                    ceny[row["Cas"].to_pydatetime()] = row["Cena"]
+                    
+                # Uložíme data i s naší speciální časovou značkou
+                with open(SOUBOR_CENY, 'w') as f:
+                    json.dump({
+                        "_last_download": datetime.now().isoformat(),
+                        "ceny": {k.strftime('%Y-%m-%d %H:%M:%S'): v for k, v in ceny.items()}
+                    }, f)
+                return ceny
+    except Exception as e: print(f"Chyba pri stahovani ENTSO-E: {e}")
         
-        if zaznamy:
-            df = pd.DataFrame(zaznamy).set_index("Cas").resample("15min").ffill().reset_index()
-            for _, row in df.iterrows():
-                ceny[row["Cas"].to_pydatetime()] = row["Cena"]
-    except Exception as e: 
-        print(f"Kriticka chyba pri cteni ENTSO-E: {e}")
+    # Pokud stahování selže, zkusíme vrátit alespoň stará data z cache, pokud existují
+    if "ceny" in data:
+        return {pd.to_datetime(k).to_pydatetime(): v for k, v in data["ceny"].items()}
     return ceny
 
 def nacti_predpoved_fs():
@@ -121,34 +146,44 @@ def nacti_predpoved_fs():
     predpoved = {}
     data = None
     
+    # 1. CACHOVÁNÍ ODOLNÉ VŮČI GITHUBU
     potrebujeme_stahnout = True
     if os.path.exists(SOUBOR_PREDPOVEDI):
-        cas_zmeny = datetime.fromtimestamp(os.path.getmtime(SOUBOR_PREDPOVEDI))
-        if datetime.now() - cas_zmeny < timedelta(hours=3):
-            potrebujeme_stahnout = False
+        try:
+            with open(SOUBOR_PREDPOVEDI, 'r') as f:
+                data = json.load(f)
             
+            # Čteme čas zevnitř souboru
+            last_dl_str = data.get("_last_download")
+            if last_dl_str:
+                last_dl = datetime.fromisoformat(last_dl_str)
+                if datetime.now() - last_dl < timedelta(hours=3):
+                    potrebujeme_stahnout = False
+        except: pass
+
     if potrebujeme_stahnout:
         try:
             r = requests.get(url, timeout=10)
             if r.status_code == 200:
                 data = r.json()
-                with open(SOUBOR_PREDPOVEDI, 'w') as f:
-                    json.dump(data, f)
+                data["_last_download"] = datetime.now().isoformat() # Vložení razítka
+                with open(SOUBOR_PREDPOVEDI, 'w') as f: json.dump(data, f)
             else:
-                print(f"CHYBA FORECAST.SOLAR (Kod {r.status_code}). API limit pravdepodobne vycerpan.")
+                print(f"CHYBA FORECAST.SOLAR: Server zamitl pozadavek (Kod {r.status_code}).")
+                # Posuneme razítko, abychom API nespamovali
+                if data:
+                    data["_last_download"] = datetime.now().isoformat()
+                    with open(SOUBOR_PREDPOVEDI, 'w') as f: json.dump(data, f)
         except Exception as e:
             print(f"Chyba spojeni Forecast.Solar: {e}")
+            if data:
+                data["_last_download"] = datetime.now().isoformat()
+                with open(SOUBOR_PREDPOVEDI, 'w') as f: json.dump(data, f)
 
-    if not data and os.path.exists(SOUBOR_PREDPOVEDI):
-        try:
-            with open(SOUBOR_PREDPOVEDI, 'r') as f:
-                data = json.load(f)
-        except Exception as e:
-            print(f"Chyba pri cteni cache souboru: {e}")
-
-    if not data:
+    if not data or 'result' not in data:
         return predpoved
 
+    # 3. ZPRACOVÁNÍ DAT Z CACHE (s ochranou proti duplicitám a linearizací)
     try:
         raw_data = []
         for cas_str, wh in data['result']['watt_hours_period'].items():
@@ -158,14 +193,13 @@ def nacti_predpoved_fs():
             raw_data.append({"Cas": cas, "Vykon_kW": float(wh) / 1000.0})
         
         if raw_data:
-            df = pd.DataFrame(raw_data).set_index("Cas").sort_index()
+            df = pd.DataFrame(raw_data).drop_duplicates(subset=["Cas"]).set_index("Cas").sort_index()
             df = df.resample("15min").interpolate(method='linear', limit=3).fillna(0.0).reset_index()
             
             for _, row in df.iterrows():
                 if pd.notna(row["Cas"]):
                     predpoved[row["Cas"].to_pydatetime()] = max(0.0, float(row["Vykon_kW"]))
-    except Exception as e: 
-        print(f"Kriticka chyba pri cteni Forecast.Solar dat: {e}")
+    except Exception as e: print(f"Kriticka chyba pri cteni Forecast.Solar dat: {e}")
         
     return predpoved
 
@@ -343,7 +377,6 @@ def main():
             model += soc[i] == soc[i-1] + zmena_soc
 
         # --- PŘIDANÉ BIG-M PODMÍNKY ---
-        # Využíváme MAX_VYKON_STRIDACE jako dostatečně velkou konstantu M
         model += p_nabijeni[i] <= MAX_VYKON_STRIDACE * is_charging[i]
         model += p_vybijeni[i] <= MAX_VYKON_STRIDACE * (1 - is_charging[i])
 
@@ -456,7 +489,7 @@ def main():
         'Odhad_Spotreba_Modelu_kW': odhad_spotreby_ted,
         'Aktualni_import/export_W': str(m['sit_w']).replace('.', ','),
         'Import_5min_kWh': str(round(h_import, 4)).replace('.', ','),                
-        'Export_5min_kWh': str(round(h_export, 4)).replace('.', ','),                                                                      
+        'Export_5min_kWh': str(round(h_export, 4)).replace('.', ','),                                                                                                        
         'Celkovy_Vykon_Panelu_W': str(celkovy_dc_vykon_w).replace('.', ','), 
         'Cista_Vyroba_Panelu_kWh': str(round(cista_vyroba_pv_kwh, 4)).replace('.', ','),
         'Aktualni_AC_Vystup_W': str(m['ac_out']).replace('.', ','),
@@ -472,7 +505,7 @@ def main():
         'Denni_Export_kWh': str(round(denni_export, 2)).replace('.', ','),  
         'AC_vyroba_Dnes_kWh': str(m['v_dnes']).replace('.', ','), 
         'Spotreba_Celkem_kWh': str(m['s_celkem']).replace('.', ','),
-        'Export_Celkem_kWh': str(m['e_celkem']).replace('.', ',')                   
+        'Export_Celkem_kWh': str(m['e_celkem']).replace('.', ',')                    
     }])
 
     aktualni_mesic_soubor = f"fve_historie_{ted.strftime('%Y_%m')}.csv"
