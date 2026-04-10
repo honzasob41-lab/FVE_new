@@ -1,4 +1,4 @@
-Cas;Skutecna_Spotreba_W;Aktualni_import/export_W;Aktualni_AC_Vystup_W;Celkovy_Vykon_Panelu_W;Vykon_Baterie_W;Odhad_Spotreba_Modelu_kW;Baterie_SOC_%;Simulovane_SOC_%;Cena_EUR/MWh;Predpoved_FS_kWh;Doporucena_Akce;Akce_PuLP;Duvod_PuLP;Skutecny_AC_Vystup_kWh;Cista_Vyroba_Panelu_kWh;Import_5min_kWh;Export_5min_kWh;Denni_Import_kWh;Denni_Export_kWh;AC_vyroba_Dnes_kWh;Spotreba_Celkem_kWh;Export_Celkem_kWh
+Cas;Skutecna_Spotreba_W;Odhad_Spotreba_Modelu_kW;Aktualni_import/export_W;Aktualni_AC_Vystup_W;Celkovy_Vykon_Panelu_W;Predpoved_FS_kW;Vykon_Baterie_W;Baterie_SOC_%;Simulovane_SOC_%;Cena_EUR/MWh;Doporucena_Akce;Akce_PuLP;Duvod_PuLP;Skutecny_AC_Vystup_kWh;Cista_Vyroba_Panelu_kWh;Import_5min_kWh;Export_5min_kWh;Denni_Import_kWh;Denni_Export_kWh;AC_vyroba_Dnes_kWh;Spotreba_Celkem_kWh;Export_Celkem_kWh
 2026-03-23 22:09;0;;;;;;;;;;;;;;;;;;;;10472,53;
 2026-03-23 22:10;0;;;;;;;;;;;;;;;;;;;;10472,53;
 2026-03-24 20:39;9480;;;;;;;;;;;;;;;;;;;;10473,32;
