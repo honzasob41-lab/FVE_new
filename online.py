@@ -288,7 +288,7 @@ def main():
         casy_192.append(c)
         
         hodina_c = c.hour
-        korigovane_fs = vsechny_fs.get(c, 0.0) * korekce_fs.get(hodina_c, 1.0)
+        korigovane_fs = min(vsechny_fs.get(c, 0.0) * korekce_fs.get(hodina_c, 1.0), KW_PEAK)
         pv_192.append(korigovane_fs)
         
         ceny_192.append(vsechny_ceny.get(c, 0.0))
@@ -344,10 +344,10 @@ def main():
     aktualni_hodina = ted_5min.hour
     
     surovy_fs = vsechny_fs.get(ted_5min, 0.0) * 1000
-    fs_aktualni_w = int(round(surovy_fs * korekce_fs.get(aktualni_hodina, 1.0)))
-    
     surovy_pvf = vsechny_pvf.get(ted_5min, 0.0) * 1000
-    pvf_aktualni_w = int(round(surovy_pvf * korekce_pvf.get(aktualni_hodina, 1.0)))
+    
+    fs_korigovany_w = min(surovy_fs * korekce_fs.get(aktualni_hodina, 1.0), KW_PEAK * 1000)
+    pvf_korigovany_w = min(surovy_pvf * korekce_pvf.get(aktualni_hodina, 1.0), KW_PEAK * 1000)
     
     n_radek = pd.DataFrame([{
         'Cas': ted.strftime('%Y-%m-%d %H:%M'),
@@ -356,8 +356,10 @@ def main():
         'Aktualni_import/export_W': str(m['sit_w']).replace('.', ','),
         'Aktualni_AC_Vystup_W': str(m['ac_out']).replace('.', ','),
         'Celkovy_Vykon_Panelu_W': int(m['dc1']+m['dc2']),
-        'Predpoved_FS_W': fs_aktualni_w,
-        'Predpoved_PVF_W': pvf_aktualni_w,
+        
+        'Predpoved_FS_W': int(round(surovy_fs)),
+        'Predpoved_PVF_W': int(round(surovy_pvf)),
+        
         'Vykon_Baterie_W': int(m['bat_p']),
         'Baterie_SOC_%': str(m['soc']).replace('.', ','),
         'Simulovane_SOC_%': str(round(float(soc_vars[0].varValue), 1)).replace('.', ','),
@@ -374,7 +376,10 @@ def main():
         'Spotreba_Celkem_kWh': str(m['s_celkem']).replace('.', ','),
         'Export_Celkem_kWh': str(m['e_celkem']).replace('.', ','),
         'Uceni_Koeficient_FS': str(round(korekce_fs.get(aktualni_hodina, 1.0), 2)).replace('.', ','),
-        'Uceni_Koeficient_PVF': str(round(korekce_pvf.get(aktualni_hodina, 1.0), 2)).replace('.', ',')
+        'Uceni_Koeficient_PVF': str(round(korekce_pvf.get(aktualni_hodina, 1.0), 2)).replace('.', ','),
+        
+        'Korigovana_Predpoved_FS_W': int(round(fs_korigovany_w)),
+        'Korigovana_Predpoved_PVF_W': int(round(pvf_korigovany_w))
     }])
 
     poradi = [
@@ -384,7 +389,8 @@ def main():
         'Akce_PuLP', 'Duvod_PuLP', 'Skutecny_AC_Vystup_kWh', 'Cista_Vyroba_Panelu_kWh', 
         'Import_5min_kWh', 'Export_5min_kWh', 'Denni_Import_kWh', 'Denni_Export_kWh', 
         'AC_vyroba_Dnes_kWh', 'Spotreba_Celkem_kWh', 'Export_Celkem_kWh',
-        'Uceni_Koeficient_FS', 'Uceni_Koeficient_PVF'
+        'Uceni_Koeficient_FS', 'Uceni_Koeficient_PVF',
+        'Korigovana_Predpoved_FS_W', 'Korigovana_Predpoved_PVF_W'
     ]
     
     n_radek = n_radek[poradi]
