@@ -40,7 +40,7 @@ def nacti_solax_v2():
     headers = {"tokenId": TOKEN_SOLAX, "Content-Type": "application/json"}
     for _ in range(3):
         try:
-            r = requests.post(url, json=payload, headers=headers, timeout=20)
+            r = requests.post(url, json=payload, headers=headers, timeout=15)
             data = r.json()
             if data.get("success"):
                 res = data.get("result")
@@ -74,7 +74,7 @@ def nacti_ceny_entsoe():
     stop = (cas_utc + timedelta(days=3)).strftime("%Y%m%d0000")
     url = f"https://web-api.tp.entsoe.eu/api?securityToken={TOKEN_ENTSOE}&documentType=A44&in_Domain={DOMENA_CZ}&out_Domain={DOMENA_CZ}&periodStart={start}&periodEnd={stop}"
     try:
-        r = requests.get(url, timeout=20)
+        r = requests.get(url, timeout=15)
         if r.status_code == 200:
             root = ElementTree.fromstring(r.content)
             zaznamy = []
@@ -119,8 +119,19 @@ def nacti_predpoved_fs():
         for cas_str, w in data['result']['watts'].items():
             cas = pd.to_datetime(cas_str).replace(tzinfo=None)
             raw_data.append({"Cas": cas, "W": float(w)})
+            
         if raw_data:
-            df = pd.DataFrame(raw_data).set_index("Cas").resample("5min").interpolate(method='linear').fillna(0.0)
+            df = pd.DataFrame(raw_data).set_index("Cas")
+            
+            # Linearizace nabehu vlozeni fixnich kotev s nulou rano a vecer
+            unikatni_dny = df.index.normalize().unique()
+            for den in unikatni_dny:
+                ranni_cas = den + pd.Timedelta(hours=4)
+                vecerni_cas = den + pd.Timedelta(hours=21)
+                if ranni_cas not in df.index: df.loc[ranni_cas] = 0.0
+                if vecerni_cas not in df.index: df.loc[vecerni_cas] = 0.0
+                
+            df = df.sort_index().resample("5min").interpolate(method='linear').fillna(0.0)
             for c, r in df.iterrows():
                 predpoved[c.to_pydatetime()] = r["W"] / 1000.0
     except: pass
@@ -138,13 +149,16 @@ def nacti_predpoved_pvf():
         
     if not data:
         try:
-            r = requests.get(url, timeout=15)
+            r = requests.get(url, timeout=20)
             if r.status_code == 200:
                 try: raw_json = r.json()
                 except: raw_json = json.loads(r.text)
                 data = {"_last_download": datetime.now().isoformat(), "forecast": raw_json}
                 with open(SOUBOR_PREDPOVEDI_PVF, 'w') as f: json.dump(data, f)
-        except: pass
+            else:
+                print(f"PV Forecast API Error {r.status_code}: {r.text}")
+        except Exception as e:
+            print(f"PV Forecast Connection Error: {e}")
         
     if not data or 'forecast' not in data: return predpoved
     
@@ -158,11 +172,42 @@ def nacti_predpoved_pvf():
             raw.append({"Cas": cas, "W": vykon_w})
             
         if raw:
-            df = pd.DataFrame(raw).set_index("Cas").resample("5min").interpolate(method='linear').fillna(0.0)
+            df = pd.DataFrame(raw).set_index("Cas")
+            
+            unikatni_dny = df.index.normalize().unique()
+            for den in unikatni_dny:
+                ranni_cas = den + pd.Timedelta(hours=4)
+                vecerni_cas = den + pd.Timedelta(hours=21)
+                if ranni_cas not in df.index: df.loc[ranni_cas] = 0.0
+                if vecerni_cas not in df.index: df.loc[vecerni_cas] = 0.0
+                
+            df = df.sort_index().resample("5min").interpolate(method='linear').fillna(0.0)
             for c, r in df.iterrows():
                 predpoved[c.to_pydatetime()] = r["W"] / 1000.0
     except: traceback.print_exc()
     return predpoved
+
+def nauc_se_korekci(df_h, sloupec_predpovedi):
+    # Univerzalni funkce pro uceni obou modelu
+    korekce = {h: 1.0 for h in range(24)}
+    if df_h.empty or 'Celkovy_Vykon_Panelu_W' not in df_h.columns or sloupec_predpovedi not in df_h.columns:
+        return korekce
+
+    try:
+        df_k = df_h[['Cas', 'Celkovy_Vykon_Panelu_W', sloupec_predpovedi]].copy()
+        df_k['Real'] = pd.to_numeric(df_k['Celkovy_Vykon_Panelu_W'].astype(str).str.replace(',', '.'), errors='coerce')
+        df_k['Pred'] = pd.to_numeric(df_k[sloupec_predpovedi].astype(str).str.replace(',', '.'), errors='coerce')
+        
+        df_k['Hodina'] = df_k['Cas'].dt.hour
+        agregace = df_k.groupby('Hodina')[['Real', 'Pred']].sum()
+        
+        for hodina, row in agregace.iterrows():
+            if row['Pred'] > 50: # Chranime se proti deleni nulou nebo malymi cisly v noci
+                koef = row['Real'] / row['Pred']
+                korekce[hodina] = max(0.2, min(6.0, koef))
+    except:
+        pass
+    return korekce
 
 def nauc_se_spotrebu(df_h, aktualni_cas):
     if df_h.empty or 'Skutecna_Spotreba_W' not in df_h.columns: return None
@@ -212,6 +257,10 @@ def main():
         df_h['Cas'] = pd.to_datetime(df_h['Cas'], format='mixed', errors='coerce')
         df_h = df_h.sort_values(by='Cas').reset_index(drop=True)
 
+    # Naucime se korekce z historie pro OBA modely
+    korekce_fs = nauc_se_korekci(df_h, 'Predpoved_FS_W')
+    korekce_pvf = nauc_se_korekci(df_h, 'Predpoved_PVF_W')
+
     vsechny_ceny = nacti_ceny_entsoe()
     vsechny_fs = nacti_predpoved_fs()
     vsechny_pvf = nacti_predpoved_pvf()
@@ -220,8 +269,12 @@ def main():
     for i in range(192):
         c = ted_ctvrt + timedelta(minutes=15 * i)
         casy_192.append(c)
-        # ZMĚNA: Vráceno na původní předpověď Forecast.Solar
-        pv_192.append(vsechny_fs.get(c, 0.0))
+        
+        # Aplikace nauceneho koeficientu uz primo pro rozhodovaci model PuLP
+        hodina_c = c.hour
+        korigovane_fs = vsechny_fs.get(c, 0.0) * korekce_fs.get(hodina_c, 1.0)
+        pv_192.append(korigovane_fs)
+        
         ceny_192.append(vsechny_ceny.get(c, 0.0))
         spot = nauc_se_spotrebu(df_h, c)
         spotreba_192.append(spot if spot is not None else 0.0)
@@ -272,8 +325,14 @@ def main():
     akce = rozhodovaci_logika(pv_192[0], spotreba_192[0], m['soc'], ceny_192[0])
     
     ted_5min = ted.replace(minute=(ted.minute // 5) * 5)
-    fs_aktualni_w = int(round(vsechny_fs.get(ted_5min, 0.0) * 1000))
-    pvf_aktualni_w = int(round(vsechny_pvf.get(ted_5min, 0.0) * 1000))
+    aktualni_hodina = ted_5min.hour
+    
+    # Aplikace kotev a vypoctu i pro zapis do tabulky
+    surovy_fs = vsechny_fs.get(ted_5min, 0.0) * 1000
+    fs_aktualni_w = int(round(surovy_fs * korekce_fs.get(aktualni_hodina, 1.0)))
+    
+    surovy_pvf = vsechny_pvf.get(ted_5min, 0.0) * 1000
+    pvf_aktualni_w = int(round(surovy_pvf * korekce_pvf.get(aktualni_hodina, 1.0)))
     
     n_radek = pd.DataFrame([{
         'Cas': ted.strftime('%Y-%m-%d %H:%M'),
@@ -298,16 +357,20 @@ def main():
         'Denni_Export_kWh': str(round(denni_export_kwh, 2)).replace('.', ','),
         'AC_vyroba_Dnes_kWh': str(m['v_dnes']).replace('.', ','),
         'Spotreba_Celkem_kWh': str(m['s_celkem']).replace('.', ','),
-        'Export_Celkem_kWh': str(m['e_celkem']).replace('.', ',')
+        'Export_Celkem_kWh': str(m['e_celkem']).replace('.', ','),
+        'Uceni_Koeficient_FS': str(round(korekce_fs.get(aktualni_hodina, 1.0), 2)).replace('.', ','),
+        'Uceni_Koeficient_PVF': str(round(korekce_pvf.get(aktualni_hodina, 1.0), 2)).replace('.', ',')
     }])
 
+    # Pridano nakonec aby se nerozbila struktura starych dat
     poradi = [
         'Cas', 'Skutecna_Spotreba_W', 'Odhad_Spotreba_Modelu_W', 'Aktualni_import/export_W', 
         'Aktualni_AC_Vystup_W', 'Celkovy_Vykon_Panelu_W', 'Predpoved_FS_W', 'Predpoved_PVF_W', 
         'Vykon_Baterie_W', 'Baterie_SOC_%', 'Simulovane_SOC_%', 'Cena_EUR/MWh', 'Doporucena_Akce', 
         'Akce_PuLP', 'Duvod_PuLP', 'Skutecny_AC_Vystup_kWh', 'Cista_Vyroba_Panelu_kWh', 
         'Import_5min_kWh', 'Export_5min_kWh', 'Denni_Import_kWh', 'Denni_Export_kWh', 
-        'AC_vyroba_Dnes_kWh', 'Spotreba_Celkem_kWh', 'Export_Celkem_kWh'
+        'AC_vyroba_Dnes_kWh', 'Spotreba_Celkem_kWh', 'Export_Celkem_kWh',
+        'Uceni_Koeficient_FS', 'Uceni_Koeficient_PVF'
     ]
     
     n_radek = n_radek[poradi]
