@@ -14,7 +14,7 @@ import glob
 
 warnings.simplefilter(action='ignore', category=UserWarning)
 
-# Konfigurace prostředí
+# --- KONFIGURACE PROSTŘEDÍ ---
 TOKEN_SOLAX = os.environ.get("TOKEN_SOLAX")
 WIFI_SN = os.environ.get("SN")
 LAT, LON = "49.848", "18.409"
@@ -32,6 +32,23 @@ SOUBOR_PREDPOVEDI = "predpoved_cache.json"
 SOUBOR_PREDPOVEDI_PVF = "predpoved_pvf_cache.json"
 SOUBOR_CENY = "ceny_cache.json"
 MIN_DNI_PRO_UCENI = 2
+
+# --- VIRTUÁLNÍ SENZOR BOJLERU ---
+def je_bojler_nahraty(df_h, aktualni_spotreba_w):
+    # Pokud nemáme historii, nemůžeme nic vyhodnotit
+    if df_h.empty or 'Bojler_Zapnut' not in df_h.columns:
+        return False
+        
+    # Zjistíme, co se dělo před 5 minutami (z posledního řádku Excelu)
+    posledni_radek = df_h.iloc[-1]
+    byl_bojler_zapnuty = str(posledni_radek.get('Bojler_Zapnut', '0')).strip() in ['1', '1.0']
+    
+    # Pokud skript držel bojler zapnutý, ale celková spotřeba domu je nyní 
+    # pod prahem (např. pod 1500 W), termostat fyzicky rozpojil obvod. Voda je horká.
+    if byl_bojler_zapnuty and aktualni_spotreba_w < 1500:
+        return True
+        
+    return False
 
 def bezpecny_float(val):
     try:
@@ -232,82 +249,44 @@ def rozhodovaci_logika(prum_p, spot, soc, cena):
     elif soc > 20: return "VYBIJET_PRO_DUM"
     return "NORMALNI_PROVOZ"
 
-def vygeneruj_duvod_pulp(akce, cena, pv, soc):
-    if akce == "PRODAVAT_Z_BATERII": return f"Vysoka cena ({cena:.2f} EUR), vyuziti kapacity pro zisk."
-    if akce == "POKRYT_Z_BATERIE": return f"Kryti spotreby z baterie, cena je {cena:.2f} EUR."
-    return "Bezny provoz EMS."
+def vygeneruj_duvod_pulp(akce, cena, pv, soc, bojler_zapnut, bojler_nahraty):
+    duvod = "Bezny provoz EMS."
+    if cena < 0.0: duvod = f"Zaporna cena ({cena:.2f} EUR). Nucena spotreba."
+    elif akce == "PRODAVAT_Z_BATERII": duvod = f"Vysoka cena ({cena:.2f} EUR), vyuziti kapacity pro zisk."
+    elif akce == "POKRYT_Z_BATERIE": duvod = f"Kryti spotreby z baterie, cena je {cena:.2f} EUR."
+    
+    if bojler_nahraty:
+        duvod += " | Bojler: NAHRATO (Blokovano)"
+    elif bojler_zapnut == 1:
+        duvod += " | Bojler: ZAPNUT (Optimalizovano)"
+    else:
+        duvod += " | Bojler: CEKA"
+        
+    return duvod
 
 def main():
     ted = datetime.now(ZoneInfo("Europe/Prague")).replace(tzinfo=None, second=0, microsecond=0)
     ted_ctvrt = ted.replace(minute=(ted.minute // 15) * 15)
     
+    # 1. NAČTENÍ HISTORIE (BEZPEČNĚ)
     vsechny_soubory = glob.glob("fve_historie_*.csv")
-    df_list = [pd.read_csv(f, sep=';', decimal=',') for f in vsechny_soubory]
+    df_list = []
+    for f in vsechny_soubory:
+        try:
+            if os.path.getsize(f) > 0:
+                df_temp = pd.read_csv(f, sep=';', decimal=',')
+                df_list.append(df_temp)
+        except pd.errors.EmptyDataError:
+            print(f"Ignoruji soubor bez datových sloupců: {f}")
+        except Exception as e:
+            print(f"Chyba při čtení souboru {f}: {e}")
+
     df_h = pd.concat(df_list, ignore_index=True) if df_list else pd.DataFrame()
     if not df_h.empty:
         df_h['Cas'] = pd.to_datetime(df_h['Cas'], format='mixed', errors='coerce')
         df_h = df_h.sort_values(by='Cas').reset_index(drop=True)
 
-    # --- PAMET BOJLERU: Kolik 15min intervalu uz dnes odjel? ---
-    odjeto_intervalu = 0
-    if not df_h.empty and 'Bojler_Zapnut' in df_h.columns:
-        dnesni_data = df_h[df_h['Cas'].dt.date == ted.date()]
-        # Skript bezi po 5 minutach, 3 radky (15 minut) tvori 1 ucetni interval
-        bojler_bezel_5min_bloku = len(dnesni_data[dnesni_data['Bojler_Zapnut'].astype(str) == '1'])
-        odjeto_intervalu = bojler_bezel_5min_bloku // 3
-    zbyva_intervalu_dnes = max(0, BOJLER_CELKEM_INTERVALU - odjeto_intervalu)
-
-    korekce_fs = nauc_se_korekci(df_h, 'Predpoved_FS_W')
-    korekce_pvf = nauc_se_korekci(df_h, 'Predpoved_PVF_W')
-
-    vsechny_ceny = nacti_ceny_entsoe()
-    vsechny_fs = nacti_predpoved_fs()
-    vsechny_pvf = nacti_predpoved_pvf()
-
-    ceny_192, pv_192, spotreba_192, casy_192 = [], [], [], []
-    for i in range(192):
-        c = ted_ctvrt + timedelta(minutes=15 * i)
-        casy_192.append(c)
-        hodina_c = c.hour
-        korigovane_fs = min(vsechny_fs.get(c, 0.0) * korekce_fs.get(hodina_c, 1.0), KW_PEAK)
-        pv_192.append(korigovane_fs)
-        ceny_192.append(vsechny_ceny.get(c, 0.0))
-        spot = nauc_se_spotrebu(df_h, c)
-        spotreba_192.append(spot if spot is not None else 0.0)
-
-    p_soc = bezpecny_float(df_h.iloc[-1].get('Baterie_SOC_%', 50.0)) if not df_h.empty else 50.0
-    
-    model = pulp.LpProblem("EMS", pulp.LpMinimize)
-    p_nab = pulp.LpVariable.dicts("Nab", range(192), lowBound=0, upBound=MAX_VYKON_STRIDACE)
-    p_vyb = pulp.LpVariable.dicts("Vyb", range(192), lowBound=0, upBound=MAX_VYKON_STRIDACE)
-    p_nakup = pulp.LpVariable.dicts("Nakup", range(192), lowBound=0)
-    p_prodej = pulp.LpVariable.dicts("Prodej", range(192), lowBound=0)
-    soc_vars = pulp.LpVariable.dicts("SOC", range(192), lowBound=10.0, upBound=100.0)
-    is_chg = pulp.LpVariable.dicts("IsChg", range(192), cat=pulp.LpBinary)
-    
-    # NOVINKA: Umela inteligence dostava bojler jako volnou figurku na sachovnici
-    b_on = pulp.LpVariable.dicts("Bojler", range(192), cat=pulp.LpBinary)
-
-    for i in range(192):
-        # Energie bojleru (2.0 kW) se jednoduse pricte ke spotrebe domu, pokud je zapnuty (b_on=1)
-        model += (pv_192[i] + p_nakup[i] + p_vyb[i] == spotreba_192[i] + BOJLER_KW * b_on[i] + p_prodej[i] + p_nab[i])
-        zmena = ((p_nab[i] - p_vyb[i]) * 0.25 / KAPACITA_BATERIE_KWH) * 100.0
-        model += soc_vars[i] == (p_soc if i==0 else soc_vars[i-1]) + zmena
-        model += p_nab[i] <= MAX_VYKON_STRIDACE * is_chg[i]
-        model += p_vyb[i] <= MAX_VYKON_STRIDACE * (1 - is_chg[i])
-
-    # TVRDA PODMINKA PRO BOJLER DNES (Pojistka proti padu: Udelat max tolik intervalu, kolik je do pulnoci hodin)
-    indexy_dneska = [i for i, c in enumerate(casy_192) if c.date() == ted.date()]
-    realne_zbyva_dnes = min(zbyva_intervalu_dnes, len(indexy_dneska))
-    model += pulp.lpSum([b_on[i] for i in indexy_dneska]) == realne_zbyva_dnes
-
-    # TVRDA PODMINKA PRO BOJLER ZITRA (Zitra uz ma k dispozici celych 8 intervalu)
-    indexy_zitra = [i for i, c in enumerate(casy_192) if c.date() == (ted + timedelta(days=1)).date()]
-    model += pulp.lpSum([b_on[i] for i in indexy_zitra]) == BOJLER_CELKEM_INTERVALU
-
-    model += pulp.lpSum([(p_nakup[i]*(ceny_192[i]+60) - p_prodej[i]*(ceny_192[i]-10))*0.25 for i in range(192)])
-    model.solve(pulp.PULP_CBC_CMD(msg=False))
-
+    # 2. NAČTENÍ STŘÍDAČE A VÝPOČET SPOTŘEBY
     m = nacti_solax_v2()
     if not m: return
 
@@ -329,11 +308,71 @@ def main():
         else: h_spotreba_w = int(round(max(0, m['ac_out'] - m['sit_w'])))
     else: h_spotreba_w = int(round(max(0, m['ac_out'] - m['sit_w'])))
 
-    # Vytahnuti povelu z matematickeho modelu (0 = Vypnuto, 1 = Zapnuto)
-    bojler_aktualni_stav = int(round(b_on[0].varValue))
+    # 3. PAMĚŤ BOJLERU A VIRTUÁLNÍ SENZOR
+    odjeto_intervalu = 0
+    if not df_h.empty and 'Bojler_Zapnut' in df_h.columns:
+        dnesni_data = df_h[df_h['Cas'].dt.date == ted.date()]
+        bojler_bezel_5min_bloku = len(dnesni_data[dnesni_data['Bojler_Zapnut'].astype(str).isin(['1', '1.0'])])
+        odjeto_intervalu = bojler_bezel_5min_bloku // 3
+        
+    zbyva_intervalu_dnes = max(0, BOJLER_CELKEM_INTERVALU - odjeto_intervalu)
+
+    stav_nahraty = je_bojler_nahraty(df_h, h_spotreba_w)
+    if stav_nahraty:
+        zbyva_intervalu_dnes = 0
+
+    # 4. UČENÍ A PŘEDPOVĚDI
+    korekce_fs = nauc_se_korekci(df_h, 'Predpoved_FS_W')
+    korekce_pvf = nauc_se_korekci(df_h, 'Predpoved_PVF_W')
+
+    vsechny_ceny = nacti_ceny_entsoe()
+    vsechny_fs = nacti_predpoved_fs()
+    vsechny_pvf = nacti_predpoved_pvf()
+
+    ceny_192, pv_192, spotreba_192, casy_192 = [], [], [], []
+    for i in range(192):
+        c = ted_ctvrt + timedelta(minutes=15 * i)
+        casy_192.append(c)
+        hodina_c = c.hour
+        korigovane_fs = min(vsechny_fs.get(c, 0.0) * korekce_fs.get(hodina_c, 1.0), KW_PEAK)
+        pv_192.append(korigovane_fs)
+        ceny_192.append(vsechny_ceny.get(c, 0.0))
+        spot = nauc_se_spotrebu(df_h, c)
+        spotreba_192.append(spot if spot is not None else 0.0)
+
+    p_soc = bezpecny_float(df_h.iloc[-1].get('Baterie_SOC_%', 50.0)) if not df_h.empty else 50.0
     
+    # 5. MATEMATICKÝ MOZEK (PuLP)
+    model = pulp.LpProblem("EMS", pulp.LpMinimize)
+    p_nab = pulp.LpVariable.dicts("Nab", range(192), lowBound=0, upBound=MAX_VYKON_STRIDACE)
+    p_vyb = pulp.LpVariable.dicts("Vyb", range(192), lowBound=0, upBound=MAX_VYKON_STRIDACE)
+    p_nakup = pulp.LpVariable.dicts("Nakup", range(192), lowBound=0)
+    p_prodej = pulp.LpVariable.dicts("Prodej", range(192), lowBound=0)
+    soc_vars = pulp.LpVariable.dicts("SOC", range(192), lowBound=10.0, upBound=100.0)
+    is_chg = pulp.LpVariable.dicts("IsChg", range(192), cat=pulp.LpBinary)
+    b_on = pulp.LpVariable.dicts("Bojler", range(192), cat=pulp.LpBinary)
+
+    for i in range(192):
+        model += (pv_192[i] + p_nakup[i] + p_vyb[i] == spotreba_192[i] + BOJLER_KW * b_on[i] + p_prodej[i] + p_nab[i])
+        zmena = ((p_nab[i] - p_vyb[i]) * 0.25 / KAPACITA_BATERIE_KWH) * 100.0
+        model += soc_vars[i] == (p_soc if i==0 else soc_vars[i-1]) + zmena
+        model += p_nab[i] <= MAX_VYKON_STRIDACE * is_chg[i]
+        model += p_vyb[i] <= MAX_VYKON_STRIDACE * (1 - is_chg[i])
+
+    indexy_dneska = [i for i, c in enumerate(casy_192) if c.date() == ted.date()]
+    realne_zbyva_dnes = min(zbyva_intervalu_dnes, len(indexy_dneska))
+    model += pulp.lpSum([b_on[i] for i in indexy_dneska]) == realne_zbyva_dnes
+
+    indexy_zitra = [i for i, c in enumerate(casy_192) if c.date() == (ted + timedelta(days=1)).date()]
+    model += pulp.lpSum([b_on[i] for i in indexy_zitra]) == BOJLER_CELKEM_INTERVALU
+
+    model += pulp.lpSum([(p_nakup[i]*(ceny_192[i]+60) - p_prodej[i]*(ceny_192[i]-10))*0.25 for i in range(192)])
+    model.solve(pulp.PULP_CBC_CMD(msg=False))
+
+    bojler_aktualni_stav = int(round(b_on[0].varValue))
     akce = rozhodovaci_logika(pv_192[0], spotreba_192[0], m['soc'], ceny_192[0])
     
+    # 6. ZÁPIS DO HISTORIE (Zálohování a Audit Log)
     ted_5min = ted.replace(minute=(ted.minute // 5) * 5)
     aktualni_hodina = ted_5min.hour
     
@@ -359,7 +398,9 @@ def main():
         'Simulovane_SOC_%': str(round(float(soc_vars[0].varValue), 1)).replace('.', ','),
         'Cena_EUR/MWh': str(round(ceny_192[0], 2)).replace('.', ','),
         'Doporucena_Akce': akce, 'Akce_PuLP': akce,
-        'Duvod_PuLP': vygeneruj_duvod_pulp(akce, ceny_192[0], pv_192[0], m['soc']),
+        
+        'Duvod_PuLP': vygeneruj_duvod_pulp(akce, ceny_192[0], pv_192[0], m['soc'], bojler_aktualni_stav, stav_nahraty),
+        
         'Skutecny_AC_Vystup_kWh': str(round(m['v_dnes'], 4)).replace('.', ','),
         'Cista_Vyroba_Panelu_kWh': str(round((m['dc1']+m['dc2'])/1000*0.0833, 4)).replace('.', ','),
         'Import_5min_kWh': str(round((abs(m['sit_w'])/1000*0.0833 if m['sit_w']<0 else 0), 4)).replace('.', ','),
@@ -374,8 +415,6 @@ def main():
         
         'Korigovana_Predpoved_FS_W': int(round(fs_korigovany_w)),
         'Korigovana_Predpoved_PVF_W': int(round(pvf_korigovany_w)),
-        
-        # Ovladač pro relé bojleru
         'Bojler_Zapnut': bojler_aktualni_stav
     }])
 
