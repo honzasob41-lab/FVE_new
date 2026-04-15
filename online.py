@@ -178,7 +178,7 @@ def nacti_predpoved_pvf():
                     print(f"CHYBA DAT: Server poslal jen {len(raw_json) if isinstance(raw_json, list) else 'nesmysl'}. Zneni: {raw_json}", flush=True)
                     if stara_data: data = stara_data
             else:
-                print(f"CHYBA SERVERU: Odpoved neni 200 OK, ale kod {r.status_code}", flush=True)
+                print(f"CHYBA SERVERU: Odpoved neni 200 OK, ale kod {r.status_code}. Zprava serveru: {r.text}", flush=True)
                 if stara_data: data = stara_data
         except Exception as e:
             print(f"KRITICKA CHYBA SPOJENI: {e}", flush=True)
