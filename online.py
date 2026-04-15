@@ -119,13 +119,12 @@ def nacti_predpoved_fs():
             r = requests.get(url, timeout=15)
             if r.status_code == 200:
                 novy_json = r.json()
-                # KONTROLA PŘÍČETNOSTI: Aspoň 10 záznamů, jinak je to ustřižené
                 if 'result' in novy_json and 'watts' in novy_json['result'] and len(novy_json['result']['watts']) > 10:
                     novy_json["_last_download"] = datetime.now().isoformat()
                     with open(SOUBOR_PREDPOVEDI, 'w') as f: json.dump(novy_json, f)
                     data = novy_json
                 else:
-                    print("FS API poslalo podezrele malo dat. Pouzivam starou cache.")
+                    print("FS API poslalo podezrele malo dat. Pouzivam starou cache.", flush=True)
                     if stara_data: data = stara_data
             else:
                 if stara_data: data = stara_data
@@ -164,22 +163,25 @@ def nacti_predpoved_pvf():
         except: pass
         
     if not data:
+        print("--- START STAHOVANI PV FORECAST ---", flush=True)
         try:
             r = requests.get(url, timeout=20)
             if r.status_code == 200:
                 try: raw_json = r.json()
                 except: raw_json = json.loads(r.text)
                 
-                # KONTROLA PŘÍČETNOSTI: Aspoň 10 záznamů (hodin) pro platný den
                 if isinstance(raw_json, list) and len(raw_json) > 10:
+                    print(f"OK: Stazeno {len(raw_json)} platnych zaznamu.", flush=True)
                     data = {"_last_download": datetime.now().isoformat(), "forecast": raw_json}
                     with open(SOUBOR_PREDPOVEDI_PVF, 'w') as f: json.dump(data, f)
                 else:
-                    print("PVF API poslalo podezrele malo dat. Pouzivam starou cache.")
+                    print(f"CHYBA DAT: Server poslal jen {len(raw_json) if isinstance(raw_json, list) else 'nesmysl'}. Zneni: {raw_json}", flush=True)
                     if stara_data: data = stara_data
             else:
+                print(f"CHYBA SERVERU: Odpoved neni 200 OK, ale kod {r.status_code}", flush=True)
                 if stara_data: data = stara_data
-        except Exception:
+        except Exception as e:
+            print(f"KRITICKA CHYBA SPOJENI: {e}", flush=True)
             if stara_data: data = stara_data
             
     if not data or 'forecast' not in data: return predpoved
