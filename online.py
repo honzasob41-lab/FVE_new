@@ -158,7 +158,11 @@ def nacti_predpoved_pvf():
         try:
             with open(SOUBOR_PREDPOVEDI_PVF, 'r') as f: 
                 stara_data = json.load(f)
-                if datetime.now() - datetime.fromisoformat(stara_data.get("_last_download", "2000-01-01")) <= timedelta(hours=3):
+                posledni_stazeni = datetime.fromisoformat(stara_data.get("_last_download", "2000-01-01")).date()
+                dnes = datetime.now().date()
+                
+                # Pokud datum stažení odpovídá dnešku, použij cache a nestahuj znovu
+                if posledni_stazeni == dnes:
                     data = stara_data
         except: pass
         
