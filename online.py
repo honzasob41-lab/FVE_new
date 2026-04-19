@@ -359,7 +359,7 @@ def main():
     pvf_korigovany_w = min(surovy_pvf * korekce_pvf.get(aktualni_hodina, 1.0), KW_PEAK * 1000)
     
     n_radek = pd.DataFrame([{
-        'Cas': ted.strftime('%d.%m.%Y %H:%M'),
+        'Cas': ted.strftime('%Y-%m-%d %H:%M'), 
         'Skutecna_Spotreba_W': h_spotreba_w,
         'Odhad_Spotreba_Modelu_W': int(round(spotreba_192[0] * 1000)),
         'Aktualni_import/export_W': str(m['sit_w']).replace('.', ','),
