@@ -271,12 +271,15 @@ def main():
         df_h['Cas'] = pd.to_datetime(df_h['Cas'], format='mixed', dayfirst=True, errors='coerce')
         df_h = df_h.sort_values(by='Cas').reset_index(drop=True)
 
-    # --- PAMET BOJLERU: Kolik 15min intervalu uz dnes odjel? ---
+        # --- PAMET BOJLERU (Upravená verze) ---
     odjeto_intervalu = 0
-    if not df_h.empty and 'Bojler_Zapnut' in df_h.columns:
-        dnesni_data = df_h[df_h['Cas'].dt.date == ted.date()]
-        bojler_bezel_5min_bloku = len(dnesni_data[dnesni_data['Bojler_Zapnut'].astype(str).replace('.0', '') == '1'])
-        odjeto_intervalu = bojler_bezel_5min_bloku // 3
+    if not df_h.empty:
+        df_h['Cas_DT'] = pd.to_datetime(df_h['Cas'], errors='coerce')
+        dnesni_data = df_h[df_h['Cas_DT'].dt.date == ted.date()]
+    if not dnesni_data.empty and 'Bojler_Zapnut' in dnesni_data.columns:
+        # Spočítáme cokoli, co obsahuje jedničku (robustní vůči 1 i 1.0 i "1")
+        zapnuto_bloky = dnesni_data['Bojler_Zapnut'].astype(str).str.contains('1').sum()
+        odjeto_intervalu = zapnuto_bloky // 3
     zbyva_intervalu_dnes = max(0, BOJLER_CELKEM_INTERVALU - odjeto_intervalu)
 
     korekce_fs = nauc_se_korekci(df_h, 'Predpoved_FS_W')
