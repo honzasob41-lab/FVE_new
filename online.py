@@ -26,7 +26,7 @@ MAX_VYKON_STRIDACE = 10.0
 # --- KONFIGURACE BOJLERU ---
 BOJLER_KW = 2.0
 BOJLER_HODIN_DENNE = 2.0
-BOJLER_CELKEM_INTERVALU = int(BOJLER_HODIN_DENNE * 4) # 8 intervalů po 15 min
+BOJLER_CELKEM_INTERVALU = int(BOJLER_HODIN_DENNE * 4) 
 
 SOUBOR_PREDPOVEDI = "predpoved_cache.json"
 SOUBOR_PREDPOVEDI_PVF = "predpoved_pvf_cache.json"
@@ -127,7 +127,6 @@ def nacti_predpoved_fs():
                     with open(SOUBOR_PREDPOVEDI, 'w') as f: json.dump(novy_json, f)
                     data = novy_json
                 else:
-                    print("FS API poslalo podezrele malo dat. Pouzivam starou cache.", flush=True)
                     if stara_data: data = stara_data
             else:
                 if stara_data: data = stara_data
@@ -172,7 +171,6 @@ def nacti_predpoved_pvf():
         except: pass
         
     if not data:
-        print("--- START STAHOVANI PV FORECAST ---", flush=True)
         try:
             r = requests.get(url, timeout=20)
             if r.status_code == 200:
@@ -180,17 +178,13 @@ def nacti_predpoved_pvf():
                 except: raw_json = json.loads(r.text)
                 
                 if isinstance(raw_json, list) and len(raw_json) > 10:
-                    print(f"OK: Stazeno {len(raw_json)} platnych zaznamu.", flush=True)
                     data = {"_last_download": datetime.now().isoformat(), "forecast": raw_json}
                     with open(SOUBOR_PREDPOVEDI_PVF, 'w') as f: json.dump(data, f)
                 else:
-                    print(f"CHYBA DAT: Server poslal jen {len(raw_json) if isinstance(raw_json, list) else 'nesmysl'}.", flush=True)
                     if stara_data: data = stara_data
             else:
-                print(f"CHYBA SERVERU: Odpoved {r.status_code}.", flush=True)
                 if stara_data: data = stara_data
-        except Exception as e:
-            print(f"KRITICKA CHYBA SPOJENI: {e}", flush=True)
+        except Exception:
             if stara_data: data = stara_data
             
     if not data or 'forecast' not in data: return predpoved
@@ -204,8 +198,7 @@ def nacti_predpoved_pvf():
                 cas = pd.to_datetime(cas_str).replace(tzinfo=None)
                 vykon_w = osvit_w_m2 * KW_PEAK
                 raw.append({"Cas": cas, "W": vykon_w})
-            except Exception as e:
-                print(f"Přeskočen vadný řádek PVF: {item} - {e}")
+            except Exception:
                 continue
                 
         if raw:
@@ -232,7 +225,6 @@ def nauc_se_korekci(df_h, sloupec_predpovedi):
         df_k['Real'] = pd.to_numeric(df_k['Celkovy_Vykon_Panelu_W'].astype(str).str.replace(',', '.'), errors='coerce')
         df_k['Pred'] = pd.to_numeric(df_k[sloupec_predpovedi].astype(str).str.replace(',', '.'), errors='coerce')
         
-        # Ignorujeme řádky se špatným datem
         df_k['Cas_Parsed'] = pd.to_datetime(df_k['Cas'], errors='coerce')
         df_k = df_k.dropna(subset=['Cas_Parsed'])
         
@@ -307,8 +299,8 @@ def main():
             if not dnesni_data.empty:
                 zapnuto_bloky = dnesni_data['Bojler_Zapnut'].astype(str).str.contains('1').sum()
                 odjeto_intervalu = zapnuto_bloky // 3
-        except Exception as e:
-            print(f"Chyba pri pocitani historie bojleru: {e}")
+        except Exception:
+            pass
 
     zbyva_intervalu_dnes = max(0, BOJLER_CELKEM_INTERVALU - odjeto_intervalu)
 
@@ -383,6 +375,25 @@ def main():
     bojler_aktualni_stav = int(round(b_on[0].varValue))
     akce = rozhodovaci_logika(pv_192[0], spotreba_192[0], m['soc'], ceny_192[0])
     
+    # --- PŘEKLAD SKUTEČNÉ AKCE PULPU ---
+    nabijeni_w = p_nab[0].varValue * 1000
+    vybijeni_w = p_vyb[0].varValue * 1000
+    nakup_w = p_nakup[0].varValue * 1000
+    prodej_w = p_prodej[0].varValue * 1000
+
+    if nabijeni_w > 100 and nakup_w > 100:
+        skutecna_akce_pulp = "NABIJET_ZE_SITE"
+    elif vybijeni_w > 100 and prodej_w > 100:
+        skutecna_akce_pulp = "PRODAVAT_Z_BATERII"
+    elif prodej_w > 100:
+        skutecna_akce_pulp = "PRODAVAT_DO_SITE"
+    elif nabijeni_w > 100:
+        skutecna_akce_pulp = "NABIJET_SOLAREM"
+    elif vybijeni_w > 100:
+        skutecna_akce_pulp = "VYBIJET_PRO_DUM"
+    else:
+        skutecna_akce_pulp = "NORMALNI_PROVOZ"
+        
     ted_5min = ted.replace(minute=(ted.minute // 5) * 5)
     aktualni_hodina = ted_5min.hour
     
@@ -392,7 +403,6 @@ def main():
     fs_korigovany_w = min(surovy_fs * korekce_fs.get(aktualni_hodina, 1.0), KW_PEAK * 1000)
     pvf_korigovany_w = min(surovy_pvf * korekce_pvf.get(aktualni_hodina, 1.0), KW_PEAK * 1000)
     
-    # Pouzijeme cas primo z mereni API Solaxu misto systemoveho casu (format YYYY-MM-DD)
     cas_pro_zapis = m.get('cas_mereni', ted.strftime('%Y-%m-%d %H:%M'))
     
     n_radek = pd.DataFrame([{
@@ -410,8 +420,11 @@ def main():
         'Baterie_SOC_%': str(m['soc']).replace('.', ','),
         'Simulovane_SOC_%': str(round(float(soc_vars[0].varValue), 1)).replace('.', ','),
         'Cena_EUR/MWh': str(round(ceny_192[0], 2)).replace('.', ','),
-        'Doporucena_Akce': akce, 'Akce_PuLP': akce,
-        'Duvod_PuLP': vygeneruj_duvod_pulp(akce, ceny_192[0], pv_192[0], m['soc']) + (" | Bojler: ZAPNUT" if bojler_aktualni_stav else ""),
+        
+        'Doporucena_Akce': akce, 
+        'Akce_PuLP': skutecna_akce_pulp,
+        
+        'Duvod_PuLP': vygeneruj_duvod_pulp(skutecna_akce_pulp, ceny_192[0], pv_192[0], m['soc']) + (" | Bojler: ZAPNUT" if bojler_aktualni_stav else ""),
         'Skutecny_AC_Vystup_kWh': str(round(m['v_dnes'], 4)).replace('.', ','),
         'Cista_Vyroba_Panelu_kWh': str(round((m['dc1']+m['dc2'])/1000*0.0833, 4)).replace('.', ','),
         'Import_5min_kWh': str(round((abs(m['sit_w'])/1000*0.0833 if m['sit_w']<0 else 0), 4)).replace('.', ','),
@@ -443,7 +456,6 @@ def main():
     n_radek = n_radek[poradi]
     aktualni_soubor = f"fve_historie_{ted.strftime('%Y_%m')}.csv"
     
-    # Pro zajisteni konzistence vzdy pouzivame jako oddelovac strednik
     n_radek.to_csv(aktualni_soubor, mode='a', header=not os.path.exists(aktualni_soubor), index=False, sep=';', decimal=',')
 
 if __name__ == "__main__":
