@@ -278,8 +278,19 @@ def rozhodovaci_logika(prum_p, spot, soc, cena):
     return "NORMALNI_PROVOZ"
 
 def vygeneruj_duvod_pulp(akce, cena, pv, soc):
-    if akce == "PRODAVAT_Z_BATERII": return f"Vysoka cena ({cena:.2f} EUR), vyuziti kapacity pro zisk."
-    if akce == "POKRYT_Z_BATERIE": return f"Kryti spotreby z baterie, cena je {cena:.2f} EUR."
+    if akce == "PRODAVAT_Z_BATERII": 
+        return f"Vysoka cena ({cena:.2f} EUR), vyuziti kapacity pro zisk."
+    if akce == "POKRYT_Z_BATERIE": 
+        return f"Kryti spotreby z baterie, cena je {cena:.2f} EUR."
+    if akce == "NABIJET_ZE_SITE": 
+        return f"Vyhodna cena ({cena:.2f} EUR) nebo priprava na spicku, nabijim ze site."
+    if akce == "NABIJET_SOLAREM": 
+        return f"Prebytek slunce ({pv*1000:.0f} W), ukladam energii."
+    if akce == "PRODAVAT_DO_SITE": 
+        return f"Baterie je plna (SOC {soc} %), prodavam prebytek."
+    if akce == "VYBIJET_PRO_DUM": 
+        return "Vyuziti ulozene energie pro kryti spotreby domu."
+        
     return "Bezny provoz EMS."
 
 def main():
