@@ -50,6 +50,7 @@ def nacti_solax_v2():
             if data.get("success"):
                 res = data.get("result")
                 return {
+                    "cas_mereni": res.get("uploadTime", datetime.now().strftime("%Y-%m-%d %H:%M:%S")),
                     "v_dnes": float(res.get("yieldtoday", 0)),
                     "soc": float(res.get("soc", 0)),
                     "s_celkem": float(res.get("consumeenergy", 0)),
@@ -110,7 +111,9 @@ def nacti_predpoved_fs():
         try:
             with open(SOUBOR_PREDPOVEDI, 'r') as f: 
                 stara_data = json.load(f)
-                if datetime.now() - datetime.fromisoformat(stara_data.get("_last_download", "2000-01-01")) <= timedelta(hours=3):
+                posledni_stazeni = datetime.fromisoformat(stara_data.get("_last_download", "2000-01-01")).date()
+                dnes = datetime.now().date()
+                if posledni_stazeni == dnes:
                     data = stara_data
         except: pass
         
@@ -139,11 +142,15 @@ def nacti_predpoved_fs():
             raw_data.append({"Cas": cas, "W": float(w)})
         if raw_data:
             df = pd.DataFrame(raw_data).set_index("Cas")
+            df = df[~df.index.duplicated(keep='first')]
+            
             for den in df.index.normalize().unique():
                 ranni_cas = den + pd.Timedelta(hours=4)
                 vecerni_cas = den + pd.Timedelta(hours=21)
                 if ranni_cas not in df.index: df.loc[ranni_cas] = 0.0
                 if vecerni_cas not in df.index: df.loc[vecerni_cas] = 0.0
+                
+            df = df[~df.index.duplicated(keep='first')]
             df = df.sort_index().resample("5min").mean().interpolate(method='linear').fillna(0.0)
             for c, r in df.iterrows(): predpoved[c.to_pydatetime()] = r["W"] / 1000.0
     except: traceback.print_exc()
@@ -160,8 +167,6 @@ def nacti_predpoved_pvf():
                 stara_data = json.load(f)
                 posledni_stazeni = datetime.fromisoformat(stara_data.get("_last_download", "2000-01-01")).date()
                 dnes = datetime.now().date()
-                
-                # Pokud datum stažení odpovídá dnešku, použij cache a nestahuj znovu
                 if posledni_stazeni == dnes:
                     data = stara_data
         except: pass
@@ -179,31 +184,41 @@ def nacti_predpoved_pvf():
                     data = {"_last_download": datetime.now().isoformat(), "forecast": raw_json}
                     with open(SOUBOR_PREDPOVEDI_PVF, 'w') as f: json.dump(data, f)
                 else:
-                    print(f"CHYBA DAT: Server poslal jen {len(raw_json) if isinstance(raw_json, list) else 'nesmysl'}. Zneni: {raw_json}", flush=True)
+                    print(f"CHYBA DAT: Server poslal jen {len(raw_json) if isinstance(raw_json, list) else 'nesmysl'}.", flush=True)
                     if stara_data: data = stara_data
             else:
-                print(f"CHYBA SERVERU: Odpoved neni 200 OK, ale kod {r.status_code}. Zprava serveru: {r.text}", flush=True)
+                print(f"CHYBA SERVERU: Odpoved {r.status_code}.", flush=True)
                 if stara_data: data = stara_data
         except Exception as e:
             print(f"KRITICKA CHYBA SPOJENI: {e}", flush=True)
             if stara_data: data = stara_data
             
     if not data or 'forecast' not in data: return predpoved
+    
     try:
         raw = []
         for item in data['forecast']:
-            cas_str = item[0]
-            osvit_w_m2 = float(item[1])
-            cas = pd.to_datetime(cas_str).replace(tzinfo=None)
-            vykon_w = osvit_w_m2 * KW_PEAK
-            raw.append({"Cas": cas, "W": vykon_w})
+            try:
+                cas_str = item[0]
+                osvit_w_m2 = bezpecny_float(item[1]) 
+                cas = pd.to_datetime(cas_str).replace(tzinfo=None)
+                vykon_w = osvit_w_m2 * KW_PEAK
+                raw.append({"Cas": cas, "W": vykon_w})
+            except Exception as e:
+                print(f"Přeskočen vadný řádek PVF: {item} - {e}")
+                continue
+                
         if raw:
             df = pd.DataFrame(raw).set_index("Cas")
+            df = df[~df.index.duplicated(keep='first')]
+            
             for den in df.index.normalize().unique():
                 ranni_cas = den + pd.Timedelta(hours=4)
                 vecerni_cas = den + pd.Timedelta(hours=21)
                 if ranni_cas not in df.index: df.loc[ranni_cas] = 0.0
                 if vecerni_cas not in df.index: df.loc[vecerni_cas] = 0.0
+                
+            df = df[~df.index.duplicated(keep='first')]
             df = df.sort_index().resample("5min").mean().interpolate(method='linear').fillna(0.0)
             for c, r in df.iterrows(): predpoved[c.to_pydatetime()] = r["W"] / 1000.0
     except: traceback.print_exc()
@@ -216,7 +231,12 @@ def nauc_se_korekci(df_h, sloupec_predpovedi):
         df_k = df_h[['Cas', 'Celkovy_Vykon_Panelu_W', sloupec_predpovedi]].copy()
         df_k['Real'] = pd.to_numeric(df_k['Celkovy_Vykon_Panelu_W'].astype(str).str.replace(',', '.'), errors='coerce')
         df_k['Pred'] = pd.to_numeric(df_k[sloupec_predpovedi].astype(str).str.replace(',', '.'), errors='coerce')
-        df_k['Hodina'] = df_k['Cas'].dt.hour
+        
+        # Ignorujeme řádky se špatným datem
+        df_k['Cas_Parsed'] = pd.to_datetime(df_k['Cas'], errors='coerce')
+        df_k = df_k.dropna(subset=['Cas_Parsed'])
+        
+        df_k['Hodina'] = df_k['Cas_Parsed'].dt.hour
         agregace = df_k.groupby('Hodina')[['Real', 'Pred']].sum()
         for hodina, row in agregace.iterrows():
             if row['Pred'] > 50:
@@ -227,22 +247,32 @@ def nauc_se_korekci(df_h, sloupec_predpovedi):
 
 def nauc_se_spotrebu(df_h, aktualni_cas):
     if df_h.empty or 'Skutecna_Spotreba_W' not in df_h.columns: return None
-    maska = (df_h['Cas'] >= (aktualni_cas - timedelta(days=90)))
-    df_temp = df_h[maska].copy()
-    cz_holidays = holidays.CZ(years=[aktualni_cas.year])
-    def urci_typ(dt):
-        if dt.date() in cz_holidays: return "Svatek"
-        return ["Pondeli", "Utery", "Streda", "Ctvrtek", "Patek", "Sobota", "Nedele"][dt.weekday()]
-    cilovy_typ = urci_typ(aktualni_cas)
-    df_temp['Typ_Dne'] = df_temp['Cas'].apply(urci_typ)
-    df_f = df_temp[(df_temp['Cas'].dt.hour == aktualni_cas.hour) & (df_temp['Cas'].dt.minute // 15 == aktualni_cas.minute // 15)]
-    df_final = df_f[df_f['Typ_Dne'] == cilovy_typ]
-    if df_final['Cas'].dt.date.nunique() < MIN_DNI_PRO_UCENI:
-        pracovni = ["Pondeli", "Utery", "Streda", "Ctvrtek", "Patek"]
-        df_final = df_f[df_f['Typ_Dne'].isin(pracovni if cilovy_typ in pracovni else ["Sobota", "Nedele", "Svatek"])]
-    if df_final['Cas'].dt.date.nunique() >= MIN_DNI_PRO_UCENI:
-        val = pd.to_numeric(df_final['Skutecna_Spotreba_W'].astype(str).str.replace(',', '.'), errors='coerce').mean()
-        return max(0.0, val / 1000.0)
+    try:
+        df_h_temp = df_h.copy()
+        df_h_temp['Cas_Parsed'] = pd.to_datetime(df_h_temp['Cas'], errors='coerce')
+        df_h_temp = df_h_temp.dropna(subset=['Cas_Parsed'])
+        
+        maska = (df_h_temp['Cas_Parsed'] >= (aktualni_cas - timedelta(days=90)))
+        df_temp = df_h_temp[maska].copy()
+        cz_holidays = holidays.CZ(years=[aktualni_cas.year])
+        
+        def urci_typ(dt):
+            if dt.date() in cz_holidays: return "Svatek"
+            return ["Pondeli", "Utery", "Streda", "Ctvrtek", "Patek", "Sobota", "Nedele"][dt.weekday()]
+            
+        cilovy_typ = urci_typ(aktualni_cas)
+        df_temp['Typ_Dne'] = df_temp['Cas_Parsed'].apply(urci_typ)
+        df_f = df_temp[(df_temp['Cas_Parsed'].dt.hour == aktualni_cas.hour) & (df_temp['Cas_Parsed'].dt.minute // 15 == aktualni_cas.minute // 15)]
+        df_final = df_f[df_f['Typ_Dne'] == cilovy_typ]
+        
+        if df_final['Cas_Parsed'].dt.date.nunique() < MIN_DNI_PRO_UCENI:
+            pracovni = ["Pondeli", "Utery", "Streda", "Ctvrtek", "Patek"]
+            df_final = df_f[df_f['Typ_Dne'].isin(pracovni if cilovy_typ in pracovni else ["Sobota", "Nedele", "Svatek"])]
+            
+        if df_final['Cas_Parsed'].dt.date.nunique() >= MIN_DNI_PRO_UCENI:
+            val = pd.to_numeric(df_final['Skutecna_Spotreba_W'].astype(str).str.replace(',', '.'), errors='coerce').mean()
+            return max(0.0, val / 1000.0)
+    except: pass
     return None
 
 def rozhodovaci_logika(prum_p, spot, soc, cena):
@@ -267,19 +297,19 @@ def main():
     vsechny_soubory = glob.glob("fve_historie_*.csv")
     df_list = [pd.read_csv(f, sep=';', decimal=',') for f in vsechny_soubory]
     df_h = pd.concat(df_list, ignore_index=True) if df_list else pd.DataFrame()
-    if not df_h.empty:
-        df_h['Cas'] = pd.to_datetime(df_h['Cas'], format='mixed', dayfirst=True, errors='coerce')
-        df_h = df_h.sort_values(by='Cas').reset_index(drop=True)
 
-        # --- PAMET BOJLERU (Upravená verze) ---
+    # --- ROBUSTNI PAMET BOJLERU ---
     odjeto_intervalu = 0
-    if not df_h.empty:
-        df_h['Cas_DT'] = pd.to_datetime(df_h['Cas'], errors='coerce')
-        dnesni_data = df_h[df_h['Cas_DT'].dt.date == ted.date()]
-    if not dnesni_data.empty and 'Bojler_Zapnut' in dnesni_data.columns:
-        # Spočítáme cokoli, co obsahuje jedničku (robustní vůči 1 i 1.0 i "1")
-        zapnuto_bloky = dnesni_data['Bojler_Zapnut'].astype(str).str.contains('1').sum()
-        odjeto_intervalu = zapnuto_bloky // 3
+    if not df_h.empty and 'Bojler_Zapnut' in df_h.columns:
+        try:
+            df_h['Cas_Parsed'] = pd.to_datetime(df_h['Cas'], errors='coerce')
+            dnesni_data = df_h[df_h['Cas_Parsed'].dt.date == ted.date()].copy()
+            if not dnesni_data.empty:
+                zapnuto_bloky = dnesni_data['Bojler_Zapnut'].astype(str).str.contains('1').sum()
+                odjeto_intervalu = zapnuto_bloky // 3
+        except Exception as e:
+            print(f"Chyba pri pocitani historie bojleru: {e}")
+
     zbyva_intervalu_dnes = max(0, BOJLER_CELKEM_INTERVALU - odjeto_intervalu)
 
     korekce_fs = nauc_se_korekci(df_h, 'Predpoved_FS_W')
@@ -336,10 +366,11 @@ def main():
     h_spotreba_w = 0
 
     if not df_h.empty:
-        dnesni_data = df_h[df_h['Cas'].dt.date == ted.date()]
-        if not dnesni_data.empty:
-            start_import = bezpecny_float(dnesni_data.iloc[0].get('Spotreba_Celkem_kWh', m['s_celkem']))
-            start_export = bezpecny_float(dnesni_data.iloc[0].get('Export_Celkem_kWh', m['e_celkem']))
+        df_h['Cas_Parsed_M'] = pd.to_datetime(df_h['Cas'], errors='coerce')
+        dnesni_data_m = df_h[df_h['Cas_Parsed_M'].dt.date == ted.date()]
+        if not dnesni_data_m.empty:
+            start_import = bezpecny_float(dnesni_data_m.iloc[0].get('Spotreba_Celkem_kWh', m['s_celkem']))
+            start_export = bezpecny_float(dnesni_data_m.iloc[0].get('Export_Celkem_kWh', m['e_celkem']))
             denni_import_kwh = max(0.0, m['s_celkem'] - start_import)
             denni_export_kwh = max(0.0, m['e_celkem'] - start_export)
 
@@ -361,8 +392,11 @@ def main():
     fs_korigovany_w = min(surovy_fs * korekce_fs.get(aktualni_hodina, 1.0), KW_PEAK * 1000)
     pvf_korigovany_w = min(surovy_pvf * korekce_pvf.get(aktualni_hodina, 1.0), KW_PEAK * 1000)
     
+    # Pouzijeme cas primo z mereni API Solaxu misto systemoveho casu (format YYYY-MM-DD)
+    cas_pro_zapis = m.get('cas_mereni', ted.strftime('%Y-%m-%d %H:%M'))
+    
     n_radek = pd.DataFrame([{
-        'Cas': ted.strftime('%Y-%m-%d %H:%M'), 
+        'Cas': cas_pro_zapis,
         'Skutecna_Spotreba_W': h_spotreba_w,
         'Odhad_Spotreba_Modelu_W': int(round(spotreba_192[0] * 1000)),
         'Aktualni_import/export_W': str(m['sit_w']).replace('.', ','),
@@ -408,6 +442,8 @@ def main():
     
     n_radek = n_radek[poradi]
     aktualni_soubor = f"fve_historie_{ted.strftime('%Y_%m')}.csv"
+    
+    # Pro zajisteni konzistence vzdy pouzivame jako oddelovac strednik
     n_radek.to_csv(aktualni_soubor, mode='a', header=not os.path.exists(aktualni_soubor), index=False, sep=';', decimal=',')
 
 if __name__ == "__main__":
