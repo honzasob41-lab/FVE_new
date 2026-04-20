@@ -14,7 +14,9 @@ import glob
 
 warnings.simplefilter(action='ignore', category=UserWarning)
 
-# Konfigurace prostředí
+# ==============================================================================
+# KONFIGURACE SYSTÉMU
+# ==============================================================================
 TOKEN_SOLAX = os.environ.get("TOKEN_SOLAX")
 WIFI_SN = os.environ.get("SN")
 LAT, LON = "49.848", "18.409"
@@ -22,6 +24,10 @@ DECLINATION, AZIMUTH = "35", "-50"
 KW_PEAK = 10.0
 KAPACITA_BATERIE_KWH = 10.0
 MAX_VYKON_STRIDACE = 10.0
+
+# --- NASTAVENÍ MEZÍ BATERIE ---
+SOC_MIN = 15.0  # Minimální nabití (bezpečnostní rezerva pro dům a střídač)
+SOC_MAX = 100.0 # Maximální nabití
 
 # --- KONFIGURACE BOJLERU ---
 BOJLER_KW = 2.0
@@ -32,6 +38,10 @@ SOUBOR_PREDPOVEDI = "predpoved_cache.json"
 SOUBOR_PREDPOVEDI_PVF = "predpoved_pvf_cache.json"
 SOUBOR_CENY = "ceny_cache.json"
 MIN_DNI_PRO_UCENI = 2
+
+# ==============================================================================
+# POMOCNÉ FUNKCE
+# ==============================================================================
 
 def bezpecny_float(val):
     try:
@@ -50,6 +60,7 @@ def nacti_solax_v2():
             if data.get("success"):
                 res = data.get("result")
                 return {
+                    # Přesný čas měření ze střídače eliminuje 5minutový posun cloudu
                     "cas_mereni": res.get("uploadTime", datetime.now().strftime("%Y-%m-%d %H:%M:%S")),
                     "v_dnes": float(res.get("yieldtoday", 0)),
                     "soc": float(res.get("soc", 0)),
@@ -106,115 +117,67 @@ def nacti_predpoved_fs():
     url = f"https://api.forecast.solar/estimate/{LAT}/{LON}/{DECLINATION}/{AZIMUTH}/{KW_PEAK}"
     predpoved = {}
     data, stara_data = None, None
-    
     if os.path.exists(SOUBOR_PREDPOVEDI):
         try:
             with open(SOUBOR_PREDPOVEDI, 'r') as f: 
                 stara_data = json.load(f)
                 posledni_stazeni = datetime.fromisoformat(stara_data.get("_last_download", "2000-01-01")).date()
-                dnes = datetime.now().date()
-                if posledni_stazeni == dnes:
-                    data = stara_data
+                if posledni_stazeni == datetime.now().date(): data = stara_data
         except: pass
-        
     if not data:
         try:
             r = requests.get(url, timeout=15)
             if r.status_code == 200:
                 novy_json = r.json()
-                if 'result' in novy_json and 'watts' in novy_json['result'] and len(novy_json['result']['watts']) > 10:
+                if 'result' in novy_json and 'watts' in novy_json['result']:
                     novy_json["_last_download"] = datetime.now().isoformat()
                     with open(SOUBOR_PREDPOVEDI, 'w') as f: json.dump(novy_json, f)
                     data = novy_json
-                else:
-                    if stara_data: data = stara_data
-            else:
-                if stara_data: data = stara_data
-        except Exception:
-            if stara_data: data = stara_data
-            
+                else: data = stara_data
+            else: data = stara_data
+        except: data = stara_data
     if not data or 'result' not in data: return predpoved
     try:
         raw_data = []
         for cas_str, w in data['result']['watts'].items():
-            cas = pd.to_datetime(cas_str).replace(tzinfo=None)
-            raw_data.append({"Cas": cas, "W": float(w)})
+            raw_data.append({"Cas": pd.to_datetime(cas_str).replace(tzinfo=None), "W": float(w)})
         if raw_data:
-            df = pd.DataFrame(raw_data).set_index("Cas")
-            df = df[~df.index.duplicated(keep='first')]
-            
-            for den in df.index.normalize().unique():
-                ranni_cas = den + pd.Timedelta(hours=4)
-                vecerni_cas = den + pd.Timedelta(hours=21)
-                if ranni_cas not in df.index: df.loc[ranni_cas] = 0.0
-                if vecerni_cas not in df.index: df.loc[vecerni_cas] = 0.0
-                
-            df = df[~df.index.duplicated(keep='first')]
-            df = df.sort_index().resample("5min").mean().interpolate(method='linear').fillna(0.0)
+            df = pd.DataFrame(raw_data).set_index("Cas").resample("5min").mean().interpolate().fillna(0.0)
             for c, r in df.iterrows(): predpoved[c.to_pydatetime()] = r["W"] / 1000.0
-    except: traceback.print_exc()
+    except: pass
     return predpoved
 
 def nacti_predpoved_pvf():
     url = f"https://www.pvforecast.cz/api/?key=8slpgw&lat={LAT}&lon={LON}&format=json"
     predpoved = {}
     data, stara_data = None, None
-    
     if os.path.exists(SOUBOR_PREDPOVEDI_PVF):
         try:
             with open(SOUBOR_PREDPOVEDI_PVF, 'r') as f: 
                 stara_data = json.load(f)
                 posledni_stazeni = datetime.fromisoformat(stara_data.get("_last_download", "2000-01-01")).date()
-                dnes = datetime.now().date()
-                if posledni_stazeni == dnes:
-                    data = stara_data
+                if posledni_stazeni == datetime.now().date(): data = stara_data
         except: pass
-        
     if not data:
         try:
             r = requests.get(url, timeout=20)
             if r.status_code == 200:
-                try: raw_json = r.json()
-                except: raw_json = json.loads(r.text)
-                
+                raw_json = r.json()
                 if isinstance(raw_json, list) and len(raw_json) > 10:
                     data = {"_last_download": datetime.now().isoformat(), "forecast": raw_json}
                     with open(SOUBOR_PREDPOVEDI_PVF, 'w') as f: json.dump(data, f)
-                else:
-                    if stara_data: data = stara_data
-            else:
-                if stara_data: data = stara_data
-        except Exception:
-            if stara_data: data = stara_data
-            
+                else: data = stara_data
+            else: data = stara_data
+        except: data = stara_data
     if not data or 'forecast' not in data: return predpoved
-    
     try:
         raw = []
         for item in data['forecast']:
-            try:
-                cas_str = item[0]
-                osvit_w_m2 = bezpecny_float(item[1]) 
-                cas = pd.to_datetime(cas_str).replace(tzinfo=None)
-                vykon_w = osvit_w_m2 * KW_PEAK
-                raw.append({"Cas": cas, "W": vykon_w})
-            except Exception:
-                continue
-                
+            raw.append({"Cas": pd.to_datetime(item[0]).replace(tzinfo=None), "W": bezpecny_float(item[1]) * KW_PEAK})
         if raw:
-            df = pd.DataFrame(raw).set_index("Cas")
-            df = df[~df.index.duplicated(keep='first')]
-            
-            for den in df.index.normalize().unique():
-                ranni_cas = den + pd.Timedelta(hours=4)
-                vecerni_cas = den + pd.Timedelta(hours=21)
-                if ranni_cas not in df.index: df.loc[ranni_cas] = 0.0
-                if vecerni_cas not in df.index: df.loc[vecerni_cas] = 0.0
-                
-            df = df[~df.index.duplicated(keep='first')]
-            df = df.sort_index().resample("5min").mean().interpolate(method='linear').fillna(0.0)
+            df = pd.DataFrame(raw).set_index("Cas").resample("5min").mean().interpolate().fillna(0.0)
             for c, r in df.iterrows(): predpoved[c.to_pydatetime()] = r["W"] / 1000.0
-    except: traceback.print_exc()
+    except: pass
     return predpoved
 
 def nauc_se_korekci(df_h, sloupec_predpovedi):
@@ -224,16 +187,13 @@ def nauc_se_korekci(df_h, sloupec_predpovedi):
         df_k = df_h[['Cas', 'Celkovy_Vykon_Panelu_W', sloupec_predpovedi]].copy()
         df_k['Real'] = pd.to_numeric(df_k['Celkovy_Vykon_Panelu_W'].astype(str).str.replace(',', '.'), errors='coerce')
         df_k['Pred'] = pd.to_numeric(df_k[sloupec_predpovedi].astype(str).str.replace(',', '.'), errors='coerce')
-        
         df_k['Cas_Parsed'] = pd.to_datetime(df_k['Cas'], errors='coerce')
         df_k = df_k.dropna(subset=['Cas_Parsed'])
-        
         df_k['Hodina'] = df_k['Cas_Parsed'].dt.hour
         agregace = df_k.groupby('Hodina')[['Real', 'Pred']].sum()
         for hodina, row in agregace.iterrows():
             if row['Pred'] > 50:
-                koef = row['Real'] / row['Pred']
-                korekce[hodina] = max(0.2, min(6.0, koef))
+                korekce[hodina] = max(0.2, min(6.0, row['Real'] / row['Pred']))
     except: pass
     return korekce
 
@@ -243,24 +203,18 @@ def nauc_se_spotrebu(df_h, aktualni_cas):
         df_h_temp = df_h.copy()
         df_h_temp['Cas_Parsed'] = pd.to_datetime(df_h_temp['Cas'], errors='coerce')
         df_h_temp = df_h_temp.dropna(subset=['Cas_Parsed'])
-        
-        maska = (df_h_temp['Cas_Parsed'] >= (aktualni_cas - timedelta(days=90)))
-        df_temp = df_h_temp[maska].copy()
+        df_temp = df_h_temp[df_h_temp['Cas_Parsed'] >= (aktualni_cas - timedelta(days=90))].copy()
         cz_holidays = holidays.CZ(years=[aktualni_cas.year])
-        
         def urci_typ(dt):
             if dt.date() in cz_holidays: return "Svatek"
             return ["Pondeli", "Utery", "Streda", "Ctvrtek", "Patek", "Sobota", "Nedele"][dt.weekday()]
-            
         cilovy_typ = urci_typ(aktualni_cas)
         df_temp['Typ_Dne'] = df_temp['Cas_Parsed'].apply(urci_typ)
         df_f = df_temp[(df_temp['Cas_Parsed'].dt.hour == aktualni_cas.hour) & (df_temp['Cas_Parsed'].dt.minute // 15 == aktualni_cas.minute // 15)]
         df_final = df_f[df_f['Typ_Dne'] == cilovy_typ]
-        
         if df_final['Cas_Parsed'].dt.date.nunique() < MIN_DNI_PRO_UCENI:
             pracovni = ["Pondeli", "Utery", "Streda", "Ctvrtek", "Patek"]
             df_final = df_f[df_f['Typ_Dne'].isin(pracovni if cilovy_typ in pracovni else ["Sobota", "Nedele", "Svatek"])]
-            
         if df_final['Cas_Parsed'].dt.date.nunique() >= MIN_DNI_PRO_UCENI:
             val = pd.to_numeric(df_final['Skutecna_Spotreba_W'].astype(str).str.replace(',', '.'), errors='coerce').mean()
             return max(0.0, val / 1000.0)
@@ -290,18 +244,22 @@ def vygeneruj_duvod_pulp(akce, cena, pv, soc):
         return f"Baterie je plna (SOC {soc} %), prodavam prebytek."
     if akce == "VYBIJET_PRO_DUM": 
         return "Vyuziti ulozene energie pro kryti spotreby domu."
-        
     return "Bezny provoz EMS."
+
+# ==============================================================================
+# HLAVNÍ PROGRAM
+# ==============================================================================
 
 def main():
     ted = datetime.now(ZoneInfo("Europe/Prague")).replace(tzinfo=None, second=0, microsecond=0)
     ted_ctvrt = ted.replace(minute=(ted.minute // 15) * 15)
     
+    # Načtení historie pro paměť bojleru a učení
     vsechny_soubory = glob.glob("fve_historie_*.csv")
     df_list = [pd.read_csv(f, sep=';', decimal=',') for f in vsechny_soubory]
     df_h = pd.concat(df_list, ignore_index=True) if df_list else pd.DataFrame()
 
-    # --- ROBUSTNI PAMET BOJLERU ---
+    # --- ROBUSTNÍ PAMĚŤ BOJLERU ---
     odjeto_intervalu = 0
     if not df_h.empty and 'Bojler_Zapnut' in df_h.columns:
         try:
@@ -310,37 +268,38 @@ def main():
             if not dnesni_data.empty:
                 zapnuto_bloky = dnesni_data['Bojler_Zapnut'].astype(str).str.contains('1').sum()
                 odjeto_intervalu = zapnuto_bloky // 3
-        except Exception:
-            pass
+        except: pass
 
     zbyva_intervalu_dnes = max(0, BOJLER_CELKEM_INTERVALU - odjeto_intervalu)
 
+    # Učení a data
     korekce_fs = nauc_se_korekci(df_h, 'Predpoved_FS_W')
     korekce_pvf = nauc_se_korekci(df_h, 'Predpoved_PVF_W')
-
     vsechny_ceny = nacti_ceny_entsoe()
     vsechny_fs = nacti_predpoved_fs()
     vsechny_pvf = nacti_predpoved_pvf()
 
+    # Příprava horizontu (192 intervalů = 48 hodin)
     ceny_192, pv_192, spotreba_192, casy_192 = [], [], [], []
     for i in range(192):
         c = ted_ctvrt + timedelta(minutes=15 * i)
         casy_192.append(c)
-        hodina_c = c.hour
-        korigovane_fs = min(vsechny_fs.get(c, 0.0) * korekce_fs.get(hodina_c, 1.0), KW_PEAK)
-        pv_192.append(korigovane_fs)
+        pv_192.append(min(vsechny_fs.get(c, 0.0) * korekce_fs.get(c.hour, 1.0), KW_PEAK))
         ceny_192.append(vsechny_ceny.get(c, 0.0))
-        spot = nauc_se_spotrebu(df_h, c)
-        spotreba_192.append(spot if spot is not None else 0.0)
+        spotreba_192.append(nauc_se_spotrebu(df_h, c) or 0.0)
 
     p_soc = bezpecny_float(df_h.iloc[-1].get('Baterie_SOC_%', 50.0)) if not df_h.empty else 50.0
     
+    # --- PU-LP OPTIMALIZACE ---
     model = pulp.LpProblem("EMS", pulp.LpMinimize)
     p_nab = pulp.LpVariable.dicts("Nab", range(192), lowBound=0, upBound=MAX_VYKON_STRIDACE)
     p_vyb = pulp.LpVariable.dicts("Vyb", range(192), lowBound=0, upBound=MAX_VYKON_STRIDACE)
     p_nakup = pulp.LpVariable.dicts("Nakup", range(192), lowBound=0)
     p_prodej = pulp.LpVariable.dicts("Prodej", range(192), lowBound=0)
-    soc_vars = pulp.LpVariable.dicts("SOC", range(192), lowBound=10.0, upBound=100.0)
+    
+    # Aplikace mezí baterie definovaných v úvodu
+    soc_vars = pulp.LpVariable.dicts("SOC", range(192), lowBound=SOC_MIN, upBound=SOC_MAX)
+    
     is_chg = pulp.LpVariable.dicts("IsChg", range(192), cat=pulp.LpBinary)
     b_on = pulp.LpVariable.dicts("Bojler", range(192), cat=pulp.LpBinary)
 
@@ -351,91 +310,68 @@ def main():
         model += p_nab[i] <= MAX_VYKON_STRIDACE * is_chg[i]
         model += p_vyb[i] <= MAX_VYKON_STRIDACE * (1 - is_chg[i])
 
+    # Omezení bojleru pro dnešek a zítřek
     indexy_dneska = [i for i, c in enumerate(casy_192) if c.date() == ted.date()]
-    realne_zbyva_dnes = min(zbyva_intervalu_dnes, len(indexy_dneska))
-    model += pulp.lpSum([b_on[i] for i in indexy_dneska]) == realne_zbyva_dnes
-
+    model += pulp.lpSum([b_on[i] for i in indexy_dneska]) == min(zbyva_intervalu_dnes, len(indexy_dneska))
+    
     indexy_zitra = [i for i, c in enumerate(casy_192) if c.date() == (ted + timedelta(days=1)).date()]
     model += pulp.lpSum([b_on[i] for i in indexy_zitra]) == BOJLER_CELKEM_INTERVALU
 
     model += pulp.lpSum([(p_nakup[i]*(ceny_192[i]+60) - p_prodej[i]*(ceny_192[i]-10))*0.25 for i in range(192)])
     model.solve(pulp.PULP_CBC_CMD(msg=False))
 
+    # Načtení dat ze střídače
     m = nacti_solax_v2()
     if not m: return
 
+    # Výpočet aktuální spotřeby a bilancí
+    h_spotreba_w = int(round(max(0, m['ac_out'] - m['sit_w'])))
     denni_import_kwh = 0.0
     denni_export_kwh = 0.0
-    h_spotreba_w = 0
-
     if not df_h.empty:
         df_h['Cas_Parsed_M'] = pd.to_datetime(df_h['Cas'], errors='coerce')
         dnesni_data_m = df_h[df_h['Cas_Parsed_M'].dt.date == ted.date()]
         if not dnesni_data_m.empty:
-            start_import = bezpecny_float(dnesni_data_m.iloc[0].get('Spotreba_Celkem_kWh', m['s_celkem']))
-            start_export = bezpecny_float(dnesni_data_m.iloc[0].get('Export_Celkem_kWh', m['e_celkem']))
-            denni_import_kwh = max(0.0, m['s_celkem'] - start_import)
-            denni_export_kwh = max(0.0, m['e_celkem'] - start_export)
+            denni_import_kwh = max(0.0, m['s_celkem'] - bezpecny_float(dnesni_data_m.iloc[0].get('Spotreba_Celkem_kWh', m['s_celkem'])))
+            denni_export_kwh = max(0.0, m['e_celkem'] - bezpecny_float(dnesni_data_m.iloc[0].get('Export_Celkem_kWh', m['e_celkem'])))
 
-        posledni_s_celkem = bezpecny_float(df_h.iloc[-1].get('Spotreba_Celkem_kWh', m['s_celkem']))
-        rozdil_kwh = m['s_celkem'] - posledni_s_celkem
-        if 0 < rozdil_kwh < 10: h_spotreba_w = int(round(rozdil_kwh * 12000))
-        else: h_spotreba_w = int(round(max(0, m['ac_out'] - m['sit_w'])))
-    else: h_spotreba_w = int(round(max(0, m['ac_out'] - m['sit_w'])))
-
-    bojler_aktualni_stav = int(round(b_on[0].varValue))
-    akce = rozhodovaci_logika(pv_192[0], spotreba_192[0], m['soc'], ceny_192[0])
+    # --- LOGIKA TEXTOVÝCH ŠTÍTKŮ ---
+    akce_heuristika = rozhodovaci_logika(pv_192[0], spotreba_192[0], m['soc'], ceny_192[0])
     
-    # --- PŘEKLAD SKUTEČNÉ AKCE PULPU ---
     nabijeni_w = p_nab[0].varValue * 1000
     vybijeni_w = p_vyb[0].varValue * 1000
     nakup_w = p_nakup[0].varValue * 1000
     prodej_w = p_prodej[0].varValue * 1000
 
-    if nabijeni_w > 100 and nakup_w > 100:
-        skutecna_akce_pulp = "NABIJET_ZE_SITE"
-    elif vybijeni_w > 100 and prodej_w > 100:
-        skutecna_akce_pulp = "PRODAVAT_Z_BATERII"
-    elif prodej_w > 100:
-        skutecna_akce_pulp = "PRODAVAT_DO_SITE"
-    elif nabijeni_w > 100:
-        skutecna_akce_pulp = "NABIJET_SOLAREM"
-    elif vybijeni_w > 100:
-        skutecna_akce_pulp = "VYBIJET_PRO_DUM"
-    else:
-        skutecna_akce_pulp = "NORMALNI_PROVOZ"
-        
+    if nabijeni_w > 100 and nakup_w > 100: akce_pulp = "NABIJET_ZE_SITE"
+    elif vybijeni_w > 100 and prodej_w > 100: akce_pulp = "PRODAVAT_Z_BATERII"
+    elif prodej_w > 100: akce_pulp = "PRODAVAT_DO_SITE"
+    elif nabijeni_w > 100: akce_pulp = "NABIJET_SOLAREM"
+    elif vybijeni_w > 100: akce_pulp = "VYBIJET_PRO_DUM"
+    else: akce_pulp = "NORMALNI_PROVOZ"
+    
+    duvod = vygeneruj_duvod_pulp(akce_pulp, ceny_192[0], pv_192[0], m['soc'])
+    bojler_aktualni_stav = int(round(b_on[0].varValue))
+    if bojler_aktualni_stav: duvod += " | Bojler: ZAPNUT"
+
+    # Tvorba nového řádku
     ted_5min = ted.replace(minute=(ted.minute // 5) * 5)
-    aktualni_hodina = ted_5min.hour
-    
-    surovy_fs = vsechny_fs.get(ted_5min, 0.0) * 1000
-    surovy_pvf = vsechny_pvf.get(ted_5min, 0.0) * 1000
-    
-    fs_korigovany_w = min(surovy_fs * korekce_fs.get(aktualni_hodina, 1.0), KW_PEAK * 1000)
-    pvf_korigovany_w = min(surovy_pvf * korekce_pvf.get(aktualni_hodina, 1.0), KW_PEAK * 1000)
-    
-    cas_pro_zapis = m.get('cas_mereni', ted.strftime('%Y-%m-%d %H:%M'))
-    
     n_radek = pd.DataFrame([{
-        'Cas': cas_pro_zapis,
+        'Cas': m['cas_mereni'], # Používáme čas měření ze střídače
         'Skutecna_Spotreba_W': h_spotreba_w,
         'Odhad_Spotreba_Modelu_W': int(round(spotreba_192[0] * 1000)),
         'Aktualni_import/export_W': str(m['sit_w']).replace('.', ','),
         'Aktualni_AC_Vystup_W': str(m['ac_out']).replace('.', ','),
         'Celkovy_Vykon_Panelu_W': int(m['dc1']+m['dc2']),
-        
-        'Predpoved_FS_W': int(round(surovy_fs)),
-        'Predpoved_PVF_W': int(round(surovy_pvf)),
-        
+        'Predpoved_FS_W': int(round(vsechny_fs.get(ted_5min, 0.0) * 1000)),
+        'Predpoved_PVF_W': int(round(vsechny_pvf.get(ted_5min, 0.0) * 1000)),
         'Vykon_Baterie_W': int(m['bat_p']),
         'Baterie_SOC_%': str(m['soc']).replace('.', ','),
         'Simulovane_SOC_%': str(round(float(soc_vars[0].varValue), 1)).replace('.', ','),
         'Cena_EUR/MWh': str(round(ceny_192[0], 2)).replace('.', ','),
-        
-        'Doporucena_Akce': akce, 
-        'Akce_PuLP': skutecna_akce_pulp,
-        
-        'Duvod_PuLP': vygeneruj_duvod_pulp(skutecna_akce_pulp, ceny_192[0], pv_192[0], m['soc']) + (" | Bojler: ZAPNUT" if bojler_aktualni_stav else ""),
+        'Doporucena_Akce': akce_heuristika, 
+        'Akce_PuLP': akce_pulp,
+        'Duvod_PuLP': duvod,
         'Skutecny_AC_Vystup_kWh': str(round(m['v_dnes'], 4)).replace('.', ','),
         'Cista_Vyroba_Panelu_kWh': str(round((m['dc1']+m['dc2'])/1000*0.0833, 4)).replace('.', ','),
         'Import_5min_kWh': str(round((abs(m['sit_w'])/1000*0.0833 if m['sit_w']<0 else 0), 4)).replace('.', ','),
@@ -445,28 +381,15 @@ def main():
         'AC_vyroba_Dnes_kWh': str(m['v_dnes']).replace('.', ','),
         'Spotreba_Celkem_kWh': str(m['s_celkem']).replace('.', ','),
         'Export_Celkem_kWh': str(m['e_celkem']).replace('.', ','),
-        'Uceni_Koeficient_FS': str(round(korekce_fs.get(aktualni_hodina, 1.0), 2)).replace('.', ','),
-        'Uceni_Koeficient_PVF': str(round(korekce_pvf.get(aktualni_hodina, 1.0), 2)).replace('.', ','),
-        
-        'Korigovana_Predpoved_FS_W': int(round(fs_korigovany_w)),
-        'Korigovana_Predpoved_PVF_W': int(round(pvf_korigovany_w)),
+        'Uceni_Koeficient_FS': str(round(korekce_fs.get(ted.hour, 1.0), 2)).replace('.', ','),
+        'Uceni_Koeficient_PVF': str(round(korekce_pvf.get(ted.hour, 1.0), 2)).replace('.', ','),
+        'Korigovana_Predpoved_FS_W': int(round(min(vsechny_fs.get(ted_5min, 0.0) * 1000 * korekce_fs.get(ted.hour, 1.0), KW_PEAK * 1000))),
+        'Korigovana_Predpoved_PVF_W': int(round(min(vsechny_pvf.get(ted_5min, 0.0) * 1000 * korekce_pvf.get(ted.hour, 1.0), KW_PEAK * 1000))),
         'Bojler_Zapnut': bojler_aktualni_stav
     }])
 
-    poradi = [
-        'Cas', 'Skutecna_Spotreba_W', 'Odhad_Spotreba_Modelu_W', 'Aktualni_import/export_W', 
-        'Aktualni_AC_Vystup_W', 'Celkovy_Vykon_Panelu_W', 'Predpoved_FS_W', 'Predpoved_PVF_W', 
-        'Vykon_Baterie_W', 'Baterie_SOC_%', 'Simulovane_SOC_%', 'Cena_EUR/MWh', 'Doporucena_Akce', 
-        'Akce_PuLP', 'Duvod_PuLP', 'Skutecny_AC_Vystup_kWh', 'Cista_Vyroba_Panelu_kWh', 
-        'Import_5min_kWh', 'Export_5min_kWh', 'Denni_Import_kWh', 'Denni_Export_kWh', 
-        'AC_vyroba_Dnes_kWh', 'Spotreba_Celkem_kWh', 'Export_Celkem_kWh',
-        'Uceni_Koeficient_FS', 'Uceni_Koeficient_PVF',
-        'Korigovana_Predpoved_FS_W', 'Korigovana_Predpoved_PVF_W', 'Bojler_Zapnut'
-    ]
-    
-    n_radek = n_radek[poradi]
+    # Zápis do souboru
     aktualni_soubor = f"fve_historie_{ted.strftime('%Y_%m')}.csv"
-    
     n_radek.to_csv(aktualni_soubor, mode='a', header=not os.path.exists(aktualni_soubor), index=False, sep=';', decimal=',')
 
 if __name__ == "__main__":
