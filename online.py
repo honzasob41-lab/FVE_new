@@ -60,7 +60,6 @@ def nacti_solax_v2():
             if data.get("success"):
                 res = data.get("result")
                 return {
-                    # Přesný čas měření ze střídače eliminuje 5minutový posun cloudu
                     "cas_mereni": res.get("uploadTime", datetime.now().strftime("%Y-%m-%d %H:%M:%S")),
                     "v_dnes": float(res.get("yieldtoday", 0)),
                     "soc": float(res.get("soc", 0)),
@@ -187,7 +186,6 @@ def nauc_se_korekci(df_h, sloupec_predpovedi):
         df_k = df_h[['Cas', 'Celkovy_Vykon_Panelu_W', sloupec_predpovedi]].copy()
         df_k['Real'] = pd.to_numeric(df_k['Celkovy_Vykon_Panelu_W'].astype(str).str.replace(',', '.'), errors='coerce')
         df_k['Pred'] = pd.to_numeric(df_k[sloupec_predpovedi].astype(str).str.replace(',', '.'), errors='coerce')
-        # OPRAVA: Povolení smíšeného formátu času
         df_k['Cas_Parsed'] = pd.to_datetime(df_k['Cas'], format='mixed', errors='coerce') 
         df_k = df_k.dropna(subset=['Cas_Parsed'])
         df_k['Hodina'] = df_k['Cas_Parsed'].dt.hour
@@ -202,7 +200,6 @@ def nauc_se_spotrebu(df_h, aktualni_cas):
     if df_h.empty or 'Skutecna_Spotreba_W' not in df_h.columns: return None
     try:
         df_h_temp = df_h.copy()
-        # OPRAVA: Povolení smíšeného formátu času
         df_h_temp['Cas_Parsed'] = pd.to_datetime(df_h_temp['Cas'], format='mixed', errors='coerce') 
         df_h_temp = df_h_temp.dropna(subset=['Cas_Parsed'])
         df_temp = df_h_temp[df_h_temp['Cas_Parsed'] >= (aktualni_cas - timedelta(days=90))].copy()
@@ -238,14 +235,20 @@ def vygeneruj_duvod_pulp(akce, cena, pv, soc):
         return f"Vysoka cena ({cena:.2f} EUR), vyuziti kapacity pro zisk."
     if akce == "POKRYT_Z_BATERIE": 
         return f"Kryti spotreby z baterie, cena je {cena:.2f} EUR."
+        
     if akce == "NABIJET_ZE_SITE": 
-        return f"Vyhodna cena ({cena:.2f} EUR) nebo priprava na spicku, nabijim ze site."
+        if cena <= 10.0:
+            return f"Absolutne vyhodna cena ({cena:.2f} EUR), plnim baterii ze site."
+        else:
+            return f"Priprava na drazsi spicku (aktualne {cena:.2f} EUR), nabijim dopredu."
+            
     if akce == "NABIJET_SOLAREM": 
         return f"Prebytek slunce ({pv*1000:.0f} W), ukladam energii."
     if akce == "PRODAVAT_DO_SITE": 
         return f"Baterie je plna (SOC {soc} %), prodavam prebytek."
     if akce == "VYBIJET_PRO_DUM": 
         return "Vyuziti ulozene energie pro kryti spotreby domu."
+        
     return "Bezny provoz EMS."
 
 # ==============================================================================
@@ -256,16 +259,13 @@ def main():
     ted = datetime.now(ZoneInfo("Europe/Prague")).replace(tzinfo=None, second=0, microsecond=0)
     ted_ctvrt = ted.replace(minute=(ted.minute // 15) * 15)
     
-    # Načtení historie pro paměť bojleru a učení
     vsechny_soubory = glob.glob("fve_historie_*.csv")
     df_list = [pd.read_csv(f, sep=';', decimal=',') for f in vsechny_soubory]
     df_h = pd.concat(df_list, ignore_index=True) if df_list else pd.DataFrame()
 
-    # --- ROBUSTNÍ PAMĚŤ BOJLERU ---
     odjeto_intervalu = 0
     if not df_h.empty and 'Bojler_Zapnut' in df_h.columns:
         try:
-            # OPRAVA: Povolení smíšeného formátu času
             df_h['Cas_Parsed'] = pd.to_datetime(df_h['Cas'], format='mixed', errors='coerce') 
             dnesni_data = df_h[df_h['Cas_Parsed'].dt.date == ted.date()].copy()
             if not dnesni_data.empty:
@@ -275,14 +275,12 @@ def main():
 
     zbyva_intervalu_dnes = max(0, BOJLER_CELKEM_INTERVALU - odjeto_intervalu)
 
-    # Učení a data
     korekce_fs = nauc_se_korekci(df_h, 'Predpoved_FS_W')
     korekce_pvf = nauc_se_korekci(df_h, 'Predpoved_PVF_W')
     vsechny_ceny = nacti_ceny_entsoe()
     vsechny_fs = nacti_predpoved_fs()
     vsechny_pvf = nacti_predpoved_pvf()
 
-    # Příprava horizontu (192 intervalů = 48 hodin)
     ceny_192, pv_192, spotreba_192, casy_192 = [], [], [], []
     for i in range(192):
         c = ted_ctvrt + timedelta(minutes=15 * i)
@@ -291,16 +289,16 @@ def main():
         ceny_192.append(vsechny_ceny.get(c, 0.0))
         spotreba_192.append(nauc_se_spotrebu(df_h, c) or 0.0)
 
-    p_soc = bezpecny_float(df_h.iloc[-1].get('Baterie_SOC_%', 50.0)) if not df_h.empty else 50.0
+    # --- PŘIDÁNO MASKOVÁNÍ SOC ---
+    skutecne_soc = bezpecny_float(df_h.iloc[-1].get('Baterie_SOC_%', 50.0)) if not df_h.empty else 50.0
+    p_soc = max(skutecne_soc, SOC_MIN)
     
-    # --- PU-LP OPTIMALIZACE ---
     model = pulp.LpProblem("EMS", pulp.LpMinimize)
     p_nab = pulp.LpVariable.dicts("Nab", range(192), lowBound=0, upBound=MAX_VYKON_STRIDACE)
     p_vyb = pulp.LpVariable.dicts("Vyb", range(192), lowBound=0, upBound=MAX_VYKON_STRIDACE)
     p_nakup = pulp.LpVariable.dicts("Nakup", range(192), lowBound=0)
     p_prodej = pulp.LpVariable.dicts("Prodej", range(192), lowBound=0)
     
-    # Aplikace mezí baterie definovaných v úvodu
     soc_vars = pulp.LpVariable.dicts("SOC", range(192), lowBound=SOC_MIN, upBound=SOC_MAX)
     
     is_chg = pulp.LpVariable.dicts("IsChg", range(192), cat=pulp.LpBinary)
@@ -313,7 +311,6 @@ def main():
         model += p_nab[i] <= MAX_VYKON_STRIDACE * is_chg[i]
         model += p_vyb[i] <= MAX_VYKON_STRIDACE * (1 - is_chg[i])
 
-    # Omezení bojleru pro dnešek a zítřek
     indexy_dneska = [i for i, c in enumerate(casy_192) if c.date() == ted.date()]
     model += pulp.lpSum([b_on[i] for i in indexy_dneska]) == min(zbyva_intervalu_dnes, len(indexy_dneska))
     
@@ -323,23 +320,19 @@ def main():
     model += pulp.lpSum([(p_nakup[i]*(ceny_192[i]+60) - p_prodej[i]*(ceny_192[i]-10))*0.25 for i in range(192)])
     model.solve(pulp.PULP_CBC_CMD(msg=False))
 
-    # Načtení dat ze střídače
     m = nacti_solax_v2()
     if not m: return
 
-    # Výpočet aktuální spotřeby a bilancí
     h_spotreba_w = int(round(max(0, m['ac_out'] - m['sit_w'])))
     denni_import_kwh = 0.0
     denni_export_kwh = 0.0
     if not df_h.empty:
-        # OPRAVA: Povolení smíšeného formátu času
         df_h['Cas_Parsed_M'] = pd.to_datetime(df_h['Cas'], format='mixed', errors='coerce') 
         dnesni_data_m = df_h[df_h['Cas_Parsed_M'].dt.date == ted.date()]
         if not dnesni_data_m.empty:
             denni_import_kwh = max(0.0, m['s_celkem'] - bezpecny_float(dnesni_data_m.iloc[0].get('Spotreba_Celkem_kWh', m['s_celkem'])))
             denni_export_kwh = max(0.0, m['e_celkem'] - bezpecny_float(dnesni_data_m.iloc[0].get('Export_Celkem_kWh', m['e_celkem'])))
 
-    # --- LOGIKA TEXTOVÝCH ŠTÍTKŮ ---
     akce_heuristika = rozhodovaci_logika(pv_192[0], spotreba_192[0], m['soc'], ceny_192[0])
     
     nabijeni_w = p_nab[0].varValue * 1000
@@ -358,7 +351,6 @@ def main():
     bojler_aktualni_stav = int(round(b_on[0].varValue))
     if bojler_aktualni_stav: duvod += " | Bojler: ZAPNUT"
 
-    # Tvorba nového řádku
     ted_5min = ted.replace(minute=(ted.minute // 5) * 5)
     n_radek = pd.DataFrame([{
         'Cas': m['cas_mereni'], 
