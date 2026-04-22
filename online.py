@@ -187,7 +187,8 @@ def nauc_se_korekci(df_h, sloupec_predpovedi):
         df_k = df_h[['Cas', 'Celkovy_Vykon_Panelu_W', sloupec_predpovedi]].copy()
         df_k['Real'] = pd.to_numeric(df_k['Celkovy_Vykon_Panelu_W'].astype(str).str.replace(',', '.'), errors='coerce')
         df_k['Pred'] = pd.to_numeric(df_k[sloupec_predpovedi].astype(str).str.replace(',', '.'), errors='coerce')
-        df_k['Cas_Parsed'] = pd.to_datetime(df_k['Cas'], errors='coerce')
+        # OPRAVA: Povolení smíšeného formátu času
+        df_k['Cas_Parsed'] = pd.to_datetime(df_k['Cas'], format='mixed', errors='coerce') 
         df_k = df_k.dropna(subset=['Cas_Parsed'])
         df_k['Hodina'] = df_k['Cas_Parsed'].dt.hour
         agregace = df_k.groupby('Hodina')[['Real', 'Pred']].sum()
@@ -201,7 +202,8 @@ def nauc_se_spotrebu(df_h, aktualni_cas):
     if df_h.empty or 'Skutecna_Spotreba_W' not in df_h.columns: return None
     try:
         df_h_temp = df_h.copy()
-        df_h_temp['Cas_Parsed'] = pd.to_datetime(df_h_temp['Cas'], errors='coerce')
+        # OPRAVA: Povolení smíšeného formátu času
+        df_h_temp['Cas_Parsed'] = pd.to_datetime(df_h_temp['Cas'], format='mixed', errors='coerce') 
         df_h_temp = df_h_temp.dropna(subset=['Cas_Parsed'])
         df_temp = df_h_temp[df_h_temp['Cas_Parsed'] >= (aktualni_cas - timedelta(days=90))].copy()
         cz_holidays = holidays.CZ(years=[aktualni_cas.year])
@@ -263,7 +265,8 @@ def main():
     odjeto_intervalu = 0
     if not df_h.empty and 'Bojler_Zapnut' in df_h.columns:
         try:
-            df_h['Cas_Parsed'] = pd.to_datetime(df_h['Cas'], errors='coerce')
+            # OPRAVA: Povolení smíšeného formátu času
+            df_h['Cas_Parsed'] = pd.to_datetime(df_h['Cas'], format='mixed', errors='coerce') 
             dnesni_data = df_h[df_h['Cas_Parsed'].dt.date == ted.date()].copy()
             if not dnesni_data.empty:
                 zapnuto_bloky = dnesni_data['Bojler_Zapnut'].astype(str).str.contains('1').sum()
@@ -329,7 +332,8 @@ def main():
     denni_import_kwh = 0.0
     denni_export_kwh = 0.0
     if not df_h.empty:
-        df_h['Cas_Parsed_M'] = pd.to_datetime(df_h['Cas'], errors='coerce')
+        # OPRAVA: Povolení smíšeného formátu času
+        df_h['Cas_Parsed_M'] = pd.to_datetime(df_h['Cas'], format='mixed', errors='coerce') 
         dnesni_data_m = df_h[df_h['Cas_Parsed_M'].dt.date == ted.date()]
         if not dnesni_data_m.empty:
             denni_import_kwh = max(0.0, m['s_celkem'] - bezpecny_float(dnesni_data_m.iloc[0].get('Spotreba_Celkem_kWh', m['s_celkem'])))
@@ -357,7 +361,7 @@ def main():
     # Tvorba nového řádku
     ted_5min = ted.replace(minute=(ted.minute // 5) * 5)
     n_radek = pd.DataFrame([{
-        'Cas': m['cas_mereni'], # Používáme čas měření ze střídače
+        'Cas': m['cas_mereni'], 
         'Skutecna_Spotreba_W': h_spotreba_w,
         'Odhad_Spotreba_Modelu_W': int(round(spotreba_192[0] * 1000)),
         'Aktualni_import/export_W': str(m['sit_w']).replace('.', ','),
@@ -388,7 +392,18 @@ def main():
         'Bojler_Zapnut': bojler_aktualni_stav
     }])
 
-    # Zápis do souboru
+    poradi = [
+        'Cas', 'Skutecna_Spotreba_W', 'Odhad_Spotreba_Modelu_W', 'Aktualni_import/export_W', 
+        'Aktualni_AC_Vystup_W', 'Celkovy_Vykon_Panelu_W', 'Predpoved_FS_W', 'Predpoved_PVF_W', 
+        'Vykon_Baterie_W', 'Baterie_SOC_%', 'Simulovane_SOC_%', 'Cena_EUR/MWh', 'Doporucena_Akce', 
+        'Akce_PuLP', 'Duvod_PuLP', 'Skutecny_AC_Vystup_kWh', 'Cista_Vyroba_Panelu_kWh', 
+        'Import_5min_kWh', 'Export_5min_kWh', 'Denni_Import_kWh', 'Denni_Export_kWh', 
+        'AC_vyroba_Dnes_kWh', 'Spotreba_Celkem_kWh', 'Export_Celkem_kWh',
+        'Uceni_Koeficient_FS', 'Uceni_Koeficient_PVF',
+        'Korigovana_Predpoved_FS_W', 'Korigovana_Predpoved_PVF_W', 'Bojler_Zapnut'
+    ]
+    
+    n_radek = n_radek[poradi]
     aktualni_soubor = f"fve_historie_{ted.strftime('%Y_%m')}.csv"
     n_radek.to_csv(aktualni_soubor, mode='a', header=not os.path.exists(aktualni_soubor), index=False, sep=';', decimal=',')
 
