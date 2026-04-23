@@ -3289,3 +3289,4 @@ Cas;Skutecna_Spotreba_W;Odhad_Spotreba_Modelu_W;Aktualni_import/export_W;Aktualn
 2026-04-23 23:58:41;137;507;0,0;137,0;0;0;0;-141;29,0;27,7;115,84;VYBIJET_PRO_DUM;VYBIJET_PRO_DUM;Vyuziti ulozene energie pro kryti spotreby domu.;51,1;0,0;0;0;0,0;0,0;51,1;10751,44;12311,92;0,2;1,0;0;0;0
 2026-04-24 00:03:41;79;507;-79,0;0,0;0;0;0;0;29,0;27,7;115,84;VYBIJET_PRO_DUM;VYBIJET_PRO_DUM;Vyuziti ulozene energie pro kryti spotreby domu.;0,0;0,0;0,0066;0;0,0;0,0;0,0;10751,45;12311,92;0,2;1,0;0;0;0
 2026-04-24 00:08:41;76;94;-76,0;0,0;0;0;0;0;29,0;28,8;115,84;VYBIJET_PRO_DUM;NORMALNI_PROVOZ;Bezny provoz EMS.;0,0;0,0;0,0063;0;0,0;0,0;0,0;10751,45;12311,92;0,2;1,0;0;0;0
+2026-04-24 00:13:41;77;695;-77,0;0,0;0;0;0;0;29,0;27,3;104,1;VYBIJET_PRO_DUM;VYBIJET_PRO_DUM;Vyuziti ulozene energie pro kryti spotreby domu.;0,0;0,0;0,0064;0;0,01;0,0;0,0;10751,46;12311,92;0,2;1,0;0;0;0
