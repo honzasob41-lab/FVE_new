@@ -3838,3 +3838,4 @@ Cas;Skutecna_Spotreba_W;Odhad_Spotreba_Modelu_W;Aktualni_import/export_W;Aktualn
 2026-04-25 21:44:09;2210;206;291,0;2501,0;0;0;0;-2481;21,0;35,7;62,44;VYBIJET_PRO_DUM;NABIJET_ZE_SITE;Priprava na drazsi spicku (aktualne 62.44 EUR), nabijim dopredu.;50,8;0,0;0;0,0242;0,38;30,77;50,8;10752,23;12370,02;0,2;0,2;0;0;0
 2026-04-25 21:49:09;2078;206;0,0;2078,0;0;0;0;-2134;19,0;35,7;62,44;NORMALNI_PROVOZ;NABIJET_ZE_SITE;Priprava na drazsi spicku (aktualne 62.44 EUR), nabijim dopredu.;51,0;0,0;0;0;0,38;30,77;51,0;10752,23;12370,02;0,2;0,2;0;0;0
 2026-04-25 21:54:09;2065;664;0,0;2065,0;0;0;0;-2153;17,0;35,7;62,44;NORMALNI_PROVOZ;NABIJET_ZE_SITE;Priprava na drazsi spicku (aktualne 62.44 EUR), nabijim dopredu.;51,1;0,0;0;0;0,38;30,77;51,1;10752,23;12370,02;0,2;0,2;0;0;0
+2026-04-25 21:59:09;190;874;0,0;190,0;0;0;0;-162;16,0;15,0;87,4;NORMALNI_PROVOZ;VYBIJET_PRO_DUM;Vyuziti ulozene energie pro kryti spotreby domu.;51,3;0,0;0;0;0,38;30,77;51,3;10752,23;12370,02;0,2;1,0;0;0;0
