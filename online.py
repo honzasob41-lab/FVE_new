@@ -147,7 +147,13 @@ def nacti_predpoved_fs():
     return predpoved
 
 def nacti_predpoved_pvf():
-    url = f"https://www.pvforecast.cz/api/?key=8slpgw&lat={LAT}&lon={LON}&format=json"
+    url = "http://www.pvforecast.cz/api/"
+    params = {
+        "key": "8slpgw",
+        "lat": LAT,
+        "lon": LON,
+        "format": "json"
+    }
     predpoved = {}
     data, stara_data = None, None
     
@@ -161,29 +167,29 @@ def nacti_predpoved_pvf():
         except: pass
         
     if not data:
-        print("Aktualizuji predpoved PVF...", flush=True)
+        print(f"DEBUG: Odesilam dotaz na PVF: {url} s parametry {params}", flush=True)
         try:
-            headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
-            r = requests.get(url, headers=headers, timeout=20)
+            # Přechod na HTTP řeší chybu 400 u některých verzí knihovny requests
+            r = requests.get(url, params=params, timeout=20)
             
             if r.status_code == 200:
-                try: 
-                    raw_json = r.json()
-                except: 
-                    raw_json = json.loads(r.text.strip('\ufeff'))
+                # Ošetření neviditelného znaku BOM na začátku odpovědi
+                text_dat = r.text.strip().lstrip('\ufeff')
+                raw_json = json.loads(text_dat)
                 
                 if isinstance(raw_json, list) and len(raw_json) > 10:
                     data = {"_last_download": datetime.now().isoformat(), "forecast": raw_json}
                     with open(SOUBOR_PREDPOVEDI_PVF, 'w') as f: 
                         json.dump(data, f)
+                    print("PVF: Data uspesne stazena.")
                 else:
-                    print("Chyba: PVF API nevratilo platna data.")
+                    print(f"PVF CHYBA: Server vratil neocekavany format: {r.text[:200]}")
                     if stara_data: data = stara_data
             else:
-                print(f"Chyba serveru PVF. HTTP Status: {r.status_code}")
+                print(f"PVF CHYBA: Status {r.status_code}. Odpoved: {r.text}")
                 if stara_data: data = stara_data
         except Exception as e:
-            print(f"Kriticka chyba spojeni s PVF: {e}")
+            print(f"PVF KRITICKA CHYBA SPOJENI: {e}")
             if stara_data: data = stara_data
             
     if not data or 'forecast' not in data: 
@@ -205,7 +211,7 @@ def nacti_predpoved_pvf():
             for c, r in df.iterrows(): 
                 predpoved[c.to_pydatetime()] = r["W"] / 1000.0
     except Exception as e: 
-        print(f"Chyba pri zpracovani JSONu z PVF: {e}")
+        print(f"PVF CHYBA ZPRACOVANI: {e}")
         
     return predpoved
 
@@ -319,7 +325,8 @@ def main():
         ceny_192.append(vsechny_ceny.get(c, 0.0))
         spotreba_192.append(nauc_se_spotrebu(df_h, c) or 0.0)
 
-    # --- PŘIDÁNO MASKOVÁNÍ SOC ---
+    # --- MASKOVÁNÍ POCATECNIHO STAVU (STATE-MASKING) ---
+    # Zamezuje vynucenému nákupu drahé energie, pokud je baterie těsně pod hranicí SOC_MIN
     skutecne_soc = bezpecny_float(df_h.iloc[-1].get('Baterie_SOC_%', 50.0)) if not df_h.empty else 50.0
     p_soc = max(skutecne_soc, SOC_MIN)
     
