@@ -150,33 +150,63 @@ def nacti_predpoved_pvf():
     url = f"https://www.pvforecast.cz/api/?key=8slpgw&lat={LAT}&lon={LON}&format=json"
     predpoved = {}
     data, stara_data = None, None
+    
     if os.path.exists(SOUBOR_PREDPOVEDI_PVF):
         try:
             with open(SOUBOR_PREDPOVEDI_PVF, 'r') as f: 
                 stara_data = json.load(f)
-                posledni_stazeni = datetime.fromisoformat(stara_data.get("_last_download", "2000-01-01")).date()
-                if posledni_stazeni == datetime.now().date(): data = stara_data
+                cas_stazeni = datetime.fromisoformat(stara_data.get("_last_download", "2000-01-01"))
+                if datetime.now() - cas_stazeni < timedelta(hours=6):
+                    data = stara_data
         except: pass
+        
     if not data:
+        print("Aktualizuji predpoved PVF...", flush=True)
         try:
-            r = requests.get(url, timeout=20)
+            headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
+            r = requests.get(url, headers=headers, timeout=20)
+            
             if r.status_code == 200:
-                raw_json = r.json()
+                try: 
+                    raw_json = r.json()
+                except: 
+                    raw_json = json.loads(r.text.strip('\ufeff'))
+                
                 if isinstance(raw_json, list) and len(raw_json) > 10:
                     data = {"_last_download": datetime.now().isoformat(), "forecast": raw_json}
-                    with open(SOUBOR_PREDPOVEDI_PVF, 'w') as f: json.dump(data, f)
-                else: data = stara_data
-            else: data = stara_data
-        except: data = stara_data
-    if not data or 'forecast' not in data: return predpoved
+                    with open(SOUBOR_PREDPOVEDI_PVF, 'w') as f: 
+                        json.dump(data, f)
+                else:
+                    print("Chyba: PVF API nevratilo platna data.")
+                    if stara_data: data = stara_data
+            else:
+                print(f"Chyba serveru PVF. HTTP Status: {r.status_code}")
+                if stara_data: data = stara_data
+        except Exception as e:
+            print(f"Kriticka chyba spojeni s PVF: {e}")
+            if stara_data: data = stara_data
+            
+    if not data or 'forecast' not in data: 
+        return predpoved
+    
     try:
         raw = []
         for item in data['forecast']:
-            raw.append({"Cas": pd.to_datetime(item[0]).replace(tzinfo=None), "W": bezpecny_float(item[1]) * KW_PEAK})
+            try:
+                cas = pd.to_datetime(item[0]).replace(tzinfo=None)
+                vykon = bezpecny_float(item[1]) * KW_PEAK
+                raw.append({"Cas": cas, "W": vykon})
+            except: continue
+                
         if raw:
-            df = pd.DataFrame(raw).set_index("Cas").resample("5min").mean().interpolate().fillna(0.0)
-            for c, r in df.iterrows(): predpoved[c.to_pydatetime()] = r["W"] / 1000.0
-    except: pass
+            df = pd.DataFrame(raw).set_index("Cas")
+            df = df[~df.index.duplicated(keep='first')]
+            df = df.sort_index().resample("5min").mean().interpolate(method='linear').fillna(0.0)
+            for c, r in df.iterrows(): 
+                predpoved[c.to_pydatetime()] = r["W"] / 1000.0
+    except Exception as e: 
+        print(f"Chyba pri zpracovani JSONu z PVF: {e}")
+        
     return predpoved
 
 def nauc_se_korekci(df_h, sloupec_predpovedi):
