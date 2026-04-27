@@ -4403,3 +4403,4 @@ Cas;Skutecna_Spotreba_W;Odhad_Spotreba_Modelu_W;Aktualni_import/export_W;Aktualn
 2026-04-27 20:49:38;2161;1395;0,0;2161,0;0;0;0;-2294;70,0;67,5;142,75;VYBIJET_PRO_DUM;VYBIJET_PRO_DUM;Vyuziti ulozene energie pro kryti spotreby domu.;52,0;0,0;0;0;1,74;34,05;52,0;10756,37;12426,1;0,2;0,2;0;0;0
 2026-04-27 20:54:38;291;1504;0,0;291,0;0;0;0;-285;69,0;66,2;142,75;VYBIJET_PRO_DUM;VYBIJET_PRO_DUM;Vyuziti ulozene energie pro kryti spotreby domu.;52,1;0,0;0;0;1,74;34,05;52,1;10756,37;12426,1;0,2;0,2;0;0;0
 2026-04-27 20:59:38;315;1167;0,0;315,0;0;0;0;-309;69,0;44,0;185,47;VYBIJET_PRO_DUM;PRODAVAT_Z_BATERII;Vysoka cena (185.47 EUR), vyuziti kapacity pro zisk.;52,1;0,0;0;0;1,74;34,05;52,1;10756,37;12426,1;0,2;0,2;0;0;0
+2026-04-27 21:04:38;286;1167;0,0;286,0;0;0;0;-285;69,0;44,0;185,47;VYBIJET_PRO_DUM;PRODAVAT_Z_BATERII;Vysoka cena (185.47 EUR), vyuziti kapacity pro zisk.;52,2;0,0;0;0;1,74;34,05;52,2;10756,37;12426,1;0,2;0,2;0;0;0
