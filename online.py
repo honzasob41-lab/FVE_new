@@ -169,11 +169,9 @@ def nacti_predpoved_pvf():
     if not data:
         print(f"DEBUG: Odesilam dotaz na PVF: {url} s parametry {params}", flush=True)
         try:
-            # Přechod na HTTP řeší chybu 400 u některých verzí knihovny requests
             r = requests.get(url, params=params, timeout=20)
             
             if r.status_code == 200:
-                # Ošetření neviditelného znaku BOM na začátku odpovědi
                 text_dat = r.text.strip().lstrip('\ufeff')
                 raw_json = json.loads(text_dat)
                 
@@ -300,16 +298,32 @@ def main():
     df_h = pd.concat(df_list, ignore_index=True) if df_list else pd.DataFrame()
 
     odjeto_intervalu = 0
+    bojler_je_plny = False
+
     if not df_h.empty and 'Bojler_Zapnut' in df_h.columns:
         try:
             df_h['Cas_Parsed'] = pd.to_datetime(df_h['Cas'], format='mixed', errors='coerce') 
             dnesni_data = df_h[df_h['Cas_Parsed'].dt.date == ted.date()].copy()
             if not dnesni_data.empty:
+                # 1. Spočítání všech intervalů, kdy byl poslán příkaz zapnout
                 zapnuto_bloky = dnesni_data['Bojler_Zapnut'].astype(str).str.contains('1').sum()
                 odjeto_intervalu = zapnuto_bloky // 3
+                
+                # 2. Inteligentní kontrola: Je bojler nahřátý?
+                # Zkontrolujeme poslední dva intervaly, kdy měl bojler topit.
+                posledni_aktivni = dnesni_data[dnesni_data['Bojler_Zapnut'].astype(str).str.contains('1')].tail(2)
+                if len(posledni_aktivni) >= 2:
+                    prum_spotreba = pd.to_numeric(posledni_aktivni['Skutecna_Spotreba_W'], errors='coerce').mean()
+                    # Pokud je průměrná spotřeba pod 2000 W, znamená to, že termostat obvod rozpojil
+                    if prum_spotreba < 2000:
+                        bojler_je_plny = True
         except: pass
 
-    zbyva_intervalu_dnes = max(0, BOJLER_CELKEM_INTERVALU - odjeto_intervalu)
+    # Pokud je bojler plný, nastavíme zbývající intervaly na nulu
+    if bojler_je_plny:
+        zbyva_intervalu_dnes = 0
+    else:
+        zbyva_intervalu_dnes = max(0, BOJLER_CELKEM_INTERVALU - odjeto_intervalu)
 
     korekce_fs = nauc_se_korekci(df_h, 'Predpoved_FS_W')
     korekce_pvf = nauc_se_korekci(df_h, 'Predpoved_PVF_W')
@@ -326,7 +340,6 @@ def main():
         spotreba_192.append(nauc_se_spotrebu(df_h, c) or 0.0)
 
     # --- MASKOVÁNÍ POCATECNIHO STAVU (STATE-MASKING) ---
-    # Zamezuje vynucenému nákupu drahé energie, pokud je baterie těsně pod hranicí SOC_MIN
     skutecne_soc = bezpecny_float(df_h.iloc[-1].get('Baterie_SOC_%', 50.0)) if not df_h.empty else 50.0
     p_soc = max(skutecne_soc, SOC_MIN)
     
